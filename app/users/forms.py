@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, SelectField, TextAreaField
-from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
+from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError, Optional
 from flask_login import current_user
 from app.models import User
 from app import songlist_pairs, raw_songdata
@@ -35,6 +35,7 @@ class UpdateAccountForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     bio = TextAreaField('Bio (Max 500 chars)', validators=[Length(max=500)])
     favsong = SelectField('Favourite Song', coerce=str, choices=[tuple(map(lambda x: x.decode('utf-8'), tup)) for tup in songlist_pairs])
+    accesscode = TextAreaField('Access Code (if connecting with PrimeServer)', validators=[Length(min=32, max=32), Optional()])
     submit = SubmitField('Update')
 
     def validate_username(self, username):

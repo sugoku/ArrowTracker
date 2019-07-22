@@ -1,11 +1,13 @@
-from flask import render_template, request, Blueprint, current_app, session, redirect, url_for, flash, Markup
+from flask import render_template, request, Blueprint, current_app, session, redirect, url_for, flash, Markup, jsonify
 from flask_login import current_user, login_required
 from app.main.forms import SearchForm, TournamentForm, TournamentEditForm
+from app.scores.forms import ScoreForm
 from app.models import Post, Tournament
 from app import songlist_pairs, difficulties, db, raw_songdata
 from sqlalchemy import desc, or_
 from app.config import GetChangelog
-from app.main.utils import save_picture, allowed_file
+from app.main.utils import save_picture, allowed_file, valid_api_key
+from app.users.utils import access_code_to_user
 import os
 
 # We can define all of the "@main" decorators below as a "blueprint" that
@@ -23,6 +25,71 @@ def home():
 @main.route('/about')
 def about():
     return render_template("about.html")
+
+@main.route('/submit', methods=['POST'])
+def submit():
+    response = {
+        'status': 'success'
+    }
+    try:
+        if request.form.validate() and valid_api_key(request.form['api_key']): # and if request.remote_addr in approved_ips
+            form = ScoreForm(request.form)
+            if form.validate():
+                post = Post(
+                    song = form.song.data,
+                    score = form.score.data,
+                    lettergrade = form.lettergrade.data,
+                    type = form.type.data,
+                    difficulty = form.difficulty.data,
+                    platform = 'pad',
+                    stagepass = form.stagepass.data,
+                    perfect = form.perfect.data,
+                    great = form.great.data,
+                    good = form.good.data,
+                    bad = form.bad.data,
+                    miss = form.miss.data,
+                    maxcombo = form.maxcombo.data,
+                    pp = form.pp.data,
+                    runningstep = form.runningstep.data,
+                    kcal = form.kcal.data,
+                    scrollspeed = form.scrollspeed.data,
+                    noteskin = form.noteskin.data,
+                    modifiers = form.modifiers.data,
+                    gamemix = form.gamemix.data,
+                    gameversion = form.gameversion.data,
+                    ranked = form.ranked.data,
+                    length = form.length.data,
+                    accesscode = form.accesscode.data,
+                    acsubmit = True,
+                    user_id = access_code_to_user(request.form.accesscode.data).id
+                )
+                db.session.add(post)
+                db.session.commit()
+                
+                return jsonify(response)
+        else:
+            response['status'] = 'failure'
+            response['reason'] = 'invalid request'
+            return jsonify(response)
+    except Exception as e:
+        response['status'] = 'failure'
+        response['reason'] = type(e).__name__
+        return jsonify(response)
+
+@main.route('/getprofile', methods=['POST'])
+def getprofile():
+    response = {}
+    try:
+        if request.form.validate() and valid_api_key(request.form['api_key']): # and if request.remote_addr in approved_ips
+            pass
+        else:
+            response['status'] = 'failure'
+            response['reason'] = 'invalid request'
+            return jsonify(response)
+    except Exception as e:
+        response['status'] = 'failure'
+        response['reason'] = type(e).__name__
+        return jsonify(response)
 
 @main.route('/search', methods=['GET', 'POST']) # The methods 'GET' and 'POST' tell this route that
 def search():                                   # we can both request and send data to/from the page.

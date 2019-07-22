@@ -29,3 +29,7 @@ If you didn't request this reset, please ignore this email - the unique token us
 No changes will be made without using the above link.
 '''
     mail.send(msg)
+
+def access_code_to_user(acode):
+    u = User.query.filter_by(accesscode=acode).first()
+    return u.id if u != None else None

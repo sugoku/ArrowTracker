@@ -2,6 +2,7 @@ from PIL import Image
 import os
 import secrets
 from flask import current_app
+from app.models import APIKey
 
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 
@@ -18,3 +19,10 @@ def save_picture(form_picture):
     i.thumbnail(output_size)
     i.save(picture_path)
     return picture_fn
+
+def valid_api_key(apikey):
+    u = APIKey.query.filter_by(key=apikey).first()
+    return u != None
+
+def get_api_key(apikey):
+    return APIKey.query.filter_by(key=apikey).first()
