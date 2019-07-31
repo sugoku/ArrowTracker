@@ -1,14 +1,16 @@
+import os
+import logging
 from flask import render_template, request, Blueprint, current_app, session, redirect, url_for, flash, Markup, jsonify
 from flask_login import current_user, login_required
 from app.main.forms import SearchForm, TournamentForm, TournamentEditForm
 from app.scores.forms import ScoreForm
-from app.models import Post, Tournament
+from app.users.forms import APIKeyForm
+from app.models import Post, Tournament, APIKey
 from app import songlist_pairs, difficulties, db, raw_songdata
 from sqlalchemy import desc, or_
 from app.config import GetChangelog
-from app.main.utils import save_picture, allowed_file, valid_api_key
-from app.users.utils import access_code_to_user
-import os
+from app.main.utils import save_picture, allowed_file, valid_api_key, generate_unique_key
+from app.users.utils import accesscode_to_user, user_to_primeprofile, update_user_with_primeprofile
 
 # We can define all of the "@main" decorators below as a "blueprint" that
 # allows us to easily call or redirect the user to any of them from anywhere.
@@ -61,7 +63,7 @@ def submit():
                     length = form.length.data,
                     accesscode = form.accesscode.data,
                     acsubmit = True,
-                    user_id = access_code_to_user(request.form.accesscode.data).id
+                    user_id = accesscode_to_user(request.form.accesscode.data).id
                 )
                 db.session.add(post)
                 db.session.commit()
@@ -76,12 +78,13 @@ def submit():
         response['reason'] = type(e).__name__
         return jsonify(response)
 
-@main.route('/getprofile', methods=['POST'])
+@main.route('/getprofile', methods=['GET'])
 def getprofile():
     response = {}
     try:
-        if request.form.validate() and valid_api_key(request.form['api_key']): # and if request.remote_addr in approved_ips
-            pass
+        if request.form.validate() and valid_api_key(request.args.get('api_key')): # and if request.remote_addr in approved_ips
+            u = accesscode_to_user(request.args.get('access_code'))
+            return jsonify(user_to_primeprofile(u))
         else:
             response['status'] = 'failure'
             response['reason'] = 'invalid request'
@@ -90,6 +93,92 @@ def getprofile():
         response['status'] = 'failure'
         response['reason'] = type(e).__name__
         return jsonify(response)
+
+@main.route('/saveprofile', methods=['POST'])
+def saveprofile():
+    response = {}
+    try:
+        if request.form.validate() and valid_api_key(request.form['api_key']): # and if request.remote_addr in approved_ips
+            u = accesscode_to_user(request.form['access_code'])
+            update_user_with_primeprofile(u, request.form)
+            db.session.commit()
+            response['status'] = 'success'
+        else:
+            response['status'] = 'failure'
+            response['reason'] = 'invalid request'
+    except Exception as e:
+        response['status'] = 'failure'
+        response['reason'] = type(e).__name__
+    return jsonify(response)
+
+@main.route('/getworldbest', methods=['GET'])
+def getworldbest():
+    response = {}
+    try:
+        if request.form.validate() and valid_api_key(request.args.get('api_key')): # and if request.remote_addr in approved_ips
+            return jsonify(get_worldbest(scoretype=request.args.get('scoretype')))
+        else:
+            response['status'] = 'failure'
+            response['reason'] = 'invalid request'
+    except Exception as e:
+        response['status'] = 'failure'
+        response['reason'] = type(e).__name__
+    return jsonify(response)
+
+@main.route('/getrankmode', methods=['GET'])
+def getrankmode():
+    response = {}
+    try:
+        if request.form.validate() and valid_api_key(request.args.get('api_key')): # and if request.remote_addr in approved_ips
+            return jsonify(get_rankmode(scoretype=request.args.get('scoretype')))
+        else:
+            response['status'] = 'failure'
+            response['reason'] = 'invalid request'
+    except Exception as e:
+        response['status'] = 'failure'
+        response['reason'] = type(e).__name__
+    return jsonify(response)
+
+@main.route('/getapikey', methods=['POST'])
+@login_required
+def getapikey():
+    response = {}
+    try:
+        if request.form.validate() and current_user.is_authenticated: # and if request.remote_addr in approved_ips
+            form = APIKeyForm(request.form)
+            if form.validate():
+                apikey = APIKey(
+                    key = generate_unique_key(),
+                    name = form.name.data,
+                    country = form.country.data
+                )
+                db.session.add(apikey)
+                db.session.commit()
+                response['status'] = 'success'
+        else:
+            response['status'] = 'failure'
+            response['reason'] = 'invalid request'
+    except Exception as e:
+        response['status'] = 'failure'
+        response['reason'] = type(e).__name__
+    return jsonify(response)
+
+'''@main.route('/validatetid', methods=['POST'])
+def validatetid():
+    response = {}
+    try:
+        if request.form.validate() and valid_api_key(request.form['api_key']): # and if request.remote_addr in approved_ips
+            if get_tournament(request.form['tid']) == None: 
+                response['status'] = 'false'
+            else:
+                response['status'] = 'true' if get_tournament(request.form['tid']).active else 'false'
+        else:
+            response['status'] = 'failure'
+            response['reason'] = 'invalid request'
+    except Exception as e:
+        response['status'] = 'failure'
+        response['reason'] = type(e).__name__
+    return jsonify(response)'''
 
 @main.route('/search', methods=['GET', 'POST']) # The methods 'GET' and 'POST' tell this route that
 def search():                                   # we can both request and send data to/from the page.

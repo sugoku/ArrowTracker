@@ -1,6 +1,7 @@
 from PIL import Image
 import os
 import secrets
+import uuid
 from flask import current_app
 from app.models import APIKey
 
@@ -26,3 +27,9 @@ def valid_api_key(apikey):
 
 def get_api_key(apikey):
     return APIKey.query.filter_by(key=apikey).first()
+
+def generate_unique_key():
+    key = uuid.uuid4()
+    while not valid_api_key(key.hex):
+        key = uuid.uuid4()
+    return key.hex

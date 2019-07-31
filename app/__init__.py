@@ -5,6 +5,8 @@ from flask_login import LoginManager
 from loadsongs import load_song_lists, raw_songdata
 from flask_mail import Mail
 from app.config import Config
+from flask_apscheduler import APScheduler
+import atexit
 
 songlist_pairs, lengthtype_pairs = load_song_lists()
 
@@ -24,6 +26,8 @@ login_manager.login_message_category = 'success'
 
 mail = Mail()
 
+scheduler = APScheduler()
+
 def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(Config)
@@ -42,5 +46,12 @@ def create_app(config_class=Config):
     app.register_blueprint(scores)
     app.register_blueprint(main)
     app.register_blueprint(errors)
+
+    scheduler.init_app(app)
+    scheduler.start()
+    atexit.register(lambda: scheduler.shutdown())
+    @app.before_first_request
+    def load_tasks():
+        from app.scores.utils import update_scores_task
 
     return app

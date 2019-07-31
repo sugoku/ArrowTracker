@@ -30,6 +30,7 @@ class ScoreForm(FlaskForm):
     length = SelectField('Length', coerce=str, choices=lengthtype_pairs, validators=[DataRequired()])
     accesscode = HiddenField('Access Code', coerce=str, validators=[Length(min=32, max=32)])
     acsubmit = HiddenField('Submitted via Machine', coerce=str)
+    #tournamentid = IntegerField('Tournament ID', validators=[NumberRange(min=0)])
     submit = SubmitField('Submit')
 
 class WeeklyForm(FlaskForm):

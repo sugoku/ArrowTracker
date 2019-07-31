@@ -30,6 +30,45 @@ No changes will be made without using the above link.
 '''
     mail.send(msg)
 
-def access_code_to_user(acode):
+def accesscode_to_user(acode):
     u = User.query.filter_by(accesscode=acode).first()
     return u.id if u != None else None
+
+def user_to_primeprofile(user):
+    return {
+        'PlayerID': user.id,     # figure out which is which (player and profile ID)
+        'AccessCode': user.accesscode,
+        'Nickname': user.ign,
+        'ProfileID': user.id,
+        'CountryID': user.countryid,
+        'Avatar': user.gameavatar,
+        'Level': user.gamelevel,
+        'EXP': user.gameexp,
+        'PP': user.gamepp,
+        'RankSingle': user.ranksingle,
+        'RankDouble': user.rankdouble,
+        'RunningStep': user.runningstep,
+        'PlayCount': user.playcount,
+        'Kcal': user.kcal,
+        'Modifiers': user.modifiers,
+        'SpeedMod': user.noteskin + user.speedmod,
+        'RushSpeed': user.rushspeed,
+        'Scores': posts_to_uscore(u.posts)
+    }
+
+def update_user_with_primeprofile(user, post):
+    user.ign = post['Nickname'] # consider not changing this
+    user.countryid = post['CountryID'] # or this
+    user.gameavatar = post['Avatar'] # or this
+    user.gamelevel = int(post['Level'])
+    user.gameexp = int(post['EXP'])
+    user.gamepp = int(post['PP'])
+    user.ranksingle = int(post['RankSingle'])
+    user.rankdouble = int(post['RankDouble'])
+    user.runningstep = int(post['RunningStep'])
+    user.playcount = int(post['PlayCount'])
+    user.kcal = float(post['Kcal'])
+    user.modifiers = int(post['Modifiers'])
+    user.noteskin = int(post['SpeedMod']) % 100
+    user.speedmod = int(post['SpeedMod']) - (int(post['SpeedMod']) % 100)
+    user.rushspeed = float(post['RushSpeed'])

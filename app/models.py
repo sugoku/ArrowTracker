@@ -20,6 +20,21 @@ class User(db.Model, UserMixin):
     posts = db.relationship('Post', backref='author', lazy=True)
     weeklyposts = db.relationship('WeeklyPost', backref='author', lazy=True)
     accesscode = db.Column(db.String(32), unique=True, nullable=True)
+    ign = db.Column(db.String(20), unique=True, nullable=False, default='PUMPITUP')
+    countryid = db.Column(db.Integer, nullable=False, default=196)
+    gameavatar = db.Column(db.Integer, nullable=False, default=41)
+    gamelevel = db.Column(db.Integer, nullable=False, default=0)
+    gameexp = db.Column(db.Integer, nullable=False, default=0)
+    gamepp = db.Column(db.Integer, nullable=False, default=0)
+    ranksingle = db.Column(db.Integer, nullable=False, default=0)
+    rankdouble = db.Column(db.Integer, nullable=False, default=0)
+    runningstep = db.Column(db.Integer, nullable=False, default=0)
+    playcount = db.Column(db.Integer, nullable=False, default=0)
+    kcal = db.Column(db.Integer, nullable=False, default=0)
+    modifiers = db.Column(db.Integer, nullable=False, default=0)
+    noteskin = db.Column(db.Integer, nullable=False, default=0)
+    speedmod = db.Column(db.Integer, nullable=False, default=0)
+    rushspeed = db.Column(db.Integer, nullable=False, default=0)
 
     def get_reset_token(self, expires_sec=1800):
         s = Serializer(current_app.config["SECRET_KEY"], expires_sec)
@@ -41,7 +56,9 @@ class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     date_posted = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     song = db.Column(db.String(50), nullable=False)
+    song_id = db.Column(db.Integer, nullable=False)
     score = db.Column(db.Integer, nullable=False)
+    exscore = db.Column(db.Integer, nullable=False)
     lettergrade = db.Column(db.String(3), nullable=False)
     type = db.Column(db.String(7), nullable=True, default="None")
     difficulty = db.Column(db.Integer, nullable=False)
@@ -66,6 +83,7 @@ class Post(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     accesscode = db.Column(db.String(32), nullable=True)
     acsubmit = db.Column(db.String(5), nullable=False)
+    #tournamentid = db.Column(db.Integer, nullable=True)
     image_file = db.Column(db.String(20), nullable=False, default="None")
 
     def __repr__(self):
@@ -119,6 +137,6 @@ class Tournament(db.Model):
 
 class APIKey(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    key = db.Column(db.String(50), unique=True, nullable=False)
+    key = db.Column(db.String(32), unique=True, nullable=False)
     name = db.Column(db.String(50), nullable=True)
     country = db.Column(db.String(2), nullable=True)
