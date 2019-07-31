@@ -35,14 +35,12 @@
   <body>
     {% include 'includes/_navbar.html' %}
     <main id="swup" class="transition-fade">
-      <div class="container animbg" style="padding: 20px">
+      <div class="container" style="padding: 20px">
         {% include 'includes/_messages.html' %}
         {% block body %}{% endblock %}
       </div>
     </main>
-    <div id="swup" class="transition-fade">
-      {% include 'includes/_footer.html' %}
-    </div>
+    {% include 'includes/_footer.html' %}
     <script src="https://unpkg.com/swup@latest/dist/swup.min.js"></script>
     <script type="text/javascript">
       window.scroll({
@@ -52,8 +50,6 @@
       });
 
       const swup = new Swup();
-
-      swup.on('contentReplaced', init);
     </script>
   </body>
 </html>

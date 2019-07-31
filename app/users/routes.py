@@ -5,6 +5,7 @@ from app.models import User, Post
 from app.users.forms import (RegisterForm, LoginForm, UpdateAccountForm,
                              RequestResetForm, ResetPasswordForm)
 from app.users.utils import save_picture, send_reset_email
+import json
 
 users = Blueprint('users', __name__)
 
@@ -129,3 +130,10 @@ def members():
     users = User.query.all()
     total = db.engine.execute('select count(*) from User').scalar()
     return render_template('users.html', users=users, total=total)
+
+@users.route("/members/supporters")
+def supporters():
+    with open('supporters.json', 'r') as f:
+        supporters = json.load(f)
+    total = len(supporters)
+    return render_template('supporters.html', supporters=supporters, total=total)

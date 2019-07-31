@@ -1409,26 +1409,12 @@
       "D20"
     ]
   },
-  "Blow [Full Song]": {
-    "length": "Full Song",
-    "author": "Future Funk Squad",
-    "bpm": "130 BPM",
-    "genre": "WORLD MUSIC",
-    "id": "88",
-    "difficulties": [
-      "S12",
-      "S17",
-      "D13",
-      "D19",
-      "RT14"
-    ]
-  },
   "Blow": {
     "length": "Arcade",
     "author": "Future Funk Squad",
     "bpm": "130 BPM",
     "genre": "WORLD MUSIC",
-    "id": "89",
+    "id": "88",
     "difficulties": [
       "S2",
       "S4",
@@ -1443,6 +1429,20 @@
       "D16",
       "D19",
       "RT10"
+    ]
+  },
+  "Blow [Full Song]": {
+    "length": "Full Song",
+    "author": "Future Funk Squad",
+    "bpm": "130 BPM",
+    "genre": "WORLD MUSIC",
+    "id": "89",
+    "difficulties": [
+      "S12",
+      "S17",
+      "D13",
+      "D19",
+      "RT14"
     ]
   },
   "Blowin It Up": {
@@ -2582,17 +2582,27 @@
       "SP2"
     ]
   },
-  "Dance on Fire: Retribution [Short Cut]": {
-    "length": "Short Cut",
+  "Dance on Fire: Retribution": {
+    "length": "Arcade",
     "author": "Magic Hammer",
     "bpm": "165 BPM",
     "genre": "WORLD MUSIC",
     "id": "160",
     "difficulties": [
-      "S6",
+      "S1",
+      "S4",
+      "S7",
+      "S9",
+      "S12",
       "S15",
-      "D4",
-      "D16"
+      "S18",
+      "D6",
+      "D10",
+      "D12",
+      "D17",
+      "D20",
+      "SP4",
+      "RT17"
     ]
   },
   "Dance Vibrations [Short Cut]": {
@@ -8100,6 +8110,17 @@
       "D23",
       "D25",
       "DP4"
+    ]
+  },
+  "Nyarlathotep [Short Cut]": {
+    "length": "Short Cut",
+    "author": "Nato",
+    "bpm": "200 BPM",
+    "genre": "ORIGINAL",
+    "id": "501",
+    "difficulties": [
+      "S22",
+      "D24"
     ]
   },
   "Obelisque": {
