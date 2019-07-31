@@ -51,9 +51,9 @@ def user_to_primeprofile(user):
         'PlayCount': user.playcount,
         'Kcal': user.kcal,
         'Modifiers': user.modifiers,
-        'SpeedMod': user.noteskin + user.speedmod,
+        'NoteSkinSpeed': user.noteskin * 0x10000 + user.speedmod,
         'RushSpeed': user.rushspeed,
-        'Scores': posts_to_uscore(u.posts)
+        'Scores': posts_to_uscore(user.posts)
     }
 
 def update_user_with_primeprofile(user, post):
@@ -69,6 +69,6 @@ def update_user_with_primeprofile(user, post):
     user.playcount = int(post['PlayCount'])
     user.kcal = float(post['Kcal'])
     user.modifiers = int(post['Modifiers'])
-    user.noteskin = int(post['SpeedMod']) % 100
-    user.speedmod = int(post['SpeedMod']) - (int(post['SpeedMod']) % 100)
+    user.noteskin = int(post['NoteSkinSpeed']) / 0x10000
+    user.speedmod = int(post['NoteSkinSpeed']) % 0x100
     user.rushspeed = float(post['RushSpeed'])

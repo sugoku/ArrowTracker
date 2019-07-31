@@ -39,6 +39,61 @@ def return_completion(user, difficulty):
             data['singles'][diff] = completed
     return(data)
 
+prime_grade = {
+    0: "SSS",
+    1: "SS",
+    2: "S",
+    3: "A",
+    4: "B",
+    5: "C",
+    6: "D",
+    7: "F"
+}
+prime_charttype = {
+    0x0: "Single", # 0
+    0x5: "Double Performance", # 5
+    0x40: "Single Performance", # 64
+    0x80: "Double", # 128
+    0xc0: "Co-Op" # 192
+}
+prime_songcategory = {
+    0x0: "Arcade",
+    0x1: "Random",
+    0x7: "Remix",
+    0x8: "Short Cut",
+    0x9: "Music Train",
+    0xa: "Quest",
+    0xc: "UCS" # HDD
+}
+prime_noteskin = {
+    0x0: "Prime",
+    0x1: "Korean Trump",
+    0x2: "Old",
+    0x3: "Easy (Infinity)",
+    0x4: "Slime",
+    0x5: "Music",
+    0x6: "Canon",
+    0x7: "Poker",
+    0x8: "NX",
+    0x9: "Lamb",
+    0xa: "Horse",
+    0xb: "Dog",
+    0xc: "Girl",
+    0xd: "Fire",
+    0xe: "Ice",
+    0xf: "Wind",
+    0x13: "NXA",
+    0x14: "NX2",
+    0x15: "Lightning",
+    0x16: "Drum",
+    0x17: "Missile",
+    0x1b: "Football",
+    0x1c: "Rebirth",
+    0x1d: "Basic",
+    0x1e: "Fiesta",
+    0x1f: "Fiesta 2"
+}
+
 @scheduler.task('interval', id='update_scores', minutes=1)
 def update_scores_task():
     with scheduler.app.app_context():
@@ -114,3 +169,15 @@ def get_rankmode(scoretype='default'):
     with open(os.getcwd()+'/leaderboards/'+'rankmode_'+scoretype+'.json') as f:
         return json.load(f)
     # plan to use APScheduler to update database
+
+def id_to_songdiff(sid, diff):
+    pass
+
+def id_to_songname(sid):
+    for song in raw_songdata:
+        if raw_songdata[song]['id'] == sid:
+            return song
+    return None
+
+def posts_to_uscore(posts):
+    pass

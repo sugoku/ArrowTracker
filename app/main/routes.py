@@ -11,6 +11,7 @@ from sqlalchemy import desc, or_
 from app.config import GetChangelog
 from app.main.utils import save_picture, allowed_file, valid_api_key, generate_unique_key
 from app.users.utils import accesscode_to_user, user_to_primeprofile, update_user_with_primeprofile
+from app.scores.utils import id_to_songname, prime_grade, prime_charttype, prime_songcategory
 
 # We can define all of the "@main" decorators below as a "blueprint" that
 # allows us to easily call or redirect the user to any of them from anywhere.
@@ -37,15 +38,15 @@ def submit():
         if request.form.validate() and valid_api_key(request.form['api_key']): # and if request.remote_addr in approved_ips
             u = accesscode_to_user(request.form.accesscode.data)
             post = Post(
-                song = id_to_songdiff(hex(int(request.form['SongID'])), request.form['difficulty']),
-                song_id = request.form['song_id'],
+                song = id_to_songname(hex(int(request.form['SongID']))),
+                song_id = int(request.form['SongID']),
                 score = int(request.form['Score']),
                 exscore = calc_exscore(int(request.form['Perfect']), int(request.form['Great']), int(request.form['Good']), int(request.form['Bad']), int(request.form['Miss'])),
                 lettergrade = prime_grade[int(request.form['Grade'])],
                 type = prime_charttype[int(request.form['Type'])],
                 difficulty = int(request.form['ChartLevel']),
                 platform = 'pad',
-                stagepass = request.form['stagepass'],
+                stagepass = 'True' if request.form['Flag'] == '128' else 'False',
                 perfect = int(request.form['Perfect']),
                 great = int(request.form['Great']),
                 good = int(request.form['Good']),
@@ -55,13 +56,13 @@ def submit():
                 pp = int(request.form['PP']),
                 runningstep = int(request.form['RunningStep']),
                 kcal = float(request.form['Kcal']),
-                scrollspeed = int(request.form['ScrollSpeed']), # this does NOT EXIST FIX IT
-                noteskin = int(request.form['Noteskin']), # fix
-                modifiers = int(request.form['Modifiers']), # fix
+                scrollspeed = int(request.form['NoteSkinSpeed']) % 0x100,
+                noteskin = int(request.form['NoteSkinSpeed']) / 0x10000,
+                modifiers = int(request.form['Modifiers']),
                 #gamemix = request.form['Gamemix'],
                 gameversion = request.form['GameVersion'],
                 ranked = 'True' if request.form['Flag'] == '128' else 'False',
-                length = request.form['length'], # how do i even? Type maybe?
+                length = prime_songcategory[int(request.form['SongCategory'])],
                 accesscode = request.form['AccessCode'],
                 acsubmit = 'True',
                 user_id = u.id
@@ -98,13 +99,14 @@ def getprofile():
 
 @main.route('/saveprofile', methods=['POST'])
 def saveprofile():
-    response = {}
+    response = {
+        'status': 'success'
+    }
     try:
         if request.form.validate() and valid_api_key(request.form['api_key']): # and if request.remote_addr in approved_ips
             u = accesscode_to_user(request.form['access_code'])
             update_user_with_primeprofile(u, request.form)
             db.session.commit()
-            response['status'] = 'success'
         else:
             response['status'] = 'failure'
             response['reason'] = 'invalid request'
@@ -144,7 +146,9 @@ def getrankmode():
 @main.route('/getapikey', methods=['POST'])
 @login_required
 def getapikey():
-    response = {}
+    response = {
+        'status': 'success'
+    }
     try:
         if request.form.validate() and current_user.is_authenticated: # and if request.remote_addr in approved_ips
             form = APIKeyForm(request.form)
@@ -156,7 +160,6 @@ def getapikey():
                 )
                 db.session.add(apikey)
                 db.session.commit()
-                response['status'] = 'success'
         else:
             response['status'] = 'failure'
             response['reason'] = 'invalid request'
