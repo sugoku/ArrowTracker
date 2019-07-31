@@ -59,6 +59,8 @@ while pagenum <= totalpages:
         data[song]['author'] = match.a.div.find('div', class_='media-body').find('span', class_='label bg-primary').text
         data[song]['bpm'] = re.sub(r'\s+', ' ', match.a.div.find('div', class_='hidden-lg').div.span.text.strip())
         data[song]['genre'] = match.a.div.find('div', class_='media-body').find('div', class_='hidden-lg').div.find('span', class_='badge bg-success').text
+        data[song]['song_id'] = match.a.div.find('div', class_='media-body').find('span', class_='label bg-inverse').text.replace("ID: ", "") 
+        print(data[song]['song_id'])
         data[song]['id'] = f'{id}'
         thumburl = 'https://pumpout.anyhowstep.com' + match.a.div.find('img', class_='thumb-large')['src']
         urllib.request.urlretrieve(thumburl, f'app/static/songthumbs/{id}.png')

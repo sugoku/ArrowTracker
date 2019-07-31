@@ -4,6 +4,7 @@
     "author": "Onyx",
     "bpm": "39~155 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "0",
     "difficulties": [
       "S2",
@@ -21,6 +22,7 @@
     "author": "SLAM",
     "bpm": "220 BPM",
     "genre": "ORIGINAL",
+    "song_id": "",
     "id": "1",
     "difficulties": [
       "S16",
@@ -35,6 +37,7 @@
     "author": "SLAM",
     "bpm": "200 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1424",
     "id": "2",
     "difficulties": [
       "S16",
@@ -53,6 +56,7 @@
     "author": "BanYa Production",
     "bpm": "96 BPM",
     "genre": "ORIGINAL",
+    "song_id": "D14",
     "id": "3",
     "difficulties": [
       "S3",
@@ -68,6 +72,7 @@
     "author": "45RPM",
     "bpm": "123 BPM",
     "genre": "K-POP",
+    "song_id": "F30",
     "id": "4",
     "difficulties": [
       "S11",
@@ -80,6 +85,7 @@
     "author": "Energy presents",
     "bpm": "128 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1020",
     "id": "5",
     "difficulties": [
       "S2",
@@ -93,24 +99,13 @@
       "DP4"
     ]
   },
-  "86 [Full Song]": {
-    "length": "Full Song",
-    "author": "Dasu",
-    "bpm": "167 BPM",
-    "genre": "WORLD MUSIC",
-    "id": "6",
-    "difficulties": [
-      "S16",
-      "S21",
-      "D23"
-    ]
-  },
   "86": {
     "length": "Arcade",
     "author": "Dasu",
     "bpm": "167 BPM",
     "genre": "WORLD MUSIC",
-    "id": "7",
+    "song_id": "",
+    "id": "6",
     "difficulties": [
       "S12",
       "S16",
@@ -120,11 +115,25 @@
       "DP3"
     ]
   },
+  "86 [Full Song]": {
+    "length": "Full Song",
+    "author": "Dasu",
+    "bpm": "167 BPM",
+    "genre": "WORLD MUSIC",
+    "song_id": "",
+    "id": "7",
+    "difficulties": [
+      "S16",
+      "S21",
+      "D23"
+    ]
+  },
   "A nightmare": {
     "length": "Arcade",
     "author": "BanYa",
     "bpm": "120 BPM",
     "genre": "ORIGINAL",
+    "song_id": "306",
     "id": "8",
     "difficulties": [
       "S2",
@@ -138,6 +147,7 @@
     "author": "STREME REVERIE",
     "bpm": "186 BPM",
     "genre": "XROSS",
+    "song_id": "15B6",
     "id": "9",
     "difficulties": [
       "S8",
@@ -154,6 +164,7 @@
     "author": "MAX",
     "bpm": "183 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1311",
     "id": "10",
     "difficulties": [
       "S4",
@@ -169,6 +180,7 @@
     "author": "D_AAN",
     "bpm": "200 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1463",
     "id": "11",
     "difficulties": [
       "S9",
@@ -188,6 +200,7 @@
     "author": "Outsider",
     "bpm": "130 BPM",
     "genre": "K-POP",
+    "song_id": "1557",
     "id": "12",
     "difficulties": [
       "S3",
@@ -207,6 +220,7 @@
     "author": "Outsider",
     "bpm": "130 BPM",
     "genre": "K-POP",
+    "song_id": "15E4",
     "id": "13",
     "difficulties": [
       "S20",
@@ -218,6 +232,7 @@
     "author": "Zircon",
     "bpm": "130 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1470",
     "id": "14",
     "difficulties": [
       "S3",
@@ -234,6 +249,7 @@
     "author": "Eun Ji Won",
     "bpm": "123 BPM",
     "genre": "K-POP",
+    "song_id": "F05",
     "id": "15",
     "difficulties": [
       "S1",
@@ -250,6 +266,7 @@
     "author": "TatshMusicCircle",
     "bpm": "152 BPM",
     "genre": "J-MUSIC",
+    "song_id": "1485",
     "id": "16",
     "difficulties": [
       "S1",
@@ -269,6 +286,7 @@
     "author": "BanYa",
     "bpm": "130 BPM",
     "genre": "ORIGINAL",
+    "song_id": "504",
     "id": "17",
     "difficulties": [
       "S3",
@@ -282,6 +300,7 @@
     "author": "DM Ashura",
     "bpm": "156 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "18",
     "difficulties": [
       "S23",
@@ -293,6 +312,7 @@
     "author": "DM Ashura",
     "bpm": "156 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1122",
     "id": "19",
     "difficulties": [
       "S4",
@@ -318,6 +338,7 @@
     "author": "DM Ashura",
     "bpm": "176 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1526",
     "id": "20",
     "difficulties": [
       "S5",
@@ -335,6 +356,7 @@
     "author": "DM Ashura",
     "bpm": "160 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1426",
     "id": "21",
     "difficulties": [
       "S4",
@@ -352,6 +374,7 @@
     "author": "Bakusute Sotokanda Icchome",
     "bpm": "125 BPM",
     "genre": "J-MUSIC",
+    "song_id": "1475",
     "id": "22",
     "difficulties": [
       "S1",
@@ -370,6 +393,7 @@
     "author": "Gentle Stick",
     "bpm": "155 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1416",
     "id": "23",
     "difficulties": [
       "S7",
@@ -385,6 +409,7 @@
     "author": "BanYa",
     "bpm": "160 BPM",
     "genre": "ORIGINAL",
+    "song_id": "305",
     "id": "24",
     "difficulties": [
       "S6",
@@ -396,6 +421,7 @@
     "author": "void",
     "bpm": "170 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1529",
     "id": "25",
     "difficulties": [
       "S3",
@@ -413,6 +439,7 @@
     "author": "DM Ashura",
     "bpm": "192 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1427",
     "id": "26",
     "difficulties": [
       "S7",
@@ -431,6 +458,7 @@
     "author": "Novasonic",
     "bpm": "136 BPM",
     "genre": "K-POP",
+    "song_id": "112",
     "id": "27",
     "difficulties": [
       "S1",
@@ -450,6 +478,7 @@
     "author": "Banzai",
     "bpm": "110 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "28",
     "difficulties": [
       "S1",
@@ -468,6 +497,7 @@
     "author": "mzet:-P",
     "bpm": "175 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1525",
     "id": "29",
     "difficulties": [
       "S4",
@@ -485,6 +515,7 @@
     "author": "Yahpp",
     "bpm": "135.9 BPM",
     "genre": "ORIGINAL",
+    "song_id": "D02",
     "id": "30",
     "difficulties": [
       "S2",
@@ -503,6 +534,7 @@
     "author": "BanYa Production",
     "bpm": "160 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1023",
     "id": "31",
     "difficulties": [
       "S11",
@@ -518,6 +550,7 @@
     "author": "BanYa Production",
     "bpm": "170 BPM",
     "genre": "ORIGINAL",
+    "song_id": "",
     "id": "32",
     "difficulties": [
       "S10",
@@ -535,6 +568,7 @@
     "author": "Doin",
     "bpm": "170 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1154",
     "id": "33",
     "difficulties": [
       "S4",
@@ -553,6 +587,7 @@
     "author": "ATAS",
     "bpm": "148 BPM",
     "genre": "XROSS",
+    "song_id": "15B0",
     "id": "34",
     "difficulties": [
       "S4",
@@ -573,6 +608,7 @@
     "author": "Memme",
     "bpm": "175 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1408",
     "id": "35",
     "difficulties": [
       "S4",
@@ -594,6 +630,7 @@
     "author": "MAX",
     "bpm": "175 BPM",
     "genre": "ORIGINAL",
+    "song_id": "14A1",
     "id": "36",
     "difficulties": [
       "S20",
@@ -606,6 +643,7 @@
     "author": "typeMARS",
     "bpm": "150 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1541",
     "id": "37",
     "difficulties": [
       "S7",
@@ -624,6 +662,7 @@
     "author": "BanYa Production",
     "bpm": "164 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1031",
     "id": "38",
     "difficulties": [
       "S12",
@@ -638,6 +677,7 @@
     "author": "BanYa Production",
     "bpm": "180 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1034",
     "id": "39",
     "difficulties": [
       "S11",
@@ -649,6 +689,7 @@
     "author": "MAX",
     "bpm": "158 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1412",
     "id": "40",
     "difficulties": [
       "S4",
@@ -666,6 +707,7 @@
     "author": "HitoshizukuP",
     "bpm": "204 BPM",
     "genre": "J-MUSIC",
+    "song_id": "1491",
     "id": "41",
     "difficulties": [
       "S2",
@@ -687,6 +729,7 @@
     "author": "Masayoshi Minoshima",
     "bpm": "136 BPM",
     "genre": "J-MUSIC",
+    "song_id": "1481",
     "id": "42",
     "difficulties": [
       "S1",
@@ -708,6 +751,7 @@
     "author": "Masayoshi Minoshima",
     "bpm": "136 BPM",
     "genre": "J-MUSIC",
+    "song_id": "14C6",
     "id": "43",
     "difficulties": [
       "S10",
@@ -724,6 +768,7 @@
     "author": "Miss A",
     "bpm": "136 BPM",
     "genre": "K-POP",
+    "song_id": "1316",
     "id": "44",
     "difficulties": [
       "S1",
@@ -741,6 +786,7 @@
     "author": "Bigbang",
     "bpm": "135 BPM",
     "genre": "K-POP",
+    "song_id": "1544",
     "id": "45",
     "difficulties": [
       "S1",
@@ -760,6 +806,7 @@
     "author": "Bigbang",
     "bpm": "135 BPM",
     "genre": "K-POP",
+    "song_id": "15E1",
     "id": "46",
     "difficulties": [
       "S6",
@@ -772,6 +819,7 @@
     "author": "Wez Devine",
     "bpm": "32~95 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "47",
     "difficulties": [
       "S2",
@@ -789,6 +837,7 @@
     "author": "BanYa",
     "bpm": "162~170 BPM",
     "genre": "ORIGINAL",
+    "song_id": "B29",
     "id": "48",
     "difficulties": [
       "S13",
@@ -802,6 +851,7 @@
     "author": "BanYa",
     "bpm": "146~195 BPM",
     "genre": "ORIGINAL",
+    "song_id": "",
     "id": "49",
     "difficulties": [
       "S9",
@@ -815,6 +865,7 @@
     "author": "BanYa",
     "bpm": "99 BPM",
     "genre": "ORIGINAL",
+    "song_id": "B56",
     "id": "50",
     "difficulties": [
       "S6",
@@ -828,6 +879,7 @@
     "author": "BanYa Production",
     "bpm": "92~180 BPM",
     "genre": "ORIGINAL",
+    "song_id": "D36",
     "id": "51",
     "difficulties": [
       "S15",
@@ -841,6 +893,7 @@
     "author": "BanYa Production",
     "bpm": "120 BPM",
     "genre": "ORIGINAL",
+    "song_id": "E50",
     "id": "52",
     "difficulties": [
       "S21",
@@ -854,6 +907,7 @@
     "author": "Crayon Pop",
     "bpm": "134 BPM",
     "genre": "K-POP",
+    "song_id": "1437",
     "id": "53",
     "difficulties": [
       "S3",
@@ -872,6 +926,7 @@
     "author": "Crayon Pop",
     "bpm": "134 BPM",
     "genre": "K-POP",
+    "song_id": "14C0",
     "id": "54",
     "difficulties": [
       "S16",
@@ -883,6 +938,7 @@
     "author": "Zircon",
     "bpm": "135 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "55",
     "difficulties": [
       "S18"
@@ -893,6 +949,7 @@
     "author": "Zircon",
     "bpm": "135 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1304",
     "id": "56",
     "difficulties": [
       "S2",
@@ -913,6 +970,7 @@
     "author": "Zircon",
     "bpm": "135 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "57",
     "difficulties": [
       "S9",
@@ -926,6 +984,7 @@
     "author": "MOMOLAND",
     "bpm": "126 BPM",
     "genre": "K-POP",
+    "song_id": "",
     "id": "58",
     "difficulties": [
       "S17",
@@ -937,6 +996,7 @@
     "author": "MOMOLAND",
     "bpm": "126 BPM",
     "genre": "K-POP",
+    "song_id": "",
     "id": "59",
     "difficulties": [
       "S1",
@@ -957,6 +1017,7 @@
     "author": "Stian K",
     "bpm": "142 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1237",
     "id": "60",
     "difficulties": [
       "S1",
@@ -981,6 +1042,7 @@
     "author": "Infinite",
     "bpm": "130 BPM",
     "genre": "K-POP",
+    "song_id": "1325",
     "id": "61",
     "difficulties": [
       "S2",
@@ -998,6 +1060,7 @@
     "author": "HEaDTriP",
     "bpm": "121 BPM",
     "genre": "K-POP",
+    "song_id": "E20",
     "id": "62",
     "difficulties": [
       "S6",
@@ -1017,6 +1080,7 @@
     "author": "HEaDTriP",
     "bpm": "121 BPM",
     "genre": "K-POP",
+    "song_id": "F65",
     "id": "63",
     "difficulties": [
       "S17",
@@ -1031,6 +1095,7 @@
     "author": "BanYa",
     "bpm": "140~202 BPM",
     "genre": "ORIGINAL",
+    "song_id": "820",
     "id": "64",
     "difficulties": [
       "S3",
@@ -1052,6 +1117,7 @@
     "author": "BanYa",
     "bpm": "120~190 BPM",
     "genre": "ORIGINAL",
+    "song_id": "C01",
     "id": "65",
     "difficulties": [
       "S4",
@@ -1069,6 +1135,7 @@
     "author": "Yahpp",
     "bpm": "120~190 BPM",
     "genre": "ORIGINAL",
+    "song_id": "D42",
     "id": "66",
     "difficulties": [
       "S17",
@@ -1081,6 +1148,7 @@
     "author": "BanYa Production",
     "bpm": "124 BPM",
     "genre": "ORIGINAL",
+    "song_id": "",
     "id": "67",
     "difficulties": [
       "S5",
@@ -1095,6 +1163,7 @@
     "author": "BanYa Production",
     "bpm": "124 BPM",
     "genre": "ORIGINAL",
+    "song_id": "E02",
     "id": "68",
     "difficulties": [
       "S3",
@@ -1114,6 +1183,7 @@
     "author": "Wanna One",
     "bpm": "80 BPM",
     "genre": "K-POP",
+    "song_id": "1560",
     "id": "69",
     "difficulties": [
       "S2",
@@ -1131,6 +1201,7 @@
     "author": "SANY-ON",
     "bpm": "183 BPM",
     "genre": "XROSS",
+    "song_id": "15B5",
     "id": "70",
     "difficulties": [
       "S8",
@@ -1148,6 +1219,7 @@
     "author": "BanYa",
     "bpm": "160 BPM",
     "genre": "ORIGINAL",
+    "song_id": "802",
     "id": "71",
     "difficulties": [
       "S4",
@@ -1168,6 +1240,7 @@
     "author": "BanYa",
     "bpm": "170 BPM",
     "genre": "ORIGINAL",
+    "song_id": "14A0",
     "id": "72",
     "difficulties": [
       "S18",
@@ -1180,6 +1253,7 @@
     "author": "BanYa",
     "bpm": "162 BPM",
     "genre": "ORIGINAL",
+    "song_id": "505",
     "id": "73",
     "difficulties": [
       "S4",
@@ -1202,6 +1276,7 @@
     "author": "Yahpp",
     "bpm": "210 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1062",
     "id": "74",
     "difficulties": [
       "S14",
@@ -1215,6 +1290,7 @@
     "author": "Yahpp",
     "bpm": "210 BPM",
     "genre": "ORIGINAL",
+    "song_id": "D35",
     "id": "75",
     "difficulties": [
       "S17",
@@ -1228,6 +1304,7 @@
     "author": "BanYa",
     "bpm": "92 BPM",
     "genre": "ORIGINAL",
+    "song_id": "403",
     "id": "76",
     "difficulties": [
       "S1",
@@ -1246,6 +1323,7 @@
     "author": "msgoon",
     "bpm": "92 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1003",
     "id": "77",
     "difficulties": [
       "S4",
@@ -1261,6 +1339,7 @@
     "author": "NOW",
     "bpm": "104 BPM",
     "genre": "K-POP",
+    "song_id": "1005",
     "id": "78",
     "difficulties": [
       "S5",
@@ -1277,6 +1356,7 @@
     "author": "Big metra",
     "bpm": "105 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "F38",
     "id": "79",
     "difficulties": [
       "S5",
@@ -1289,6 +1369,7 @@
     "author": "Bigbang",
     "bpm": "135 BPM",
     "genre": "K-POP",
+    "song_id": "13A0",
     "id": "80",
     "difficulties": [
       "S17",
@@ -1300,6 +1381,7 @@
     "author": "Memme",
     "bpm": "162 BPM",
     "genre": "XROSS",
+    "song_id": "15A0",
     "id": "81",
     "difficulties": [
       "S5",
@@ -1317,6 +1399,7 @@
     "author": "DJ Clonepa",
     "bpm": "192 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "82",
     "difficulties": [
       "S6",
@@ -1336,6 +1419,7 @@
     "author": "DJ Clonepa",
     "bpm": "192 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "83",
     "difficulties": [
       "S18",
@@ -1349,6 +1433,7 @@
     "author": "zeron",
     "bpm": "175 BPM",
     "genre": "XROSS",
+    "song_id": "",
     "id": "84",
     "difficulties": [
       "S12",
@@ -1365,6 +1450,7 @@
     "author": "Yahpp",
     "bpm": "170 BPM",
     "genre": "ORIGINAL",
+    "song_id": "F01",
     "id": "85",
     "difficulties": [
       "S2",
@@ -1384,6 +1470,7 @@
     "author": "Yahpp",
     "bpm": "170 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1423",
     "id": "86",
     "difficulties": [
       "S2",
@@ -1399,6 +1486,7 @@
     "author": "BanYa",
     "bpm": "158 BPM",
     "genre": "ORIGINAL",
+    "song_id": "A04",
     "id": "87",
     "difficulties": [
       "S4",
@@ -1409,12 +1497,28 @@
       "D20"
     ]
   },
+  "Blow [Full Song]": {
+    "length": "Full Song",
+    "author": "Future Funk Squad",
+    "bpm": "130 BPM",
+    "genre": "WORLD MUSIC",
+    "song_id": "",
+    "id": "88",
+    "difficulties": [
+      "S12",
+      "S17",
+      "D13",
+      "D19",
+      "RT14"
+    ]
+  },
   "Blow": {
     "length": "Arcade",
     "author": "Future Funk Squad",
     "bpm": "130 BPM",
     "genre": "WORLD MUSIC",
-    "id": "88",
+    "song_id": "",
+    "id": "89",
     "difficulties": [
       "S2",
       "S4",
@@ -1431,25 +1535,12 @@
       "RT10"
     ]
   },
-  "Blow [Full Song]": {
-    "length": "Full Song",
-    "author": "Future Funk Squad",
-    "bpm": "130 BPM",
-    "genre": "WORLD MUSIC",
-    "id": "89",
-    "difficulties": [
-      "S12",
-      "S17",
-      "D13",
-      "D19",
-      "RT14"
-    ]
-  },
   "Blowin It Up": {
     "length": "Remix",
     "author": "Future Funk Squad",
     "bpm": "130 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "90",
     "difficulties": [
       "S13",
@@ -1464,6 +1555,7 @@
     "author": "BLACKPINK",
     "bpm": "125 BPM",
     "genre": "K-POP",
+    "song_id": "1551",
     "id": "91",
     "difficulties": [
       "S2",
@@ -1484,6 +1576,7 @@
     "author": "BLACKPINK",
     "bpm": "125 BPM",
     "genre": "K-POP",
+    "song_id": "15E2",
     "id": "92",
     "difficulties": [
       "S10",
@@ -1496,6 +1589,7 @@
     "author": "Wanna One",
     "bpm": "100 BPM",
     "genre": "K-POP",
+    "song_id": "",
     "id": "93",
     "difficulties": [
       "S2",
@@ -1516,6 +1610,7 @@
     "author": "HAON",
     "bpm": "136 BPM",
     "genre": "K-POP",
+    "song_id": "",
     "id": "94",
     "difficulties": [
       "S1",
@@ -1535,6 +1630,7 @@
     "author": "Nightmare",
     "bpm": "170 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "95",
     "difficulties": [
       "S2",
@@ -1552,6 +1648,7 @@
     "author": "MAZO",
     "bpm": "176 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1497",
     "id": "96",
     "difficulties": [
       "S7",
@@ -1567,6 +1664,7 @@
     "author": "Lunatic Sounds",
     "bpm": "175 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1513",
     "id": "97",
     "difficulties": [
       "S4",
@@ -1584,6 +1682,7 @@
     "author": "Lunatic Sounds",
     "bpm": "160 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1512",
     "id": "98",
     "difficulties": [
       "S7",
@@ -1600,6 +1699,7 @@
     "author": "Memme",
     "bpm": "180 BPM",
     "genre": "XROSS",
+    "song_id": "15A1",
     "id": "99",
     "difficulties": [
       "S8",
@@ -1617,6 +1717,7 @@
     "author": "Hanna Stockzell",
     "bpm": "175 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "100",
     "difficulties": [
       "S3",
@@ -1635,6 +1736,7 @@
     "author": "BanYa Production",
     "bpm": "168 BPM",
     "genre": "ORIGINAL",
+    "song_id": "",
     "id": "101",
     "difficulties": [
       "S5",
@@ -1649,6 +1751,7 @@
     "author": "BanYa Production",
     "bpm": "168 BPM",
     "genre": "ORIGINAL",
+    "song_id": "D17",
     "id": "102",
     "difficulties": [
       "S4",
@@ -1665,6 +1768,7 @@
     "author": "MAX",
     "bpm": "128 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1105",
     "id": "103",
     "difficulties": [
       "S3",
@@ -1684,6 +1788,7 @@
     "author": "MAX",
     "bpm": "128 BPM",
     "genre": "ORIGINAL",
+    "song_id": "",
     "id": "104",
     "difficulties": [
       "S7",
@@ -1698,6 +1803,7 @@
     "author": "Baby V.O.X",
     "bpm": "127 BPM",
     "genre": "K-POP",
+    "song_id": "1007",
     "id": "105",
     "difficulties": [
       "S2",
@@ -1715,6 +1821,7 @@
     "author": "Cashew",
     "bpm": "140 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1434",
     "id": "106",
     "difficulties": [
       "S6",
@@ -1730,6 +1837,7 @@
     "author": "Sr. Lan Belmont",
     "bpm": "195 BPM",
     "genre": "ORIGINAL",
+    "song_id": "16A0",
     "id": "107",
     "difficulties": [
       "S8",
@@ -1748,6 +1856,7 @@
     "author": "2NE1",
     "bpm": "130 BPM",
     "genre": "K-POP",
+    "song_id": "1319",
     "id": "108",
     "difficulties": [
       "S2",
@@ -1766,6 +1875,7 @@
     "author": "2NE1",
     "bpm": "130 BPM",
     "genre": "K-POP",
+    "song_id": "13C4",
     "id": "109",
     "difficulties": [
       "S15",
@@ -1777,6 +1887,7 @@
     "author": "Yahpp",
     "bpm": "185 BPM",
     "genre": "ORIGINAL",
+    "song_id": "F02",
     "id": "110",
     "difficulties": [
       "S3",
@@ -1796,6 +1907,7 @@
     "author": "Yahpp",
     "bpm": "185 BPM",
     "genre": "ORIGINAL",
+    "song_id": "",
     "id": "111",
     "difficulties": [
       "S17",
@@ -1807,6 +1919,7 @@
     "author": "BanYa",
     "bpm": "160 BPM",
     "genre": "ORIGINAL",
+    "song_id": "B19",
     "id": "112",
     "difficulties": [
       "S1",
@@ -1833,6 +1946,7 @@
     "author": "BanYa",
     "bpm": "160 BPM",
     "genre": "ORIGINAL",
+    "song_id": "B57",
     "id": "113",
     "difficulties": [
       "S14",
@@ -1848,6 +1962,7 @@
     "author": "BanYa Production",
     "bpm": "180 BPM",
     "genre": "ORIGINAL",
+    "song_id": "F33",
     "id": "114",
     "difficulties": [
       "S11",
@@ -1861,6 +1976,7 @@
     "author": "BanYa Production",
     "bpm": "160 BPM",
     "genre": "ORIGINAL",
+    "song_id": "E03",
     "id": "115",
     "difficulties": [
       "S3",
@@ -1883,6 +1999,7 @@
     "author": "Wang Leehom",
     "bpm": "104.5 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "F17",
     "id": "116",
     "difficulties": [
       "S1",
@@ -1899,6 +2016,7 @@
     "author": "DM Ashura",
     "bpm": "128 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "117",
     "difficulties": [
       "S2",
@@ -1916,6 +2034,7 @@
     "author": "Dreamcatcher",
     "bpm": "200 BPM",
     "genre": "K-POP",
+    "song_id": "1547",
     "id": "118",
     "difficulties": [
       "S3",
@@ -1936,6 +2055,7 @@
     "author": "Dreamcatcher",
     "bpm": "200 BPM",
     "genre": "K-POP",
+    "song_id": "15E7",
     "id": "119",
     "difficulties": [
       "S19",
@@ -1947,6 +2067,7 @@
     "author": "BanYa",
     "bpm": "200 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1054",
     "id": "120",
     "difficulties": [
       "S20",
@@ -1958,6 +2079,7 @@
     "author": "BanYa",
     "bpm": "200 BPM",
     "genre": "ORIGINAL",
+    "song_id": "911",
     "id": "121",
     "difficulties": [
       "S4",
@@ -1978,6 +2100,7 @@
     "author": "Yahpp",
     "bpm": "210 BPM",
     "genre": "ORIGINAL",
+    "song_id": "D03",
     "id": "122",
     "difficulties": [
       "S4",
@@ -2002,6 +2125,7 @@
     "author": "Memme",
     "bpm": "175 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1407",
     "id": "123",
     "difficulties": [
       "S4",
@@ -2020,6 +2144,7 @@
     "author": "Yahpp",
     "bpm": "128 BPM",
     "genre": "ORIGINAL",
+    "song_id": "F03",
     "id": "124",
     "difficulties": [
       "S6",
@@ -2034,6 +2159,7 @@
     "author": "Yahpp",
     "bpm": "128 BPM",
     "genre": "ORIGINAL",
+    "song_id": "F50",
     "id": "125",
     "difficulties": [
       "S15",
@@ -2045,6 +2171,7 @@
     "author": "Sonic Dimension",
     "bpm": "134 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "E26",
     "id": "126",
     "difficulties": [
       "S5",
@@ -2059,6 +2186,7 @@
     "author": "Warak",
     "bpm": "170 BPM",
     "genre": "XROSS",
+    "song_id": "15A8",
     "id": "127",
     "difficulties": [
       "S3",
@@ -2076,6 +2204,7 @@
     "author": "Louis",
     "bpm": "149.5 BPM",
     "genre": "K-POP",
+    "song_id": "C14",
     "id": "128",
     "difficulties": [
       "S4",
@@ -2092,6 +2221,7 @@
     "author": "Doin",
     "bpm": "203 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1101",
     "id": "129",
     "difficulties": [
       "S4",
@@ -2113,6 +2243,7 @@
     "author": "Doin",
     "bpm": "203 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1146",
     "id": "130",
     "difficulties": [
       "S21",
@@ -2124,6 +2255,7 @@
     "author": "Inspector K",
     "bpm": "175 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "131",
     "difficulties": [
       "S2",
@@ -2141,6 +2273,7 @@
     "author": "BanYa",
     "bpm": "105 BPM",
     "genre": "ORIGINAL",
+    "song_id": "307",
     "id": "132",
     "difficulties": [
       "S4",
@@ -2153,6 +2286,7 @@
     "author": "Matduke",
     "bpm": "170 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "133",
     "difficulties": [
       "S8",
@@ -2171,6 +2305,7 @@
     "author": "Transin",
     "bpm": "140 BPM",
     "genre": "XROSS",
+    "song_id": "15B7",
     "id": "134",
     "difficulties": [
       "S4",
@@ -2189,6 +2324,7 @@
     "author": "On Slot",
     "bpm": "137 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "135",
     "difficulties": [
       "S2",
@@ -2206,6 +2342,7 @@
     "author": "Sechs Kies",
     "bpm": "158 BPM",
     "genre": "K-POP",
+    "song_id": "212",
     "id": "136",
     "difficulties": [
       "S4",
@@ -2222,6 +2359,7 @@
     "author": "BanYa",
     "bpm": "100~107 BPM",
     "genre": "ORIGINAL",
+    "song_id": "826",
     "id": "137",
     "difficulties": [
       "S4",
@@ -2240,6 +2378,7 @@
     "author": "Playmaker",
     "bpm": "130 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "138",
     "difficulties": [
       "S2",
@@ -2257,6 +2396,7 @@
     "author": "Sanxion7",
     "bpm": "70~140 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "139",
     "difficulties": [
       "S2",
@@ -2272,6 +2412,7 @@
     "author": "Siromaru",
     "bpm": "160 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1676",
     "id": "140",
     "difficulties": [
       "S6",
@@ -2289,6 +2430,7 @@
     "author": "SID-Sound",
     "bpm": "128 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1457",
     "id": "141",
     "difficulties": [
       "S3",
@@ -2307,6 +2449,7 @@
     "author": "Crash",
     "bpm": "220 BPM",
     "genre": "K-POP",
+    "song_id": "1119",
     "id": "142",
     "difficulties": [
       "S4",
@@ -2324,6 +2467,7 @@
     "author": "Crash",
     "bpm": "220 BPM",
     "genre": "K-POP",
+    "song_id": "1142",
     "id": "143",
     "difficulties": [
       "S22",
@@ -2335,6 +2479,7 @@
     "author": "G-Dragon",
     "bpm": "132 BPM",
     "genre": "K-POP",
+    "song_id": "1326",
     "id": "144",
     "difficulties": [
       "S4",
@@ -2350,6 +2495,7 @@
     "author": "Gyfted",
     "bpm": "108 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "F61",
     "id": "145",
     "difficulties": [
       "S3",
@@ -2362,6 +2508,7 @@
     "author": "Gyfted",
     "bpm": "108.1 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "F12",
     "id": "146",
     "difficulties": [
       "S2",
@@ -2380,6 +2527,7 @@
     "author": "rainbowdragoneyes",
     "bpm": "190 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "147",
     "difficulties": [
       "S2",
@@ -2402,6 +2550,7 @@
     "author": "TatshMusicCircle",
     "bpm": "163 BPM",
     "genre": "J-MUSIC",
+    "song_id": "1482",
     "id": "148",
     "difficulties": [
       "S4",
@@ -2420,6 +2569,7 @@
     "author": "TatshMusicCircle",
     "bpm": "163 BPM",
     "genre": "J-MUSIC",
+    "song_id": "14C7",
     "id": "149",
     "difficulties": [
       "S18",
@@ -2433,6 +2583,7 @@
     "author": "HyuN",
     "bpm": "200 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1505",
     "id": "150",
     "difficulties": [
       "S7",
@@ -2450,6 +2601,7 @@
     "author": "Brandy",
     "bpm": "160 BPM",
     "genre": "XROSS",
+    "song_id": "1594",
     "id": "151",
     "difficulties": [
       "S3",
@@ -2468,6 +2620,7 @@
     "author": "SGX",
     "bpm": "136 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "152",
     "difficulties": [
       "S2",
@@ -2483,6 +2636,7 @@
     "author": "BanYa",
     "bpm": "180 BPM",
     "genre": "ORIGINAL",
+    "song_id": "736",
     "id": "153",
     "difficulties": [
       "S4",
@@ -2505,6 +2659,7 @@
     "author": "MAX",
     "bpm": "180 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1312",
     "id": "154",
     "difficulties": [
       "S4",
@@ -2521,6 +2676,7 @@
     "author": "BanYa",
     "bpm": "150 BPM",
     "genre": "ORIGINAL",
+    "song_id": "807",
     "id": "155",
     "difficulties": [
       "S4",
@@ -2541,6 +2697,7 @@
     "author": "Ben Chalatit",
     "bpm": "141 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1336",
     "id": "156",
     "difficulties": [
       "S1",
@@ -2556,6 +2713,7 @@
     "author": "The DNC",
     "bpm": "124 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "157",
     "difficulties": [
       "S1",
@@ -2574,6 +2732,7 @@
     "author": "OscillatorX",
     "bpm": "140 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "E27",
     "id": "158",
     "difficulties": [
       "S5",
@@ -2587,7 +2746,8 @@
     "author": "Magic Hammer",
     "bpm": "165 BPM",
     "genre": "WORLD MUSIC",
-    "id": "160",
+    "song_id": "",
+    "id": "159",
     "difficulties": [
       "S1",
       "S4",
@@ -2605,11 +2765,26 @@
       "RT17"
     ]
   },
+  "Dance on Fire: Retribution [Short Cut]": {
+    "length": "Short Cut",
+    "author": "Magic Hammer",
+    "bpm": "165 BPM",
+    "genre": "WORLD MUSIC",
+    "song_id": "",
+    "id": "160",
+    "difficulties": [
+      "S6",
+      "S15",
+      "D4",
+      "D16"
+    ]
+  },
   "Dance Vibrations [Short Cut]": {
     "length": "Short Cut",
     "author": "Elpis",
     "bpm": "130 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "161",
     "difficulties": [
       "S16"
@@ -2620,6 +2795,7 @@
     "author": "Elpis",
     "bpm": "130 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "E28",
     "id": "162",
     "difficulties": [
       "S3",
@@ -2643,6 +2819,7 @@
     "author": "BanYa",
     "bpm": "122 BPM",
     "genre": "ORIGINAL",
+    "song_id": "718",
     "id": "163",
     "difficulties": [
       "S2",
@@ -2662,6 +2839,7 @@
     "author": "Don Omar",
     "bpm": "130 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1329",
     "id": "164",
     "difficulties": [
       "S4",
@@ -2677,6 +2855,7 @@
     "author": "CanBlaster (Miami Style)",
     "bpm": "158 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "165",
     "difficulties": [
       "S2",
@@ -2693,6 +2872,7 @@
     "author": "MAX",
     "bpm": "160 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "166",
     "difficulties": [
       "RT15",
@@ -2704,6 +2884,7 @@
     "author": "KaW",
     "bpm": "171 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "167",
     "difficulties": [
       "S2",
@@ -2721,6 +2902,7 @@
     "author": "Vassline",
     "bpm": "??? BPM",
     "genre": "K-POP",
+    "song_id": "1044",
     "id": "168",
     "difficulties": [
       "S15",
@@ -2733,6 +2915,7 @@
     "author": "Vassline",
     "bpm": "??? BPM",
     "genre": "K-POP",
+    "song_id": "F28",
     "id": "169",
     "difficulties": [
       "S4",
@@ -2747,6 +2930,7 @@
     "author": "SHK",
     "bpm": "160 BPM",
     "genre": "XROSS",
+    "song_id": "15A6",
     "id": "170",
     "difficulties": [
       "S3",
@@ -2767,6 +2951,7 @@
     "author": "SHK",
     "bpm": "160 BPM",
     "genre": "XROSS",
+    "song_id": "15F1",
     "id": "171",
     "difficulties": [
       "S9",
@@ -2782,6 +2967,7 @@
     "author": "SOM2",
     "bpm": "115 BPM",
     "genre": "K-POP",
+    "song_id": "1042",
     "id": "172",
     "difficulties": [
       "S7",
@@ -2794,6 +2980,7 @@
     "author": "SOM2",
     "bpm": "115 BPM",
     "genre": "K-POP",
+    "song_id": "B06",
     "id": "173",
     "difficulties": [
       "S1",
@@ -2813,6 +3000,7 @@
     "author": "Lunatic Sounds",
     "bpm": "210 BPM",
     "genre": "XROSS",
+    "song_id": "",
     "id": "174",
     "difficulties": [
       "S23",
@@ -2825,6 +3013,7 @@
     "author": "Applesoda",
     "bpm": "174 BPM",
     "genre": "ORIGINAL",
+    "song_id": "",
     "id": "175",
     "difficulties": [
       "S20",
@@ -2837,6 +3026,7 @@
     "author": "SHK",
     "bpm": "150 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1013",
     "id": "176",
     "difficulties": [
       "S4",
@@ -2856,6 +3046,7 @@
     "author": "SHK",
     "bpm": "150 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1064",
     "id": "177",
     "difficulties": [
       "S9",
@@ -2869,6 +3060,7 @@
     "author": "/DJS\\",
     "bpm": "183 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "178",
     "difficulties": [
       "S4",
@@ -2887,6 +3079,7 @@
     "author": "/DJS\\",
     "bpm": "183 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "179",
     "difficulties": [
       "S12",
@@ -2900,6 +3093,7 @@
     "author": "Zircon",
     "bpm": "116 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "180",
     "difficulties": [
       "S3",
@@ -2921,6 +3115,7 @@
     "author": "Nina Pilots",
     "bpm": "143 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1096",
     "id": "181",
     "difficulties": [
       "S2",
@@ -2936,6 +3131,7 @@
     "author": "Nina Pilots",
     "bpm": "162 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "F15",
     "id": "182",
     "difficulties": [
       "S3",
@@ -2955,6 +3151,7 @@
     "author": "Nina Pilots",
     "bpm": "162 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "F59",
     "id": "183",
     "difficulties": [
       "S7",
@@ -2967,6 +3164,7 @@
     "author": "Crash",
     "bpm": "195 BPM",
     "genre": "K-POP",
+    "song_id": "A08",
     "id": "184",
     "difficulties": [
       "S3",
@@ -2986,6 +3184,7 @@
     "author": "Crash",
     "bpm": "195 BPM",
     "genre": "K-POP",
+    "song_id": "B51",
     "id": "185",
     "difficulties": [
       "S13",
@@ -3000,6 +3199,7 @@
     "author": "640x480",
     "bpm": "115 BPM",
     "genre": "ORIGINAL",
+    "song_id": "",
     "id": "186",
     "difficulties": [
       "S2",
@@ -3018,6 +3218,7 @@
     "author": "Matduke",
     "bpm": "130 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "187",
     "difficulties": [
       "S3",
@@ -3037,6 +3238,7 @@
     "author": "BanYa Production",
     "bpm": "180 BPM",
     "genre": "ORIGINAL",
+    "song_id": "F23",
     "id": "188",
     "difficulties": [
       "S4",
@@ -3055,6 +3257,7 @@
     "author": "BanYa Production",
     "bpm": "96 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1021",
     "id": "189",
     "difficulties": [
       "S13",
@@ -3068,6 +3271,7 @@
     "author": "House Rulez",
     "bpm": "129 BPM",
     "genre": "K-POP",
+    "song_id": "F27",
     "id": "190",
     "difficulties": [
       "S6",
@@ -3082,6 +3286,7 @@
     "author": "BanYa Production",
     "bpm": "120 BPM",
     "genre": "ORIGINAL",
+    "song_id": "D15",
     "id": "191",
     "difficulties": [
       "S4",
@@ -3096,6 +3301,7 @@
     "author": "SID-Sound",
     "bpm": "149 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1458",
     "id": "192",
     "difficulties": [
       "S3",
@@ -3112,6 +3318,7 @@
     "author": "Tashannie",
     "bpm": "110 BPM",
     "genre": "K-POP",
+    "song_id": "",
     "id": "193",
     "difficulties": [
       "S7",
@@ -3124,6 +3331,7 @@
     "author": "Tashannie",
     "bpm": "110 BPM",
     "genre": "K-POP",
+    "song_id": "312",
     "id": "194",
     "difficulties": [
       "S4",
@@ -3142,6 +3350,7 @@
     "author": "Triplestar",
     "bpm": "175 BPM",
     "genre": "XROSS",
+    "song_id": "15C0",
     "id": "195",
     "difficulties": [
       "S13",
@@ -3156,6 +3365,7 @@
     "author": "BanYa Production",
     "bpm": "156 BPM",
     "genre": "ORIGINAL",
+    "song_id": "F34",
     "id": "196",
     "difficulties": [
       "S10",
@@ -3168,6 +3378,7 @@
     "author": "BanYa",
     "bpm": "145 BPM",
     "genre": "ORIGINAL",
+    "song_id": "701",
     "id": "197",
     "difficulties": [
       "S3",
@@ -3188,6 +3399,7 @@
     "author": "Nitro fun",
     "bpm": "130 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "198",
     "difficulties": [
       "S2",
@@ -3207,6 +3419,7 @@
     "author": "Nightmare",
     "bpm": "178 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1228",
     "id": "199",
     "difficulties": [
       "S2",
@@ -3230,6 +3443,7 @@
     "author": "The DNC",
     "bpm": "120 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "200",
     "difficulties": [
       "S9",
@@ -3243,6 +3457,7 @@
     "author": "The DNC",
     "bpm": "120 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1302",
     "id": "201",
     "difficulties": [
       "S2",
@@ -3270,6 +3485,7 @@
     "author": "Throwdown",
     "bpm": "100 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "202",
     "difficulties": [
       "S1",
@@ -3286,6 +3502,7 @@
     "author": "DM Ashura",
     "bpm": "162 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1305",
     "id": "203",
     "difficulties": [
       "S4",
@@ -3309,6 +3526,7 @@
     "author": "AOA",
     "bpm": "135 BPM",
     "genre": "K-POP",
+    "song_id": "1439",
     "id": "204",
     "difficulties": [
       "S2",
@@ -3326,6 +3544,7 @@
     "author": "Warak",
     "bpm": "128 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1404",
     "id": "205",
     "difficulties": [
       "S4",
@@ -3341,6 +3560,7 @@
     "author": "BanYa",
     "bpm": "150 BPM",
     "genre": "ORIGINAL",
+    "song_id": "702",
     "id": "206",
     "difficulties": [
       "S2",
@@ -3362,6 +3582,7 @@
     "author": "Novasonic",
     "bpm": "118 BPM",
     "genre": "K-POP",
+    "song_id": "821",
     "id": "207",
     "difficulties": [
       "S6",
@@ -3376,6 +3597,7 @@
     "author": "Wanna One",
     "bpm": "125 BPM",
     "genre": "K-POP",
+    "song_id": "1559",
     "id": "208",
     "difficulties": [
       "S2",
@@ -3395,6 +3617,7 @@
     "author": "Zig Zag",
     "bpm": "151 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "209",
     "difficulties": [
       "S8",
@@ -3407,6 +3630,7 @@
     "author": "Zig Zag",
     "bpm": "151.5 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "E29",
     "id": "210",
     "difficulties": [
       "S2",
@@ -3430,6 +3654,7 @@
     "author": "Mighty Mouth",
     "bpm": "155 BPM",
     "genre": "K-POP",
+    "song_id": "1115",
     "id": "211",
     "difficulties": [
       "S4",
@@ -3447,6 +3672,7 @@
     "author": "Matduke",
     "bpm": "170 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1471",
     "id": "212",
     "difficulties": [
       "S3",
@@ -3477,6 +3703,7 @@
     "author": "Matduke",
     "bpm": "170 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "213",
     "difficulties": [
       "S14",
@@ -3489,6 +3716,7 @@
     "author": "Mu.Ga.Dang.",
     "bpm": "138 BPM",
     "genre": "K-POP",
+    "song_id": "1012",
     "id": "214",
     "difficulties": [
       "S3",
@@ -3506,6 +3734,7 @@
     "author": "JTL",
     "bpm": "110 BPM",
     "genre": "K-POP",
+    "song_id": "C18",
     "id": "215",
     "difficulties": [
       "S1",
@@ -3523,6 +3752,7 @@
     "author": "JTL",
     "bpm": "110 BPM",
     "genre": "K-POP",
+    "song_id": "F64",
     "id": "216",
     "difficulties": [
       "S17",
@@ -3534,6 +3764,7 @@
     "author": "D_AAN",
     "bpm": "220 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1542",
     "id": "217",
     "difficulties": [
       "S15",
@@ -3549,6 +3780,7 @@
     "author": "KaW",
     "bpm": "147 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "218",
     "difficulties": [
       "S2",
@@ -3567,6 +3799,7 @@
     "author": "Sanxion7",
     "bpm": "140 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "219",
     "difficulties": [
       "S2",
@@ -3585,6 +3818,7 @@
     "author": "DM Ashura",
     "bpm": "148 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "220",
     "difficulties": [
       "S4",
@@ -3603,6 +3837,7 @@
     "author": "DM Ashura",
     "bpm": "158 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "221",
     "difficulties": [
       "S2",
@@ -3624,6 +3859,7 @@
     "author": "MAX",
     "bpm": "128 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1132",
     "id": "222",
     "difficulties": [
       "S19",
@@ -3635,6 +3871,7 @@
     "author": "BanYa",
     "bpm": "??? BPM",
     "genre": "ORIGINAL",
+    "song_id": "1059",
     "id": "223",
     "difficulties": [
       "S15",
@@ -3647,6 +3884,7 @@
     "author": "Dynamic Duo",
     "bpm": "104 BPM",
     "genre": "K-POP",
+    "song_id": "1006",
     "id": "224",
     "difficulties": [
       "S2",
@@ -3661,6 +3899,7 @@
     "author": "BanYa",
     "bpm": "200 BPM",
     "genre": "ORIGINAL",
+    "song_id": "E928",
     "id": "225",
     "difficulties": [
       "S11",
@@ -3673,6 +3912,7 @@
     "author": "BanYa",
     "bpm": "195 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1053",
     "id": "226",
     "difficulties": [
       "S15",
@@ -3686,6 +3926,7 @@
     "author": "BanYa",
     "bpm": "195 BPM",
     "genre": "ORIGINAL",
+    "song_id": "205",
     "id": "227",
     "difficulties": [
       "S4",
@@ -3704,6 +3945,7 @@
     "author": "BanYa",
     "bpm": "95~190 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "228",
     "difficulties": [
       "S5",
@@ -3724,6 +3966,7 @@
     "author": "DM Ashura",
     "bpm": "157 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "15C5",
     "id": "229",
     "difficulties": [
       "S3",
@@ -3746,6 +3989,7 @@
     "author": "Bigbang",
     "bpm": "130 BPM",
     "genre": "K-POP",
+    "song_id": "1321",
     "id": "230",
     "difficulties": [
       "S3",
@@ -3763,6 +4007,7 @@
     "author": "Bigbang",
     "bpm": "130 BPM",
     "genre": "K-POP",
+    "song_id": "13C3",
     "id": "231",
     "difficulties": [
       "S17",
@@ -3774,6 +4019,7 @@
     "author": "Yahpp",
     "bpm": "162 BPM",
     "genre": "ORIGINAL",
+    "song_id": "E12",
     "id": "232",
     "difficulties": [
       "S4",
@@ -3796,6 +4042,7 @@
     "author": "3R2",
     "bpm": "175 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1461",
     "id": "233",
     "difficulties": [
       "S3",
@@ -3812,6 +4059,7 @@
     "author": "Eskimo",
     "bpm": "135 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "234",
     "difficulties": [
       "S2",
@@ -3830,6 +4078,7 @@
     "author": "Doin",
     "bpm": "200 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1309",
     "id": "235",
     "difficulties": [
       "S11",
@@ -3846,6 +4095,7 @@
     "author": "Doin",
     "bpm": "200 BPM",
     "genre": "ORIGINAL",
+    "song_id": "13E3",
     "id": "236",
     "difficulties": [
       "S18",
@@ -3857,6 +4107,7 @@
     "author": "BanYa",
     "bpm": "130.5 BPM",
     "genre": "ORIGINAL",
+    "song_id": "204",
     "id": "237",
     "difficulties": [
       "S1",
@@ -3877,6 +4128,7 @@
     "author": "BanYa",
     "bpm": "130 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1048",
     "id": "238",
     "difficulties": [
       "S17",
@@ -3888,6 +4140,7 @@
     "author": "BanYa",
     "bpm": "130 BPM",
     "genre": "ORIGINAL",
+    "song_id": "301",
     "id": "239",
     "difficulties": [
       "S4",
@@ -3906,6 +4159,7 @@
     "author": "BanYa",
     "bpm": "130.5 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1049",
     "id": "240",
     "difficulties": [
       "S18",
@@ -3917,6 +4171,7 @@
     "author": "BanYa",
     "bpm": "130.5 BPM",
     "genre": "ORIGINAL",
+    "song_id": "A01",
     "id": "241",
     "difficulties": [
       "S2",
@@ -3936,6 +4191,7 @@
     "author": "BanYa",
     "bpm": "189 BPM",
     "genre": "ORIGINAL",
+    "song_id": "922",
     "id": "242",
     "difficulties": [
       "S4",
@@ -3954,6 +4210,7 @@
     "author": "Yahpp",
     "bpm": "170 BPM",
     "genre": "ORIGINAL",
+    "song_id": "D28",
     "id": "243",
     "difficulties": [
       "S3",
@@ -3972,6 +4229,7 @@
     "author": "Yahpp",
     "bpm": "200 BPM",
     "genre": "ORIGINAL",
+    "song_id": "D30",
     "id": "244",
     "difficulties": [
       "S1",
@@ -3992,6 +4250,7 @@
     "author": "Yahpp",
     "bpm": "170 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1050",
     "id": "245",
     "difficulties": [
       "S20",
@@ -4003,6 +4262,7 @@
     "author": "Yahpp",
     "bpm": "170 BPM",
     "genre": "ORIGINAL",
+    "song_id": "F29",
     "id": "246",
     "difficulties": [
       "S3",
@@ -4020,6 +4280,7 @@
     "author": "BanYa",
     "bpm": "130~140 BPM",
     "genre": "ORIGINAL",
+    "song_id": "",
     "id": "247",
     "difficulties": [
       "S4",
@@ -4037,6 +4298,7 @@
     "author": "Crolul",
     "bpm": "178 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "248",
     "difficulties": [
       "S4",
@@ -4056,6 +4318,7 @@
     "author": "2NE1",
     "bpm": "126 BPM",
     "genre": "K-POP",
+    "song_id": "1015",
     "id": "249",
     "difficulties": [
       "S3",
@@ -4076,6 +4339,7 @@
     "author": "2NE1",
     "bpm": "126 BPM",
     "genre": "K-POP",
+    "song_id": "1045",
     "id": "250",
     "difficulties": [
       "S14"
@@ -4086,6 +4350,7 @@
     "author": "Jehezukiel",
     "bpm": "155 BPM",
     "genre": "ORIGINAL",
+    "song_id": "16A2",
     "id": "251",
     "difficulties": [
       "S6",
@@ -4103,6 +4368,7 @@
     "author": "BanYa",
     "bpm": "104 BPM",
     "genre": "ORIGINAL",
+    "song_id": "402",
     "id": "252",
     "difficulties": [
       "S4",
@@ -4117,6 +4383,7 @@
     "author": "Epik High",
     "bpm": "128 BPM",
     "genre": "K-POP",
+    "song_id": "D05",
     "id": "253",
     "difficulties": [
       "S1",
@@ -4134,6 +4401,7 @@
     "author": "Epik High",
     "bpm": "128 BPM",
     "genre": "K-POP",
+    "song_id": "E76",
     "id": "254",
     "difficulties": [
       "S10",
@@ -4147,6 +4415,7 @@
     "author": "Dreamcatcher",
     "bpm": "154 BPM",
     "genre": "K-POP",
+    "song_id": "",
     "id": "255",
     "difficulties": [
       "S1",
@@ -4166,6 +4435,7 @@
     "author": "Cherry Filter",
     "bpm": "158 BPM",
     "genre": "K-POP",
+    "song_id": "1450",
     "id": "256",
     "difficulties": [
       "S3",
@@ -4182,6 +4452,7 @@
     "author": "SHK",
     "bpm": "155 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1340",
     "id": "257",
     "difficulties": [
       "S4",
@@ -4199,6 +4470,7 @@
     "author": "Memme",
     "bpm": "180 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1409",
     "id": "258",
     "difficulties": [
       "S7",
@@ -4215,6 +4487,7 @@
     "author": "WyvernP",
     "bpm": "137 BPM",
     "genre": "ORIGINAL",
+    "song_id": "16A4",
     "id": "259",
     "difficulties": [
       "S3",
@@ -4236,6 +4509,7 @@
     "author": "DJ Missill",
     "bpm": "97 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "F10",
     "id": "260",
     "difficulties": [
       "S2",
@@ -4252,6 +4526,7 @@
     "author": "DJ Missill",
     "bpm": "97 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "F55",
     "id": "261",
     "difficulties": [
       "S4",
@@ -4264,6 +4539,7 @@
     "author": "TatshMusicCircle",
     "bpm": "178 BPM",
     "genre": "J-MUSIC",
+    "song_id": "1484",
     "id": "262",
     "difficulties": [
       "S1",
@@ -4286,6 +4562,7 @@
     "author": "TatshMusicCircle",
     "bpm": "178 BPM",
     "genre": "J-MUSIC",
+    "song_id": "14C5",
     "id": "263",
     "difficulties": [
       "S14",
@@ -4299,6 +4576,7 @@
     "author": "BanYa",
     "bpm": "99 BPM",
     "genre": "ORIGINAL",
+    "song_id": "308",
     "id": "264",
     "difficulties": [
       "S13",
@@ -4312,6 +4590,7 @@
     "author": "Aspektz",
     "bpm": "103 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "265",
     "difficulties": [
       "S1",
@@ -4331,6 +4610,7 @@
     "author": "CLON",
     "bpm": "105 BPM",
     "genre": "K-POP",
+    "song_id": "",
     "id": "266",
     "difficulties": [
       "S7",
@@ -4344,6 +4624,7 @@
     "author": "CLON",
     "bpm": "105 BPM",
     "genre": "K-POP",
+    "song_id": "109",
     "id": "267",
     "difficulties": [
       "S2",
@@ -4359,6 +4640,7 @@
     "author": "Doin",
     "bpm": "194 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1509",
     "id": "269",
     "difficulties": [
       "S10",
@@ -4377,6 +4659,7 @@
     "author": "Sanxion7",
     "bpm": "150 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1121",
     "id": "270",
     "difficulties": [
       "S4",
@@ -4401,6 +4684,7 @@
     "author": "Sanxion7",
     "bpm": "150 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "15E5",
     "id": "271",
     "difficulties": [
       "S20",
@@ -4419,6 +4703,7 @@
     "author": "SUNMI",
     "bpm": "94 BPM",
     "genre": "K-POP",
+    "song_id": "",
     "id": "272",
     "difficulties": [
       "S2",
@@ -4438,6 +4723,7 @@
     "author": "SUNMI",
     "bpm": "94 BPM",
     "genre": "K-POP",
+    "song_id": "16E3",
     "id": "273",
     "difficulties": [
       "S15",
@@ -4450,6 +4736,7 @@
     "author": "BanYa Production",
     "bpm": "164 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1027",
     "id": "274",
     "difficulties": [
       "S4",
@@ -4466,6 +4753,7 @@
     "author": "BanYa",
     "bpm": "180 BPM",
     "genre": "ORIGINAL",
+    "song_id": "A07",
     "id": "275",
     "difficulties": [
       "S4",
@@ -4481,6 +4769,7 @@
     "author": "BanYa",
     "bpm": "96 BPM",
     "genre": "ORIGINAL",
+    "song_id": "703",
     "id": "276",
     "difficulties": [
       "S4",
@@ -4495,6 +4784,7 @@
     "author": "Thomas Howard",
     "bpm": "105 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "277",
     "difficulties": [
       "S2",
@@ -4513,6 +4803,7 @@
     "author": "U;NEE",
     "bpm": "138 BPM",
     "genre": "K-POP",
+    "song_id": "A12",
     "id": "278",
     "difficulties": [
       "S3",
@@ -4527,6 +4818,7 @@
     "author": "DM Ashura",
     "bpm": "152 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "279",
     "difficulties": [
       "S2",
@@ -4544,6 +4836,7 @@
     "author": "Nato",
     "bpm": "152 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1507",
     "id": "280",
     "difficulties": [
       "S5",
@@ -4562,6 +4855,7 @@
     "author": "HONG JINYOUNG",
     "bpm": "139 BPM",
     "genre": "K-POP",
+    "song_id": "",
     "id": "281",
     "difficulties": [
       "S2",
@@ -4581,6 +4875,7 @@
     "author": "Drunken Tiger",
     "bpm": "98.2 BPM",
     "genre": "K-POP",
+    "song_id": "1004",
     "id": "282",
     "difficulties": [
       "S2",
@@ -4597,6 +4892,7 @@
     "author": "Dreamcatcher",
     "bpm": "196 BPM",
     "genre": "K-POP",
+    "song_id": "1554",
     "id": "283",
     "difficulties": [
       "S3",
@@ -4617,6 +4913,7 @@
     "author": "Vospi",
     "bpm": "208 BPM",
     "genre": "ORIGINAL",
+    "song_id": "",
     "id": "284",
     "difficulties": [
       "S8",
@@ -4637,6 +4934,7 @@
     "author": "P4Koo",
     "bpm": "174 BPM",
     "genre": "XROSS",
+    "song_id": "15B3",
     "id": "285",
     "difficulties": [
       "S7",
@@ -4652,6 +4950,7 @@
     "author": "2NE1",
     "bpm": "130 BPM",
     "genre": "K-POP",
+    "song_id": "1550",
     "id": "286",
     "difficulties": [
       "S3",
@@ -4670,6 +4969,7 @@
     "author": "Tashannie",
     "bpm": "105~110 BPM",
     "genre": "K-POP",
+    "song_id": "D32",
     "id": "287",
     "difficulties": [
       "S5",
@@ -4683,6 +4983,7 @@
     "author": "Sonic Dimension",
     "bpm": "130.02 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "E30",
     "id": "288",
     "difficulties": [
       "S6",
@@ -4697,6 +4998,7 @@
     "author": "BanYa Production",
     "bpm": "120 BPM",
     "genre": "ORIGINAL",
+    "song_id": "",
     "id": "289",
     "difficulties": [
       "S1",
@@ -4709,6 +5011,7 @@
     "author": "BanYa Production",
     "bpm": "120 BPM",
     "genre": "ORIGINAL",
+    "song_id": "E23",
     "id": "290",
     "difficulties": [
       "S1",
@@ -4729,6 +5032,7 @@
     "author": "BanYa Production",
     "bpm": "120 BPM",
     "genre": "ORIGINAL",
+    "song_id": "E51",
     "id": "291",
     "difficulties": [
       "S8",
@@ -4740,6 +5044,7 @@
     "author": "BanYa Production",
     "bpm": "104 BPM",
     "genre": "ORIGINAL",
+    "song_id": "D16",
     "id": "292",
     "difficulties": [
       "S5",
@@ -4756,6 +5061,7 @@
     "author": "Sam-I-Am",
     "bpm": "112 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "D26",
     "id": "293",
     "difficulties": [
       "S4",
@@ -4770,6 +5076,7 @@
     "author": "2PM",
     "bpm": "130 BPM",
     "genre": "K-POP",
+    "song_id": "1324",
     "id": "294",
     "difficulties": [
       "S3",
@@ -4787,6 +5094,7 @@
     "author": "(G)I-DLE",
     "bpm": "105 BPM",
     "genre": "K-POP",
+    "song_id": "",
     "id": "295",
     "difficulties": [
       "S1",
@@ -4804,6 +5112,7 @@
     "author": "BanYa Production",
     "bpm": "??? BPM",
     "genre": "ORIGINAL",
+    "song_id": "1035",
     "id": "296",
     "difficulties": [
       "S18",
@@ -4815,6 +5124,7 @@
     "author": "Diclonius Kid",
     "bpm": "181 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "297",
     "difficulties": [
       "S2",
@@ -4832,6 +5142,7 @@
     "author": "Diclonius Kid",
     "bpm": "190 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1212",
     "id": "298",
     "difficulties": [
       "S2",
@@ -4854,6 +5165,7 @@
     "author": "Onyx",
     "bpm": "140~280 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "299",
     "difficulties": [
       "S2",
@@ -4871,6 +5183,7 @@
     "author": "Dal shabet",
     "bpm": "123 BPM",
     "genre": "K-POP",
+    "song_id": "1444",
     "id": "300",
     "difficulties": [
       "S2",
@@ -4887,6 +5200,7 @@
     "author": "Novasonic",
     "bpm": "136.03 BPM",
     "genre": "K-POP",
+    "song_id": "111",
     "id": "301",
     "difficulties": [
       "S6",
@@ -4901,6 +5215,7 @@
     "author": "DJ Counterforce",
     "bpm": "148 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1578",
     "id": "302",
     "difficulties": [
       "S7",
@@ -4918,6 +5233,7 @@
     "author": "G-Dragon",
     "bpm": "135 BPM",
     "genre": "K-POP",
+    "song_id": "1323",
     "id": "303",
     "difficulties": [
       "S1",
@@ -4936,6 +5252,7 @@
     "author": "G-Dragon",
     "bpm": "135 BPM",
     "genre": "K-POP",
+    "song_id": "13C5",
     "id": "304",
     "difficulties": [
       "S16",
@@ -4947,6 +5264,7 @@
     "author": "AKB48 (Cover)",
     "bpm": "178 BPM",
     "genre": "J-MUSIC",
+    "song_id": "1496",
     "id": "305",
     "difficulties": [
       "S2",
@@ -4966,6 +5284,7 @@
     "author": "AKB48 (Cover)",
     "bpm": "178 BPM",
     "genre": "J-MUSIC",
+    "song_id": "14F0",
     "id": "306",
     "difficulties": [
       "S10",
@@ -4981,6 +5300,7 @@
     "author": "KURi-ZiLL",
     "bpm": "185 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1226",
     "id": "307",
     "difficulties": [
       "S2",
@@ -5005,6 +5325,7 @@
     "author": "ESTi",
     "bpm": "175 BPM",
     "genre": "XROSS",
+    "song_id": "1597",
     "id": "308",
     "difficulties": [
       "S5",
@@ -5024,6 +5345,7 @@
     "author": "Diclonius Kid",
     "bpm": "172 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "309",
     "difficulties": [
       "S2",
@@ -5040,6 +5362,7 @@
     "author": "Memme",
     "bpm": "170 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1503",
     "id": "310",
     "difficulties": [
       "S7",
@@ -5057,6 +5380,7 @@
     "author": "BanYa",
     "bpm": "140 BPM",
     "genre": "ORIGINAL",
+    "song_id": "811",
     "id": "311",
     "difficulties": [
       "S7",
@@ -5070,6 +5394,7 @@
     "author": "BanYa Production",
     "bpm": "170 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1025",
     "id": "312",
     "difficulties": [
       "S1",
@@ -5087,6 +5412,7 @@
     "author": "Block B",
     "bpm": "162 BPM",
     "genre": "K-POP",
+    "song_id": "1447",
     "id": "313",
     "difficulties": [
       "S4",
@@ -5104,6 +5430,7 @@
     "author": "Gentle Stick",
     "bpm": "150 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1415",
     "id": "314",
     "difficulties": [
       "S4",
@@ -5122,6 +5449,7 @@
     "author": "MAZO",
     "bpm": "162 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1533",
     "id": "315",
     "difficulties": [
       "S5",
@@ -5137,6 +5465,7 @@
     "author": "BanYa",
     "bpm": "145 BPM",
     "genre": "ORIGINAL",
+    "song_id": "B17",
     "id": "316",
     "difficulties": [
       "S3",
@@ -5154,6 +5483,7 @@
     "author": "BanYa Production",
     "bpm": "150 BPM",
     "genre": "ORIGINAL",
+    "song_id": "E24",
     "id": "317",
     "difficulties": [
       "S2",
@@ -5173,6 +5503,7 @@
     "author": "msgoon",
     "bpm": "112.5 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1041",
     "id": "318",
     "difficulties": [
       "SP6",
@@ -5184,6 +5515,7 @@
     "author": "1Tym",
     "bpm": "98 BPM",
     "genre": "K-POP",
+    "song_id": "B02",
     "id": "319",
     "difficulties": [
       "S2",
@@ -5199,6 +5531,7 @@
     "author": "4Minute",
     "bpm": "128 BPM",
     "genre": "K-POP",
+    "song_id": "1109",
     "id": "320",
     "difficulties": [
       "S3",
@@ -5220,6 +5553,7 @@
     "author": "4Minute",
     "bpm": "128 BPM",
     "genre": "K-POP",
+    "song_id": "1143",
     "id": "321",
     "difficulties": [
       "S9",
@@ -5232,6 +5566,7 @@
     "author": "Last Note.",
     "bpm": "225 BPM",
     "genre": "J-MUSIC",
+    "song_id": "1489",
     "id": "322",
     "difficulties": [
       "S3",
@@ -5250,6 +5585,7 @@
     "author": "Quree",
     "bpm": "147 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1537",
     "id": "323",
     "difficulties": [
       "S2",
@@ -5269,6 +5605,7 @@
     "author": "BanYa Production",
     "bpm": "145 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1123",
     "id": "324",
     "difficulties": [
       "S4",
@@ -5286,6 +5623,7 @@
     "author": "Yassi Pressman",
     "bpm": "82 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1584",
     "id": "325",
     "difficulties": [
       "S3",
@@ -5301,6 +5639,7 @@
     "author": "Yassi Pressman",
     "bpm": "82 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "15E6",
     "id": "326",
     "difficulties": [
       "S15",
@@ -5312,6 +5651,7 @@
     "author": "Yahpp",
     "bpm": "192 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1422",
     "id": "327",
     "difficulties": [
       "S9",
@@ -5329,6 +5669,7 @@
     "author": "DJ Dookie",
     "bpm": "102 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "D23",
     "id": "328",
     "difficulties": [
       "S4",
@@ -5343,6 +5684,7 @@
     "author": "MAX",
     "bpm": "145 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1498",
     "id": "329",
     "difficulties": [
       "S6",
@@ -5360,6 +5702,7 @@
     "author": "M2U",
     "bpm": "145 BPM",
     "genre": "XROSS",
+    "song_id": "1598",
     "id": "330",
     "difficulties": [
       "S5",
@@ -5377,6 +5720,7 @@
     "author": "M2U",
     "bpm": "145 BPM",
     "genre": "XROSS",
+    "song_id": "15F5",
     "id": "331",
     "difficulties": [
       "S16",
@@ -5389,6 +5733,7 @@
     "author": "BanYa",
     "bpm": "180.2 BPM",
     "genre": "ORIGINAL",
+    "song_id": "102",
     "id": "332",
     "difficulties": [
       "S1",
@@ -5411,6 +5756,7 @@
     "author": "BanYa",
     "bpm": "175 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1308",
     "id": "333",
     "difficulties": [
       "S8",
@@ -5434,6 +5780,7 @@
     "author": "MAX",
     "bpm": "156 BPM",
     "genre": "ORIGINAL",
+    "song_id": "",
     "id": "334",
     "difficulties": [
       "S3",
@@ -5453,6 +5800,7 @@
     "author": "Wax",
     "bpm": "164 BPM",
     "genre": "K-POP",
+    "song_id": "",
     "id": "335",
     "difficulties": [
       "S18",
@@ -5465,6 +5813,7 @@
     "author": "Wax",
     "bpm": "164 BPM",
     "genre": "K-POP",
+    "song_id": "B13",
     "id": "336",
     "difficulties": [
       "S2",
@@ -5482,6 +5831,7 @@
     "author": "Apink",
     "bpm": "124 BPM",
     "genre": "K-POP",
+    "song_id": "",
     "id": "337",
     "difficulties": [
       "S2",
@@ -5502,6 +5852,7 @@
     "author": "CNBLUE",
     "bpm": "131 BPM",
     "genre": "K-POP",
+    "song_id": "1441",
     "id": "338",
     "difficulties": [
       "S4",
@@ -5518,6 +5869,7 @@
     "author": "2NE1",
     "bpm": "128 BPM",
     "genre": "K-POP",
+    "song_id": "1318",
     "id": "339",
     "difficulties": [
       "S2",
@@ -5535,6 +5887,7 @@
     "author": "2NE1",
     "bpm": "128 BPM",
     "genre": "K-POP",
+    "song_id": "13C1",
     "id": "340",
     "difficulties": [
       "S18",
@@ -5546,6 +5899,7 @@
     "author": "Fiverwater",
     "bpm": "172 BPM",
     "genre": "ORIGINAL",
+    "song_id": "",
     "id": "341",
     "difficulties": [
       "S7",
@@ -5563,6 +5917,7 @@
     "author": "void",
     "bpm": "140 BPM",
     "genre": "J-MUSIC",
+    "song_id": "1493",
     "id": "342",
     "difficulties": [
       "S2",
@@ -5580,6 +5935,7 @@
     "author": "BanYa",
     "bpm": "220 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1306",
     "id": "343",
     "difficulties": [
       "S10",
@@ -5608,6 +5964,7 @@
     "author": "DM Ashura",
     "bpm": "220 BPM",
     "genre": "ORIGINAL",
+    "song_id": "13E2",
     "id": "344",
     "difficulties": [
       "S21",
@@ -5619,6 +5976,7 @@
     "author": "BanYa",
     "bpm": "146.05 BPM",
     "genre": "ORIGINAL",
+    "song_id": "101",
     "id": "345",
     "difficulties": [
       "S2",
@@ -5640,6 +5998,7 @@
     "author": "SHK",
     "bpm": "180 BPM",
     "genre": "XROSS",
+    "song_id": "",
     "id": "346",
     "difficulties": [
       "S12",
@@ -5655,6 +6014,7 @@
     "author": "Sakuzyo",
     "bpm": "175 BPM",
     "genre": "J-MUSIC",
+    "song_id": "1477",
     "id": "347",
     "difficulties": [
       "S4",
@@ -5674,6 +6034,7 @@
     "author": "/DJS\\",
     "bpm": "177 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "348",
     "difficulties": [
       "S3",
@@ -5695,6 +6056,7 @@
     "author": "/DJS\\",
     "bpm": "178 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "349",
     "difficulties": [
       "S5",
@@ -5709,6 +6071,7 @@
     "author": "Norazo",
     "bpm": "170 BPM",
     "genre": "K-POP",
+    "song_id": "1451",
     "id": "350",
     "difficulties": [
       "S4",
@@ -5726,6 +6089,7 @@
     "author": "Kimsynth",
     "bpm": "145 BPM",
     "genre": "ORIGINAL",
+    "song_id": "",
     "id": "351",
     "difficulties": [
       "S5",
@@ -5746,6 +6110,7 @@
     "author": "Lunatic Sounds",
     "bpm": "175 BPM",
     "genre": "XROSS",
+    "song_id": "15B2",
     "id": "352",
     "difficulties": [
       "S10",
@@ -5763,6 +6128,7 @@
     "author": "SynthWulf",
     "bpm": "175 BPM",
     "genre": "ORIGINAL",
+    "song_id": "13A2",
     "id": "353",
     "difficulties": [
       "S20",
@@ -5774,6 +6140,7 @@
     "author": "koyote",
     "bpm": "137 BPM",
     "genre": "K-POP",
+    "song_id": "1011",
     "id": "354",
     "difficulties": [
       "S3",
@@ -5789,6 +6156,7 @@
     "author": "Doin",
     "bpm": "180.4 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1102",
     "id": "355",
     "difficulties": [
       "S11",
@@ -5806,6 +6174,7 @@
     "author": "Doin",
     "bpm": "180.4 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1135",
     "id": "356",
     "difficulties": [
       "S18",
@@ -5818,6 +6187,7 @@
     "author": "Lagoona",
     "bpm": "140 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "357",
     "difficulties": [
       "S2",
@@ -5836,6 +6206,7 @@
     "author": "DJ Missill",
     "bpm": "90 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "358",
     "difficulties": [
       "S2",
@@ -5855,6 +6226,7 @@
     "author": "Block B",
     "bpm": "130 BPM",
     "genre": "K-POP",
+    "song_id": "1549",
     "id": "359",
     "difficulties": [
       "S1",
@@ -5872,6 +6244,7 @@
     "author": "BanYa Production",
     "bpm": "120 BPM",
     "genre": "ORIGINAL",
+    "song_id": "E25",
     "id": "360",
     "difficulties": [
       "S7",
@@ -5886,6 +6259,7 @@
     "author": "HEaDTriP",
     "bpm": "121 BPM",
     "genre": "ORIGINAL",
+    "song_id": "F35",
     "id": "361",
     "difficulties": [
       "S16",
@@ -5898,6 +6272,7 @@
     "author": "BanYa",
     "bpm": "140 BPM",
     "genre": "ORIGINAL",
+    "song_id": "B16",
     "id": "362",
     "difficulties": [
       "S3",
@@ -5914,6 +6289,7 @@
     "author": "MAX",
     "bpm": "140 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1160",
     "id": "363",
     "difficulties": [
       "S8",
@@ -5929,6 +6305,7 @@
     "author": "MAX",
     "bpm": "140 BPM",
     "genre": "ORIGINAL",
+    "song_id": "",
     "id": "364",
     "difficulties": [
       "S7",
@@ -5943,6 +6320,7 @@
     "author": "BanYa",
     "bpm": "96 BPM",
     "genre": "ORIGINAL",
+    "song_id": "C07",
     "id": "365",
     "difficulties": [
       "S4",
@@ -5956,6 +6334,7 @@
     "author": "void",
     "bpm": "170 BPM",
     "genre": "J-MUSIC",
+    "song_id": "1494",
     "id": "366",
     "difficulties": [
       "S4",
@@ -5975,6 +6354,7 @@
     "author": "Vospi",
     "bpm": "125 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1576",
     "id": "367",
     "difficulties": [
       "S5",
@@ -5990,6 +6370,7 @@
     "author": "Secret",
     "bpm": "128 BPM",
     "genre": "K-POP",
+    "song_id": "1129",
     "id": "368",
     "difficulties": [
       "S14",
@@ -6001,6 +6382,7 @@
     "author": "BanYa Production",
     "bpm": "138 BPM",
     "genre": "K-POP",
+    "song_id": "1032",
     "id": "369",
     "difficulties": [
       "S7",
@@ -6012,6 +6394,7 @@
     "author": "BanYa Production",
     "bpm": "156 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1061",
     "id": "370",
     "difficulties": [
       "S8",
@@ -6025,6 +6408,7 @@
     "author": "BanYa Production",
     "bpm": "156 BPM",
     "genre": "ORIGINAL",
+    "song_id": "F24",
     "id": "371",
     "difficulties": [
       "S2",
@@ -6043,6 +6427,7 @@
     "author": "Vesuvia x REDSHiFT",
     "bpm": "173 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1464",
     "id": "372",
     "difficulties": [
       "S4",
@@ -6062,6 +6447,7 @@
     "author": "MAX",
     "bpm": "170 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1517",
     "id": "373",
     "difficulties": [
       "S4",
@@ -6082,6 +6468,7 @@
     "author": "MAX",
     "bpm": "170 BPM",
     "genre": "ORIGINAL",
+    "song_id": "15F6",
     "id": "374",
     "difficulties": [
       "S20",
@@ -6093,6 +6480,7 @@
     "author": "M2U",
     "bpm": "180 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1402",
     "id": "375",
     "difficulties": [
       "S7",
@@ -6110,6 +6498,7 @@
     "author": "AmamoriP",
     "bpm": "185 BPM",
     "genre": "XROSS",
+    "song_id": "15A9",
     "id": "376",
     "difficulties": [
       "S6",
@@ -6129,6 +6518,7 @@
     "author": "Archefluxx",
     "bpm": "170 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "377",
     "difficulties": [
       "S20",
@@ -6140,6 +6530,7 @@
     "author": "Archefluxx",
     "bpm": "170 BPM",
     "genre": "XROSS",
+    "song_id": "15B9",
     "id": "378",
     "difficulties": [
       "S3",
@@ -6169,6 +6560,7 @@
     "author": "Garlic Squad",
     "bpm": "190 BPM",
     "genre": "ORIGINAL",
+    "song_id": "",
     "id": "379",
     "difficulties": [
       "S14",
@@ -6184,6 +6576,7 @@
     "author": "Throwdown",
     "bpm": "124 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "380",
     "difficulties": [
       "S1",
@@ -6201,6 +6594,7 @@
     "author": "Coconut",
     "bpm": "128 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "381",
     "difficulties": [
       "S1",
@@ -6226,6 +6620,7 @@
     "author": "Bigbang",
     "bpm": "102 BPM",
     "genre": "K-POP",
+    "song_id": "F04",
     "id": "382",
     "difficulties": [
       "S1",
@@ -6243,6 +6638,7 @@
     "author": "Bigbang",
     "bpm": "102 BPM",
     "genre": "K-POP",
+    "song_id": "F51",
     "id": "383",
     "difficulties": [
       "S4",
@@ -6255,6 +6651,7 @@
     "author": "Coconut",
     "bpm": "133 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1209",
     "id": "384",
     "difficulties": [
       "S1",
@@ -6278,6 +6675,7 @@
     "author": "Sanxion7",
     "bpm": "140 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "385",
     "difficulties": [
       "S2",
@@ -6295,6 +6693,7 @@
     "author": "Bigbang",
     "bpm": "135 BPM",
     "genre": "K-POP",
+    "song_id": "1113",
     "id": "386",
     "difficulties": [
       "S2",
@@ -6313,6 +6712,7 @@
     "author": "SHK",
     "bpm": "120 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1501",
     "id": "387",
     "difficulties": [
       "S3",
@@ -6332,6 +6732,7 @@
     "author": "Warak",
     "bpm": "170 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1403",
     "id": "388",
     "difficulties": [
       "S3",
@@ -6349,6 +6750,7 @@
     "author": "KIEN",
     "bpm": "165 BPM",
     "genre": "XROSS",
+    "song_id": "15B1",
     "id": "389",
     "difficulties": [
       "S7",
@@ -6367,6 +6769,7 @@
     "author": "KIEN",
     "bpm": "166 BPM",
     "genre": "ORIGINAL",
+    "song_id": "",
     "id": "390",
     "difficulties": [
       "S8",
@@ -6383,6 +6786,7 @@
     "author": "Doin",
     "bpm": "180 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1417",
     "id": "391",
     "difficulties": [
       "S10",
@@ -6401,6 +6805,7 @@
     "author": "Doin",
     "bpm": "200 BPM",
     "genre": "ORIGINAL",
+    "song_id": "15D3",
     "id": "392",
     "difficulties": [
       "S18",
@@ -6415,6 +6820,7 @@
     "author": "Bigbang",
     "bpm": "125 BPM",
     "genre": "K-POP",
+    "song_id": "1322",
     "id": "393",
     "difficulties": [
       "S2",
@@ -6432,6 +6838,7 @@
     "author": "Outsider",
     "bpm": "180 BPM",
     "genre": "K-POP",
+    "song_id": "1118",
     "id": "394",
     "difficulties": [
       "S4",
@@ -6451,6 +6858,7 @@
     "author": "Outsider",
     "bpm": "180 BPM",
     "genre": "K-POP",
+    "song_id": "1140",
     "id": "395",
     "difficulties": [
       "S19",
@@ -6462,6 +6870,7 @@
     "author": "SHK",
     "bpm": "155 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1499",
     "id": "396",
     "difficulties": [
       "S6",
@@ -6479,6 +6888,7 @@
     "author": "Daddy Yankee",
     "bpm": "125 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1467",
     "id": "397",
     "difficulties": [
       "S2",
@@ -6494,6 +6904,7 @@
     "author": "D.O",
     "bpm": "126 BPM",
     "genre": "K-POP",
+    "song_id": "B08",
     "id": "398",
     "difficulties": [
       "S3",
@@ -6509,6 +6920,7 @@
     "author": "SHK",
     "bpm": "140 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1338",
     "id": "399",
     "difficulties": [
       "S4",
@@ -6525,6 +6937,7 @@
     "author": "Lotze",
     "bpm": "140 BPM",
     "genre": "XROSS",
+    "song_id": "",
     "id": "400",
     "difficulties": [
       "S12",
@@ -6541,6 +6954,7 @@
     "author": "Outsider",
     "bpm": "125 BPM",
     "genre": "K-POP",
+    "song_id": "1449",
     "id": "401",
     "difficulties": [
       "S3",
@@ -6559,6 +6973,7 @@
     "author": "PXNDX",
     "bpm": "172 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1333",
     "id": "402",
     "difficulties": [
       "S4",
@@ -6574,6 +6989,7 @@
     "author": "When Machines Dream",
     "bpm": "80~160 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "403",
     "difficulties": [
       "S2",
@@ -6591,6 +7007,7 @@
     "author": "BanYa",
     "bpm": "140 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1051",
     "id": "404",
     "difficulties": [
       "S13",
@@ -6603,6 +7020,7 @@
     "author": "BanYa",
     "bpm": "140 BPM",
     "genre": "ORIGINAL",
+    "song_id": "704",
     "id": "405",
     "difficulties": [
       "S3",
@@ -6625,6 +7043,7 @@
     "author": "BanYa",
     "bpm": "155 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1307",
     "id": "406",
     "difficulties": [
       "S6",
@@ -6655,6 +7074,7 @@
     "author": "BanYa",
     "bpm": "140~169 BPM",
     "genre": "ORIGINAL",
+    "song_id": "C41",
     "id": "407",
     "difficulties": [
       "S15",
@@ -6668,6 +7088,7 @@
     "author": "Yahpp",
     "bpm": "100~162 BPM",
     "genre": "ORIGINAL",
+    "song_id": "D41",
     "id": "408",
     "difficulties": [
       "S19",
@@ -6680,6 +7101,7 @@
     "author": "BanYa",
     "bpm": "162 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1052",
     "id": "409",
     "difficulties": [
       "S8",
@@ -6692,6 +7114,7 @@
     "author": "BanYa",
     "bpm": "162 BPM",
     "genre": "ORIGINAL",
+    "song_id": "C04",
     "id": "410",
     "difficulties": [
       "S4",
@@ -6708,6 +7131,7 @@
     "author": "BanYa",
     "bpm": "162 BPM",
     "genre": "ORIGINAL",
+    "song_id": "DC04",
     "id": "411",
     "difficulties": [
       "S16",
@@ -6722,6 +7146,7 @@
     "author": "iKON",
     "bpm": "118 BPM",
     "genre": "K-POP",
+    "song_id": "",
     "id": "412",
     "difficulties": [
       "S1",
@@ -6740,6 +7165,7 @@
     "author": "Daddy Yankee",
     "bpm": "121 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1331",
     "id": "413",
     "difficulties": [
       "S2",
@@ -6756,6 +7182,7 @@
     "author": "Yak Won",
     "bpm": "40~190 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1314",
     "id": "414",
     "difficulties": [
       "S4",
@@ -6774,6 +7201,7 @@
     "author": "HyuN",
     "bpm": "173 BPM",
     "genre": "ORIGINAL",
+    "song_id": "",
     "id": "415",
     "difficulties": [
       "S12",
@@ -6788,6 +7216,7 @@
     "author": "Norazo",
     "bpm": "150 BPM",
     "genre": "K-POP",
+    "song_id": "1327",
     "id": "416",
     "difficulties": [
       "S4",
@@ -6806,6 +7235,7 @@
     "author": "Paul Bazooka",
     "bpm": "130 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1414",
     "id": "417",
     "difficulties": [
       "S5",
@@ -6821,6 +7251,7 @@
     "author": "Secret",
     "bpm": "107 BPM",
     "genre": "K-POP",
+    "song_id": "1108",
     "id": "418",
     "difficulties": [
       "S1",
@@ -6838,6 +7269,7 @@
     "author": "Orange Caramel",
     "bpm": "136 BPM",
     "genre": "K-POP",
+    "song_id": "1110",
     "id": "419",
     "difficulties": [
       "S4",
@@ -6858,6 +7290,7 @@
     "author": "Orange Caramel",
     "bpm": "136 BPM",
     "genre": "K-POP",
+    "song_id": "1136",
     "id": "420",
     "difficulties": [
       "S12"
@@ -6868,6 +7301,7 @@
     "author": "SID-Sound",
     "bpm": "154 BPM",
     "genre": "XROSS",
+    "song_id": "15A4",
     "id": "421",
     "difficulties": [
       "S6",
@@ -6885,6 +7319,7 @@
     "author": "Throwdown",
     "bpm": "100 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "422",
     "difficulties": [
       "S1",
@@ -6900,6 +7335,7 @@
     "author": "BanYa",
     "bpm": "136 BPM",
     "genre": "ORIGINAL",
+    "song_id": "705",
     "id": "423",
     "difficulties": [
       "S6",
@@ -6915,6 +7351,7 @@
     "author": "Vospi",
     "bpm": "65~130 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "424",
     "difficulties": [
       "S16"
@@ -6925,6 +7362,7 @@
     "author": "Vospi",
     "bpm": "130 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "425",
     "difficulties": [
       "S2",
@@ -6943,6 +7381,7 @@
     "author": "Cranky",
     "bpm": "168 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1459",
     "id": "426",
     "difficulties": [
       "S4",
@@ -6962,6 +7401,7 @@
     "author": "TaroNuke",
     "bpm": "45~222 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "427",
     "difficulties": [
       "S9",
@@ -6975,6 +7415,7 @@
     "author": "GFriend",
     "bpm": "106 BPM",
     "genre": "K-POP",
+    "song_id": "1545",
     "id": "428",
     "difficulties": [
       "S2",
@@ -6994,6 +7435,7 @@
     "author": "GFriend",
     "bpm": "106 BPM",
     "genre": "K-POP",
+    "song_id": "15E0",
     "id": "429",
     "difficulties": [
       "S16",
@@ -7005,6 +7447,7 @@
     "author": "Lylloo",
     "bpm": "135 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1468",
     "id": "430",
     "difficulties": [
       "S2",
@@ -7020,6 +7463,7 @@
     "author": "On Slot",
     "bpm": "130 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "431",
     "difficulties": [
       "S2",
@@ -7039,6 +7483,7 @@
     "author": "SQUAR",
     "bpm": "120~140 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1390",
     "id": "432",
     "difficulties": [
       "S13",
@@ -7055,6 +7500,7 @@
     "author": "Paul Bazooka",
     "bpm": "140 BPM",
     "genre": "ORIGINAL",
+    "song_id": "",
     "id": "433",
     "difficulties": [
       "S18",
@@ -7068,6 +7514,7 @@
     "author": "Paul Bazooka",
     "bpm": "136 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1413",
     "id": "434",
     "difficulties": [
       "S3",
@@ -7086,6 +7533,7 @@
     "author": "BanYa",
     "bpm": "80 BPM",
     "genre": "ORIGINAL",
+    "song_id": "309",
     "id": "435",
     "difficulties": [
       "S11",
@@ -7099,6 +7547,7 @@
     "author": "3R2",
     "bpm": "175 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1460",
     "id": "436",
     "difficulties": [
       "S6",
@@ -7114,6 +7563,7 @@
     "author": "Bjorn Fogelberg",
     "bpm": "125 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "437",
     "difficulties": [
       "S2",
@@ -7129,6 +7579,7 @@
     "author": "BanYa",
     "bpm": "111 BPM",
     "genre": "ORIGINAL",
+    "song_id": "716",
     "id": "438",
     "difficulties": [
       "S5",
@@ -7145,6 +7596,7 @@
     "author": "BanYa",
     "bpm": "124 BPM",
     "genre": "ORIGINAL",
+    "song_id": "706",
     "id": "439",
     "difficulties": [
       "S5",
@@ -7159,6 +7611,7 @@
     "author": "BanYa Production",
     "bpm": "128 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1029",
     "id": "440",
     "difficulties": [
       "S19",
@@ -7173,6 +7626,7 @@
     "author": "U-Too",
     "bpm": "110 BPM",
     "genre": "K-POP",
+    "song_id": "909",
     "id": "441",
     "difficulties": [
       "S2",
@@ -7189,6 +7643,7 @@
     "author": "ETIA.",
     "bpm": "136 BPM",
     "genre": "J-MUSIC",
+    "song_id": "1479",
     "id": "442",
     "difficulties": [
       "S1",
@@ -7207,6 +7662,7 @@
     "author": "Sechs Kies",
     "bpm": "106 BPM",
     "genre": "K-POP",
+    "song_id": "213",
     "id": "443",
     "difficulties": [
       "S2",
@@ -7222,6 +7678,7 @@
     "author": "MAX",
     "bpm": "158 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1474",
     "id": "444",
     "difficulties": [
       "S3",
@@ -7242,6 +7699,7 @@
     "author": "BanYa Production",
     "bpm": "130 BPM",
     "genre": "ORIGINAL",
+    "song_id": "E04",
     "id": "445",
     "difficulties": [
       "S9",
@@ -7256,6 +7714,7 @@
     "author": "BanYa Production",
     "bpm": "170 BPM",
     "genre": "ORIGINAL",
+    "song_id": "E52",
     "id": "446",
     "difficulties": [
       "S8",
@@ -7269,6 +7728,7 @@
     "author": "BanYa",
     "bpm": "186 BPM",
     "genre": "ORIGINAL",
+    "song_id": "A03",
     "id": "447",
     "difficulties": [
       "S4",
@@ -7286,6 +7746,7 @@
     "author": "BanYa Production",
     "bpm": "186 BPM",
     "genre": "ORIGINAL",
+    "song_id": "E53",
     "id": "448",
     "difficulties": [
       "S5",
@@ -7300,6 +7761,7 @@
     "author": "BanYa Production",
     "bpm": "180 BPM",
     "genre": "ORIGINAL",
+    "song_id": "E05",
     "id": "449",
     "difficulties": [
       "S4",
@@ -7314,6 +7776,7 @@
     "author": "Affinity",
     "bpm": "196 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1201",
     "id": "450",
     "difficulties": [
       "S2",
@@ -7338,6 +7801,7 @@
     "author": "TatshMusicCircle",
     "bpm": "182 BPM",
     "genre": "J-MUSIC",
+    "song_id": "1564",
     "id": "451",
     "difficulties": [
       "S3",
@@ -7357,6 +7821,7 @@
     "author": "BanYa",
     "bpm": "180 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1057",
     "id": "452",
     "difficulties": [
       "S15",
@@ -7369,6 +7834,7 @@
     "author": "BanYa",
     "bpm": "180 BPM",
     "genre": "ORIGINAL",
+    "song_id": "C02",
     "id": "453",
     "difficulties": [
       "S4",
@@ -7386,6 +7852,7 @@
     "author": "Triplestar",
     "bpm": "173 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "454",
     "difficulties": [
       "S6",
@@ -7404,6 +7871,7 @@
     "author": "1Tym",
     "bpm": "96 BPM",
     "genre": "K-POP",
+    "song_id": "1116",
     "id": "455",
     "difficulties": [
       "S1",
@@ -7421,6 +7889,7 @@
     "author": "KaW",
     "bpm": "112 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "456",
     "difficulties": [
       "S1",
@@ -7440,6 +7909,7 @@
     "author": "DM Ashura",
     "bpm": "145 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1428",
     "id": "457",
     "difficulties": [
       "S3",
@@ -7458,6 +7928,7 @@
     "author": "DM Ashura",
     "bpm": "145 BPM",
     "genre": "ORIGINAL",
+    "song_id": "14C3",
     "id": "458",
     "difficulties": [
       "S17",
@@ -7471,6 +7942,7 @@
     "author": "DM Ashura",
     "bpm": "145 BPM",
     "genre": "ORIGINAL",
+    "song_id": "14E5",
     "id": "459",
     "difficulties": [
       "S17",
@@ -7482,6 +7954,7 @@
     "author": "Spooky Banana",
     "bpm": "158 BPM",
     "genre": "K-POP",
+    "song_id": "C15",
     "id": "460",
     "difficulties": [
       "S2",
@@ -7497,6 +7970,7 @@
     "author": "Spooky Banana",
     "bpm": "158 BPM",
     "genre": "K-POP",
+    "song_id": "",
     "id": "461",
     "difficulties": [
       "D16"
@@ -7507,6 +7981,7 @@
     "author": "BanYa",
     "bpm": "190 BPM",
     "genre": "ORIGINAL",
+    "song_id": "405",
     "id": "462",
     "difficulties": [
       "S3",
@@ -7528,6 +8003,7 @@
     "author": "msgoon",
     "bpm": "120 BPM",
     "genre": "ORIGINAL",
+    "song_id": "F44",
     "id": "463",
     "difficulties": [
       "S7",
@@ -7540,6 +8016,7 @@
     "author": "msgoon",
     "bpm": "168 BPM",
     "genre": "ORIGINAL",
+    "song_id": "F46",
     "id": "464",
     "difficulties": [
       "S6",
@@ -7553,6 +8030,7 @@
     "author": "msgoon",
     "bpm": "102.8 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1038",
     "id": "465",
     "difficulties": [
       "S17",
@@ -7566,6 +8044,7 @@
     "author": "msgoon",
     "bpm": "150 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1039",
     "id": "466",
     "difficulties": [
       "S21",
@@ -7577,6 +8056,7 @@
     "author": "msgoon",
     "bpm": "130 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1040",
     "id": "467",
     "difficulties": [
       "S17",
@@ -7588,6 +8068,7 @@
     "author": "BanYa Production",
     "bpm": "136 BPM",
     "genre": "ORIGINAL",
+    "song_id": "F25",
     "id": "468",
     "difficulties": [
       "S4",
@@ -7603,6 +8084,7 @@
     "author": "Cho PD",
     "bpm": "127 BPM",
     "genre": "K-POP",
+    "song_id": "C09",
     "id": "469",
     "difficulties": [
       "S1",
@@ -7620,6 +8102,7 @@
     "author": "BanYa",
     "bpm": "118 BPM",
     "genre": "ORIGINAL",
+    "song_id": "707",
     "id": "470",
     "difficulties": [
       "S3",
@@ -7640,6 +8123,7 @@
     "author": "BanYa",
     "bpm": "106 BPM",
     "genre": "ORIGINAL",
+    "song_id": "502",
     "id": "471",
     "difficulties": [
       "S5",
@@ -7654,6 +8138,7 @@
     "author": "BanYa",
     "bpm": "136 BPM",
     "genre": "ORIGINAL",
+    "song_id": "302",
     "id": "472",
     "difficulties": [
       "S4",
@@ -7671,6 +8156,7 @@
     "author": "BanYa",
     "bpm": "129 BPM",
     "genre": "ORIGINAL",
+    "song_id": "A02",
     "id": "473",
     "difficulties": [
       "S9",
@@ -7686,6 +8172,7 @@
     "author": "Dasu",
     "bpm": "145 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1577",
     "id": "474",
     "difficulties": [
       "S10",
@@ -7702,6 +8189,7 @@
     "author": "Vospi",
     "bpm": "115 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "475",
     "difficulties": [
       "S10",
@@ -7716,6 +8204,7 @@
     "author": "Doin",
     "bpm": "185 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1095",
     "id": "476",
     "difficulties": [
       "S6",
@@ -7735,6 +8224,7 @@
     "author": "Doin",
     "bpm": "185 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "477",
     "difficulties": [
       "S15",
@@ -7749,6 +8239,7 @@
     "author": "PXNDX",
     "bpm": "164 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1018",
     "id": "478",
     "difficulties": [
       "S3",
@@ -7764,6 +8255,7 @@
     "author": "PXNDX",
     "bpm": "164 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1043",
     "id": "479",
     "difficulties": [
       "S17",
@@ -7775,6 +8267,7 @@
     "author": "SHK",
     "bpm": "135 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1126",
     "id": "480",
     "difficulties": [
       "S3",
@@ -7793,6 +8286,7 @@
     "author": "Zircon",
     "bpm": "173 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1128",
     "id": "481",
     "difficulties": [
       "S4",
@@ -7817,6 +8311,7 @@
     "author": "PRODUCE 48",
     "bpm": "128 BPM",
     "genre": "K-POP",
+    "song_id": "",
     "id": "482",
     "difficulties": [
       "S2",
@@ -7835,6 +8330,7 @@
     "author": "M2U",
     "bpm": "160 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1401",
     "id": "483",
     "difficulties": [
       "S4",
@@ -7848,25 +8344,13 @@
       "Co-Op2"
     ]
   },
-  "Nervous [Full Song]": {
-    "length": "Full Song",
-    "author": "Vospi",
-    "bpm": "174 BPM",
-    "genre": "WORLD MUSIC",
-    "id": "484",
-    "difficulties": [
-      "S13",
-      "S20",
-      "D14",
-      "D22"
-    ]
-  },
   "Nervous": {
     "length": "Arcade",
     "author": "Vospi",
     "bpm": "174 BPM",
     "genre": "WORLD MUSIC",
-    "id": "485",
+    "song_id": "",
+    "id": "484",
     "difficulties": [
       "S3",
       "S5",
@@ -7880,11 +8364,26 @@
       "D18"
     ]
   },
+  "Nervous [Full Song]": {
+    "length": "Full Song",
+    "author": "Vospi",
+    "bpm": "174 BPM",
+    "genre": "WORLD MUSIC",
+    "song_id": "",
+    "id": "485",
+    "difficulties": [
+      "S13",
+      "S20",
+      "D14",
+      "D22"
+    ]
+  },
   "Night Duty": {
     "length": "Arcade",
     "author": "A.V.",
     "bpm": "??? BPM",
     "genre": "ORIGINAL",
+    "song_id": "",
     "id": "486",
     "difficulties": [
       "S4",
@@ -7902,6 +8401,7 @@
     "author": "Nato",
     "bpm": "190 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "487",
     "difficulties": [
       "S8",
@@ -7918,6 +8418,7 @@
     "author": "Nina Pilots",
     "bpm": "160 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "F37",
     "id": "488",
     "difficulties": [
       "S6",
@@ -7930,6 +8431,7 @@
     "author": "LTJ X-Perience",
     "bpm": "110 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1019",
     "id": "489",
     "difficulties": [
       "S2",
@@ -7945,6 +8447,7 @@
     "author": "Bae Chi Gi",
     "bpm": "128 BPM",
     "genre": "K-POP",
+    "song_id": "1117",
     "id": "490",
     "difficulties": [
       "S4",
@@ -7961,6 +8464,7 @@
     "author": "Bae Chi Gi",
     "bpm": "128 BPM",
     "genre": "K-POP",
+    "song_id": "1141",
     "id": "491",
     "difficulties": [
       "S17",
@@ -7972,6 +8476,7 @@
     "author": "Wonder Girls",
     "bpm": "131 BPM",
     "genre": "K-POP",
+    "song_id": "1315",
     "id": "492",
     "difficulties": [
       "S2",
@@ -7989,6 +8494,7 @@
     "author": "Apink",
     "bpm": "106 BPM",
     "genre": "K-POP",
+    "song_id": "1448",
     "id": "493",
     "difficulties": [
       "S2",
@@ -8008,6 +8514,7 @@
     "author": "Apink",
     "bpm": "106 BPM",
     "genre": "K-POP",
+    "song_id": "14C2",
     "id": "494",
     "difficulties": [
       "S14",
@@ -8020,6 +8527,7 @@
     "author": "Novasonic",
     "bpm": "118 BPM",
     "genre": "K-POP",
+    "song_id": "B26",
     "id": "495",
     "difficulties": [
       "S11",
@@ -8032,6 +8540,7 @@
     "author": "Novasonic",
     "bpm": "136 BPM",
     "genre": "K-POP",
+    "song_id": "F40",
     "id": "496",
     "difficulties": [
       "S6",
@@ -8044,6 +8553,7 @@
     "author": "T-ara",
     "bpm": "128 BPM",
     "genre": "K-POP",
+    "song_id": "1556",
     "id": "497",
     "difficulties": [
       "S3",
@@ -8063,6 +8573,7 @@
     "author": "DJ DOC",
     "bpm": "132 BPM",
     "genre": "K-POP",
+    "song_id": "D31",
     "id": "498",
     "difficulties": [
       "S8",
@@ -8076,21 +8587,11 @@
     "author": "Yahpp",
     "bpm": "133 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1060",
     "id": "499",
     "difficulties": [
       "S16",
       "D17"
-    ]
-  },
-  "Nyarlathotep [Short Cut]": {
-    "length": "Short Cut",
-    "author": "Nato",
-    "bpm": "200 BPM",
-    "genre": "ORIGINAL",
-    "id": "500",
-    "difficulties": [
-      "S22",
-      "D24"
     ]
   },
   "Nyarlathotep": {
@@ -8098,7 +8599,8 @@
     "author": "Nato",
     "bpm": "200 BPM",
     "genre": "ORIGINAL",
-    "id": "501",
+    "song_id": "",
+    "id": "500",
     "difficulties": [
       "S12",
       "S16",
@@ -8117,6 +8619,7 @@
     "author": "Nato",
     "bpm": "200 BPM",
     "genre": "ORIGINAL",
+    "song_id": "",
     "id": "501",
     "difficulties": [
       "S22",
@@ -8128,6 +8631,7 @@
     "author": "ESTi",
     "bpm": "130 BPM",
     "genre": "XROSS",
+    "song_id": "",
     "id": "502",
     "difficulties": [
       "S2",
@@ -8148,6 +8652,7 @@
     "author": "ATAS",
     "bpm": "150 BPM",
     "genre": "ORIGINAL",
+    "song_id": "",
     "id": "503",
     "difficulties": [
       "S7",
@@ -8164,6 +8669,7 @@
     "author": "Astra",
     "bpm": "128 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "504",
     "difficulties": [
       "S2",
@@ -8182,6 +8688,7 @@
     "author": "BanYa",
     "bpm": "148 BPM",
     "genre": "ORIGINAL",
+    "song_id": "401",
     "id": "505",
     "difficulties": [
       "S8",
@@ -8195,6 +8702,7 @@
     "author": "VIXX",
     "bpm": "119 BPM",
     "genre": "K-POP",
+    "song_id": "1438",
     "id": "506",
     "difficulties": [
       "S2",
@@ -8211,6 +8719,7 @@
     "author": "Epik High",
     "bpm": "135 BPM",
     "genre": "K-POP",
+    "song_id": "1452",
     "id": "507",
     "difficulties": [
       "S1",
@@ -8227,6 +8736,7 @@
     "author": "DJ DOC",
     "bpm": "132 BPM",
     "genre": "K-POP",
+    "song_id": "D06",
     "id": "508",
     "difficulties": [
       "S5",
@@ -8241,6 +8751,7 @@
     "author": "Belanova",
     "bpm": "150 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1332",
     "id": "509",
     "difficulties": [
       "S3",
@@ -8256,6 +8767,7 @@
     "author": "Saykoji",
     "bpm": "118 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1335",
     "id": "510",
     "difficulties": [
       "S1",
@@ -8271,6 +8783,7 @@
     "author": "MAX",
     "bpm": "155 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1106",
     "id": "511",
     "difficulties": [
       "S4",
@@ -8294,6 +8807,7 @@
     "author": "MAX",
     "bpm": "155 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1148",
     "id": "512",
     "difficulties": [
       "S18",
@@ -8305,6 +8819,7 @@
     "author": "MAX",
     "bpm": "155 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1518",
     "id": "513",
     "difficulties": [
       "S5",
@@ -8322,6 +8837,7 @@
     "author": "BanYa",
     "bpm": "148 BPM",
     "genre": "ORIGINAL",
+    "song_id": "714",
     "id": "514",
     "difficulties": [
       "S3",
@@ -8344,6 +8860,7 @@
     "author": "KARA",
     "bpm": "140 BPM",
     "genre": "K-POP",
+    "song_id": "1442",
     "id": "515",
     "difficulties": [
       "S2",
@@ -8360,6 +8877,7 @@
     "author": "KARA",
     "bpm": "140 BPM",
     "genre": "K-POP",
+    "song_id": "14C4",
     "id": "516",
     "difficulties": [
       "S17",
@@ -8371,6 +8889,7 @@
     "author": "Big metra",
     "bpm": "98 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "F13",
     "id": "517",
     "difficulties": [
       "S5",
@@ -8386,6 +8905,7 @@
     "author": "Big metra",
     "bpm": "98 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "F53",
     "id": "518",
     "difficulties": [
       "S9",
@@ -8398,6 +8918,7 @@
     "author": "BanYa",
     "bpm": "145 BPM",
     "genre": "ORIGINAL",
+    "song_id": "C06",
     "id": "519",
     "difficulties": [
       "S4",
@@ -8413,6 +8934,7 @@
     "author": "BanYa Production",
     "bpm": "145~158 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1033",
     "id": "520",
     "difficulties": [
       "S8",
@@ -8424,6 +8946,7 @@
     "author": "Yakikaze",
     "bpm": "128 BPM",
     "genre": "ORIGINAL",
+    "song_id": "16A1",
     "id": "521",
     "difficulties": [
       "S6",
@@ -8444,6 +8967,7 @@
     "author": "SLAM",
     "bpm": "220 BPM",
     "genre": "ORIGINAL",
+    "song_id": "14A2",
     "id": "522",
     "difficulties": [
       "S21",
@@ -8458,6 +8982,7 @@
     "author": "Cranky",
     "bpm": "159 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "523",
     "difficulties": [
       "S3",
@@ -8478,6 +9003,7 @@
     "author": "KaW",
     "bpm": "125 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "524",
     "difficulties": [
       "S1",
@@ -8499,6 +9025,7 @@
     "author": "SynthWulf",
     "bpm": "175 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1303",
     "id": "525",
     "difficulties": [
       "S4",
@@ -8529,6 +9056,7 @@
     "author": "SynthWulf",
     "bpm": "175 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "13E1",
     "id": "526",
     "difficulties": [
       "S17",
@@ -8540,6 +9068,7 @@
     "author": "mzet:-P",
     "bpm": "175 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1524",
     "id": "527",
     "difficulties": [
       "S8",
@@ -8555,6 +9084,7 @@
     "author": "V.A.",
     "bpm": "160 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1152",
     "id": "528",
     "difficulties": [
       "S3",
@@ -8572,6 +9102,7 @@
     "author": "Pory",
     "bpm": "150 BPM",
     "genre": "ORIGINAL",
+    "song_id": "",
     "id": "529",
     "difficulties": [
       "S3",
@@ -8590,6 +9121,7 @@
     "author": "BanYa",
     "bpm": "136 BPM",
     "genre": "ORIGINAL",
+    "song_id": "C05",
     "id": "530",
     "difficulties": [
       "S2",
@@ -8608,6 +9140,7 @@
     "author": "BanYa Production",
     "bpm": "140 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1028",
     "id": "531",
     "difficulties": [
       "S3",
@@ -8627,6 +9160,7 @@
     "author": "PRODUCE 101",
     "bpm": "128 BPM",
     "genre": "K-POP",
+    "song_id": "1561",
     "id": "533",
     "difficulties": [
       "S2",
@@ -8644,6 +9178,7 @@
     "author": "Doin",
     "bpm": "200 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1153",
     "id": "534",
     "difficulties": [
       "S13",
@@ -8657,6 +9192,7 @@
     "author": "BanYa",
     "bpm": "92 BPM",
     "genre": "ORIGINAL",
+    "song_id": "708",
     "id": "535",
     "difficulties": [
       "S6",
@@ -8673,6 +9209,7 @@
     "author": "SynthWulf",
     "bpm": "170 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1431",
     "id": "536",
     "difficulties": [
       "S9",
@@ -8689,6 +9226,7 @@
     "author": "J-Mi",
     "bpm": "160 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "537",
     "difficulties": [
       "S16",
@@ -8700,6 +9238,7 @@
     "author": "J-Mi",
     "bpm": "160 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1301",
     "id": "538",
     "difficulties": [
       "S1",
@@ -8725,6 +9264,7 @@
     "author": "J-Mi",
     "bpm": "160 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "13E0",
     "id": "539",
     "difficulties": [
       "S18",
@@ -8736,6 +9276,7 @@
     "author": "Quree",
     "bpm": "160 BPM",
     "genre": "ORIGINAL",
+    "song_id": "",
     "id": "540",
     "difficulties": [
       "S3",
@@ -8754,6 +9295,7 @@
     "author": "Quree",
     "bpm": "160 BPM",
     "genre": "ORIGINAL",
+    "song_id": "16F5",
     "id": "541",
     "difficulties": [
       "S11",
@@ -8769,6 +9311,7 @@
     "author": "Nostra Cosa",
     "bpm": "130 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "542",
     "difficulties": [
       "S2",
@@ -8784,6 +9327,7 @@
     "author": "TatshMusicCircle",
     "bpm": "165 BPM",
     "genre": "J-MUSIC",
+    "song_id": "1490",
     "id": "543",
     "difficulties": [
       "S4",
@@ -8804,6 +9348,7 @@
     "author": "MAX",
     "bpm": "128 BPM",
     "genre": "ORIGINAL",
+    "song_id": "14E6",
     "id": "544",
     "difficulties": [
       "S15",
@@ -8816,6 +9361,7 @@
     "author": "MAX",
     "bpm": "145 BPM",
     "genre": "ORIGINAL",
+    "song_id": "15F3",
     "id": "545",
     "difficulties": [
       "S7",
@@ -8829,6 +9375,7 @@
     "author": "BanYa Production",
     "bpm": "151 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1036",
     "id": "546",
     "difficulties": [
       "S17"
@@ -8839,6 +9386,7 @@
     "author": "PXNDX",
     "bpm": "160 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1065",
     "id": "547",
     "difficulties": [
       "S18",
@@ -8850,6 +9398,7 @@
     "author": "PXNDX",
     "bpm": "160 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "F14",
     "id": "548",
     "difficulties": [
       "S3",
@@ -8867,6 +9416,7 @@
     "author": "PXNDX",
     "bpm": "160 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "F54",
     "id": "549",
     "difficulties": [
       "S6",
@@ -8879,6 +9429,7 @@
     "author": "Thaide",
     "bpm": "120 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "F16",
     "id": "550",
     "difficulties": [
       "S5",
@@ -8893,6 +9444,7 @@
     "author": "msgoon",
     "bpm": "??? BPM",
     "genre": "ORIGINAL",
+    "song_id": "1047",
     "id": "551",
     "difficulties": [
       "S17",
@@ -8904,6 +9456,7 @@
     "author": "BanYa",
     "bpm": "106 BPM",
     "genre": "ORIGINAL",
+    "song_id": "501",
     "id": "552",
     "difficulties": [
       "S4",
@@ -8918,6 +9471,7 @@
     "author": "BanYa",
     "bpm": "170 BPM",
     "genre": "ORIGINAL",
+    "song_id": "A05",
     "id": "553",
     "difficulties": [
       "S3",
@@ -8935,6 +9489,7 @@
     "author": "BanYa Production",
     "bpm": "116 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1030",
     "id": "554",
     "difficulties": [
       "S1",
@@ -8956,6 +9511,7 @@
     "author": "BanYa",
     "bpm": "135 BPM",
     "genre": "ORIGINAL",
+    "song_id": "311",
     "id": "555",
     "difficulties": [
       "S4",
@@ -8968,6 +9524,7 @@
     "author": "Yahpp",
     "bpm": "162 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1063",
     "id": "556",
     "difficulties": [
       "S8",
@@ -8980,6 +9537,7 @@
     "author": "Yahpp",
     "bpm": "162 BPM",
     "genre": "ORIGINAL",
+    "song_id": "FE13B",
     "id": "557",
     "difficulties": [
       "S3",
@@ -8999,6 +9557,7 @@
     "author": "Yahpp",
     "bpm": "153 BPM",
     "genre": "ORIGINAL",
+    "song_id": "E13",
     "id": "558",
     "difficulties": [
       "S3",
@@ -9018,6 +9577,7 @@
     "author": "Wisin",
     "bpm": "130 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1469",
     "id": "559",
     "difficulties": [
       "S2",
@@ -9033,6 +9593,7 @@
     "author": "ETIA.",
     "bpm": "188 BPM",
     "genre": "J-MUSIC",
+    "song_id": "1492",
     "id": "560",
     "difficulties": [
       "S4",
@@ -9051,6 +9612,7 @@
     "author": "Shakira",
     "bpm": "133 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1330",
     "id": "561",
     "difficulties": [
       "S2",
@@ -9066,6 +9628,7 @@
     "author": "BanYa",
     "bpm": "197 BPM",
     "genre": "ORIGINAL",
+    "song_id": "913",
     "id": "562",
     "difficulties": [
       "S16",
@@ -9079,6 +9642,7 @@
     "author": "MAX",
     "bpm": "155 BPM",
     "genre": "XROSS",
+    "song_id": "",
     "id": "563",
     "difficulties": [
       "S7",
@@ -9096,6 +9660,7 @@
     "author": "SynthWulf",
     "bpm": "170 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1462",
     "id": "564",
     "difficulties": [
       "S7",
@@ -9114,6 +9679,7 @@
     "author": "Sanxion7",
     "bpm": "125 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1230",
     "id": "565",
     "difficulties": [
       "S2",
@@ -9142,6 +9708,7 @@
     "author": "5argon",
     "bpm": "160 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1540",
     "id": "566",
     "difficulties": [
       "S4",
@@ -9159,6 +9726,7 @@
     "author": "DM Ashura",
     "bpm": "144 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1159",
     "id": "567",
     "difficulties": [
       "S2",
@@ -9182,6 +9750,7 @@
     "author": "DM Ashura",
     "bpm": "148 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "568",
     "difficulties": [
       "S3",
@@ -9198,6 +9767,7 @@
     "author": "KURi-ZiLL",
     "bpm": "146 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1225",
     "id": "569",
     "difficulties": [
       "S2",
@@ -9222,6 +9792,7 @@
     "author": "SHK",
     "bpm": "135 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1103",
     "id": "570",
     "difficulties": [
       "S3",
@@ -9240,6 +9811,7 @@
     "author": "WINNER",
     "bpm": "103 BPM",
     "genre": "K-POP",
+    "song_id": "1562",
     "id": "571",
     "difficulties": [
       "S2",
@@ -9256,6 +9828,7 @@
     "author": "Cashew",
     "bpm": "170 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1433",
     "id": "572",
     "difficulties": [
       "S7",
@@ -9274,6 +9847,7 @@
     "author": "Yahpp",
     "bpm": "172 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1421",
     "id": "573",
     "difficulties": [
       "S4",
@@ -9293,6 +9867,7 @@
     "author": "Archefluxx",
     "bpm": "170 BPM",
     "genre": "XROSS",
+    "song_id": "15B8",
     "id": "574",
     "difficulties": [
       "S5",
@@ -9311,6 +9886,7 @@
     "author": "MAX",
     "bpm": "155 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1473",
     "id": "575",
     "difficulties": [
       "S3",
@@ -9331,6 +9907,7 @@
     "author": "Doin",
     "bpm": "130 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1418",
     "id": "576",
     "difficulties": [
       "S3",
@@ -9347,6 +9924,7 @@
     "author": "Last Note.",
     "bpm": "190 BPM",
     "genre": "J-MUSIC",
+    "song_id": "1488",
     "id": "577",
     "difficulties": [
       "S3",
@@ -9367,6 +9945,7 @@
     "author": "BanYa",
     "bpm": "150 BPM",
     "genre": "ORIGINAL",
+    "song_id": "224",
     "id": "578",
     "difficulties": [
       "S7",
@@ -9379,6 +9958,7 @@
     "author": "MAX",
     "bpm": "160 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1410",
     "id": "579",
     "difficulties": [
       "S4",
@@ -9397,6 +9977,7 @@
     "author": "iKON",
     "bpm": "82 BPM",
     "genre": "K-POP",
+    "song_id": "1546",
     "id": "580",
     "difficulties": [
       "S2",
@@ -9415,6 +9996,7 @@
     "author": "SGX",
     "bpm": "117 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "581",
     "difficulties": [
       "S2",
@@ -9430,6 +10012,7 @@
     "author": "Future Funk Squad",
     "bpm": "128 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1218",
     "id": "582",
     "difficulties": [
       "S2",
@@ -9453,6 +10036,7 @@
     "author": "CYO Style",
     "bpm": "198 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1436",
     "id": "583",
     "difficulties": [
       "S9",
@@ -9470,6 +10054,7 @@
     "author": "Matduke",
     "bpm": "175 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1429",
     "id": "584",
     "difficulties": [
       "S7",
@@ -9488,6 +10073,7 @@
     "author": "Matduke",
     "bpm": "175 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "14E4",
     "id": "585",
     "difficulties": [
       "S15",
@@ -9500,6 +10086,7 @@
     "author": "Beltaine",
     "bpm": "140 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1206",
     "id": "586",
     "difficulties": [
       "S2",
@@ -9521,6 +10108,7 @@
     "author": "BanYa",
     "bpm": "142 BPM",
     "genre": "ORIGINAL",
+    "song_id": "503",
     "id": "587",
     "difficulties": [
       "S3",
@@ -9544,6 +10132,7 @@
     "author": "DJ DOC",
     "bpm": "132 BPM",
     "genre": "K-POP",
+    "song_id": "414",
     "id": "588",
     "difficulties": [
       "S2",
@@ -9562,6 +10151,7 @@
     "author": "Novasonic",
     "bpm": "140 BPM",
     "genre": "K-POP",
+    "song_id": "413",
     "id": "589",
     "difficulties": [
       "S4",
@@ -9576,6 +10166,7 @@
     "author": "MAX",
     "bpm": "157 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1516",
     "id": "590",
     "difficulties": [
       "S2",
@@ -9597,6 +10188,7 @@
     "author": "MAX",
     "bpm": "157 BPM",
     "genre": "ORIGINAL",
+    "song_id": "15F0",
     "id": "591",
     "difficulties": [
       "S9",
@@ -9610,6 +10202,7 @@
     "author": "Doin",
     "bpm": "155 BPM",
     "genre": "ORIGINAL",
+    "song_id": "",
     "id": "592",
     "difficulties": [
       "S11",
@@ -9625,6 +10218,7 @@
     "author": "r300k",
     "bpm": "113 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1430",
     "id": "593",
     "difficulties": [
       "S3",
@@ -9643,6 +10237,7 @@
     "author": "rainbowdragoneyes",
     "bpm": "160 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "15C4",
     "id": "594",
     "difficulties": [
       "S2",
@@ -9663,6 +10258,7 @@
     "author": "SID-Sound",
     "bpm": "160 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1454",
     "id": "595",
     "difficulties": [
       "S3",
@@ -9680,6 +10276,7 @@
     "author": "SID-Sound",
     "bpm": "160 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "14E3",
     "id": "596",
     "difficulties": [
       "S17",
@@ -9691,6 +10288,7 @@
     "author": "BanYa",
     "bpm": "120 BPM",
     "genre": "ORIGINAL",
+    "song_id": "717",
     "id": "597",
     "difficulties": [
       "S2",
@@ -9710,6 +10308,7 @@
     "author": "BanYa Production",
     "bpm": "122 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1037",
     "id": "598",
     "difficulties": [
       "S17"
@@ -9720,6 +10319,7 @@
     "author": "Last Note.",
     "bpm": "145 BPM",
     "genre": "J-MUSIC",
+    "song_id": "1486",
     "id": "599",
     "difficulties": [
       "S1",
@@ -9741,6 +10341,7 @@
     "author": "Zircon",
     "bpm": "135 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "600",
     "difficulties": [
       "S3",
@@ -9757,6 +10358,7 @@
     "author": "Orange Caramel",
     "bpm": "149 BPM",
     "genre": "K-POP",
+    "song_id": "1320",
     "id": "601",
     "difficulties": [
       "S4",
@@ -9777,6 +10379,7 @@
     "author": "Orange Caramel",
     "bpm": "149 BPM",
     "genre": "K-POP",
+    "song_id": "13C2",
     "id": "602",
     "difficulties": [
       "S17",
@@ -9788,6 +10391,7 @@
     "author": "BanYa",
     "bpm": "230 BPM",
     "genre": "ORIGINAL",
+    "song_id": "310",
     "id": "603",
     "difficulties": [
       "S8",
@@ -9804,6 +10408,7 @@
     "author": "BEAST",
     "bpm": "135 BPM",
     "genre": "K-POP",
+    "song_id": "1112",
     "id": "604",
     "difficulties": [
       "S3",
@@ -9821,6 +10426,7 @@
     "author": "BEAST",
     "bpm": "135 BPM",
     "genre": "K-POP",
+    "song_id": "1138",
     "id": "605",
     "difficulties": [
       "S17",
@@ -9832,6 +10438,7 @@
     "author": "Coconut",
     "bpm": "134 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "606",
     "difficulties": [
       "S1",
@@ -9848,6 +10455,7 @@
     "author": "Nato",
     "bpm": "220 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1508",
     "id": "607",
     "difficulties": [
       "S12",
@@ -9866,6 +10474,7 @@
     "author": "Nato",
     "bpm": "220 BPM",
     "genre": "ORIGINAL",
+    "song_id": "15F4",
     "id": "608",
     "difficulties": [
       "S18",
@@ -9878,6 +10487,7 @@
     "author": "Nato",
     "bpm": "220 BPM",
     "genre": "ORIGINAL",
+    "song_id": "15D2",
     "id": "609",
     "difficulties": [
       "S25",
@@ -9889,6 +10499,7 @@
     "author": "Ayu Ting Ting",
     "bpm": "147 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1334",
     "id": "610",
     "difficulties": [
       "S3",
@@ -9904,6 +10515,7 @@
     "author": "Nato",
     "bpm": "167 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1406",
     "id": "611",
     "difficulties": [
       "S4",
@@ -9920,6 +10532,7 @@
     "author": "Nato",
     "bpm": "167 BPM",
     "genre": "ORIGINAL",
+    "song_id": "14E2",
     "id": "612",
     "difficulties": [
       "S18",
@@ -9931,6 +10544,7 @@
     "author": "Tatsh",
     "bpm": "153 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1511",
     "id": "613",
     "difficulties": [
       "S4",
@@ -9948,6 +10562,7 @@
     "author": "Doin",
     "bpm": "200.1 BPM",
     "genre": "ORIGINAL",
+    "song_id": "",
     "id": "614",
     "difficulties": [
       "S12",
@@ -9965,6 +10580,7 @@
     "author": "Novasonic",
     "bpm": "131.99 BPM",
     "genre": "K-POP",
+    "song_id": "516",
     "id": "615",
     "difficulties": [
       "S3",
@@ -9988,6 +10604,7 @@
     "author": "Novasonic",
     "bpm": "132 BPM",
     "genre": "K-POP",
+    "song_id": "",
     "id": "616",
     "difficulties": [
       "S9",
@@ -10001,6 +10618,7 @@
     "author": "45RPM",
     "bpm": "120 BPM",
     "genre": "K-POP",
+    "song_id": "F06",
     "id": "617",
     "difficulties": [
       "S4",
@@ -10016,6 +10634,7 @@
     "author": "45RPM",
     "bpm": "120 BPM",
     "genre": "K-POP",
+    "song_id": "F56",
     "id": "618",
     "difficulties": [
       "S5",
@@ -10027,6 +10646,7 @@
     "author": "Damian Turnbull",
     "bpm": "127 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "619",
     "difficulties": [
       "S2",
@@ -10042,6 +10662,7 @@
     "author": "Vospi",
     "bpm": "22~176 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "620",
     "difficulties": [
       "S16"
@@ -10052,6 +10673,7 @@
     "author": "Vospi",
     "bpm": "175.9 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1127",
     "id": "621",
     "difficulties": [
       "S4",
@@ -10076,6 +10698,7 @@
     "author": "you",
     "bpm": "175 BPM",
     "genre": "J-MUSIC",
+    "song_id": "1480",
     "id": "622",
     "difficulties": [
       "S4",
@@ -10094,6 +10717,7 @@
     "author": "Bigbang",
     "bpm": "130 BPM",
     "genre": "K-POP",
+    "song_id": "1552",
     "id": "623",
     "difficulties": [
       "S2",
@@ -10113,6 +10737,7 @@
     "author": "BanYa",
     "bpm": "136 BPM",
     "genre": "ORIGINAL",
+    "song_id": "404",
     "id": "624",
     "difficulties": [
       "S2",
@@ -10134,6 +10759,7 @@
     "author": "BanYa",
     "bpm": "136 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "625",
     "difficulties": [
       "S3",
@@ -10152,6 +10778,7 @@
     "author": "Yahpp",
     "bpm": "136 BPM",
     "genre": "ORIGINAL",
+    "song_id": "E01",
     "id": "626",
     "difficulties": [
       "S1",
@@ -10171,6 +10798,7 @@
     "author": "BanYa",
     "bpm": "136 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1056",
     "id": "627",
     "difficulties": [
       "S18",
@@ -10182,6 +10810,7 @@
     "author": "BanYa",
     "bpm": "136 BPM",
     "genre": "ORIGINAL",
+    "song_id": "B18",
     "id": "628",
     "difficulties": [
       "S4",
@@ -10201,6 +10830,7 @@
     "author": "TatshMusicCircle",
     "bpm": "172 BPM",
     "genre": "J-MUSIC",
+    "song_id": "1483",
     "id": "629",
     "difficulties": [
       "S3",
@@ -10220,6 +10850,7 @@
     "author": "Yahpp",
     "bpm": "158 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1002",
     "id": "630",
     "difficulties": [
       "S4",
@@ -10241,6 +10872,7 @@
     "author": "SGX",
     "bpm": "139 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "631",
     "difficulties": [
       "S2",
@@ -10257,6 +10889,7 @@
     "author": "Zircon",
     "bpm": "155 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "632",
     "difficulties": [
       "S21",
@@ -10268,6 +10901,7 @@
     "author": "Zircon",
     "bpm": "155 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1241",
     "id": "633",
     "difficulties": [
       "S2",
@@ -10293,6 +10927,7 @@
     "author": "typeMARS",
     "bpm": "175 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1472",
     "id": "634",
     "difficulties": [
       "S4",
@@ -10312,6 +10947,7 @@
     "author": "typeMARS",
     "bpm": "175 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "14E7",
     "id": "635",
     "difficulties": [
       "S16",
@@ -10323,6 +10959,7 @@
     "author": "DUKE",
     "bpm": "134.9 BPM",
     "genre": "K-POP",
+    "song_id": "906",
     "id": "636",
     "difficulties": [
       "S2",
@@ -10338,6 +10975,7 @@
     "author": "MAMAMOO",
     "bpm": "124 BPM",
     "genre": "K-POP",
+    "song_id": "1658",
     "id": "637",
     "difficulties": [
       "S1",
@@ -10356,6 +10994,7 @@
     "author": "Nato",
     "bpm": "160 BPM",
     "genre": "XROSS",
+    "song_id": "15A2",
     "id": "638",
     "difficulties": [
       "S4",
@@ -10374,6 +11013,7 @@
     "author": "KARA",
     "bpm": "123 BPM",
     "genre": "K-POP",
+    "song_id": "1317",
     "id": "639",
     "difficulties": [
       "S2",
@@ -10392,6 +11032,7 @@
     "author": "KARA",
     "bpm": "123 BPM",
     "genre": "K-POP",
+    "song_id": "13C0",
     "id": "640",
     "difficulties": [
       "S15",
@@ -10403,6 +11044,7 @@
     "author": "SID-Sound",
     "bpm": "156 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1575",
     "id": "641",
     "difficulties": [
       "S7",
@@ -10419,6 +11061,7 @@
     "author": "Onyx",
     "bpm": "137 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "642",
     "difficulties": [
       "S2",
@@ -10436,6 +11079,7 @@
     "author": "Perry",
     "bpm": "96 BPM",
     "genre": "K-POP",
+    "song_id": "C19",
     "id": "643",
     "difficulties": [
       "S5",
@@ -10449,6 +11093,7 @@
     "author": "BanYa",
     "bpm": "124 BPM",
     "genre": "ORIGINAL",
+    "song_id": "709",
     "id": "644",
     "difficulties": [
       "S7",
@@ -10464,6 +11109,7 @@
     "author": "void",
     "bpm": "152 BPM",
     "genre": "J-MUSIC",
+    "song_id": "1478",
     "id": "645",
     "difficulties": [
       "S4",
@@ -10482,6 +11128,7 @@
     "author": "MAX",
     "bpm": "170 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1425",
     "id": "646",
     "difficulties": [
       "S1",
@@ -10504,6 +11151,7 @@
     "author": "Sugar Eyes",
     "bpm": "122 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1337",
     "id": "647",
     "difficulties": [
       "S1",
@@ -10521,6 +11169,7 @@
     "author": "T-ara",
     "bpm": "128 BPM",
     "genre": "K-POP",
+    "song_id": "1446",
     "id": "648",
     "difficulties": [
       "S4",
@@ -10539,6 +11188,7 @@
     "author": "T-ara",
     "bpm": "128 BPM",
     "genre": "K-POP",
+    "song_id": "14C1",
     "id": "649",
     "difficulties": [
       "S15",
@@ -10550,6 +11200,7 @@
     "author": "Smiley",
     "bpm": "185 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "650",
     "difficulties": [
       "S2",
@@ -10569,6 +11220,7 @@
     "author": "SHK",
     "bpm": "150 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1502",
     "id": "651",
     "difficulties": [
       "S4",
@@ -10585,6 +11237,7 @@
     "author": "SHK",
     "bpm": "145 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1419",
     "id": "652",
     "difficulties": [
       "S4",
@@ -10607,6 +11260,7 @@
     "author": "SHK",
     "bpm": "145 BPM",
     "genre": "ORIGINAL",
+    "song_id": "14E0",
     "id": "653",
     "difficulties": [
       "S19",
@@ -10618,6 +11272,7 @@
     "author": "Norazo",
     "bpm": "150 BPM",
     "genre": "K-POP",
+    "song_id": "13A1",
     "id": "654",
     "difficulties": [
       "S16",
@@ -10629,6 +11284,7 @@
     "author": "Warak",
     "bpm": "146 BPM",
     "genre": "XROSS",
+    "song_id": "15A7",
     "id": "655",
     "difficulties": [
       "S7",
@@ -10646,6 +11302,7 @@
     "author": "Supreme Team",
     "bpm": "112 BPM",
     "genre": "K-POP",
+    "song_id": "1445",
     "id": "656",
     "difficulties": [
       "S2",
@@ -10662,6 +11319,7 @@
     "author": "Norazo",
     "bpm": "150 BPM",
     "genre": "K-POP",
+    "song_id": "1114",
     "id": "657",
     "difficulties": [
       "S4",
@@ -10682,6 +11340,7 @@
     "author": "Elliot Simons",
     "bpm": "133 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "658",
     "difficulties": [
       "S3",
@@ -10697,6 +11356,7 @@
     "author": "Celldweller",
     "bpm": "112 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1208",
     "id": "659",
     "difficulties": [
       "S2",
@@ -10722,6 +11382,7 @@
     "author": "KaW",
     "bpm": "172 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1222",
     "id": "660",
     "difficulties": [
       "S2",
@@ -10744,6 +11405,7 @@
     "author": "SHK",
     "bpm": "170 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1104",
     "id": "661",
     "difficulties": [
       "S4",
@@ -10764,6 +11426,7 @@
     "author": "SHK",
     "bpm": "170 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1147",
     "id": "662",
     "difficulties": [
       "S18",
@@ -10775,6 +11438,7 @@
     "author": "BanYa Production",
     "bpm": "132 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1024",
     "id": "663",
     "difficulties": [
       "S3",
@@ -10791,6 +11455,7 @@
     "author": "SGX",
     "bpm": "63~127 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "664",
     "difficulties": [
       "S2",
@@ -10807,6 +11472,7 @@
     "author": "Doin",
     "bpm": "145 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1094",
     "id": "665",
     "difficulties": [
       "S2",
@@ -10825,6 +11491,7 @@
     "author": "Roo'Ra",
     "bpm": "135 BPM",
     "genre": "K-POP",
+    "song_id": "1010",
     "id": "666",
     "difficulties": [
       "S1",
@@ -10837,22 +11504,13 @@
       "DP3"
     ]
   },
-  "The Ark Sailing Over Truth [Full Song]": {
-    "length": "Full Song",
-    "author": "Ashley Scared The Sky",
-    "bpm": "210 BPM",
-    "genre": "WORLD MUSIC",
-    "id": "667",
-    "difficulties": [
-      "S18"
-    ]
-  },
   "The Ark Sailing Over Truth": {
     "length": "Arcade",
     "author": "Ashley Scared The Sky",
     "bpm": "210 BPM",
     "genre": "WORLD MUSIC",
-    "id": "668",
+    "song_id": "",
+    "id": "667",
     "difficulties": [
       "S5",
       "S10",
@@ -10865,11 +11523,23 @@
       "D22"
     ]
   },
+  "The Ark Sailing Over Truth [Full Song]": {
+    "length": "Full Song",
+    "author": "Ashley Scared The Sky",
+    "bpm": "210 BPM",
+    "genre": "WORLD MUSIC",
+    "song_id": "",
+    "id": "668",
+    "difficulties": [
+      "S18"
+    ]
+  },
   "The Best It's Gonna' Get": {
     "length": "Arcade",
     "author": "Celldweller",
     "bpm": "130 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "669",
     "difficulties": [
       "S2",
@@ -10889,6 +11559,7 @@
     "author": "BanYa Production",
     "bpm": "130~240 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1124",
     "id": "670",
     "difficulties": [
       "S4",
@@ -10906,6 +11577,7 @@
     "author": "MonstDeath",
     "bpm": "150 BPM",
     "genre": "ORIGINAL",
+    "song_id": "16A3",
     "id": "671",
     "difficulties": [
       "S3",
@@ -10921,6 +11593,7 @@
     "author": "Brandy",
     "bpm": "136 BPM",
     "genre": "XROSS",
+    "song_id": "1595",
     "id": "672",
     "difficulties": [
       "S11",
@@ -10937,6 +11610,7 @@
     "author": "DJ Clonepa",
     "bpm": "200 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "673",
     "difficulties": [
       "S6",
@@ -10953,6 +11627,7 @@
     "author": "Celldweller",
     "bpm": "134 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "674",
     "difficulties": [
       "S2",
@@ -10969,6 +11644,7 @@
     "author": "HAON",
     "bpm": "115 BPM",
     "genre": "K-POP",
+    "song_id": "",
     "id": "675",
     "difficulties": [
       "S4",
@@ -10988,6 +11664,7 @@
     "author": "BanYa Production",
     "bpm": "134 BPM",
     "genre": "ORIGINAL",
+    "song_id": "F22",
     "id": "676",
     "difficulties": [
       "S3",
@@ -11003,6 +11680,7 @@
     "author": "BanYa Production",
     "bpm": "134 BPM",
     "genre": "ORIGINAL",
+    "song_id": "F31",
     "id": "677",
     "difficulties": [
       "S7",
@@ -11015,6 +11693,7 @@
     "author": "Doin",
     "bpm": "200 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1510",
     "id": "678",
     "difficulties": [
       "S10",
@@ -11030,6 +11709,7 @@
     "author": "MAX",
     "bpm": "160 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1453",
     "id": "679",
     "difficulties": [
       "S7",
@@ -11064,6 +11744,7 @@
     "author": "Magic Hammer",
     "bpm": "160 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "680",
     "difficulties": [
       "S4",
@@ -11084,6 +11765,7 @@
     "author": "Magic Hammer",
     "bpm": "160 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "681",
     "difficulties": [
       "S19",
@@ -11095,6 +11777,7 @@
     "author": "BanYa",
     "bpm": "140 BPM",
     "genre": "ORIGINAL",
+    "song_id": "713",
     "id": "682",
     "difficulties": [
       "S2",
@@ -11121,6 +11804,7 @@
     "author": "r300k",
     "bpm": "119 BPM",
     "genre": "XROSS",
+    "song_id": "15A3",
     "id": "683",
     "difficulties": [
       "S8",
@@ -11137,6 +11821,7 @@
     "author": "GFriend",
     "bpm": "170 BPM",
     "genre": "K-POP",
+    "song_id": "",
     "id": "684",
     "difficulties": [
       "S3",
@@ -11154,6 +11839,7 @@
     "author": "HIGHTEEN",
     "bpm": "164 BPM",
     "genre": "K-POP",
+    "song_id": "",
     "id": "685",
     "difficulties": [
       "S2",
@@ -11171,6 +11857,7 @@
     "author": "LEXY",
     "bpm": "130 BPM",
     "genre": "K-POP",
+    "song_id": "1009",
     "id": "686",
     "difficulties": [
       "S1",
@@ -11189,6 +11876,7 @@
     "author": "BanYa Production",
     "bpm": "104 BPM",
     "genre": "ORIGINAL",
+    "song_id": "F26",
     "id": "687",
     "difficulties": [
       "S4",
@@ -11207,6 +11895,7 @@
     "author": "BanYa",
     "bpm": "110.8 BPM",
     "genre": "ORIGINAL",
+    "song_id": "710",
     "id": "688",
     "difficulties": [
       "S4",
@@ -11221,6 +11910,7 @@
     "author": "Last Note.",
     "bpm": "230 BPM",
     "genre": "J-MUSIC",
+    "song_id": "1487",
     "id": "689",
     "difficulties": [
       "S1",
@@ -11241,6 +11931,7 @@
     "author": "Big metra",
     "bpm": "105 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "F60",
     "id": "690",
     "difficulties": [
       "S10",
@@ -11253,6 +11944,7 @@
     "author": "Neutral Moon",
     "bpm": "160 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1539",
     "id": "691",
     "difficulties": [
       "S3",
@@ -11271,6 +11963,7 @@
     "author": "BanYa",
     "bpm": "184~202 BPM",
     "genre": "ORIGINAL",
+    "song_id": "B28",
     "id": "692",
     "difficulties": [
       "S13",
@@ -11286,6 +11979,7 @@
     "author": "Hi-G",
     "bpm": "150 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1219",
     "id": "693",
     "difficulties": [
       "S2",
@@ -11310,6 +12004,7 @@
     "author": "Memme",
     "bpm": "180 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1504",
     "id": "694",
     "difficulties": [
       "S8",
@@ -11327,6 +12022,7 @@
     "author": "Doin",
     "bpm": "156.118 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1145",
     "id": "695",
     "difficulties": [
       "S14",
@@ -11338,6 +12034,7 @@
     "author": "SGX",
     "bpm": "135 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "696",
     "difficulties": [
       "S1",
@@ -11358,6 +12055,7 @@
     "author": "BanYa",
     "bpm": "150 BPM",
     "genre": "ORIGINAL",
+    "song_id": "303",
     "id": "697",
     "difficulties": [
       "S1",
@@ -11380,6 +12078,7 @@
     "author": "BanYa Production",
     "bpm": "130 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1026",
     "id": "698",
     "difficulties": [
       "S3",
@@ -11396,6 +12095,7 @@
     "author": "BanYa Production",
     "bpm": "150~162 BPM",
     "genre": "ORIGINAL",
+    "song_id": "F43",
     "id": "699",
     "difficulties": [
       "S8",
@@ -11408,6 +12108,7 @@
     "author": "Jehezukiel",
     "bpm": "141 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1536",
     "id": "700",
     "difficulties": [
       "S4",
@@ -11425,6 +12126,7 @@
     "author": "Bae Chi Gi",
     "bpm": "128 BPM",
     "genre": "K-POP",
+    "song_id": "1328",
     "id": "701",
     "difficulties": [
       "S4",
@@ -11443,6 +12145,7 @@
     "author": "MAX",
     "bpm": "127 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1008",
     "id": "702",
     "difficulties": [
       "S2",
@@ -11463,6 +12166,7 @@
     "author": "MAX",
     "bpm": "128 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1313",
     "id": "703",
     "difficulties": [
       "S3",
@@ -11480,6 +12184,7 @@
     "author": "MAX",
     "bpm": "128 BPM",
     "genre": "ORIGINAL",
+    "song_id": "13E5",
     "id": "704",
     "difficulties": [
       "S17",
@@ -11491,6 +12196,7 @@
     "author": "BanYa Production",
     "bpm": "92 BPM",
     "genre": "ORIGINAL",
+    "song_id": "D18",
     "id": "705",
     "difficulties": [
       "S3",
@@ -11505,6 +12211,7 @@
     "author": "BanYa Production",
     "bpm": "104 BPM",
     "genre": "ORIGINAL",
+    "song_id": "F32",
     "id": "706",
     "difficulties": [
       "S17",
@@ -11516,6 +12223,7 @@
     "author": "SHK",
     "bpm": "145 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1310",
     "id": "707",
     "difficulties": [
       "S3",
@@ -11534,6 +12242,7 @@
     "author": "SHK",
     "bpm": "145 BPM",
     "genre": "ORIGINAL",
+    "song_id": "13E4",
     "id": "708",
     "difficulties": [
       "S18",
@@ -11545,6 +12254,7 @@
     "author": "Miura Daichi (Cover)",
     "bpm": "128 BPM",
     "genre": "J-MUSIC",
+    "song_id": "1495",
     "id": "709",
     "difficulties": [
       "S2",
@@ -11563,6 +12273,7 @@
     "author": "EXID",
     "bpm": "112 BPM",
     "genre": "K-POP",
+    "song_id": "1553",
     "id": "710",
     "difficulties": [
       "S2",
@@ -11582,6 +12293,7 @@
     "author": "EXID",
     "bpm": "112 BPM",
     "genre": "K-POP",
+    "song_id": "15E3",
     "id": "711",
     "difficulties": [
       "S8",
@@ -11594,6 +12306,7 @@
     "author": "Skizzo",
     "bpm": "150 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1538",
     "id": "712",
     "difficulties": [
       "S3",
@@ -11610,6 +12323,7 @@
     "author": "Sam-I-Am",
     "bpm": "120 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "F11",
     "id": "713",
     "difficulties": [
       "S5",
@@ -11624,6 +12338,7 @@
     "author": "Smiley",
     "bpm": "166 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1235",
     "id": "714",
     "difficulties": [
       "S4",
@@ -11639,6 +12354,7 @@
     "author": "void",
     "bpm": "152 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1530",
     "id": "715",
     "difficulties": [
       "S7",
@@ -11656,6 +12372,7 @@
     "author": "Beautiful Day",
     "bpm": "160 BPM",
     "genre": "XROSS",
+    "song_id": "1593",
     "id": "716",
     "difficulties": [
       "S6",
@@ -11673,6 +12390,7 @@
     "author": "Doin",
     "bpm": "200 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1017",
     "id": "717",
     "difficulties": [
       "S19",
@@ -11688,6 +12406,7 @@
     "author": "Doin",
     "bpm": "222.22 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1131",
     "id": "718",
     "difficulties": [
       "S15",
@@ -11702,6 +12421,7 @@
     "author": "Applesoda",
     "bpm": "174 BPM",
     "genre": "ORIGINAL",
+    "song_id": "",
     "id": "719",
     "difficulties": [
       "S6",
@@ -11720,6 +12440,7 @@
     "author": "Sta",
     "bpm": "170 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "720",
     "difficulties": [
       "S4",
@@ -11739,6 +12460,7 @@
     "author": "Shinhwa",
     "bpm": "126 BPM",
     "genre": "K-POP",
+    "song_id": "1443",
     "id": "721",
     "difficulties": [
       "S2",
@@ -11755,6 +12477,7 @@
     "author": "Block B",
     "bpm": "136 BPM",
     "genre": "K-POP",
+    "song_id": "1440",
     "id": "722",
     "difficulties": [
       "S3",
@@ -11771,6 +12494,7 @@
     "author": "SEVENTEEN",
     "bpm": "122 BPM",
     "genre": "K-POP",
+    "song_id": "",
     "id": "723",
     "difficulties": [
       "S2",
@@ -11791,6 +12515,7 @@
     "author": "015B",
     "bpm": "121 BPM",
     "genre": "K-POP",
+    "song_id": "E07",
     "id": "724",
     "difficulties": [
       "S6",
@@ -11805,6 +12530,7 @@
     "author": "Vospi",
     "bpm": "198 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1465",
     "id": "725",
     "difficulties": [
       "S10",
@@ -11821,6 +12547,7 @@
     "author": "SHK",
     "bpm": "140 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1420",
     "id": "726",
     "difficulties": [
       "S4",
@@ -11839,6 +12566,7 @@
     "author": "Inspector K",
     "bpm": "180 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1221",
     "id": "727",
     "difficulties": [
       "S2",
@@ -11861,6 +12589,7 @@
     "author": "Aragon",
     "bpm": "175 BPM",
     "genre": "XROSS",
+    "song_id": "15A5",
     "id": "728",
     "difficulties": [
       "S5",
@@ -11876,6 +12605,7 @@
     "author": "BanYa",
     "bpm": "184 BPM",
     "genre": "ORIGINAL",
+    "song_id": "735",
     "id": "729",
     "difficulties": [
       "S4",
@@ -11897,6 +12627,7 @@
     "author": "Memme",
     "bpm": "175 BPM",
     "genre": "ORIGINAL",
+    "song_id": "15D0",
     "id": "730",
     "difficulties": [
       "S22",
@@ -11908,6 +12639,7 @@
     "author": "Zig Zag",
     "bpm": "??? BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "731",
     "difficulties": [
       "S12",
@@ -11925,6 +12657,7 @@
     "author": "Zig Zag",
     "bpm": "310 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1240",
     "id": "732",
     "difficulties": [
       "S3",
@@ -11949,6 +12682,7 @@
     "author": "Cashew",
     "bpm": "250 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1543",
     "id": "733",
     "difficulties": [
       "S8",
@@ -11967,6 +12701,7 @@
     "author": "KARA",
     "bpm": "161 BPM",
     "genre": "K-POP",
+    "song_id": "1016",
     "id": "734",
     "difficulties": [
       "S2",
@@ -11991,6 +12726,7 @@
     "author": "KARA",
     "bpm": "161 BPM",
     "genre": "K-POP",
+    "song_id": "1046",
     "id": "735",
     "difficulties": [
       "S16"
@@ -12001,6 +12737,7 @@
     "author": "DEUX",
     "bpm": "115.9 BPM",
     "genre": "K-POP",
+    "song_id": "",
     "id": "736",
     "difficulties": [
       "S4",
@@ -12015,6 +12752,7 @@
     "author": "DEUX",
     "bpm": "115.9 BPM",
     "genre": "K-POP",
+    "song_id": "318",
     "id": "737",
     "difficulties": [
       "S2",
@@ -12031,6 +12769,7 @@
     "author": "Dynamedion",
     "bpm": "128 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "738",
     "difficulties": [
       "S2",
@@ -12048,6 +12787,7 @@
     "author": "Gyfted",
     "bpm": "112 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "D27",
     "id": "739",
     "difficulties": [
       "S5",
@@ -12064,6 +12804,7 @@
     "author": "MAX",
     "bpm": "128 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1107",
     "id": "740",
     "difficulties": [
       "S1",
@@ -12085,6 +12826,7 @@
     "author": "BanYa",
     "bpm": "118 BPM",
     "genre": "ORIGINAL",
+    "song_id": "715",
     "id": "741",
     "difficulties": [
       "S4",
@@ -12099,6 +12841,7 @@
     "author": "SHK",
     "bpm": "165 BPM",
     "genre": "ORIGINAL",
+    "song_id": "",
     "id": "742",
     "difficulties": [
       "S18",
@@ -12110,6 +12853,7 @@
     "author": "SHK",
     "bpm": "165 BPM",
     "genre": "ORIGINAL",
+    "song_id": "",
     "id": "743",
     "difficulties": [
       "S4",
@@ -12131,6 +12875,7 @@
     "author": "Doin",
     "bpm": "200 BPM",
     "genre": "ORIGINAL",
+    "song_id": "13A3",
     "id": "744",
     "difficulties": [
       "S18",
@@ -12142,6 +12887,7 @@
     "author": "Crash",
     "bpm": "110 BPM",
     "genre": "K-POP",
+    "song_id": "A11",
     "id": "745",
     "difficulties": [
       "S3",
@@ -12161,6 +12907,7 @@
     "author": "Throwdown",
     "bpm": "130 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "",
     "id": "746",
     "difficulties": [
       "S13",
@@ -12173,6 +12920,7 @@
     "author": "Throwdown",
     "bpm": "130 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1120",
     "id": "747",
     "difficulties": [
       "S2",
@@ -12196,6 +12944,7 @@
     "author": "Yahpp",
     "bpm": "195 BPM",
     "genre": "ORIGINAL",
+    "song_id": "D34",
     "id": "748",
     "difficulties": [
       "S15",
@@ -12209,6 +12958,7 @@
     "author": "Yahpp",
     "bpm": "200 BPM",
     "genre": "ORIGINAL",
+    "song_id": "",
     "id": "749",
     "difficulties": [
       "S15",
@@ -12223,6 +12973,7 @@
     "author": "BanYa",
     "bpm": "210 BPM",
     "genre": "ORIGINAL",
+    "song_id": "712",
     "id": "750",
     "difficulties": [
       "S2",
@@ -12242,6 +12993,7 @@
     "author": "Yak Won",
     "bpm": "246 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1339",
     "id": "751",
     "difficulties": [
       "S8",
@@ -12258,6 +13010,7 @@
     "author": "BanYa",
     "bpm": "168 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1055",
     "id": "752",
     "difficulties": [
       "S6",
@@ -12273,6 +13026,7 @@
     "author": "BanYa",
     "bpm": "168 BPM",
     "genre": "ORIGINAL",
+    "song_id": "711",
     "id": "753",
     "difficulties": [
       "S4",
@@ -12293,6 +13047,7 @@
     "author": "BanYa",
     "bpm": "195 BPM",
     "genre": "ORIGINAL",
+    "song_id": "1058",
     "id": "754",
     "difficulties": [
       "S14",
@@ -12305,6 +13060,7 @@
     "author": "BanYa",
     "bpm": "195 BPM",
     "genre": "ORIGINAL",
+    "song_id": "C03",
     "id": "755",
     "difficulties": [
       "S4",
@@ -12326,6 +13082,7 @@
     "author": "Yahpp",
     "bpm": "122 BPM",
     "genre": "ORIGINAL",
+    "song_id": "D01",
     "id": "756",
     "difficulties": [
       "S2",
@@ -12347,6 +13104,7 @@
     "author": "BanYa",
     "bpm": "124 BPM",
     "genre": "ORIGINAL",
+    "song_id": "304",
     "id": "757",
     "difficulties": [
       "S5",
@@ -12360,6 +13118,7 @@
     "author": "BanYa",
     "bpm": "162 BPM",
     "genre": "ORIGINAL",
+    "song_id": "A06",
     "id": "758",
     "difficulties": [
       "S4",
@@ -12378,6 +13137,7 @@
     "author": "DM Ashura",
     "bpm": "147 BPM",
     "genre": "WORLD MUSIC",
+    "song_id": "1125",
     "id": "759",
     "difficulties": [
       "S2",

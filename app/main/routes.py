@@ -35,40 +35,42 @@ def submit():
     }
     try:
         if request.form.validate() and valid_api_key(request.form['api_key']): # and if request.remote_addr in approved_ips
-            form = ScoreForm(request.form)
-            if form.validate():
-                post = Post(
-                    song = form.song.data,
-                    score = form.score.data,
-                    lettergrade = form.lettergrade.data,
-                    type = form.type.data,
-                    difficulty = form.difficulty.data,
-                    platform = 'pad',
-                    stagepass = form.stagepass.data,
-                    perfect = form.perfect.data,
-                    great = form.great.data,
-                    good = form.good.data,
-                    bad = form.bad.data,
-                    miss = form.miss.data,
-                    maxcombo = form.maxcombo.data,
-                    pp = form.pp.data,
-                    runningstep = form.runningstep.data,
-                    kcal = form.kcal.data,
-                    scrollspeed = form.scrollspeed.data,
-                    noteskin = form.noteskin.data,
-                    modifiers = form.modifiers.data,
-                    gamemix = form.gamemix.data,
-                    gameversion = form.gameversion.data,
-                    ranked = form.ranked.data,
-                    length = form.length.data,
-                    accesscode = form.accesscode.data,
-                    acsubmit = True,
-                    user_id = accesscode_to_user(request.form.accesscode.data).id
-                )
-                db.session.add(post)
-                db.session.commit()
-                
-                return jsonify(response)
+            u = accesscode_to_user(request.form.accesscode.data)
+            post = Post(
+                song = id_to_songdiff(hex(int(request.form['SongID'])), request.form['difficulty']),
+                song_id = request.form['song_id'],
+                score = int(request.form['Score']),
+                exscore = calc_exscore(int(request.form['Perfect']), int(request.form['Great']), int(request.form['Good']), int(request.form['Bad']), int(request.form['Miss'])),
+                lettergrade = prime_grade[int(request.form['Grade'])],
+                type = prime_charttype[int(request.form['Type'])],
+                difficulty = int(request.form['ChartLevel']),
+                platform = 'pad',
+                stagepass = request.form['stagepass'],
+                perfect = int(request.form['Perfect']),
+                great = int(request.form['Great']),
+                good = int(request.form['Good']),
+                bad = int(request.form['Bad']),
+                miss = int(request.form['Miss']),
+                maxcombo = int(request.form['MaxCombo']),
+                pp = int(request.form['PP']),
+                runningstep = int(request.form['RunningStep']),
+                kcal = float(request.form['Kcal']),
+                scrollspeed = int(request.form['ScrollSpeed']), # this does NOT EXIST FIX IT
+                noteskin = int(request.form['Noteskin']), # fix
+                modifiers = int(request.form['Modifiers']), # fix
+                #gamemix = request.form['Gamemix'],
+                gameversion = request.form['GameVersion'],
+                ranked = 'True' if request.form['Flag'] == '128' else 'False',
+                length = request.form['length'], # how do i even? Type maybe?
+                accesscode = request.form['AccessCode'],
+                acsubmit = 'True',
+                user_id = u.id
+            )
+            db.session.add(post)
+            add_exp(u, request.form['EXP'])
+            db.session.commit()
+            
+            return jsonify(response)
         else:
             response['status'] = 'failure'
             response['reason'] = 'invalid request'
