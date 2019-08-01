@@ -298,15 +298,14 @@
           {{ form.submit(class="btn btn-outline-success") }}
         </div>
         <hr>
-        <div class="col">
-          <div class="form-group">
-            <label class="form-control-label" for="accesscode">Access Code</label>
-            <input class="form-control form-control-lg" id="accesscode" value={{ current_user.accesscode }} readonly>
-          </div>
-          <div class="form-field">
-            <button role="button" class="btn btn-outline-success" onclick="window.open('/getprimebin','_blank')" aria-pressed="true">Get prime.bin</button>
-          </div>
+        <div class="form-group">
+          <label class="form-control-label" for="accesscode">Access Code</label>
+          <input class="form-control form-control-lg" id="accesscode" value={{ current_user.accesscode }} readonly>
         </div>
+        <div class="form-field">
+          <button role="button" class="btn btn-outline-success" onclick="window.open('/getprimebin')" aria-pressed="true">Get prime.bin</button>
+        </div>
+        <hr>
       </form>
     </div>
   </div>

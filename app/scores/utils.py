@@ -130,6 +130,11 @@ mods = {
     'hj': 0x400000,
     'vj': 0x800000
 }
+judgements = {
+    'nj': 0x0,
+    'hj': 0x400000,
+    'vj': 0x800000
+}
 
 @scheduler.task('interval', id='update_scores', minutes=1)
 def update_scores_task():
@@ -286,8 +291,25 @@ def int_to_mods(num):
         if num - mod >= 0:
             modlist.append(mods_rev[mod])
             num -= mod
+            if num == 0:
+                break
 
     return modlist
+
+def int_to_judge(num):
+    judge_rev = {val: key for key, val in judgements.items()}
+    judge_vals = sorted(judgements.values(), reverse=True)
+    
+    modlist = []
+
+    for mod in judge_vals:
+        if num - mod >= 0:
+            modlist.append(judge_rev[mod])
+            num -= mod
+            if num == 0:
+                break
+
+    return modlist[0]
 
 def modlist_to_modstr(modlist):
     s = ""
