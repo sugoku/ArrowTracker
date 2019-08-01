@@ -4,6 +4,7 @@ import os
 import secrets
 import json
 import sys
+import re
 from flask import current_app
 from flask_login import current_user
 from app import db, logging, raw_songdata, scheduler
@@ -39,15 +40,17 @@ def return_completion(user, difficulty):
             data['singles'][diff] = completed
     return(data)
 
+global mods, prime_noteskin, other_noteskin
+
 prime_grade = {
-    0: "SSS",
-    1: "SS",
-    2: "S",
-    3: "A",
-    4: "B",
-    5: "C",
-    6: "D",
-    7: "F"
+    0: "sss",
+    1: "ss",
+    2: "s",
+    3: "a",
+    4: "b",
+    5: "c",
+    6: "d",
+    7: "f"
 }
 prime_charttype = {
     0x0: "Single", # 0
@@ -55,6 +58,14 @@ prime_charttype = {
     0x40: "Single Performance", # 64
     0x80: "Double", # 128
     0xc0: "Co-Op" # 192
+}
+abbrev_charttype = {
+    'S': "Single",
+    'SP': "Double Performance",
+    'DP': "Single Performance",
+    'D': "Double",
+    'HD': "Double", # just don't specify for now
+    'Co-Op': "Co-Op"
 }
 prime_songcategory = {
     0x0: "Arcade",
@@ -91,7 +102,33 @@ prime_noteskin = {
     0x1c: "Rebirth",
     0x1d: "Basic",
     0x1e: "Fiesta",
-    0x1f: "Fiesta 2"
+    0x1f: "Fiesta 2",
+}
+other_noteskin = {
+    0x20: "Prime 2",
+    0x21: "XX"
+}
+mods = {
+    'v': 0x1,
+    'ap': 0x2,
+    'ns': 0x3,
+    'fl': 0x4,
+    'fd': 0x8,
+    'm': 0x10,
+    'rs': 0x20,
+    'rn': 0x40, # random noteskin
+    'ua': 0x80,
+    'jr': 0x100,
+    'dc': 0x200,
+    'bgaoff': 0x800,
+    'x': 0x1000,
+    'nx': 0x2000,
+    'dr': 0x4000,
+    'si': 0x80000,
+    'ri': 0x100000,
+    'sn': 0x200000,
+    'hj': 0x400000,
+    'vj': 0x800000
 }
 
 @scheduler.task('interval', id='update_scores', minutes=1)
@@ -107,29 +144,30 @@ def update_scores_task():
         current_app.logger.info("Updated leaderboards.")
 
 def create_ranking(ranking='worldbest', scoretype='default'):
+    scoretype = re.sub(r'\W+', '', scoretype)
     if ranking == 'worldbest':
         worldbest = {
             'WorldScores': []
         }
-        song_ids = []
-        # get all song IDs and charts
-        # then get top score for each song ID and append to array
-        for i in song_ids:
-            if scoretype == 'default':
-                score = Post.query.filter_by(song_id=i).order_by(Post.score.desc()).all()
-            elif scoretype == 'exscore':
-                score = Post.query.filter_by(song_id=i).order_by(Post.exscore.desc()).all()
-            else:
-                break
-            worldbest['WorldScores'].append(
-                {
-                    'SongID': i,
-                    'ChartLevel': score.difficulty,
-                    'ChartMode': cmode[score.type],
-                    'Score': score.score,
-                    'Nickname': id_to_user(score.user_id).ign
-                }
-            )
+        for song in raw_songdata:
+            if raw_songdata[song]['song_id'] != "":
+                for chart in raw_songdata[song]['difficulties']:
+                    if scoretype == 'default':
+                        score = Post.query.filter_by(song_id=int(raw_songdata[song]['song_id'], 16), difficulty=chart).order_by(Post.score.desc()).first()
+                    elif scoretype == 'exscore':
+                        score = Post.query.filter_by(song_id=int(raw_songdata[song]['song_id'], 16), difficulty=chart).order_by(Post.exscore.desc()).first()
+                    else:
+                        break
+                    if score != None:
+                        worldbest['WorldScores'].append(
+                            {
+                                'SongID': i,
+                                'ChartLevel': score.difficulty,
+                                'ChartMode': cmode[score.type],
+                                'Score': score.score,
+                                'Nickname': id_to_user(score.user_id).ign
+                            }
+                        )
         worldbest['WorldScores'] = worldbest['WorldScores'][:4095] # 0-4094
         return worldbest
     elif ranking == 'rankmode':
@@ -137,7 +175,9 @@ def create_ranking(ranking='worldbest', scoretype='default'):
             'Ranks': []
         }
         song_ids = []
-        # get all song IDs
+        for song in raw_songdata:
+            if raw_songdata[song]['song_id'] != "":
+                song_ids.append(int(raw_songdata[song]['song_id'], 16))
         # then calculate cumulative score per user on song id and get top 3
         # ideally that is what we would do but nah let's put a watermark cause that will be hard when people submit more scores
         for i in song_ids:
@@ -160,12 +200,12 @@ def create_ranking(ranking='worldbest', scoretype='default'):
     return []
 
 def get_worldbest(scoretype='default'):
-    re.sub(r'\W+', '', scoretype)
+    scoretype = re.sub(r'\W+', '', scoretype)
     with open(os.getcwd()+'/leaderboards/'+'worldbest_'+scoretype+'.json') as f:
         return json.load(f)
 
 def get_rankmode(scoretype='default'):
-    re.sub(r'\W+', '', scoretype)
+    scoretype = re.sub(r'\W+', '', scoretype)
     with open(os.getcwd()+'/leaderboards/'+'rankmode_'+scoretype+'.json') as f:
         return json.load(f)
     # plan to use APScheduler to update database
@@ -175,9 +215,95 @@ def id_to_songdiff(sid, diff):
 
 def id_to_songname(sid):
     for song in raw_songdata:
-        if raw_songdata[song]['id'] == sid:
+        if raw_songdata[song]['song_id'] == sid:
             return song
     return None
 
-def posts_to_uscore(posts):
-    pass
+def songname_to_id(songname):
+    if raw_songdata.get(songname) != None:
+        return raw_songdata[songname]['song_id']
+    return None
+
+def posts_to_uscore(posts, scoretype='default'):
+    uscore = []
+    for post in posts:
+        if scoretype == 'default':
+            uscore.append(
+                {
+                    'SongID': post.song_id,
+                    'ChartLevel': post.difficulty,
+                    'GameDataFlag': post.gameflag,
+                    'Score': post.score,
+                    'RealScore': post.score
+                }
+            )
+        elif scoretype == 'exscore':
+            uscore.append(
+                {
+                    'SongID': post.song_id,
+                    'ChartLevel': post.difficulty,
+                    'GameDataFlag': post.gameflag,
+                    'Score': post.exscore,
+                    'RealScore': post.exscore
+                }
+            )
+    return uscore[:4384]
+
+def calc_exscore(perfect, great, good, bad, miss):
+    PERFECT_WEIGHT = 3
+    GREAT_WEIGHT = 2
+    GOOD_WEIGHT = 1
+    BAD_WEIGHT = 0
+    MISS_WEIGHT = 0
+    return PERFECT_WEIGHT * perfect + GREAT_WEIGHT * great + GOOD_WEIGHT * good + BAD_WEIGHT * bad + MISS_WEIGHT * miss
+
+def mods_to_int(modlist, judgement):
+    modsum = 0
+
+    if ('V' in modlist and 'AP' in modlist) or ('V' in modlist and 'NS' in modlist) or ('NS' in modlist and 'AP' in modlist):
+        if 'V' in modlist:
+            modlist.remove('V')
+        if 'AP' in modlist:
+            modlist.remove('AP')
+        if 'NS' not in modlist:
+            modlist.append('NS')
+
+    for mod in modlist:
+        if mods.get(mod.lower()) != None:
+            modsum += mods[mod.lower()]
+    if mods.get(judgement.lower()) != None:
+        modsum += mods[judgement.lower()]
+
+    return modsum
+
+def int_to_mods(num):
+    mods_rev = {val: key for key, val in mods.items()}
+    mods_vals = sorted(mods.values(), reverse=True)
+    
+    modlist = []
+
+    for mod in mods_vals:
+        if num - mod >= 0:
+            modlist.append(mods_rev[mod])
+            num -= mod
+
+    return modlist
+
+def modlist_to_modstr(modlist):
+    s = ""
+    i = 0
+    while i < len(modlist)-1:
+        s += str(modlist[i].upper()) + ', '
+        i += 1
+    if len(modlist) > 0:
+        s += str(modlist[i].upper())
+    return s
+
+def get_diffnum(diffstr):
+    return int(''.join(x for x in diffstr if x.isdigit()))
+
+def get_difftype(diffstr):
+    return abbrev_charttype.get(''.join(x for x in diffstr if not x.isdigit()))
+
+def int_to_noteskin(num):
+    return {**prime_noteskin, **other_noteskin}.get(int(num))

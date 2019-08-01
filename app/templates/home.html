@@ -65,25 +65,25 @@
               <table class="table" id="content-desktop">
                 <thead>
                   <tr>
-                    <th>Difficulty</th>
-                    <th>Letter Grade</th>
-                    <th>Score</th>
-                    <th>Stage Pass</th>
-                    <th>Platform</th>
-                    <th>Ranked?</th>
+                    <th scope="col">Difficulty</th>
+                    <th scope="col">Letter Grade</th>
+                    <th scope="col">Score</th>
+                    <th scope="col">EX Score</th>
+                    <th scope="col">Max Combo</th>
+                    <th scope="col">Stage Pass</th>
+                    <th scope="col">Platform</th>
+                    <th scope="col">Ranked?</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
                     <td>
-                      {% if score.type != "None" %}
-                        {{score.type.capitalize()}} {{score.difficulty}}
-                      {% else %}
-                        <img width="50pt" src="{{ url_for('static', filename='diffballs/{}.png'.format(score.difficulty)) }}" />
-                      {% endif %}
+                      <img width="50pt" src="{{ url_for('static', filename='diffballs/{}.png'.format(score.difficulty)) }}" />
                     </td>
                     <td>{{score.lettergrade.upper()}}</td>
                     <td>{{score.score}}</td>
+                    <td>{{score.exscore}}</td>
+                    <td>{{score.maxcombo}}</td>
                     {% if score.stagepass == "True" %}
                       <td>{{score.stagepass|replace("True", "Yes")}}</td>
                     {% elif score.stagepass == "False" %}

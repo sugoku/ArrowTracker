@@ -3,7 +3,7 @@ import os
 import secrets
 import uuid
 from flask import current_app
-from app.models import APIKey
+from app.models import APIKey, User
 
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 
@@ -30,6 +30,16 @@ def get_api_key(apikey):
 
 def generate_unique_key():
     key = uuid.uuid4()
-    while not valid_api_key(key.hex):
+    while valid_api_key(key.hex):
+        key = uuid.uuid4()
+    return key.hex
+
+def valid_accesscode(accesscode):
+    u = User.query.filter_by(accesscode=accesscode).first()
+    return u != None
+
+def generate_unique_accesscode():
+    key = uuid.uuid4()
+    while valid_accesscode(key.hex):
         key = uuid.uuid4()
     return key.hex

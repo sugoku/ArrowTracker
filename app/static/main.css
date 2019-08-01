@@ -159,3 +159,7 @@ html {
 .sidenav a:hover {
   color: #064579;
 }
+
+.form-check-inline {
+  margin:5px 3px;
+}

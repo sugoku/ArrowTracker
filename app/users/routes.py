@@ -1,11 +1,15 @@
-from flask import render_template, url_for, flash, redirect, request, Blueprint
+from flask import render_template, url_for, flash, redirect, request, Blueprint, send_file, current_app
 from flask_login import login_user, current_user, logout_user, login_required
 from app import db, bcrypt, raw_songdata
 from app.models import User, Post
 from app.users.forms import (RegisterForm, LoginForm, UpdateAccountForm,
                              RequestResetForm, ResetPasswordForm)
 from app.users.utils import save_picture, send_reset_email
+from app.scores.utils import *
+from app.main.utils import *
 import json
+import binascii
+import io
 
 users = Blueprint('users', __name__)
 
@@ -16,7 +20,7 @@ def register():
     form = RegisterForm()
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-        user = User(username=form.username.data, email=form.email.data, password=hashed_password)
+        user = User(username=form.username.data, email=form.email.data, password=hashed_password, accesscode=generate_unique_accesscode())
         db.session.add(user)
         db.session.commit()
         flash(f'Hello, {form.username.data}! You may now log in!', 'success')
@@ -67,6 +71,9 @@ def dashboard():
         current_user.email = form.email.data
         current_user.bio = form.bio.data
         current_user.favsong = form.favsong.data
+        current_user.noteskin = form.noteskin.data
+        current_user.scrollspeed = round(0.5 * round(float(form.scrollspeed.data) / 0.5), 1)
+        current_user.modifiers = current_user.modifiers | mods_to_int([], form.judgement.data)
         db.session.commit()
         flash('Account details updated!', 'success')
         return redirect(url_for('users.dashboard'))
@@ -76,7 +83,7 @@ def dashboard():
         form.bio.data = current_user.bio
         form.favsong.data = current_user.favsong
     image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
-    return render_template("dashboard.html", title="Dashboard", image_file=image_file, form=form)
+    return render_template("dashboard.html", title="Dashboard", image_file=image_file, form=form, current_user=current_user)
 
 @users.route("/user/<string:username>")
 def user_posts(username):
@@ -137,3 +144,16 @@ def supporters():
         supporters = json.load(f)
     total = len(supporters)
     return render_template('supporters.html', supporters=supporters, total=total)
+
+@users.route("/getprimebin", methods=["GET"])
+def getprimebin():
+    if current_user.is_authenticated:
+        current_app.logger.info(current_user.accesscode)
+        return send_file(
+            io.BytesIO(binascii.unhexlify(current_user.accesscode)), 
+            as_attachment=True,
+            attachment_filename='prime.bin',
+            mimetype='application/octet-stream'
+        )
+    else:
+        return redirect_for(url_for('main.home'))

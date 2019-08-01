@@ -101,9 +101,33 @@
             <button type="submit" class="btn btn-secondary" name="submit_button" value="defaultprime_22.png"><img class="rounded" width="60pt" src="{{ url_for('static', filename='profile_pics/defaultprime_22.png') }}" /></button>
             <button type="submit" class="btn btn-secondary" name="submit_button" value="defaultprime_23.png"><img class="rounded" width="60pt" src="{{ url_for('static', filename='profile_pics/defaultprime_23.png') }}" /></button>
           </div><br>
-          <div class="btn-group" role="group" aria-label="Default Profile Images" style="left: 64pt;">
+          <div class="btn-group" role="group" aria-label="Default Profile Images">
             <button type="submit" class="btn btn-secondary" name="submit_button" value="defaultprime_24.png"><img class="rounded" width="60pt" src="{{ url_for('static', filename='profile_pics/defaultprime_24.png') }}" /></button>
             <button type="submit" class="btn btn-secondary" name="submit_button" value="defaultprime_25.png"><img class="rounded" width="60pt" src="{{ url_for('static', filename='profile_pics/defaultprime_25.png') }}" /></button>
+            <button type="submit" class="btn btn-secondary" name="submit_button" value="defaultprime_26.png"><img class="rounded" width="60pt" src="{{ url_for('static', filename='profile_pics/defaultprime_26.png') }}" /></button>
+            <button type="submit" class="btn btn-secondary" name="submit_button" value="defaultprime_27.png"><img class="rounded" width="60pt" src="{{ url_for('static', filename='profile_pics/defaultprime_27.png') }}" /></button>
+          </div><br>
+          <div class="btn-group" role="group" aria-label="Default Profile Images">
+            <button type="submit" class="btn btn-secondary" name="submit_button" value="defaultprime_28.png"><img class="rounded" width="60pt" src="{{ url_for('static', filename='profile_pics/defaultprime_28.png') }}" /></button>
+            <button type="submit" class="btn btn-secondary" name="submit_button" value="defaultprime_29.png"><img class="rounded" width="60pt" src="{{ url_for('static', filename='profile_pics/defaultprime_29.png') }}" /></button>
+            <button type="submit" class="btn btn-secondary" name="submit_button" value="defaultprime_30.png"><img class="rounded" width="60pt" src="{{ url_for('static', filename='profile_pics/defaultprime_30.png') }}" /></button>
+            <button type="submit" class="btn btn-secondary" name="submit_button" value="defaultprime_31.png"><img class="rounded" width="60pt" src="{{ url_for('static', filename='profile_pics/defaultprime_31.png') }}" /></button>
+          </div><br>
+          <div class="btn-group" role="group" aria-label="Default Profile Images">
+            <button type="submit" class="btn btn-secondary" name="submit_button" value="defaultprime_32.png"><img class="rounded" width="60pt" src="{{ url_for('static', filename='profile_pics/defaultprime_32.png') }}" /></button>
+            <button type="submit" class="btn btn-secondary" name="submit_button" value="defaultprime_33.png"><img class="rounded" width="60pt" src="{{ url_for('static', filename='profile_pics/defaultprime_33.png') }}" /></button>
+            <button type="submit" class="btn btn-secondary" name="submit_button" value="defaultprime_34.png"><img class="rounded" width="60pt" src="{{ url_for('static', filename='profile_pics/defaultprime_34.png') }}" /></button>
+            <button type="submit" class="btn btn-secondary" name="submit_button" value="defaultprime_35.png"><img class="rounded" width="60pt" src="{{ url_for('static', filename='profile_pics/defaultprime_35.png') }}" /></button>
+          </div><br>
+          <div class="btn-group" role="group" aria-label="Default Profile Images">
+            <button type="submit" class="btn btn-secondary" name="submit_button" value="defaultprime_36.png"><img class="rounded" width="60pt" src="{{ url_for('static', filename='profile_pics/defaultprime_36.png') }}" /></button>
+            <button type="submit" class="btn btn-secondary" name="submit_button" value="defaultprime_37.png"><img class="rounded" width="60pt" src="{{ url_for('static', filename='profile_pics/defaultprime_37.png') }}" /></button>
+            <button type="submit" class="btn btn-secondary" name="submit_button" value="defaultprime_38.png"><img class="rounded" width="60pt" src="{{ url_for('static', filename='profile_pics/defaultprime_38.png') }}" /></button>
+            <button type="submit" class="btn btn-secondary" name="submit_button" value="defaultprime_39.png"><img class="rounded" width="60pt" src="{{ url_for('static', filename='profile_pics/defaultprime_39.png') }}" /></button>
+          </div><br>
+          <div class="btn-group" role="group" aria-label="Default Profile Images" style="left: 64pt;">
+            <button type="submit" class="btn btn-secondary" name="submit_button" value="defaultprime_40.png"><img class="rounded" width="60pt" src="{{ url_for('static', filename='profile_pics/defaultprime_40.png') }}" /></button>
+            <button type="submit" class="btn btn-secondary" name="submit_button" value="defaultprime_41.png"><img class="rounded" width="60pt" src="{{ url_for('static', filename='profile_pics/defaultprime_41.png') }}" /></button>
           </div>
         </form>
       </div>
@@ -229,9 +253,59 @@
               {% endfor %}
             {% endif %}
           </div>
+          <hr>
+          <div class="form-group">
+            {{ form.noteskin.label(class="form-control-label") }}
+            {% if form.noteskin.errors %}
+              {{ form.noteskin(class="form-control form-control-lg is-invalid") }}
+              <div class="invalid-feedback">
+                {% for error in form.noteskin.errors %}
+                  <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+            {% else %}
+              {{ form.noteskin(class="form-control form-control-lg") }}
+            {% endif %}
+          </div>
+          <div class="form-group">
+            {{ form.scrollspeed.label(class="form-control-label") }}
+            {% if form.scrollspeed.errors %}
+              {{ form.scrollspeed(class="form-control form-control-lg is-invalid") }}
+              <div class="invalid-feedback">
+                {% for error in form.scrollspeed.errors %}
+                  <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+            {% else %}
+              {{ form.scrollspeed(class="form-control form-control-lg") }}
+            {% endif %}
+          </div>
+          <div class="form-group">
+            {{ form.judgement.label(class="form-control-label") }}
+            {% if form.judgement.errors %}
+              {{ form.judgement(class="form-control form-control-lg is-invalid") }}
+              <div class="invalid-feedback">
+                {% for error in form.judgement.errors %}
+                  <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+            {% else %}
+              {{ form.judgement(class="form-control form-control-lg") }}
+            {% endif %}
+          </div>
         </fieldset>
         <div class="form-field">
           {{ form.submit(class="btn btn-outline-success") }}
+        </div>
+        <hr>
+        <div class="col">
+          <div class="form-group">
+            <label class="form-control-label" for="accesscode">Access Code</label>
+            <input class="form-control form-control-lg" id="accesscode" value={{ current_user.accesscode }} readonly>
+          </div>
+          <div class="form-field">
+            <button role="button" class="btn btn-outline-success" onclick="window.open('/getprimebin','_blank')" aria-pressed="true">Get prime.bin</button>
+          </div>
         </div>
       </form>
     </div>

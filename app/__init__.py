@@ -10,6 +10,50 @@ import atexit
 
 songlist_pairs, lengthtype_pairs = load_song_lists()
 
+gamemix_pairs = (
+    ('1st', 'The 1st Dance Floor'),
+    ('2nd', '2nd Ultimate Remix'),
+    ('3rd', '3rd O.B.G'),
+    ('obg', 'The O.B.G / Season Evolution'),
+    ('collection', 'The Collection'),
+    ('perfect', 'The Perfect Collection'),
+    ('extra', 'Extra'),
+    ('premiere', 'The Premiere'),
+    ('prex', 'The Prex'),
+    ('rebirth', 'The Rebirth'),
+    ('premiere2', 'The Premiere 2'),
+    ('prex2', 'The Prex 2'),
+    ('premiere3', 'The Premiere 3'),
+    ('prex3', 'The Prex 3'),
+    ('exceed', 'Exceed'),
+    ('exceed2', 'Exceed 2'),
+    ('zero', 'Zero'),
+    ('nx', 'NX / New Xenesis'),
+    ('nx2', 'NX2 / Next Xenesis'),
+    ('nxa', 'NX Absolute'),
+    ('fiesta', 'Fiesta'),
+    ('fiestaex', 'Fiesta EX'),
+    ('fiesta2', 'Fiesta 2'),
+    ('infinity', 'Infinity'),
+    ('prime', 'Prime'),
+    ('primeje', 'Prime JE'),
+    ('prime2', 'Prime 2'),
+    ('xx', 'XX'),
+    ('jump', 'Jump'),
+    ('pro', 'Pro'),
+    ('pro2', 'Pro 2'),
+    ('prox', 'Pro-X'),
+    ('stepmania', 'StepMania'),
+    ('stepf2', 'StepF2'),
+    ('other', 'Other')
+)
+
+judgement_pairs = (
+    ('nj', 'Normal Judgement'),
+    ('hj', 'Hard Judgement'),
+    ('vj', 'Very Hard Judgement')
+)
+
 difficulties = []
 coop = ["2P", "3P", "4P", "5P"]
 for i in range(1, 29):

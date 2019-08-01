@@ -11,7 +11,7 @@ from sqlalchemy import desc, or_
 from app.config import GetChangelog
 from app.main.utils import save_picture, allowed_file, valid_api_key, generate_unique_key
 from app.users.utils import accesscode_to_user, user_to_primeprofile, update_user_with_primeprofile
-from app.scores.utils import id_to_songname, prime_grade, prime_charttype, prime_songcategory
+from app.scores.utils import id_to_songname, prime_grade, prime_charttype, prime_songcategory, calc_exscore
 
 # We can define all of the "@main" decorators below as a "blueprint" that
 # allows us to easily call or redirect the user to any of them from anywhere.
@@ -37,14 +37,16 @@ def submit():
     try:
         if request.form.validate() and valid_api_key(request.form['api_key']): # and if request.remote_addr in approved_ips
             u = accesscode_to_user(request.form.accesscode.data)
+            s = id_to_songname(hex(int(request.form['SongID'])))
             post = Post(
-                song = id_to_songname(hex(int(request.form['SongID']))),
+                song = s,
                 song_id = int(request.form['SongID']),
                 score = int(request.form['Score']),
                 exscore = calc_exscore(int(request.form['Perfect']), int(request.form['Great']), int(request.form['Good']), int(request.form['Bad']), int(request.form['Miss'])),
                 lettergrade = prime_grade[int(request.form['Grade'])],
                 type = prime_charttype[int(request.form['Type'])],
-                difficulty = int(request.form['ChartLevel']),
+                difficultynum = int(request.form['ChartLevel']),
+                difficulty = get_difficulty(s, prime_charttype[int(request.form['Type'])], int(request.form['ChartLevel'])),
                 platform = 'pad',
                 stagepass = 'True' if request.form['Flag'] == '128' else 'False',
                 perfect = int(request.form['Perfect']),
@@ -56,11 +58,12 @@ def submit():
                 pp = int(request.form['PP']),
                 runningstep = int(request.form['RunningStep']),
                 kcal = float(request.form['Kcal']),
-                scrollspeed = int(request.form['NoteSkinSpeed']) % 0x100,
+                scrollspeed = (int(request.form['NoteSkinSpeed']) % 0x100) / 4.0,
                 noteskin = int(request.form['NoteSkinSpeed']) / 0x10000,
                 modifiers = int(request.form['Modifiers']),
                 #gamemix = request.form['Gamemix'],
                 gameversion = request.form['GameVersion'],
+                gameflag = int(request.form['Flag']),
                 ranked = 'True' if request.form['Flag'] == '128' else 'False',
                 length = prime_songcategory[int(request.form['SongCategory'])],
                 accesscode = request.form['AccessCode'],

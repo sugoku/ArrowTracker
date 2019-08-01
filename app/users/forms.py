@@ -1,10 +1,11 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, SelectField, TextAreaField
-from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError, Optional
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, SelectField, TextAreaField, DecimalField
+from wtforms.validators import DataRequired, InputRequired, Length, Email, EqualTo, ValidationError, Optional, NumberRange
 from flask_login import current_user
 from app.models import User
-from app import songlist_pairs, raw_songdata
+from app import songlist_pairs, raw_songdata, judgement_pairs
+from app.scores.utils import *
 
 class RegisterForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired(), Length(min=1, max=20)])
@@ -35,7 +36,9 @@ class UpdateAccountForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     bio = TextAreaField('Bio (Max 500 chars)', validators=[Length(max=500)])
     favsong = SelectField('Favourite Song', coerce=str, choices=[tuple(map(lambda x: x.decode('utf-8'), tup)) for tup in songlist_pairs])
-    accesscode = TextAreaField('Access Code (if connecting with PrimeServer)', validators=[Length(min=32, max=32), Optional()])
+    noteskin = SelectField('Preferred Noteskin', coerce=int, choices=list(prime_noteskin.items()), validators=[InputRequired(), NumberRange(min=0)])
+    scrollspeed = DecimalField('Preferred Speed Mod', places=1, validators=[NumberRange(min=0, max=5)])
+    judgement = SelectField('Preferred Judgement', coerce=str, choices=judgement_pairs, validators=[DataRequired()])
     submit = SubmitField('Update')
 
     def validate_username(self, username):

@@ -51,8 +51,8 @@ def user_to_primeprofile(user):
         'PlayCount': user.playcount,
         'Kcal': user.kcal,
         'Modifiers': user.modifiers,
-        'NoteSkinSpeed': user.noteskin * 0x10000 + user.speedmod,
-        'RushSpeed': user.rushspeed,
+        'NoteSkinSpeed': int(user.noteskin * 4 * 0x10000 + user.scrollspeed/4.0),
+        'RushSpeed': float(user.rushspeed),
         'Scores': posts_to_uscore(user.posts)
     }
 
@@ -68,7 +68,7 @@ def update_user_with_primeprofile(user, post):
     user.runningstep = int(post['RunningStep'])
     user.playcount = int(post['PlayCount'])
     user.kcal = float(post['Kcal'])
-    user.modifiers = int(post['Modifiers'])
-    user.noteskin = int(post['NoteSkinSpeed']) / 0x10000
-    user.speedmod = int(post['NoteSkinSpeed']) % 0x100
+    user.modifiers = int(post['Modifiers']) # might want to make this an option
+    user.noteskin = int(post['NoteSkinSpeed']) / 0x10000 # might want to make this an option
+    user.scrollspeed = (int(post['NoteSkinSpeed']) % 0x100) / 4.0 # might want to make this an option
     user.rushspeed = float(post['RushSpeed'])

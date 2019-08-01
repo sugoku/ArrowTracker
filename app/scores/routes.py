@@ -3,8 +3,9 @@ from flask_login import current_user, login_required
 from app import db, logging, raw_songdata
 from app.models import Post, WeeklyPost, User
 from app.scores.forms import ScoreForm, WeeklyForm
-from app.scores.utils import save_picture, allowed_file, return_completion
+from app.scores.utils import *
 import os
+import json
 from weekly import get_current_weekly, randomize_weekly
 
 scores = Blueprint('scores', __name__)
@@ -13,7 +14,9 @@ scores = Blueprint('scores', __name__)
 @login_required
 def new_score():
     form = ScoreForm()
+    current_app.logger.info(request.form)
     if form.validate_on_submit():
+        current_app.logger.info("Form validated.")
         difficulty = request.form.get('diffDrop')
         try:
             file = request.files['file']
@@ -21,22 +24,49 @@ def new_score():
             picture_file = "None"
             file = None
             flash('No file uploaded', 'info')
-        if file != None:
-            if file.filename == '':
-                flash('No file selected!', 'error')
-                picture_file = "None"
-                return redirect(request.url)
+        if file.filename != '':
             if file and allowed_file(file.filename):
                 picture_file = save_picture(file)
                 flash('File uploaded successfully!', 'success')
             elif file and not allowed_file(file.filename):
                 picture_file = "None"
                 flash('You can\'t upload that!', 'error')
-        post = Post(song = form.song.data, score = form.score.data, lettergrade = form.lettergrade.data, difficulty = difficulty, platform = form.platform.data, stagepass = form.stagepass.data, ranked = form.ranked.data, length = form.length.data, author = current_user, image_file = picture_file)
+        else:
+            picture_file = "None"
+        current_app.logger.info("Converting to post type...")
+        post = Post(
+            song = form.song.data, 
+            song_id = songname_to_id(form.song.data), 
+            score = form.score.data,
+            exscore = calc_exscore(form.perfect.data, form.great.data, form.good.data, form.bad.data, form.miss.data),
+            lettergrade = form.lettergrade.data, 
+            type = get_difftype(difficulty),
+            difficulty = difficulty, 
+            difficultynum = get_diffnum(difficulty),
+            platform = form.platform.data, 
+            stagepass = form.stagepass.data, 
+            perfect = form.perfect.data,
+            great = form.great.data,
+            good = form.good.data,
+            bad = form.bad.data,
+            miss = form.miss.data,
+            maxcombo = form.maxcombo.data,
+            modifiers = mods_to_int(request.form.getlist('modifiers'), form.judgement.data),
+            noteskin = form.noteskin.data,
+            ranked = form.ranked.data, 
+            length = form.length.data, 
+            acsubmit = 'False',
+            author = current_user, 
+            image_file = picture_file
+        )
+        current_app.logger.info("Converted.")
         db.session.add(post)
+        current_app.logger.info("Committing to database...")
         db.session.commit()
         flash('Score has been submitted!', 'success')
         return redirect(url_for('main.home'))
+    else:
+        flash('Invalid form.')
     return render_template("new_score.html", title="New Score", form=form, songdata=raw_songdata)
 
 @scores.route('/post/<int:score_id>')
@@ -45,7 +75,7 @@ def score(score_id):
     goldgrades = ['s', 'ss', 'sss']
     redgrades = ['f']
     score = Post.query.get_or_404(score_id)
-    return render_template('score.html', score=score, songdata=raw_songdata, bluegrades=bluegrades, goldgrades=goldgrades, redgrades=redgrades)
+    return render_template('score.html', score=score, songdata=raw_songdata, bluegrades=bluegrades, goldgrades=goldgrades, redgrades=redgrades, int_to_mods=int_to_mods, modlist_to_modstr=modlist_to_modstr, int_to_noteskin=int_to_noteskin)
 
 @scores.route('/post/<int:score_id>/delete', methods=["POST"])
 def delete_score(score_id):
