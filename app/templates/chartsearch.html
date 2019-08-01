@@ -1,0 +1,54 @@
+{% extends 'layout.html' %}
+<head>
+  {% block head %}
+    <title>Search</title>
+    {% block meta %}
+      <meta property="og:title" content="Arrow Tracker: The PIU Score Tracker"/>
+      <meta property="og:description" content="A handy score tracking utility for Pump it Up!"/>
+      <meta property="og:url" content="https://arrowtracker.duckdns.org/">
+      <meta name="theme-color" content="#99beea">
+      <meta name="robots" content="none">
+    {% endblock meta %}
+  {% endblock %}
+</head>
+{% block body %}
+  <div class="content-section">
+    <form action="" method="POST">
+      {{ form.hidden_tag() }}
+      <fieldset class="form-group">
+        <legend class="border-bottom mb-4">Song Leaderboards</legend>
+        <div class="form-row">
+          <div class="col">
+            {{ form.song.label(class="form-control-label") }}
+            {% if form.song.errors %}
+                {{ form.song(id="songDropdown", class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                {% for error in form.song.errors %}
+                    <span>{{ error }}</span>
+                {% endfor %}
+                </div>
+            {% else %}
+                {{ form.song(id="songDropdown", class="form-control form-control-lg", onchange="updateSelectedSong()") }}
+            {% endif %}
+          </div>
+        </div>
+        <div class="form-group">
+          {{ form.filters.label(class="form-control-label") }}
+          {% if form.filters.errors %}
+            {{ form.filters(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+              {% for error in form.filters.errors %}
+                <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+          {% else %}
+            {{ form.filters(class="form-control form-control-lg") }}
+          {% endif %}
+        </div>
+      </fieldset>
+      <div class="form-field">
+        {{ form.submit(class="btn btn-outline-success") }}
+      </div>
+    </form>
+  </div>
+{% endblock body %}

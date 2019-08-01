@@ -19,11 +19,14 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
       crossorigin="anonymous"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
     <link rel="stylesheet" href="https://bootswatch.com/4/darkly/bootstrap.min.css" />
     <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
     {% block head %}
       {% block title %}
         <title>Arrow Tracker</title>
@@ -55,7 +58,7 @@
 
       function updateSelectedSong() {
         if (document.querySelector('#difficultyDropdown')) { //This checks if this element is on the the page (in the html)
-          data = {% if songdata %}{{ songdata | tojson | safe }}{% endif %}
+          data = {% if songdata %}{{ songdata | tojson | safe }}{% else %}{};{% endif %}
           var diffDrop = document.getElementById("difficultyDropdown");
           var song = document.getElementById("songDropdown");
           diffDrop.options.length = 0;
@@ -72,6 +75,13 @@
           }
         }
       }
+
+      $(document).ready( function () {
+          if($('#search-results').length){
+            $('#search-results').DataTable();
+          } 
+        } 
+      );
 
     </script>
   </body>

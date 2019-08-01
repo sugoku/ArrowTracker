@@ -1,20 +1,62 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
-from wtforms import StringField, SubmitField, TextAreaField, SelectField, IntegerField
-from wtforms.validators import DataRequired
-from app import songlist_pairs, raw_songdata
+from wtforms import StringField, SubmitField, TextAreaField, SelectField, IntegerField, SelectMultipleField
+from wtforms.validators import DataRequired, NumberRange, Optional
+from app import songlist_pairs, raw_songdata, judgement_pairs
+from app.scores.utils import *
 
 # Form classes defined here are what show up on the website as text inputs, dropdowns, etc.
 # This for is for the leaderboard search.
 class SearchForm(FlaskForm):
     filters = (
+        ("all", "All"),
+        ("verified", "Verified (AC)"),
+        ("prime-verified", "Verified through PrimeServer (AC)"),
+        ("unverified", "Unverified (SM/StepF2)"),
+        ("old", "Old System (Only 'None' Lengths)")
+    )
+    comparators = (
+        ('==', '=='), 
+        ('!=', '!='), 
+        ('>', '>'),
+        ('<', '<'),
+        ('>=', ">="),
+        ('<=', "<=")
+    )
+    song = SelectField('Song', coerce=str, choices=[tuple(map(lambda x: x.decode('utf-8'), tup)) for tup in songlist_pairs])
+    lettergrade = SelectMultipleField('Letter Grade', coerce=str, choices=(('Any', 'Any'), ('f', 'F'), ('d', 'D'), ('c', 'C'), ('b', 'B'), ('a', 'A'), ('s', 'S'), ('ss', 'SS'), ('sss', 'SSS')), validators=[DataRequired()])
+    scoremodifier = SelectField('Score Search Type', coerce=str, choices=comparators, validators=[DataRequired()])
+    score = IntegerField('Score', validators=[Optional(), NumberRange(min=0)])
+    exscoremodifier = SelectField('EX Score Search Type', coerce=str, choices=comparators, validators=[DataRequired()])
+    exscore = IntegerField('EX Score', validators=[Optional(), NumberRange(min=0)])
+    stagepass = SelectField('Stage Pass', coerce=str, choices=(('Any', 'Any'), ('True', 'True'), ('False', 'False')), validators=[DataRequired()])
+    filters = SelectMultipleField('Filter', coerce=str, choices=filters, validators=[DataRequired()])
+    platform = SelectMultipleField('Platform', coerce=str, choices=(('pad', 'Pad'), ('keyboard', 'SF2 Keyboard'), ('sf2-pad', 'SF2 Pad')))
+    perfect = IntegerField('Perfect', validators=[Optional(), NumberRange(min=0)])
+    great = IntegerField('Great', validators=[Optional(), NumberRange(min=0)])
+    good = IntegerField('Good', validators=[Optional(), NumberRange(min=0)])
+    bad = IntegerField('Bad', validators=[Optional(), NumberRange(min=0)])
+    miss = IntegerField('Miss', validators=[Optional(), NumberRange(min=0)])
+    maxcombo = IntegerField('Max Combo', validators=[Optional(), NumberRange(min=0)])
+    #scrollspeed = DecimalField('Scroll Speed', places=1, validators=[NumberRange(min=0)])
+    #autovelocity = IntegerField('Auto Velocity Speed', validators=[NumberRange(min=0)])
+    noteskin = SelectMultipleField('Noteskin', coerce=int, choices=[(-1, 'Any')] + list(other_noteskin.items()) + list(prime_noteskin.items()), validators=[DataRequired()])
+    #gamemix = SelectMultipleField('Game Mix', coerce=str, choices=gamemix_pairs)
+    #gameversion = SelectMultipleField('Version', coerce=str, choices=[tuple(map(lambda x: x.decode('utf-8'), tup)) for tup in gameversion_pairs])
+    ranked = SelectMultipleField('Rank Mode', coerce=str, choices=(('Any', 'Any'), ('False', 'Unranked'), ('True', 'Ranked')), validators=[DataRequired()])
+    judgement = SelectMultipleField('Judgement', coerce=str, choices=(('Any', 'Any'),) + judgement_pairs, validators=[DataRequired()])
+    #tournamentid = IntegerField('Tournament ID', validators=[NumberRange(min=0)])
+    submit = SubmitField('Search')
+
+class ChartSearchForm(FlaskForm):
+    filters = (
     ("all", "All"),
     ("verified", "Verified (AC)"),
+    ("prime-verified", "Verified through PrimeServer (AC)"),
     ("unverified", "Unverified (SM/StepF2)"),
     ("old", "Old System (Only 'None' Lengths)"))
-    song = StringField('Song', validators=[DataRequired()])
-    length = SelectField('Length', coerce=str, choices=(('Arcade', 'Arcade'), ('Full Song', 'Full Song'), ('Remix', 'Remix'), ('Short Cut', 'Short Cut')), validators=[DataRequired()])
-    filters = SelectField('Filter', coerce=str, choices=filters)
+    song = SelectField('Song', coerce=str, choices=[tuple(map(lambda x: x.decode('utf-8'), tup)) for tup in songlist_pairs], validators=[DataRequired()])
+    filters = SelectField('Filter', coerce=str, choices=filters, validators=[DataRequired()])
     submit = SubmitField('Search')
 
 class TournamentForm(FlaskForm):

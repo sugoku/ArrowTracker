@@ -37,19 +37,6 @@
             {% endif %}
           </div>
           <div class="col">
-            {{ form.length.label(class="form-control-label") }}
-            {% if form.length.errors %}
-              {{ form.length(id="lengthDropdown", class="form-control form-control-lg is-invalid") }}
-              <div class="invalid-feedback">
-                {% for error in form.length.errors %}
-                  <span>{{ error }}</span>
-                {% endfor %}
-              </div>
-            {% else %}
-              {{ form.length(class="form-control form-control-lg") }}
-            {% endif %}
-          </div>
-          <div class="col">
             <div>
               <label class="form-control-label" for="difficulty">Difficulty</label>
               <a style="color: #4fbcf7" data-toggle="tooltip" data-placement="top" title="Refresh page if difficulties don't load!">[i]</a>
@@ -329,7 +316,4 @@
       </div>
     </form>
   </div>
-  <script>
-    data = {% if songdata %}{{ songdata | tojson | safe }}{% endif %}
-  </script>
 {% endblock body %}

@@ -16,33 +16,27 @@
     <form action="" method="POST">
       {{ form.hidden_tag() }}
       <fieldset class="form-group">
-        <legend class="border-bottom mb-4">Song Leaderboards</legend>
+        <legend class="border-bottom mb-4">Full Search</legend>
         <div class="form-row">
           <div class="form-group col">
             {{ form.song.label(class="form-control-label") }}
             {% if form.song.errors %}
-              {{ form.song(class="form-control form-control-lg is-invalid") }}
-              <div class="invalid-feedback">
+                {{ form.song(id="songDropdown", class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
                 {% for error in form.song.errors %}
-                  <span>{{ error }}</span>
+                    <span>{{ error }}</span>
                 {% endfor %}
-              </div>
+                </div>
             {% else %}
-              {{ form.song(class="form-control form-control-lg") }}
+                {{ form.song(id="songDropdown", class="form-control form-control-lg", onchange="updateSelectedSong()") }}
             {% endif %}
           </div>
-          <div class="form-group col">
-            {{ form.length.label(class="form-control-label") }}
-            {% if form.length.errors %}
-              {{ form.length(class="form-control form-control-lg is-invalid") }}
-              <div class="invalid-feedback">
-                {% for error in form.length.errors %}
-                  <span>{{ error }}</span>
-                {% endfor %}
-              </div>
-            {% else %}
-              {{ form.length(class="form-control form-control-lg") }}
-            {% endif %}
+          <div class="col">
+            <div>
+              <label class="form-control-label" for="difficulty">Difficulty</label>
+              <a style="color: #4fbcf7" data-toggle="tooltip" data-placement="top" title="Refresh page if difficulties don't load!">[i]</a>
+            </div>
+            <select id="difficultyDropdown" class="form-control form-control-lg" name="diffDrop"></select>
           </div>
         </div>
         <div class="form-group">
@@ -57,6 +51,299 @@
           {% else %}
             {{ form.filters(class="form-control form-control-lg") }}
           {% endif %}
+        </div>
+        <div class="form-row" style="padding: 5pt">
+          <div class="col">
+            {{ form.lettergrade.label(class="form-control-label") }}
+            {% if form.lettergrade.errors %}
+              {{ form.lettergrade(class="form-control form-control-lg is-invalid") }}
+              <div class="invalid-feedback">
+                {% for error in form.lettergrade.errors %}
+                  <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+            {% else %}
+              {{ form.lettergrade(class="form-control form-control-lg") }}
+            {% endif %}
+          </div>
+          <div class="col">
+            {{ form.scoremodifier.label(class="form-control-label") }}
+            {% if form.scoremodifier.errors %}
+              {{ form.scoremodifier(class="form-control form-control-lg is-invalid") }}
+              <div class="invalid-feedback">
+                {% for error in form.scoremodifier.errors %}
+                  <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+            {% else %}
+              {{ form.scoremodifier(class="form-control form-control-lg") }}
+            {% endif %}
+          </div>
+          <div class="col">
+            {{ form.score.label(class="form-control-label") }}
+            {% if form.score.errors %}
+              {{ form.score(class="form-control form-control-lg is-invalid") }}
+              <div class="invalid-feedback">
+                {% for error in form.score.errors %}
+                  <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+            {% else %}
+              {{ form.score(class="form-control form-control-lg") }}
+            {% endif %}
+          </div>
+          <div class="col">
+            {{ form.exscoremodifier.label(class="form-control-label") }}
+            {% if form.exscoremodifier.errors %}
+              {{ form.exscoremodifier(class="form-control form-control-lg is-invalid") }}
+              <div class="invalid-feedback">
+                {% for error in form.exscoremodifier.errors %}
+                  <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+            {% else %}
+              {{ form.exscoremodifier(class="form-control form-control-lg") }}
+            {% endif %}
+          </div>
+          <div class="col">
+            {{ form.exscore.label(class="form-control-label") }}
+            {% if form.exscore.errors %}
+              {{ form.exscore(class="form-control form-control-lg is-invalid") }}
+              <div class="invalid-feedback">
+                {% for error in form.exscore.errors %}
+                  <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+            {% else %}
+              {{ form.exscore(class="form-control form-control-lg") }}
+            {% endif %}
+          </div>
+        </div>
+        <div class="form-row" style="padding: 5pt">
+          <div class="col">
+            {{ form.platform.label(class="form-control-label") }}
+            {% if form.platform.errors %}
+              {{ form.platform(class="form-control form-control-lg is-invalid") }}
+              <div class="invalid-feedback">
+                {% for error in form.platform.errors %}
+                  <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+            {% else %}
+              {{ form.platform(class="form-control form-control-lg") }}
+            {% endif %}
+          </div>
+          <div class="col">
+            {{ form.stagepass.label(class="form-control-label") }}
+            {% if form.stagepass.errors %}
+              {{ form.stagepass(class="form-control form-control-lg is-invalid") }}
+              <div class="invalid-feedback">
+                {% for error in form.stagepass.errors %}
+                  <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+            {% else %}
+              {{ form.stagepass(class="form-control form-control-lg") }}
+            {% endif %}
+          </div>
+          <div class="col">
+            {{ form.ranked.label(class="form-control-label") }}
+            {% if form.ranked.errors %}
+              {{ form.ranked(class="form-control form-control-lg is-invalid") }}
+              <div class="invalid-feedback">
+                {% for error in form.ranked.errors %}
+                  <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+            {% else %}
+              {{ form.ranked(class="form-control form-control-lg") }}
+            {% endif %}
+          </div>
+        </div>
+        <div class="form-row" style="padding: 5pt">
+          <div class="col">
+            {{ form.perfect.label(class="form-control-label") }}
+            {% if form.perfect.errors %}
+              {{ form.perfect(class="form-control form-control-lg is-invalid") }}
+              <div class="invalid-feedback">
+                {% for error in form.perfect.errors %}
+                  <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+            {% else %}
+              {{ form.perfect(class="form-control form-control-lg") }}
+            {% endif %}
+          </div>
+          <div class="col">
+            {{ form.great.label(class="form-control-label") }}
+            {% if form.great.errors %}
+              {{ form.great(class="form-control form-control-lg is-invalid") }}
+              <div class="invalid-feedback">
+                {% for error in form.great.errors %}
+                  <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+            {% else %}
+              {{ form.great(class="form-control form-control-lg") }}
+            {% endif %}
+          </div>
+          <div class="col">
+            {{ form.good.label(class="form-control-label") }}
+            {% if form.good.errors %}
+              {{ form.good(class="form-control form-control-lg is-invalid") }}
+              <div class="invalid-feedback">
+                {% for error in form.good.errors %}
+                  <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+            {% else %}
+              {{ form.good(class="form-control form-control-lg") }}
+            {% endif %}
+          </div>
+          <div class="col">
+            {{ form.bad.label(class="form-control-label") }}
+            {% if form.bad.errors %}
+              {{ form.bad(class="form-control form-control-lg is-invalid") }}
+              <div class="invalid-feedback">
+                {% for error in form.bad.errors %}
+                  <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+            {% else %}
+              {{ form.bad(class="form-control form-control-lg") }}
+            {% endif %}
+          </div>
+          <div class="col">
+            {{ form.miss.label(class="form-control-label") }}
+            {% if form.miss.errors %}
+              {{ form.miss(class="form-control form-control-lg is-invalid") }}
+              <div class="invalid-feedback">
+                {% for error in form.miss.errors %}
+                  <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+            {% else %}
+              {{ form.miss(class="form-control form-control-lg") }}
+            {% endif %}
+          </div>
+          <div class="col">
+            {{ form.maxcombo.label(class="form-control-label") }}
+            {% if form.maxcombo.errors %}
+              {{ form.maxcombo(class="form-control form-control-lg is-invalid") }}
+              <div class="invalid-feedback">
+                {% for error in form.maxcombo.errors %}
+                  <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+            {% else %}
+              {{ form.maxcombo(class="form-control form-control-lg") }}
+            {% endif %}
+          </div>
+        </div>
+        <div class="form-row" style="padding-left: 10pt; padding-top: 5pt">
+          <label class="form-control-label">Modifiers</label>
+        </div>
+        <div class="form-row text-nowrap" style="padding: 5pt; padding-top: 0pt">
+          <div class="col form-check form-check-inline">
+            <input type="checkbox" value="V" class="form-check-input" id='modifiers_v' name='modifiers'>
+            <label class="form-check-label" for="modifiers_v">V</label>
+          </div>
+          <div class="col form-check form-check-inline">
+            <input type="checkbox" value="AP" class="form-check-input" id='modifiers_ap' name='modifiers'>
+            <label class="form-check-label" for="modifiers_ap">AP</label>
+          </div>
+          <div class="col form-check form-check-inline">
+            <input type="checkbox" value="NS" class="form-check-input" id='modifiers_ns' name='modifiers'>
+            <label class="form-check-label" for="modifiers_ns">NS</label>
+          </div>
+          <div class="col form-check form-check-inline">
+            <input type="checkbox" value="FL" class="form-check-input" id='modifiers_fl' name='modifiers'>
+            <label class="form-check-label" for="modifiers_fl">FL</label>
+          </div>
+          <div class="col form-check form-check-inline">
+            <input type="checkbox" value="FD" class="form-check-input" id='modifiers_fd' name='modifiers'>
+            <label class="form-check-label" for="modifiers_fd">FD</label>
+          </div>
+          <div class="col form-check form-check-inline">
+            <input type="checkbox" value="M" class="form-check-input" id='modifiers_m' name='modifiers'>
+            <label class="form-check-label" for="modifiers_m">M</label>
+          </div>
+          <div class="col form-check form-check-inline">
+            <input type="checkbox" value="RS" class="form-check-input" id='modifiers_rs' name='modifiers'>
+            <label class="form-check-label" for="modifiers_rs">RS</label>
+          </div>
+          <div class="col form-check form-check-inline">
+            <input type="checkbox" value="RN" class="form-check-input" id='modifiers_rn' name='modifiers'>
+            <label class="form-check-label" for="modifiers_rn">Random Noteskin</label>
+          </div>
+          <div class="col form-check form-check-inline">
+            <input type="checkbox" value="UA" class="form-check-input" id='modifiers_ua' name='modifiers'>
+            <label class="form-check-label" for="modifiers_ua">UA</label>
+          </div>
+          <div class="col form-check form-check-inline">
+            <input type="checkbox" value="JR" class="form-check-input" id='modifiers_jr' name='modifiers'>
+            <label class="form-check-label" for="modifiers_jr">JR</label>
+          </div>
+          <div class="col form-check form-check-inline">
+            <input type="checkbox" value="DC" class="form-check-input" id='modifiers_dc' name='modifiers'>
+            <label class="form-check-label" for="modifiers_dc">DC</label>
+          </div>
+          <div class="col form-check form-check-inline">
+            <input type="checkbox" value="BGAOFF" class="form-check-input" id='modifiers_bgaoff' name='modifiers'>
+            <label class="form-check-label" for="modifiers_bgaoff">BGA OFF</label>
+          </div>
+          <div class="col form-check form-check-inline">
+            <input type="checkbox" value="X" class="form-check-input" id='modifiers_x' name='modifiers'>
+            <label class="form-check-label" for="modifiers_x">X</label>
+          </div>
+          <div class="col form-check form-check-inline">
+            <input type="checkbox" value="NX" class="form-check-input" id='modifiers_nx' name='modifiers'>
+            <label class="form-check-label" for="modifiers_nx">NX</label>
+          </div>
+          <div class="col form-check form-check-inline">
+            <input type="checkbox" value="DR" class="form-check-input" id='modifiers_dr' name='modifiers'>
+            <label class="form-check-label" for="modifiers_dr">DR</label>
+          </div>
+          <div class="col form-check form-check-inline">
+            <input type="checkbox" value="SI" class="form-check-input" id='modifiers_si' name='modifiers'>
+            <label class="form-check-label" for="modifiers_si">SI</label>
+          </div>
+          <div class="col form-check form-check-inline">
+            <input type="checkbox" value="RI" class="form-check-input" id='modifiers_ri' name='modifiers'>
+            <label class="form-check-label" for="modifiers_ri">RI</label>
+          </div>
+          <div class="col form-check form-check-inline">
+            <input type="checkbox" value="SN" class="form-check-input" id='modifiers_sn' name='modifiers'>
+            <label class="form-check-label" for="modifiers_sn">SN</label>
+          </div>
+        </div>
+        <div class="form-row" style="padding: 5pt">
+          <div class="col">
+            {{ form.judgement.label(class="form-control-label") }}
+            {% if form.judgement.errors %}
+              {{ form.judgement(class="form-control form-control-lg is-invalid") }}
+              <div class="invalid-feedback">
+                {% for error in form.judgement.errors %}
+                  <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+            {% else %}
+              {{ form.judgement(class="form-control form-control-lg") }}
+            {% endif %}
+          </div>
+          <div class="col">
+            {{ form.noteskin.label(class="form-control-label") }}
+            {% if form.noteskin.errors %}
+              {{ form.noteskin(class="form-control form-control-lg is-invalid") }}
+              <div class="invalid-feedback">
+                {% for error in form.noteskin.errors %}
+                  <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+            {% else %}
+              {{ form.noteskin(class="form-control form-control-lg") }}
+            {% endif %}
+          </div>
         </div>
       </fieldset>
       <div class="form-field">

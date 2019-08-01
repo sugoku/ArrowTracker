@@ -54,7 +54,7 @@ def new_score():
             modifiers = mods_to_int(request.form.getlist('modifiers'), form.judgement.data),
             noteskin = form.noteskin.data,
             ranked = form.ranked.data, 
-            length = form.length.data, 
+            length = raw_songdata[form.song.data]['length'], 
             acsubmit = 'False',
             author = current_user, 
             image_file = picture_file
@@ -65,8 +65,6 @@ def new_score():
         db.session.commit()
         flash('Score has been submitted!', 'success')
         return redirect(url_for('main.home'))
-    else:
-        flash('Invalid form.')
     return render_template("new_score.html", title="New Score", form=form, songdata=raw_songdata)
 
 @scores.route('/post/<int:score_id>')

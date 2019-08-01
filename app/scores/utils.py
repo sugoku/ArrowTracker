@@ -329,3 +329,10 @@ def get_difftype(diffstr):
 
 def int_to_noteskin(num):
     return {**prime_noteskin, **other_noteskin}.get(int(num))
+
+def high_score(post):
+    top = Post.query.filter_by(song_id=post.song_id, difficulty=post.difficulty, user_id=post.user_id).order_by(Post.score.desc()).first()
+    if top != None:
+        if top.score > post.score:
+            return False
+    return True
