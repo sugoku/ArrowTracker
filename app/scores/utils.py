@@ -327,6 +327,9 @@ def get_diffnum(diffstr):
 def get_difftype(diffstr):
     return abbrev_charttype.get(''.join(x for x in diffstr if not x.isdigit()))
 
+def get_diffstr(difftype, diffnum):
+    return {val: key for key, val in {x:abbrev_charttype[x] for x in abbrev_charttype if x != 'HD'}.items()}[difftype] + str(diffnum)
+
 def int_to_noteskin(num):
     return {**prime_noteskin, **other_noteskin}.get(int(num))
 
@@ -336,3 +339,13 @@ def high_score(post):
         if top.score > post.score:
             return False
     return True
+
+def prime_to_xx_diff(post):
+    with open('rerates.json', 'r') as rerates:
+        reratedict = json.load(rerates)
+    newvalues = reratedict[','.join((post.song.strip(), post.difficulty, post.type, post.difficultynum))] # song name, difficulty string, chart type, difficulty number
+
+    #post.song = newvalues[0]
+    post.difficulty = newvalues[1]
+    post.type = newvalues[2]
+    post.difficultynum = newvalues[3]

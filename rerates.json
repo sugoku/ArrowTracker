@@ -1,0 +1,2858 @@
+{
+    "1950,D21,Double,21": [
+        "1950",
+        "D21",
+        "Double",
+        22
+    ],
+    "1950,S17,Single,17": [
+        "1950",
+        "S17",
+        "Single",
+        16
+    ],
+    "2006 Love Song,S10,Single,10": [
+        "2006 Love Song",
+        "S10",
+        "Single",
+        9
+    ],
+    "A Site: De La Rue,S17,Single,17": [
+        "A Site: De La Rue",
+        "S17",
+        "Single",
+        16
+    ],
+    "A Site: De La Rue,S20,Single,20": [
+        "A Site: De La Rue",
+        "S20",
+        "Single",
+        19
+    ],
+    "A Site: De La Rue,D20,Double,20": [
+        "A Site: De La Rue",
+        "D20",
+        "Double",
+        19
+    ],
+    "Accident,S10,Single,10": [
+        "Accident",
+        "S10",
+        "Single",
+        11
+    ],
+    "Accident,S19,Single,19": [
+        "Accident",
+        "S19",
+        "Single",
+        18
+    ],
+    "Achlouias,S8,Single,8": [
+        "Achlouias",
+        "S8",
+        "Single",
+        9
+    ],
+    "Achlouias,D12,Double,12": [
+        "Achlouias",
+        "D12",
+        "Double",
+        13
+    ],
+    "Achlouias,S18,Single,18": [
+        "Achlouias",
+        "S18",
+        "Single",
+        17
+    ],
+    "All I Want for X-Mas,S11,Single,11": [
+        "All I Want for X-Mas",
+        "S11",
+        "Single",
+        9
+    ],
+    "Allegro Con Fuoco,S11,Single,11": [
+        "Allegro Con Fuoco",
+        "S11",
+        "Single",
+        10
+    ],
+    "Allegro Furioso,S13,Single,13": [
+        "Allegro Furioso",
+        "S13",
+        "Single",
+        14
+    ],
+    "Allegro Furioso,D14,Double,14": [
+        "Allegro Furioso",
+        "D14",
+        "Double",
+        15
+    ],
+    "Allegro Piu Mosso,S11,Single,11": [
+        "Allegro Piu Mosso",
+        "S11",
+        "Single",
+        10
+    ],
+    "Allegro Piu Mosso,S18,Single,18": [
+        "Allegro Piu Mosso",
+        "S18",
+        "Single",
+        17
+    ],
+    "Allegro Piu Mosso,D13,Double,13": [
+        "Allegro Piu Mosso",
+        "D13",
+        "Double",
+        12
+    ],
+    "Amphitryon,S6,Single,6": [
+        "Amphitryon",
+        "S6",
+        "Single",
+        7
+    ],
+    "Annihilator Method,D14,Double,14": [
+        "Annihilator Method",
+        "D14",
+        "Double",
+        13
+    ],
+    "Another Truth,S15,Single,15": [
+        "Another Truth",
+        "S15",
+        "Single",
+        16
+    ],
+    "Another Truth,D6,Double,6": [
+        "Another Truth",
+        "D6",
+        "Double",
+        7
+    ],
+    "Another Truth,D16,Double,16": [
+        "Another Truth",
+        "D16",
+        "Double",
+        17
+    ],
+    "Another Truth,D17,Double,17": [
+        "Another Truth",
+        "D17",
+        "Double",
+        18
+    ],
+    "Another Truth,D22,Double,22": [
+        "Another Truth",
+        "D22",
+        "Double",
+        21
+    ],
+    "Arch of Darkness,S14,Single,14": [
+        "Arch of Darkness",
+        "S14",
+        "Single",
+        15
+    ],
+    "Arch of Darkness,S16,Single,16": [
+        "Arch of Darkness",
+        "S16",
+        "Single",
+        17
+    ],
+    "Arirang,S9,Single,9": [
+        "Arirang",
+        "S9",
+        "Single",
+        11
+    ],
+    "Arirang,D10,Double,10": [
+        "Arirang",
+        "D10",
+        "Double",
+        12
+    ],
+    "Arirang,S18,Single,18": [
+        "Arirang",
+        "S18",
+        "Single",
+        19
+    ],
+    "Arirang,D20,Double,20": [
+        "Arirang",
+        "D20",
+        "Double",
+        21
+    ],
+    "Asterios -ReEntry-,D22,Double,22": [
+        "Asterios -ReEntry-",
+        "D22",
+        "Double",
+        21
+    ],
+    "Avalanche,D10,Double,10": [
+        "Avalanche",
+        "D10",
+        "Double",
+        11
+    ],
+    "Avalanche,D18,Double,18": [
+        "Avalanche",
+        "D18",
+        "Double",
+        19
+    ],
+    "Avalanche,D24,Double,24": [
+        "Avalanche",
+        "D24",
+        "Double",
+        25
+    ],
+    "Avalanche,S18,Single,18": [
+        "Avalanche",
+        "S18",
+        "Single",
+        19
+    ],
+    "Avalanche,D19,Double,19": [
+        "Avalanche",
+        "D19",
+        "Double",
+        20
+    ],
+    "Avalanquiem,S19,Single,19": [
+        "Avalanquiem",
+        "S19",
+        "Single",
+        20
+    ],
+    "B.P. Classic Remix,D13,Double,13": [
+        "B.P. Classic Remix",
+        "D13",
+        "Double",
+        14
+    ],
+    "B2,S11,Single,11": [
+        "B2",
+        "S11",
+        "Single",
+        10
+    ],
+    "B2,D13,Double,13": [
+        "B2",
+        "D13",
+        "Double",
+        12
+    ],
+    "Bad Apple!!,D21,Double,21": [
+        "Bad Apple!!",
+        "D21",
+        "Double",
+        20
+    ],
+    "Banya Classic Remix,S7,Single,7": [
+        "Banya Classic Remix",
+        "S7",
+        "Single",
+        13
+    ],
+    "Banya Classic Remix,D11,Double,11": [
+        "Banya Classic Remix",
+        "D11",
+        "Double",
+        14
+    ],
+    "Beat of the War,S10,Single,10": [
+        "Beat of the War",
+        "S10",
+        "Single",
+        11
+    ],
+    "Beat of the War,S15,Single,15": [
+        "Beat of the War",
+        "S15",
+        "Single",
+        16
+    ],
+    "Beat of the War,D12,Double,12": [
+        "Beat of the War",
+        "D12",
+        "Double",
+        13
+    ],
+    "Beat of the War 2 [Full Song],S19,Single,19": [
+        "Beat of the War 2 [Full Song]",
+        "S19",
+        "Single",
+        20
+    ],
+    "Beat of the War 2 [Full Song],D20,Double,20": [
+        "Beat of the War 2 [Full Song]",
+        "D20",
+        "Double",
+        21
+    ],
+    "Beat of the War 2,D12,Double,12": [
+        "Beat of the War 2",
+        "D12",
+        "Double",
+        14
+    ],
+    "Beat of the War 2,D19,Double,19": [
+        "Beat of the War 2",
+        "D19",
+        "Double",
+        20
+    ],
+    "Beautiful,S15,Single,15": [
+        "Beautiful",
+        "S15",
+        "Single",
+        14
+    ],
+    "Bee,S10,Single,10": [
+        "Bee",
+        "S10",
+        "Single",
+        12
+    ],
+    "Bee,S15,Single,15": [
+        "Bee",
+        "S15",
+        "Single",
+        16
+    ],
+    "Bee,D11,Double,11": [
+        "Bee",
+        "D11",
+        "Double",
+        12
+    ],
+    "Bee,D19,Double,19": [
+        "Bee",
+        "D19",
+        "Double",
+        20
+    ],
+    "Bee,D21,Double,21": [
+        "Bee",
+        "D21",
+        "Double",
+        22
+    ],
+    "Bee,D23,Double,23": [
+        "Bee",
+        "D23",
+        "Double",
+        24
+    ],
+    "Beethoven Influenza,D21,Double,21": [
+        "Beethoven Influenza",
+        "D21",
+        "Double",
+        20
+    ],
+    "Beethoven Virus,D8,Double,8": [
+        "Beethoven Virus",
+        "D8",
+        "Double",
+        11
+    ],
+    "Beethoven Virus,D20,Double,20": [
+        "Beethoven Virus",
+        "D20",
+        "Double",
+        21
+    ],
+    "Beethoven Virus,S8,Single,8": [
+        "Beethoven Virus",
+        "S8",
+        "Single",
+        6
+    ],
+    "Beethoven Virus,S13,Single,13": [
+        "Beethoven Virus",
+        "S13",
+        "Single",
+        11
+    ],
+    "BEMERA,S13,Single,13": [
+        "BEMERA",
+        "S13",
+        "Single",
+        14
+    ],
+    "BEMERA,S16,Single,16": [
+        "BEMERA",
+        "S16",
+        "Single",
+        17
+    ],
+    "Betrayer,D8,Double,8": [
+        "Betrayer",
+        "D8",
+        "Double",
+        11
+    ],
+    "Blazing,S15,Single,15": [
+        "Blazing",
+        "S15",
+        "Single",
+        17
+    ],
+    "Blazing,S3,Single,3": [
+        "Blazing",
+        "S3",
+        "Single",
+        4
+    ],
+    "Blazing,D19,Double,19": [
+        "Blazing",
+        "D19",
+        "Double",
+        20
+    ],
+    "Break Out,D22,Double,22": [
+        "Break Out",
+        "D22",
+        "Double",
+        20
+    ],
+    "BSPower Explosion,S17,Single,17": [
+        "BSPower Explosion",
+        "S17",
+        "Single",
+        16
+    ],
+    "BSPower Explosion,S20,Single,20": [
+        "BSPower Explosion",
+        "S20",
+        "Single",
+        19
+    ],
+    "BSPower Explosion,S22,Single,22": [
+        "BSPower Explosion",
+        "S22",
+        "Single",
+        21
+    ],
+    "Bullfighter's Song,S8,Single,8": [
+        "Bullfighter's Song",
+        "S8",
+        "Single",
+        9
+    ],
+    "Bullfighter's Song,D17,Double,17": [
+        "Bullfighter's Song",
+        "D17",
+        "Double",
+        18
+    ],
+    "Campanella,S9,Single,9": [
+        "Campanella",
+        "S9",
+        "Single",
+        10
+    ],
+    "Canon X.1,S10,Single,10": [
+        "Canon X.1",
+        "S10",
+        "Single",
+        12
+    ],
+    "Canon X.1,D13,Double,13": [
+        "Canon X.1",
+        "D13",
+        "Double",
+        14
+    ],
+    "Canon-D [Full Song],S11,Single,11": [
+        "Canon-D [Full Song]",
+        "S11",
+        "Single",
+        14
+    ],
+    "Canon-D [Full Song],S16,Single,16": [
+        "Canon-D [Full Song]",
+        "S16",
+        "Single",
+        17
+    ],
+    "Canon-D,S9,Single,9": [
+        "Canon-D",
+        "S9",
+        "Single",
+        10
+    ],
+    "Canon-D,D10,Double,10": [
+        "Canon-D",
+        "D10",
+        "Double",
+        12
+    ],
+    "Canon-D,D22,Double,22": [
+        "Canon-D",
+        "D22",
+        "Double",
+        23
+    ],
+    "Caprice of DJ Otada,S19,Single,19": [
+        "Caprice of DJ Otada",
+        "S19",
+        "Single",
+        20
+    ],
+    "Chase Me,S21,Single,21": [
+        "Chase Me",
+        "S21",
+        "Single",
+        20
+    ],
+    "Chase Me,S18,Single,18": [
+        "Chase Me",
+        "S18",
+        "Single",
+        17
+    ],
+    "Chase Me,D19,Double,19": [
+        "Chase Me",
+        "D19",
+        "Double",
+        18
+    ],
+    "Chicken Wing,D13,Double,13": [
+        "Chicken Wing",
+        "D13",
+        "Double",
+        14
+    ],
+    "Chicken Wing,D11,Double,11": [
+        "Chicken Wing",
+        "D11",
+        "Double",
+        13
+    ],
+    "Chicken Wing,S10,Single,10": [
+        "Chicken Wing",
+        "S10",
+        "Single",
+        11
+    ],
+    "Chicken Wing,S19,Single,19": [
+        "Chicken Wing",
+        "S19",
+        "Single",
+        20
+    ],
+    "Chicken Wing,D23,Double,23": [
+        "Chicken Wing",
+        "D23",
+        "Double",
+        22
+    ],
+    "Chimera,S16,Single,16": [
+        "Chimera",
+        "S16",
+        "Single",
+        19
+    ],
+    "Chimera,S7,Single,7": [
+        "Chimera",
+        "S7",
+        "Single",
+        9
+    ],
+    "Chimera,S11,Single,11": [
+        "Chimera",
+        "S11",
+        "Single",
+        12
+    ],
+    "Chimera,D25,Double,25": [
+        "Chimera",
+        "D25",
+        "Double",
+        26
+    ],
+    "Chinese restaurant,D17,Double,17": [
+        "Chinese restaurant",
+        "D17",
+        "Double",
+        16
+    ],
+    "Chinese restaurant,D20,Double,20": [
+        "Chinese restaurant",
+        "D20",
+        "Double",
+        19
+    ],
+    "Cleaner,D20,Double,20": [
+        "Cleaner",
+        "D20",
+        "Double",
+        22
+    ],
+    "Cleaner,D24,Double,24": [
+        "Cleaner",
+        "D24",
+        "Double",
+        25
+    ],
+    "Cleaner,S18,Single,18": [
+        "Cleaner",
+        "S18",
+        "Single",
+        17
+    ],
+    "Cleaner,S22,Single,22": [
+        "Cleaner",
+        "S22",
+        "Single",
+        21
+    ],
+    "Come to Me,S15,Single,15": [
+        "Come to Me",
+        "S15",
+        "Single",
+        17
+    ],
+    "Come to Me,S12,Single,12": [
+        "Come to Me",
+        "S12",
+        "Single",
+        13
+    ],
+    "Cosmical Rhythm,S15,Single,15": [
+        "Cosmical Rhythm",
+        "S15",
+        "Single",
+        14
+    ],
+    "Cosmical Rhythm,D16,Double,16": [
+        "Cosmical Rhythm",
+        "D16",
+        "Double",
+        15
+    ],
+    "Creed ~1st Desire~ [Full Song],S23,Single,23": [
+        "Creed ~1st Desire~ [Full Song]",
+        "S23",
+        "Single",
+        22
+    ],
+    "Cross Over,D14,Double,14": [
+        "Cross Over",
+        "D14",
+        "Double",
+        15
+    ],
+    "Cross Time,S11,Single,11": [
+        "Cross Time",
+        "S11",
+        "Single",
+        12
+    ],
+    "Cross Time,S15,Single,15": [
+        "Cross Time",
+        "S15",
+        "Single",
+        16
+    ],
+    "Csikos Post,S3,Single,3": [
+        "Csikos Post",
+        "S3",
+        "Single",
+        4
+    ],
+    "Csikos Post,S7,Single,7": [
+        "Csikos Post",
+        "S7",
+        "Single",
+        8
+    ],
+    "Csikos Post,S10,Single,10": [
+        "Csikos Post",
+        "S10",
+        "Single",
+        11
+    ],
+    "Csikos Post,D21,Double,21": [
+        "Csikos Post",
+        "D21",
+        "Double",
+        22
+    ],
+    "D,S9,Single,9": [
+        "D",
+        "S9",
+        "Single",
+        10
+    ],
+    "D,D11,Double,11": [
+        "D",
+        "D11",
+        "Double",
+        12
+    ],
+    "D,D19,Double,19": [
+        "D",
+        "D19",
+        "Double",
+        20
+    ],
+    "D Gang,S9,Single,9": [
+        "D Gang",
+        "S9",
+        "Single",
+        11
+    ],
+    "Death Moon,S10,Single,10": [
+        "Death Moon",
+        "S10",
+        "Single",
+        11
+    ],
+    "Death Moon,S15,Single,15": [
+        "Death Moon",
+        "S15",
+        "Single",
+        16
+    ],
+    "Death Moon,D17,Double,17": [
+        "Death Moon",
+        "D17",
+        "Double",
+        18
+    ],
+    "Death Moon,D22,Double,22": [
+        "Death Moon",
+        "D22",
+        "Double",
+        23
+    ],
+    "Destination,S11,Single,11": [
+        "Destination",
+        "S11",
+        "Single",
+        12
+    ],
+    "Destination,S16,Single,16": [
+        "Destination",
+        "S16",
+        "Single",
+        17
+    ],
+    "Destination,S18,Single,18": [
+        "Destination",
+        "S18",
+        "Single",
+        19
+    ],
+    "Destination,S19,Single,19": [
+        "Destination",
+        "S19",
+        "Single",
+        20
+    ],
+    "Destination,D13,Double,13": [
+        "Destination",
+        "D13",
+        "Double",
+        14
+    ],
+    "Destination,D18,Double,18": [
+        "Destination",
+        "D18",
+        "Double",
+        19
+    ],
+    "Do You Know That -Old School-,S14,Single,14": [
+        "Do You Know That -Old School-",
+        "S14",
+        "Single",
+        15
+    ],
+    "Do You Know That -Old School-,D18,Double,18": [
+        "Do You Know That -Old School-",
+        "D18",
+        "Double",
+        19
+    ],
+    "Donatello,S12,Single,12": [
+        "Donatello",
+        "S12",
+        "Single",
+        13
+    ],
+    "Dr. KOA,S8,Single,8": [
+        "Dr. KOA",
+        "S8",
+        "Single",
+        10
+    ],
+    "Dr. M,D16,Double,16": [
+        "Dr. M",
+        "D16",
+        "Double",
+        18
+    ],
+    "Dr. M,S7,Single,7": [
+        "Dr. M",
+        "S7",
+        "Single",
+        8
+    ],
+    "Dream to Nightmare,D24,Double,24": [
+        "Dream to Nightmare",
+        "D24",
+        "Double",
+        23
+    ],
+    "Elise,D16,Double,16": [
+        "Elise",
+        "D16",
+        "Double",
+        17
+    ],
+    "Elise,S17,Single,17": [
+        "Elise",
+        "S17",
+        "Single",
+        16
+    ],
+    "Elise,S19,Single,19": [
+        "Elise",
+        "S19",
+        "Single",
+        18
+    ],
+    "Elise,S22,Single,22": [
+        "Elise",
+        "S22",
+        "Single",
+        21
+    ],
+    "Elise,D13,Double,13": [
+        "Elise",
+        "D13",
+        "Double",
+        12
+    ],
+    "Elysium,D16,Double,16": [
+        "Elysium",
+        "D16",
+        "Double",
+        15
+    ],
+    "Elysium,S15,Single,15": [
+        "Elysium",
+        "S15",
+        "Single",
+        14
+    ],
+    "Emperor,S11,Single,11": [
+        "Emperor",
+        "S11",
+        "Single",
+        12
+    ],
+    "Exceed2 Opening,D19,Double,19": [
+        "Exceed2 Opening",
+        "D19",
+        "Double",
+        18
+    ],
+    "Extra BanYa Remix,S8,Single,8": [
+        "Extra BanYa Remix",
+        "S8",
+        "Single",
+        11
+    ],
+    "Extra BanYa Remix,D13,Double,13": [
+        "Extra BanYa Remix",
+        "D13",
+        "Double",
+        14
+    ],
+    "Extravaganza,S14,Single,14": [
+        "Extravaganza",
+        "S14",
+        "Single",
+        15
+    ],
+    "Extravaganza,D14,Double,14": [
+        "Extravaganza",
+        "D14",
+        "Double",
+        15
+    ],
+    "Extravaganza,D21,Double,21": [
+        "Extravaganza",
+        "D21",
+        "Double",
+        22
+    ],
+    "Extravaganza,S7,Single,7": [
+        "Extravaganza",
+        "S7",
+        "Single",
+        8
+    ],
+    "Extravaganza,S9,Single,9": [
+        "Extravaganza",
+        "S9",
+        "Single",
+        10
+    ],
+    "Extravaganza,S11,Single,11": [
+        "Extravaganza",
+        "S11",
+        "Single",
+        12
+    ],
+    "Extravaganza,S16,Single,16": [
+        "Extravaganza",
+        "S16",
+        "Single",
+        17
+    ],
+    "Extravaganza,D12,Double,12": [
+        "Extravaganza",
+        "D12",
+        "Double",
+        13
+    ],
+    "Extravaganza,D17,Double,17": [
+        "Extravaganza",
+        "D17",
+        "Double",
+        18
+    ],
+    "Extravaganza,D19,Double,19": [
+        "Extravaganza",
+        "D19",
+        "Double",
+        20
+    ],
+    "Fallen Angel,D21,Double,21": [
+        "Fallen Angel",
+        "D21",
+        "Double",
+        20
+    ],
+    "Faster Z,S8,Single,8": [
+        "Faster Z",
+        "S8",
+        "Single",
+        11
+    ],
+    "Faster Z,S6,Single,6": [
+        "Faster Z",
+        "S6",
+        "Single",
+        7
+    ],
+    "Faster Z,D20,Double,20": [
+        "Faster Z",
+        "D20",
+        "Double",
+        21
+    ],
+    "FFF,S10,Single,10": [
+        "FFF",
+        "S10",
+        "Single",
+        11
+    ],
+    "FFF,S17,Single,17": [
+        "FFF",
+        "S17",
+        "Single",
+        18
+    ],
+    "FFF,D12,Double,12": [
+        "FFF",
+        "D12",
+        "Double",
+        13
+    ],
+    "FFF,S23,Single,23": [
+        "FFF",
+        "S23",
+        "Single",
+        22
+    ],
+    "Final Audition,D17,Double,17": [
+        "Final Audition",
+        "D17",
+        "Double",
+        18
+    ],
+    "Final Audition,S15,Single,15": [
+        "Final Audition",
+        "S15",
+        "Single",
+        18
+    ],
+    "Final Audition 2,S16,Single,16": [
+        "Final Audition 2",
+        "S16",
+        "Single",
+        17
+    ],
+    "Final Audition 2,D17,Double,17": [
+        "Final Audition 2",
+        "D17",
+        "Double",
+        18
+    ],
+    "Final Audition 2,D8,Double,8": [
+        "Final Audition 2",
+        "D8",
+        "Double",
+        11
+    ],
+    "Final Audition 2,S8,Single,8": [
+        "Final Audition 2",
+        "S8",
+        "Single",
+        9
+    ],
+    "Final Audition 2,D19,Double,19": [
+        "Final Audition 2",
+        "D19",
+        "Double",
+        20
+    ],
+    "Final Audition 3,S17,Single,17": [
+        "Final Audition 3",
+        "S17",
+        "Single",
+        18
+    ],
+    "Final Audition 3,S6,Single,6": [
+        "Final Audition 3",
+        "S6",
+        "Single",
+        8
+    ],
+    "Final Audition 3,S14,Single,14": [
+        "Final Audition 3",
+        "S14",
+        "Single",
+        16
+    ],
+    "Final Audition Ep. 2-X,D19,Double,19": [
+        "Final Audition Ep. 2-X",
+        "D19",
+        "Double",
+        20
+    ],
+    "Final Audition Episode 1,D11,Double,11": [
+        "Final Audition Episode 1",
+        "D11",
+        "Double",
+        13
+    ],
+    "Final Audition Episode 1,S15,Single,15": [
+        "Final Audition Episode 1",
+        "S15",
+        "Single",
+        16
+    ],
+    "Final Audition Episode 1,S19,Single,19": [
+        "Final Audition Episode 1",
+        "S19",
+        "Single",
+        20
+    ],
+    "Final Audition Episode 1,D21,Double,21": [
+        "Final Audition Episode 1",
+        "D21",
+        "Double",
+        22
+    ],
+    "Final Audition Episode 2-1,D9,Double,9": [
+        "Final Audition Episode 2-1",
+        "D9",
+        "Double",
+        12
+    ],
+    "Final Audition Episode 2-1,S20,Single,20": [
+        "Final Audition Episode 2-1",
+        "S20",
+        "Single",
+        22
+    ],
+    "Final Audition Episode 2-1,S7,Single,7": [
+        "Final Audition Episode 2-1",
+        "S7",
+        "Single",
+        8
+    ],
+    "Final Audition Episode 2-1,D21,Double,21": [
+        "Final Audition Episode 2-1",
+        "D21",
+        "Double",
+        22
+    ],
+    "Final Audition Episode 2-1,D22,Double,22": [
+        "Final Audition Episode 2-1",
+        "D22",
+        "Double",
+        23
+    ],
+    "Final Audition Episode 2-2,S7,Single,7": [
+        "Final Audition Episode 2-2",
+        "S7",
+        "Single",
+        8
+    ],
+    "Final Audition Episode 2-2,S16,Single,16": [
+        "Final Audition Episode 2-2",
+        "S16",
+        "Single",
+        17
+    ],
+    "Final Audition Episode 2-2,S17,Single,17": [
+        "Final Audition Episode 2-2",
+        "S17",
+        "Single",
+        18
+    ],
+    "Final Audition Episode 2-2,D18,Double,18": [
+        "Final Audition Episode 2-2",
+        "D18",
+        "Double",
+        19
+    ],
+    "First Love,S9,Single,9": [
+        "First Love",
+        "S9",
+        "Single",
+        10
+    ],
+    "Follow Me,D18,Double,18": [
+        "Follow Me",
+        "D18",
+        "Double",
+        17
+    ],
+    "Four Seasons of Loneliness,D14,Double,14": [
+        "Four Seasons of Loneliness",
+        "D14",
+        "Double",
+        15
+    ],
+    "Four Seasons of Loneliness,D21,Double,21": [
+        "Four Seasons of Loneliness",
+        "D21",
+        "Double",
+        22
+    ],
+    "Four Seasons of Loneliness [Full Song],D14,Double,14": [
+        "Four Seasons of Loneliness [Full Song]",
+        "D14",
+        "Double",
+        15
+    ],
+    "Gargoyle [Full Song],S20,Single,20": [
+        "Gargoyle [Full Song]",
+        "S20",
+        "Single",
+        21
+    ],
+    "Gargoyle  [Full Song],S21,Single,21": [
+        "Gargoyle  [Full Song]",
+        "S21",
+        "Single",
+        20
+    ],
+    "Get Up (and go),D20,Double,20": [
+        "Get Up (and go)",
+        "D20",
+        "Double",
+        19
+    ],
+    "Get Up!,D9,Double,9": [
+        "Get Up!",
+        "D9",
+        "Double",
+        12
+    ],
+    "Get Up!,S13,Single,13": [
+        "Get Up!",
+        "S13",
+        "Single",
+        15
+    ],
+    "Get Your Groove On,D21,Double,21": [
+        "Get Your Groove On",
+        "D21",
+        "Double",
+        22
+    ],
+    "Get Your Groove On,S13,Single,13": [
+        "Get Your Groove On",
+        "S13",
+        "Single",
+        12
+    ],
+    "Gothique Resonance,D20,Double,20": [
+        "Gothique Resonance",
+        "D20",
+        "Double",
+        21
+    ],
+    "Guitar Man,S18,Single,18": [
+        "Guitar Man",
+        "S18",
+        "Single",
+        20
+    ],
+    "Guitar Man,S9,Single,9": [
+        "Guitar Man",
+        "S9",
+        "Single",
+        7
+    ],
+    "Gun Rock,S18,Single,18": [
+        "Gun Rock",
+        "S18",
+        "Single",
+        20
+    ],
+    "Gun Rock,D22,Double,22": [
+        "Gun Rock",
+        "D22",
+        "Double",
+        24
+    ],
+    "Gun Rock,S11,Single,11": [
+        "Gun Rock",
+        "S11",
+        "Single",
+        9
+    ],
+    "Gun Rock,D11,Double,11": [
+        "Gun Rock",
+        "D11",
+        "Double",
+        9
+    ],
+    "Hardkore of the North,D16,Double,16": [
+        "Hardkore of the North",
+        "D16",
+        "Double",
+        15
+    ],
+    "Hardkore of the North,D23,Double,23": [
+        "Hardkore of the North",
+        "D23",
+        "Double",
+        22
+    ],
+    "Hello,D16,Double,16": [
+        "Hello",
+        "D16",
+        "Double",
+        18
+    ],
+    "Hello William,D21,Double,21": [
+        "Hello William",
+        "D21",
+        "Double",
+        20
+    ],
+    "Hestia,S18,Single,18": [
+        "Hestia",
+        "S18",
+        "Single",
+        19
+    ],
+    "Hi-Bi,S15,Single,15": [
+        "Hi-Bi",
+        "S15",
+        "Single",
+        16
+    ],
+    "Hi-Bi,S18,Single,18": [
+        "Hi-Bi",
+        "S18",
+        "Single",
+        19
+    ],
+    "Hi-Bi,D18,Double,18": [
+        "Hi-Bi",
+        "D18",
+        "Double",
+        19
+    ],
+    "Hyacinth,S21,Single,21": [
+        "Hyacinth",
+        "S21",
+        "Single",
+        22
+    ],
+    "Hyacinth,D23,Double,23": [
+        "Hyacinth",
+        "D23",
+        "Double",
+        24
+    ],
+    "Hypercube,D20,Double,20": [
+        "Hypercube",
+        "D20",
+        "Double",
+        19
+    ],
+    "Hypercube,D16,Double,16": [
+        "Hypercube",
+        "D16",
+        "Double",
+        15
+    ],
+    "Hyperion,S15,Single,15": [
+        "Hyperion",
+        "S15",
+        "Single",
+        16
+    ],
+    "Hypnosis Synthwulf Mix,S9,Single,9": [
+        "Hypnosis Synthwulf Mix",
+        "S9",
+        "Single",
+        11
+    ],
+    "Hypnosis Synthwulf Mix,S11,Single,11": [
+        "Hypnosis Synthwulf Mix",
+        "S11",
+        "Single",
+        13
+    ],
+    "Hypnosis Synthwulf Mix,D13,Double,13": [
+        "Hypnosis Synthwulf Mix",
+        "D13",
+        "Double",
+        14
+    ],
+    "Hypnosis Synthwulf Mix,S21,Single,21": [
+        "Hypnosis Synthwulf Mix",
+        "S21",
+        "Single",
+        20
+    ],
+    "Hypnosis Synthwulf Mix,D20,Double,20": [
+        "Hypnosis Synthwulf Mix",
+        "D20",
+        "Double",
+        19
+    ],
+    "Ignis Fatuus,D15,Double,15": [
+        "Ignis Fatuus",
+        "D15",
+        "Double",
+        17
+    ],
+    "Ignis Fatuus,S9,Single,9": [
+        "Ignis Fatuus",
+        "S9",
+        "Single",
+        10
+    ],
+    "Ignis Fatuus,S23,Single,23": [
+        "Ignis Fatuus",
+        "S23",
+        "Single",
+        22
+    ],
+    "Ignis Fatuus,D19,Double,19": [
+        "Ignis Fatuus",
+        "D19",
+        "Double",
+        18
+    ],
+    "Imprinting,S20,Single,20": [
+        "Imprinting",
+        "S20",
+        "Single",
+        21
+    ],
+    "Imprinting,D12,Double,12": [
+        "Imprinting",
+        "D12",
+        "Double",
+        13
+    ],
+    "Imprinting,D20,Double,20": [
+        "Imprinting",
+        "D20",
+        "Double",
+        21
+    ],
+    "Infinity,D24,Double,24": [
+        "Infinity",
+        "D24",
+        "Double",
+        23
+    ],
+    "Infinity RMX,D20,Double,20": [
+        "Infinity RMX",
+        "D20",
+        "Double",
+        19
+    ],
+    "Interference,D21,Double,21": [
+        "Interference",
+        "D21",
+        "Double",
+        22
+    ],
+    "Interference,D19,Double,19": [
+        "Interference",
+        "D19",
+        "Double",
+        18
+    ],
+    "J Bong,S13,Single,13": [
+        "J Bong",
+        "S13",
+        "Single",
+        15
+    ],
+    "Jam O Beat,S14,Single,14": [
+        "Jam O Beat",
+        "S14",
+        "Single",
+        15
+    ],
+    "Jam O Beat,D14,Double,14": [
+        "Jam O Beat",
+        "D14",
+        "Double",
+        15
+    ],
+    "Karyawisata,S17,Single,17": [
+        "Karyawisata",
+        "S17",
+        "Single",
+        16
+    ],
+    "Keep On!,D22,Double,22": [
+        "Keep On!",
+        "D22",
+        "Double",
+        21
+    ],
+    "Leakage Voltage,S20,Single,20": [
+        "Leakage Voltage",
+        "S20",
+        "Single",
+        21
+    ],
+    "Leakage Voltage,D19,Double,19": [
+        "Leakage Voltage",
+        "D19",
+        "Double",
+        18
+    ],
+    "LIADZ 2,D21,Double,21": [
+        "LIADZ 2",
+        "D21",
+        "Double",
+        22
+    ],
+    "LIADZ 2,S21,Single,21": [
+        "LIADZ 2",
+        "S21",
+        "Single",
+        22
+    ],
+    "LIADZ Cranky Mix,D8,Double,8": [
+        "LIADZ Cranky Mix",
+        "D8",
+        "Double",
+        11
+    ],
+    "LIADZ Cranky Mix,S12,Single,12": [
+        "LIADZ Cranky Mix",
+        "S12",
+        "Single",
+        13
+    ],
+    "LIADZ Cranky Mix,S18,Single,18": [
+        "LIADZ Cranky Mix",
+        "S18",
+        "Single",
+        17
+    ],
+    "LIADZ Cranky Mix,S22,Single,22": [
+        "LIADZ Cranky Mix",
+        "S22",
+        "Single",
+        21
+    ],
+    "LIADZ Cranky Mix,D24,Double,24": [
+        "LIADZ Cranky Mix",
+        "D24",
+        "Double",
+        23
+    ],
+    "Like Me,S17,Single,17": [
+        "Like Me",
+        "S17",
+        "Single",
+        18
+    ],
+    "Like Me,D18,Double,18": [
+        "Like Me",
+        "D18",
+        "Double",
+        19
+    ],
+    "Log In,S21,Single,21": [
+        "Log In",
+        "S21",
+        "Single",
+        20
+    ],
+    "Log In,D20,Double,20": [
+        "Log In",
+        "D20",
+        "Double",
+        19
+    ],
+    "Love is a Danger Zone,S15,Single,15": [
+        "Love is a Danger Zone",
+        "S15",
+        "Single",
+        17
+    ],
+    "Love is a Danger Zone,D15,Double,15": [
+        "Love is a Danger Zone",
+        "D15",
+        "Double",
+        17
+    ],
+    "Love is a Danger Zone,D20,Double,20": [
+        "Love is a Danger Zone",
+        "D20",
+        "Double",
+        21
+    ],
+    "Lucid (PIU Edit),S10,Single,10": [
+        "Lucid (PIU Edit)",
+        "S10",
+        "Single",
+        11
+    ],
+    "Lucid (PIU Edit),S20,Single,20": [
+        "Lucid (PIU Edit)",
+        "S20",
+        "Single",
+        19
+    ],
+    "Mad5cience,S16,Single,16": [
+        "Mad5cience",
+        "S16",
+        "Single",
+        15
+    ],
+    "Magical Vacation,S19,Single,19": [
+        "Magical Vacation",
+        "S19",
+        "Single",
+        18
+    ],
+    "Maria,D19,Double,19": [
+        "Maria",
+        "D19",
+        "Double",
+        20
+    ],
+    "Matador,D21,Double,21": [
+        "Matador",
+        "D21",
+        "Double",
+        22
+    ],
+    "Mental Rider,S12,Single,12": [
+        "Mental Rider",
+        "S12",
+        "Single",
+        13
+    ],
+    "Mental Rider,D23,Double,23": [
+        "Mental Rider",
+        "D23",
+        "Double",
+        24
+    ],
+    "Midnight Blue,S12,Single,12": [
+        "Midnight Blue",
+        "S12",
+        "Single",
+        11
+    ],
+    "Midnight Blue,D13,Double,13": [
+        "Midnight Blue",
+        "D13",
+        "Double",
+        12
+    ],
+    "Milky Way Galaxy,S17,Single,17": [
+        "Milky Way Galaxy",
+        "S17",
+        "Single",
+        18
+    ],
+    "Miss S' story,S18,Single,18": [
+        "Miss S' story",
+        "S18",
+        "Single",
+        19
+    ],
+    "Mission Possible -Blowback-,S18,Single,18": [
+        "Mission Possible -Blowback-",
+        "S18",
+        "Single",
+        19
+    ],
+    "Mission Possible -Blowback-,D19,Double,19": [
+        "Mission Possible -Blowback-",
+        "D19",
+        "Double",
+        18
+    ],
+    "Moment Day,D19,Double,19": [
+        "Moment Day",
+        "D19",
+        "Double",
+        18
+    ],
+    "Money,S10,Single,10": [
+        "Money",
+        "S10",
+        "Single",
+        9
+    ],
+    "Money,D12,Double,12": [
+        "Money",
+        "D12",
+        "Double",
+        10
+    ],
+    "Money Fingers,S16,Single,16": [
+        "Money Fingers",
+        "S16",
+        "Single",
+        17
+    ],
+    "Monkey Fingers,S3,Single,3": [
+        "Monkey Fingers",
+        "S3",
+        "Single",
+        4
+    ],
+    "Monkey Fingers,S8,Single,8": [
+        "Monkey Fingers",
+        "S8",
+        "Single",
+        9
+    ],
+    "Monkey Fingers 2,S6,Single,6": [
+        "Monkey Fingers 2",
+        "S6",
+        "Single",
+        4
+    ],
+    "Monkey Fingers 2,S10,Single,10": [
+        "Monkey Fingers 2",
+        "S10",
+        "Single",
+        8
+    ],
+    "Monkey Fingers 2,D9,Double,9": [
+        "Monkey Fingers 2",
+        "D9",
+        "Double",
+        7
+    ],
+    "Monolith,D13,Double,13": [
+        "Monolith",
+        "D13",
+        "Double",
+        14
+    ],
+    "Monolith,S16,Single,16": [
+        "Monolith",
+        "S16",
+        "Single",
+        15
+    ],
+    "Monolith,D18,Double,18": [
+        "Monolith",
+        "D18",
+        "Double",
+        17
+    ],
+    "Monolith,D23,Double,23": [
+        "Monolith",
+        "D23",
+        "Double",
+        22
+    ],
+    "Moonlight,S16,Single,16": [
+        "Moonlight",
+        "S16",
+        "Single",
+        15
+    ],
+    "Moonlight,S20,Single,20": [
+        "Moonlight",
+        "S20",
+        "Single",
+        19
+    ],
+    "Moonlight,S7,Single,7": [
+        "Moonlight",
+        "S7",
+        "Single",
+        8
+    ],
+    "Move that Body!,S16,Single,16": [
+        "Move that Body!",
+        "S16",
+        "Single",
+        17
+    ],
+    "Mr. Larpus,D14,Double,14": [
+        "Mr. Larpus",
+        "D14",
+        "Double",
+        16
+    ],
+    "Mr. Larpus,S11,Single,11": [
+        "Mr. Larpus",
+        "S11",
+        "Single",
+        12
+    ],
+    "msgoon RMX pt. 6,S20,Single,20": [
+        "msgoon RMX pt. 6",
+        "S20",
+        "Single",
+        21
+    ],
+    "msgoon RMX pt. 6,D19,Double,19": [
+        "msgoon RMX pt. 6",
+        "D19",
+        "Double",
+        20
+    ],
+    "My Dreams,S17,Single,17": [
+        "My Dreams",
+        "S17",
+        "Single",
+        18
+    ],
+    "My Dreams,S18,Single,18": [
+        "My Dreams",
+        "S18",
+        "Single",
+        19
+    ],
+    "My Way,S12,Single,12": [
+        "My Way",
+        "S12",
+        "Single",
+        14
+    ],
+    "Naissance 2,S6,Single,6": [
+        "Naissance 2",
+        "S6",
+        "Single",
+        9
+    ],
+    "Naissance 2,D19,Double,19": [
+        "Naissance 2",
+        "D19",
+        "Double",
+        20
+    ],
+    "Nakakapagpabagabag,S14,Single,14": [
+        "Nakakapagpabagabag",
+        "S14",
+        "Single",
+        15
+    ],
+    "Nakakapagpabagabag,S18,Single,18": [
+        "Nakakapagpabagabag",
+        "S18",
+        "Single",
+        19
+    ],
+    "Nakakapagpabagabag,D15,Double,15": [
+        "Nakakapagpabagabag",
+        "D15",
+        "Double",
+        16
+    ],
+    "Nakakapagpabagabag,D19,Double,19": [
+        "Nakakapagpabagabag",
+        "D19",
+        "Double",
+        20
+    ],
+    "Napalm,S13,Single,13": [
+        "Napalm",
+        "S13",
+        "Single",
+        14
+    ],
+    "Napalm,S22,Single,22": [
+        "Napalm",
+        "S22",
+        "Single",
+        21
+    ],
+    "Napalm,D23,Double,23": [
+        "Napalm",
+        "D23",
+        "Double",
+        22
+    ],
+    "Napalm,D14,Double,14": [
+        "Napalm",
+        "D14",
+        "Double",
+        15
+    ],
+    "Necromancy,D13,Double,13": [
+        "Necromancy",
+        "D13",
+        "Double",
+        14
+    ],
+    "Necromancy,D24,Double,24": [
+        "Necromancy",
+        "D24",
+        "Double",
+        23
+    ],
+    "Nightmare,S1,Single,1": [
+        "Nightmare",
+        "S1",
+        "Single",
+        2
+    ],
+    "Oh! Rosa,S7,Single,7": [
+        "Oh! Rosa",
+        "S7",
+        "Single",
+        8
+    ],
+    "Overblow,D20,Double,20": [
+        "Overblow",
+        "D20",
+        "Double",
+        19
+    ],
+    "Papa Gonzales,S14,Single,14": [
+        "Papa Gonzales",
+        "S14",
+        "Single",
+        16
+    ],
+    "Passacaglia,S10,Single,10": [
+        "Passacaglia",
+        "S10",
+        "Single",
+        11
+    ],
+    "Passacaglia,S16,Single,16": [
+        "Passacaglia",
+        "S16",
+        "Single",
+        17
+    ],
+    "Passacaglia,D12,Double,12": [
+        "Passacaglia",
+        "D12",
+        "Double",
+        13
+    ],
+    "Passacaglia,D17,Double,17": [
+        "Passacaglia",
+        "D17",
+        "Double",
+        18
+    ],
+    "Passacaglia,S20,Single,20": [
+        "Passacaglia",
+        "S20",
+        "Single",
+        19
+    ],
+    "Passacaglia,D24,Double,24": [
+        "Passacaglia",
+        "D24",
+        "Double",
+        23
+    ],
+    "Passing Rider,S20,Single,20": [
+        "Passing Rider",
+        "S20",
+        "Single",
+        19
+    ],
+    "Pavane,D16,Double,16": [
+        "Pavane",
+        "D16",
+        "Double",
+        17
+    ],
+    "Phantom,S17,Single,17": [
+        "Phantom",
+        "S17",
+        "Single",
+        18
+    ],
+    "Phantom,S18,Single,18": [
+        "Phantom",
+        "S18",
+        "Single",
+        19
+    ],
+    "Phantom,D12,Double,12": [
+        "Phantom",
+        "D12",
+        "Double",
+        13
+    ],
+    "Phantom,D19,Double,19": [
+        "Phantom",
+        "D19",
+        "Double",
+        20
+    ],
+    "Phantom,D20,Double,20": [
+        "Phantom",
+        "D20",
+        "Double",
+        19
+    ],
+    "Phantom ~Intermezzo~,D15,Double,15": [
+        "Phantom ~Intermezzo~",
+        "D15",
+        "Double",
+        17
+    ],
+    "Phantom ~Intermezzo~,S21,Single,21": [
+        "Phantom ~Intermezzo~",
+        "S21",
+        "Single",
+        22
+    ],
+    "Phantom ~Intermezzo~,D20,Double,20": [
+        "Phantom ~Intermezzo~",
+        "D20",
+        "Double",
+        21
+    ],
+    "Pick Me,S14,Single,14": [
+        "Pick Me",
+        "S14",
+        "Single",
+        15
+    ],
+    "Pop the Track,S19,Single,19": [
+        "Pop the Track",
+        "S19",
+        "Single",
+        18
+    ],
+    "Prime,S20,Single,20": [
+        "Prime",
+        "S20",
+        "Single",
+        21
+    ],
+    "Pump me Amadeus,S9,Single,9": [
+        "Pump me Amadeus",
+        "S9",
+        "Single",
+        11
+    ],
+    "Pump me Amadeus,D10,Double,10": [
+        "Pump me Amadeus",
+        "D10",
+        "Double",
+        12
+    ],
+    "Pump me Amadeus,D19,Double,19": [
+        "Pump me Amadeus",
+        "D19",
+        "Double",
+        21
+    ],
+    "Pump me Amadeus,S5,Single,5": [
+        "Pump me Amadeus",
+        "S5",
+        "Single",
+        6
+    ],
+    "Pump me Amadeus,S17,Single,17": [
+        "Pump me Amadeus",
+        "S17",
+        "Single",
+        18
+    ],
+    "Pump me Amadeus,D18,Double,18": [
+        "Pump me Amadeus",
+        "D18",
+        "Double",
+        19
+    ],
+    "Pumping Jumping,S3,Single,3": [
+        "Pumping Jumping",
+        "S3",
+        "Single",
+        4
+    ],
+    "Pumptris Quattro,D13,Double,13": [
+        "Pumptris Quattro",
+        "D13",
+        "Double",
+        15
+    ],
+    "Pumptris Quattro,S17,Single,17": [
+        "Pumptris Quattro",
+        "S17",
+        "Single",
+        18
+    ],
+    "Reality,S14,Single,14": [
+        "Reality",
+        "S14",
+        "Single",
+        15
+    ],
+    "Really Really,S6,Single,6": [
+        "Really Really",
+        "S6",
+        "Single",
+        7
+    ],
+    "Red Snow,D12,Double,12": [
+        "Red Snow",
+        "D12",
+        "Double",
+        13
+    ],
+    "Red Snow,D20,Double,20": [
+        "Red Snow",
+        "D20",
+        "Double",
+        21
+    ],
+    "Red Swan,S6,Single,6": [
+        "Red Swan",
+        "S6",
+        "Single",
+        7
+    ],
+    "Red Swan,S8,Single,8": [
+        "Red Swan",
+        "S8",
+        "Single",
+        9
+    ],
+    "Red Swan,D21,Double,21": [
+        "Red Swan",
+        "D21",
+        "Double",
+        22
+    ],
+    "Redline,D13,Double,13": [
+        "Redline",
+        "D13",
+        "Double",
+        15
+    ],
+    "Redline,D21,Double,21": [
+        "Redline",
+        "D21",
+        "Double",
+        22
+    ],
+    "Reminiscence,S17,Single,17": [
+        "Reminiscence",
+        "S17",
+        "Single",
+        18
+    ],
+    "Reminiscence,D20,Double,20": [
+        "Reminiscence",
+        "D20",
+        "Double",
+        19
+    ],
+    "Repeatorment,S19,Single,19": [
+        "Repeatorment",
+        "S19",
+        "Single",
+        18
+    ],
+    "Requiem,D17,Double,17": [
+        "Requiem",
+        "D17",
+        "Double",
+        18
+    ],
+    "Robot battle,S8,Single,8": [
+        "Robot battle",
+        "S8",
+        "Single",
+        9
+    ],
+    "Robot battle,S12,Single,12": [
+        "Robot battle",
+        "S12",
+        "Single",
+        13
+    ],
+    "Robot battle,S21,Single,21": [
+        "Robot battle",
+        "S21",
+        "Single",
+        22
+    ],
+    "Robot battle,D12,Double,12": [
+        "Robot battle",
+        "D12",
+        "Double",
+        13
+    ],
+    "Robot battle,D23,Double,23": [
+        "Robot battle",
+        "D23",
+        "Double",
+        24
+    ],
+    "Rock the House,D10,Double,10": [
+        "Rock the House",
+        "D10",
+        "Double",
+        11
+    ],
+    "Rock the House,S17,Single,17": [
+        "Rock the House",
+        "S17",
+        "Single",
+        16
+    ],
+    "Rolling Christmas,S13,Single,13": [
+        "Rolling Christmas",
+        "S13",
+        "Single",
+        12
+    ],
+    "Rolling Christmas,D17,Double,17": [
+        "Rolling Christmas",
+        "D17",
+        "Double",
+        16
+    ],
+    "Sarabande,S18,Single,18": [
+        "Sarabande",
+        "S18",
+        "Single",
+        19
+    ],
+    "Sarabande,D20,Double,20": [
+        "Sarabande",
+        "D20",
+        "Double",
+        21
+    ],
+    "Sarabande,S16,Single,16": [
+        "Sarabande",
+        "S16",
+        "Single",
+        17
+    ],
+    "Sarabande,D17,Double,17": [
+        "Sarabande",
+        "D17",
+        "Double",
+        18
+    ],
+    "Selfishness,D21,Double,21": [
+        "Selfishness",
+        "D21",
+        "Double",
+        20
+    ],
+    "Shub Niggurath,S11,Single,11": [
+        "Shub Niggurath",
+        "S11",
+        "Single",
+        12
+    ],
+    "Shub Niggurath,D17,Double,17": [
+        "Shub Niggurath",
+        "D17",
+        "Double",
+        18
+    ],
+    "Shub Niggurath,S22,Single,22": [
+        "Shub Niggurath",
+        "S22",
+        "Single",
+        21
+    ],
+    "Slam,S17,Single,17": [
+        "Slam",
+        "S17",
+        "Single",
+        18
+    ],
+    "Slam,S18,Single,18": [
+        "Slam",
+        "S18",
+        "Single",
+        19
+    ],
+    "Slam,D20,Double,20": [
+        "Slam",
+        "D20",
+        "Double",
+        21
+    ],
+    "Smile Diary,D20,Double,20": [
+        "Smile Diary",
+        "D20",
+        "Double",
+        19
+    ],
+    "Solitary,D7,Double,7": [
+        "Solitary",
+        "D7",
+        "Double",
+        10
+    ],
+    "Solitary,S16,Single,16": [
+        "Solitary",
+        "S16",
+        "Single",
+        18
+    ],
+    "Solitary 2,S6,Single,6": [
+        "Solitary 2",
+        "S6",
+        "Single",
+        8
+    ],
+    "Solitary 2,S8,Single,8": [
+        "Solitary 2",
+        "S8",
+        "Single",
+        9
+    ],
+    "Solitary 2,D18,Double,18": [
+        "Solitary 2",
+        "D18",
+        "Double",
+        19
+    ],
+    "Sorceress Elise,S15,Single,15": [
+        "Sorceress Elise",
+        "S15",
+        "Single",
+        17
+    ],
+    "Star Command,D16,Double,16": [
+        "Star Command",
+        "D16",
+        "Double",
+        15
+    ],
+    "Stardust Overdrive,D24,Double,24": [
+        "Stardust Overdrive",
+        "D24",
+        "Double",
+        23
+    ],
+    "Sudden Romance,D14,Double,14": [
+        "Sudden Romance",
+        "D14",
+        "Double",
+        15
+    ],
+    "Sugar Conspiracy Theory,S15,Single,15": [
+        "Sugar Conspiracy Theory",
+        "S15",
+        "Single",
+        14
+    ],
+    "Sugar Conspiracy Theory,D17,Double,17": [
+        "Sugar Conspiracy Theory",
+        "D17",
+        "Double",
+        16
+    ],
+    "Super Capriccio,S18,Single,18": [
+        "Super Capriccio",
+        "S18",
+        "Single",
+        19
+    ],
+    "Super Capriccio,D18,Double,18": [
+        "Super Capriccio",
+        "D18",
+        "Double",
+        19
+    ],
+    "Super Fantasy,D21,Double,21": [
+        "Super Fantasy",
+        "D21",
+        "Double",
+        22
+    ],
+    "Tepris,S16,Single,16": [
+        "Tepris",
+        "S16",
+        "Single",
+        17
+    ],
+    "Tepris,D18,Double,18": [
+        "Tepris",
+        "D18",
+        "Double",
+        19
+    ],
+    "The Devil,D13,Double,13": [
+        "The Devil",
+        "D13",
+        "Double",
+        14
+    ],
+    "The Devil,S20,Single,20": [
+        "The Devil",
+        "S20",
+        "Single",
+        19
+    ],
+    "The Devil,D21,Double,21": [
+        "The Devil",
+        "D21",
+        "Double",
+        20
+    ],
+    "The People Didn't Know,S2,Single,2": [
+        "The People Didn't Know",
+        "S2",
+        "Single",
+        3
+    ],
+    "The People Didn't Know \"Pumping Up\",D17,Double,17": [
+        "The People Didn't Know \"Pumping Up\"",
+        "D17",
+        "Double",
+        18
+    ],
+    "TQBFJOLD,D14,Double,14": [
+        "TQBFJOLD",
+        "D14",
+        "Double",
+        15
+    ],
+    "TQBFJOLD,S17,Single,17": [
+        "TQBFJOLD",
+        "S17",
+        "Single",
+        16
+    ],
+    "TQBFJOLD,S20,Single,20": [
+        "TQBFJOLD",
+        "S20",
+        "Single",
+        19
+    ],
+    "Trashy Innocence,S14,Single,14": [
+        "Trashy Innocence",
+        "S14",
+        "Single",
+        15
+    ],
+    "Trashy Innocence,D15,Double,15": [
+        "Trashy Innocence",
+        "D15",
+        "Double",
+        16
+    ],
+    "Trashy Innocence,D10,Double,10": [
+        "Trashy Innocence",
+        "D10",
+        "Double",
+        11
+    ],
+    "Tream Vook of the War,S11,Single,11": [
+        "Tream Vook of the War",
+        "S11",
+        "Single",
+        13
+    ],
+    "Tream Vook of the War,D13,Double,13": [
+        "Tream Vook of the War",
+        "D13",
+        "Double",
+        15
+    ],
+    "Tribe Attacker,D15,Double,15": [
+        "Tribe Attacker",
+        "D15",
+        "Double",
+        17
+    ],
+    "Tribe Attacker,S16,Single,16": [
+        "Tribe Attacker",
+        "S16",
+        "Single",
+        17
+    ],
+    "Tritium,D22,Double,22": [
+        "Tritium",
+        "D22",
+        "Double",
+        21
+    ],
+    "Trotpris,D15,Double,15": [
+        "Trotpris",
+        "D15",
+        "Double",
+        14
+    ],
+    "Try to BPM: LIADZ,S12,Single,12": [
+        "Try to BPM: LIADZ",
+        "S12",
+        "Single",
+        15
+    ],
+    "Try to BPM: LIADZ,D14,Double,14": [
+        "Try to BPM: LIADZ",
+        "D14",
+        "Double",
+        16
+    ],
+    "Try to BPM: LIADZ,S20,Single,20": [
+        "Try to BPM: LIADZ",
+        "S20",
+        "Single",
+        21
+    ],
+    "Turkey March,S15,Single,15": [
+        "Turkey March",
+        "S15",
+        "Single",
+        16
+    ],
+    "Turkey March,D19,Double,19": [
+        "Turkey March",
+        "D19",
+        "Double",
+        20
+    ],
+    "Turkey March ~Minimal Tunes~,S8,Single,8": [
+        "Turkey March ~Minimal Tunes~",
+        "S8",
+        "Single",
+        10
+    ],
+    "Turkey March ~Minimal Tunes~,D10,Double,10": [
+        "Turkey March ~Minimal Tunes~",
+        "D10",
+        "Double",
+        11
+    ],
+    "Twist of Fate,S18,Single,18": [
+        "Twist of Fate",
+        "S18",
+        "Single",
+        19
+    ],
+    "Twist of Fate,D20,Double,20": [
+        "Twist of Fate",
+        "D20",
+        "Double",
+        21
+    ],
+    "U Got 2 Know,S18,Single,18": [
+        "U Got 2 Know",
+        "S18",
+        "Single",
+        20
+    ],
+    "Ugly Dee,D11,Double,11": [
+        "Ugly Dee",
+        "D11",
+        "Double",
+        15
+    ],
+    "Ugly Dee,D15,Double,15": [
+        "Ugly Dee",
+        "D15",
+        "Double",
+        18
+    ],
+    "Unique,S17,Single,17": [
+        "Unique",
+        "S17",
+        "Single",
+        16
+    ],
+    "Unique,S15,Single,15": [
+        "Unique",
+        "S15",
+        "Single",
+        14
+    ],
+    "Unique,D19,Double,19": [
+        "Unique",
+        "D19",
+        "Double",
+        18
+    ],
+    "Utsushiyo no Kaze,S16,Single,16": [
+        "Utsushiyo no Kaze",
+        "S16",
+        "Single",
+        17
+    ],
+    "Utsushiyo no Kaze,D19,Double,19": [
+        "Utsushiyo no Kaze",
+        "D19",
+        "Double",
+        20
+    ],
+    "Vacuum,D22,Double,22": [
+        "Vacuum",
+        "D22",
+        "Double",
+        21
+    ],
+    "video out c,S9,Single,9": [
+        "video out c",
+        "S9",
+        "Single",
+        10
+    ],
+    "video out c,D14,Double,14": [
+        "video out c",
+        "D14",
+        "Double",
+        15
+    ],
+    "Violet Perfume,S14,Single,14": [
+        "Violet Perfume",
+        "S14",
+        "Single",
+        13
+    ],
+    "Violet Perfume,D15,Double,15": [
+        "Violet Perfume",
+        "D15",
+        "Double",
+        14
+    ],
+    "Violet Perfume,D19,Double,19": [
+        "Violet Perfume",
+        "D19",
+        "Double",
+        18
+    ],
+    "Vook,D12,Double,12": [
+        "Vook",
+        "D12",
+        "Double",
+        13
+    ],
+    "Vook,D18,Double,18": [
+        "Vook",
+        "D18",
+        "Double",
+        19
+    ],
+    "Vook,D19,Double,19": [
+        "Vook",
+        "D19",
+        "Double",
+        20
+    ],
+    "VVV,D18,Double,18": [
+        "VVV",
+        "D18",
+        "Double",
+        17
+    ],
+    "We Will Meet Again,S3,Single,3": [
+        "We Will Meet Again",
+        "S3",
+        "Single",
+        4
+    ],
+    "We Will Meet Again,S13,Single,13": [
+        "We Will Meet Again",
+        "S13",
+        "Single",
+        14
+    ],
+    "We Will Meet Again,S14,Single,14": [
+        "We Will Meet Again",
+        "S14",
+        "Single",
+        13
+    ],
+    "What Are You Doin?,S19,Single,19": [
+        "What Are You Doin?",
+        "S19",
+        "Single",
+        18
+    ],
+    "What Are You Doin?,D24,Double,24": [
+        "What Are You Doin?",
+        "D24",
+        "Double",
+        23
+    ],
+    "What Happened,S20,Single,20": [
+        "What Happened",
+        "S20",
+        "Single",
+        21
+    ],
+    "WI-EX-DOC-VA,D15,Double,15": [
+        "WI-EX-DOC-VA",
+        "D15",
+        "Double",
+        16
+    ],
+    "WI-EX-DOC-VA,D23,Double,23": [
+        "WI-EX-DOC-VA",
+        "D23",
+        "Double",
+        24
+    ],
+    "Will o' the Wisp,D10,Double,10": [
+        "Will o' the Wisp",
+        "D10",
+        "Double",
+        13
+    ],
+    "Will o' the Wisp,S10,Single,10": [
+        "Will o' the Wisp",
+        "S10",
+        "Single",
+        11
+    ],
+    "Will o' the Wisp,S13,Single,13": [
+        "Will o' the Wisp",
+        "S13",
+        "Single",
+        14
+    ],
+    "Will o' the Wisp,D13,Double,13": [
+        "Will o' the Wisp",
+        "D13",
+        "Double",
+        14
+    ],
+    "Will o' the Wisp,D19,Double,19": [
+        "Will o' the Wisp",
+        "D19",
+        "Double",
+        20
+    ],
+    "Will o' the Wisp,S3,Single,3": [
+        "Will o' the Wisp",
+        "S3",
+        "Single",
+        2
+    ],
+    "Windmill,D24,Double,24": [
+        "Windmill",
+        "D24",
+        "Double",
+        23
+    ],
+    "Winter,S6,Single,6": [
+        "Winter",
+        "S6",
+        "Single",
+        7
+    ],
+    "Winter,S15,Single,15": [
+        "Winter",
+        "S15",
+        "Single",
+        16
+    ],
+    "Winter,D11,Double,11": [
+        "Winter",
+        "D11",
+        "Double",
+        12
+    ],
+    "Winter,D19,Double,19": [
+        "Winter",
+        "D19",
+        "Double",
+        20
+    ],
+    "Winter,S8,Single,8": [
+        "Winter",
+        "S8",
+        "Single",
+        10
+    ],
+    "Witch Doctor,D18,Double,18": [
+        "Witch Doctor",
+        "D18",
+        "Double",
+        17
+    ],
+    "Witch Doctor,S16,Single,16": [
+        "Witch Doctor",
+        "S16",
+        "Single",
+        17
+    ],
+    "Witch Doctor,D22,Double,22": [
+        "Witch Doctor",
+        "D22",
+        "Double",
+        23
+    ],
+    "Witch Doctor,D23,Double,23": [
+        "Witch Doctor",
+        "D23",
+        "Double",
+        22
+    ],
+    "Witch Doctor #1,D19,Double,19": [
+        "Witch Doctor #1",
+        "D19",
+        "Double",
+        21
+    ],
+    "Witch Doctor #1,S15,Single,15": [
+        "Witch Doctor #1",
+        "S15",
+        "Single",
+        16
+    ],
+    "Witch Doctor #1,S16,Single,16": [
+        "Witch Doctor #1",
+        "S16",
+        "Single",
+        17
+    ],
+    "Witch Doctor #1,S18,Single,18": [
+        "Witch Doctor #1",
+        "S18",
+        "Single",
+        19
+    ],
+    "X-Tream,S9,Single,9": [
+        "X-Tream",
+        "S9",
+        "Single",
+        10
+    ],
+    "X-Tream,S14,Single,14": [
+        "X-Tream",
+        "S14",
+        "Single",
+        15
+    ],
+    "X-Tream,D19,Double,19": [
+        "X-Tream",
+        "D19",
+        "Double",
+        20
+    ],
+    "X-TREE,D14,Double,14": [
+        "X-TREE",
+        "D14",
+        "Double",
+        15
+    ],
+    "X-TREE,D18,Double,18": [
+        "X-TREE",
+        "D18",
+        "Double",
+        19
+    ],
+    "X-TREE,S3,Single,3": [
+        "X-TREE",
+        "S3",
+        "Single",
+        2
+    ],
+    "Xuxa,D18,Double,18": [
+        "Xuxa",
+        "D18",
+        "Double",
+        17
+    ],
+    "Yeo rae a,D5,Double,5": [
+        "Yeo rae a",
+        "D5",
+        "Double",
+        7
+    ],
+    "Yeo rae a,D12,Double,12": [
+        "Yeo rae a",
+        "D12",
+        "Double",
+        10
+    ],
+    "Yog Sothoth,D17,Double,17": [
+        "Yog Sothoth",
+        "D17",
+        "Double",
+        18
+    ],
+    "Yog Sothoth,D23,Double,23": [
+        "Yog Sothoth",
+        "D23",
+        "Double",
+        24
+    ],
+    "Yog Sothoth,S18,Single,18": [
+        "Yog Sothoth",
+        "S18",
+        "Single",
+        17
+    ],
+    "You again my love,D14,Double,14": [
+        "You again my love",
+        "D14",
+        "Double",
+        15
+    ],
+    "\u7518\u3044\u8a98\u60d1 Dangerous,S15,Single,15": [
+        "\u7518\u3044\u8a98\u60d1 Dangerous",
+        "S15",
+        "Single",
+        14
+    ],
+    "\u7518\u3044\u8a98\u60d1 Dangerous,D16,Double,16": [
+        "\u7518\u3044\u8a98\u60d1 Dangerous",
+        "D16",
+        "Double",
+        15
+    ]
+}

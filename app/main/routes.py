@@ -76,6 +76,7 @@ def submit():
                     acsubmit = 'True',
                     user_id = u.id
                 )
+                prime_to_xx_diff(post)
                 add_exp(u, request.form['EXP'])
                 add_pp(u, request.form['PP'])
                 if high_score(post):
