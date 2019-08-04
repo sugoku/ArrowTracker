@@ -1,5 +1,6 @@
 import os
 import logging
+import traceback
 from flask import render_template, request, Blueprint, current_app, session, redirect, url_for, flash, Markup, jsonify
 from flask_login import current_user, login_required
 from app.main.forms import SearchForm, TournamentForm, TournamentEditForm, ChartSearchForm
@@ -90,14 +91,15 @@ def submit():
             return jsonify(response)
     except Exception as e:
         response['status'] = 'failure'
-        response['reason'] = type(e).__name__
+        #response['reason'] = type(e).__name__
+        response['reason'] = traceback.format_exc()
         return jsonify(response)
 
 @main.route('/getprofile', methods=['GET'])
 def getprofile():
     response = {}
     try:
-        if request.form.validate() and valid_api_key(request.args.get('api_key')): # and if request.remote_addr in approved_ips
+        if valid_api_key(request.args.get('api_key')): # and if request.remote_addr in approved_ips
             u = accesscode_to_user(request.args.get('access_code'))
             return jsonify(user_to_primeprofile(u))
         else:
@@ -106,7 +108,8 @@ def getprofile():
             return jsonify(response)
     except Exception as e:
         response['status'] = 'failure'
-        response['reason'] = type(e).__name__
+        #response['reason'] = type(e).__name__
+        response['reason'] = traceback.format_exc()
         return jsonify(response)
 
 @main.route('/saveprofile', methods=['POST'])
@@ -115,7 +118,7 @@ def saveprofile():
         'status': 'success'
     }
     try:
-        if request.form.validate() and valid_api_key(request.form['api_key']): # and if request.remote_addr in approved_ips
+        if valid_api_key(request.form['api_key']): # and if request.remote_addr in approved_ips
             u = accesscode_to_user(request.form['access_code'])
             update_user_with_primeprofile(u, request.form)
             db.session.commit()
@@ -124,35 +127,38 @@ def saveprofile():
             response['reason'] = 'invalid request'
     except Exception as e:
         response['status'] = 'failure'
-        response['reason'] = type(e).__name__
+        #response['reason'] = type(e).__name__
+        response['reason'] = traceback.format_exc()
     return jsonify(response)
 
 @main.route('/getworldbest', methods=['GET'])
 def getworldbest():
     response = {}
     try:
-        if request.form.validate() and valid_api_key(request.args.get('api_key')): # and if request.remote_addr in approved_ips
+        if valid_api_key(request.args.get('api_key')): # and if request.remote_addr in approved_ips
             return jsonify(get_worldbest(scoretype=request.args.get('scoretype')))
         else:
             response['status'] = 'failure'
             response['reason'] = 'invalid request'
     except Exception as e:
         response['status'] = 'failure'
-        response['reason'] = type(e).__name__
+        #response['reason'] = type(e).__name__
+        response['reason'] = traceback.format_exc()
     return jsonify(response)
 
 @main.route('/getrankmode', methods=['GET'])
 def getrankmode():
     response = {}
     try:
-        if request.form.validate() and valid_api_key(request.args.get('api_key')): # and if request.remote_addr in approved_ips
+        if valid_api_key(request.args.get('api_key')): # and if request.remote_addr in approved_ips
             return jsonify(get_rankmode(scoretype=request.args.get('scoretype')))
         else:
             response['status'] = 'failure'
             response['reason'] = 'invalid request'
     except Exception as e:
         response['status'] = 'failure'
-        response['reason'] = type(e).__name__
+        #response['reason'] = type(e).__name__
+        response['reason'] = traceback.format_exc()
     return jsonify(response)
 
 @main.route('/getapikey', methods=['POST'])
@@ -162,7 +168,7 @@ def getapikey():
         'status': 'success'
     }
     try:
-        if request.form.validate() and current_user.is_authenticated: # and if request.remote_addr in approved_ips
+        if current_user.is_authenticated: # and if request.remote_addr in approved_ips
             form = APIKeyForm(request.form)
             if form.validate():
                 apikey = APIKey(
@@ -177,7 +183,8 @@ def getapikey():
             response['reason'] = 'invalid request'
     except Exception as e:
         response['status'] = 'failure'
-        response['reason'] = type(e).__name__
+        #response['reason'] = type(e).__name__
+        response['reason'] = traceback.format_exc()
     return jsonify(response)
 
 '''@main.route('/validatetid', methods=['POST'])
