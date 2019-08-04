@@ -7,6 +7,7 @@ from app import mail
 from app.models import User
 import json
 from app.config import Config
+from app.scores.utils import *
 
 def save_picture(form_picture):
     random_hex = secrets.token_hex(8)
@@ -32,7 +33,7 @@ No changes will be made without using the above link.
 
 def accesscode_to_user(acode):
     u = User.query.filter_by(accesscode=acode).first()
-    return u.id if u != None else None
+    return u if u != None else None
 
 def user_to_primeprofile(user):
     return {
