@@ -25,6 +25,7 @@
         <th>Letter Grade</th>
         <th>Score</th>
         <th>EX Score</th>
+        <th>SP</th>
         <th>Perfect</th>
         <th>Great</th>
         <th>Good</th>
@@ -34,6 +35,7 @@
         <th>Stage Pass</th>
         <th>Noteskin</th>
         <th>Modifiers</th>
+        <th>Rush Speed</th>
         <th>Platform</th>
         <th>Ranked?</th>
         <th>Author</th>
@@ -58,6 +60,7 @@
         <td>{{score.lettergrade.upper()}}</td>
         <td>{{score.score}}</td>
         <td>{{score.exscore}}</td>
+        <td>{{score.sp|int}}</td>
         <td>{{score.perfect}}</td>
         <td>{{score.great}}</td>
         <td>{{score.good}}</td>
@@ -71,6 +74,7 @@
         {% endif %}
         <td>{{int_to_noteskin(score.noteskin)}}</td>
         <td>{{modlist_to_modstr(int_to_mods(score.modifiers))}}</td>
+        <td>{{score.rushspeed}}</td>
         <td>{{score.platform.capitalize()|replace('Sf2-pad', 'StepF2 Pad')}}</td>
         {% if score.ranked == "True" %}
           <td>{{score.ranked|replace("True", "Yes")}}</td>

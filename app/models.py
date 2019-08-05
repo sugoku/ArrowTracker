@@ -37,6 +37,7 @@ class User(db.Model, UserMixin):
     autovelocity = db.Column(db.Integer, nullable=True)
     rushspeed = db.Column(db.Integer, nullable=False, default=0)
     psupdate = db.Column(db.String(5), nullable=False, default='True')
+    sp = db.Column(db.Float, nullable=False, default=0)
 
     def get_reset_token(self, expires_sec=1800):
         s = Serializer(current_app.config["SECRET_KEY"], expires_sec)
@@ -73,13 +74,14 @@ class Post(db.Model):
     bad = db.Column(db.Integer, nullable=False)
     miss = db.Column(db.Integer, nullable=False)
     maxcombo = db.Column(db.Integer, nullable=False)
-    pp = db.Column(db.Float, nullable=False, default=0)
-    runningstep = db.Column(db.Float, nullable=False, default=0)
-    kcal = db.Column(db.Float, nullable=False, default=0)
+    pp = db.Column(db.Float, nullable=False, default=0.0)
+    runningstep = db.Column(db.Float, nullable=False, default=0.0)
+    kcal = db.Column(db.Float, nullable=False, default=0.0)
     scrollspeed = db.Column(db.Float, nullable=True, default=None)
     autovelocity = db.Column(db.Integer, nullable=True, default=None)
     noteskin = db.Column(db.String(20), nullable=False, default="Default")
     modifiers = db.Column(db.Integer, nullable=False, default=0)
+    rushspeed = db.Column(db.Float, nullable=False, default=1.0)
     gamemix = db.Column(db.String(30), nullable=False, default="Unknown")
     gameversion = db.Column(db.String(12), nullable=False, default="Unknown")
     gameflag = db.Column(db.Integer, nullable=False, default=0)
@@ -88,6 +90,7 @@ class Post(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     accesscode = db.Column(db.String(32), nullable=True, default=None)
     acsubmit = db.Column(db.String(5), nullable=False)
+    sp = db.Column(db.Float, nullable=True)
     #tournamentid = db.Column(db.Integer, nullable=True)
     image_file = db.Column(db.String(20), nullable=False, default="None")
 

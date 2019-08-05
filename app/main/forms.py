@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
-from wtforms import StringField, SubmitField, TextAreaField, SelectField, IntegerField, SelectMultipleField
+from wtforms import StringField, SubmitField, TextAreaField, SelectField, IntegerField, SelectMultipleField, DecimalField
 from wtforms.validators import DataRequired, NumberRange, Optional
 from app import songlist_pairs, raw_songdata, judgement_pairs
 from app.scores.utils import *
@@ -41,11 +41,13 @@ class SearchForm(FlaskForm):
     #scrollspeed = DecimalField('Scroll Speed', places=1, validators=[NumberRange(min=0)])
     #autovelocity = IntegerField('Auto Velocity Speed', validators=[NumberRange(min=0)])
     noteskin = SelectMultipleField('Noteskin', coerce=int, choices=[(-1, 'Any')] + list(other_noteskin.items()) + list(prime_noteskin.items()), validators=[DataRequired()])
+    rushspeed = DecimalField('Rush Speed', places=1, validators=[Optional(), NumberRange(min=0.7, max=1.5)])
     #gamemix = SelectMultipleField('Game Mix', coerce=str, choices=gamemix_pairs)
     #gameversion = SelectMultipleField('Version', coerce=str, choices=[tuple(map(lambda x: x.decode('utf-8'), tup)) for tup in gameversion_pairs])
     ranked = SelectMultipleField('Rank Mode', coerce=str, choices=(('Any', 'Any'), ('False', 'Unranked'), ('True', 'Ranked')), validators=[DataRequired()])
     judgement = SelectMultipleField('Judgement', coerce=str, choices=(('Any', 'Any'),) + judgement_pairs, validators=[DataRequired()])
     #tournamentid = IntegerField('Tournament ID', validators=[NumberRange(min=0)])
+    author = StringField('Author')
     submit = SubmitField('Search')
 
 class ChartSearchForm(FlaskForm):

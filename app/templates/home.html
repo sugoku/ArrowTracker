@@ -69,6 +69,7 @@
                     <th scope="col">Letter Grade</th>
                     <th scope="col">Score</th>
                     <th scope="col">EX Score</th>
+                    <th scope="col">SP</th>
                     <th scope="col">Max Combo</th>
                     <th scope="col">Stage Pass</th>
                     <th scope="col">Platform</th>
@@ -83,6 +84,7 @@
                     <td>{{score.lettergrade.upper()}}</td>
                     <td>{{score.score}}</td>
                     <td>{{score.exscore}}</td>
+                    <td>{{score.sp|int}}</td>
                     <td>{{score.maxcombo}}</td>
                     {% if score.stagepass == "True" %}
                       <td>{{score.stagepass|replace("True", "Yes")}}</td>

@@ -81,7 +81,7 @@ prime_noteskin = {
     0x0: "Prime",
     0x1: "Korean Trump",
     0x2: "Old",
-    0x3: "Easy (Infinity)",
+    0x3: "Easy",
     0x4: "Slime",
     0x5: "Music",
     0x6: "Canon",
@@ -101,7 +101,7 @@ prime_noteskin = {
     0x17: "Missile",
     0x1b: "Football",
     0x1c: "Rebirth",
-    0x1d: "Basic",
+    0x1d: "Basic (Infinity)",
     0x1e: "Fiesta",
     0x1f: "Fiesta 2",
 }
@@ -331,7 +331,7 @@ def modlist_to_modstr(modlist):
         i += 1
     if len(modlist) > 0:
         s += str(modlist[i].upper())
-    return s
+    return s if s != "" else "None"
 
 def get_diffnum(diffstr):
     return int(''.join(x for x in diffstr if x.isdigit()))
@@ -364,3 +364,11 @@ def prime_to_xx_diff(post):
     post.difficulty = newvalues[1]
     post.type = newvalues[2]
     post.difficultynum = newvalues[3]
+
+def calc_level(exp):
+    i = 0
+    while True:
+        #if exp < int(100+(100*(0.01*(1.02110074343**i)))):\
+        if exp < int(2.5065*i*i + 38.48*i):
+            return i
+        i += 1

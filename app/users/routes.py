@@ -4,7 +4,7 @@ from app import db, bcrypt, raw_songdata
 from app.models import User, Post
 from app.users.forms import (RegisterForm, LoginForm, UpdateAccountForm,
                              RequestResetForm, ResetPasswordForm)
-from app.users.utils import save_picture, send_reset_email
+from app.users.utils import save_picture, send_reset_email, get_user_rank
 from app.scores.utils import *
 from app.main.utils import *
 import json
@@ -107,8 +107,9 @@ def user_posts(username):
 @users.route("/userpage/<string:username>")
 def user_page(username):
     user = User.query.filter_by(username=username).first_or_404()
-    scores = Post.query.filter_by(author=user).order_by(Post.date_posted.desc()).limit(5).all()
-    return render_template("user_profile.html", scores=scores, user=user)
+    topscores = Post.query.filter_by(author=user).order_by(Post.sp.desc()).limit(50).all()
+    recentscores = Post.query.filter_by(author=user).order_by(Post.date_posted.desc()).limit(3).all()
+    return render_template("user_profile.html", topscores=topscores, recentscores=recentscores, user=user, int_to_mods=int_to_mods, modlist_to_modstr=modlist_to_modstr, int_to_noteskin=int_to_noteskin, get_user_rank=get_user_rank)
 
 @users.route("/reset_password", methods=["GET", "POST"])
 def reset_request():

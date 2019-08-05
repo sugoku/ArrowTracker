@@ -11,8 +11,9 @@ from app import songlist_pairs, difficulties, db, raw_songdata
 from sqlalchemy import desc, or_
 from app.config import GetChangelog
 from app.main.utils import save_picture, allowed_file, valid_api_key, generate_unique_key
-from app.users.utils import accesscode_to_user, user_to_primeprofile, update_user_with_primeprofile
+from app.users.utils import accesscode_to_user, user_to_primeprofile, update_user_with_primeprofile, update_user_sp
 from app.scores.utils import *
+from calc_performance import calc_performance
 
 # We can define all of the "@main" decorators below as a "blueprint" that
 # allows us to easily call or redirect the user to any of them from anywhere.
@@ -67,6 +68,7 @@ def submit():
                     scrollspeed = (int(request.form['NoteSkinSpeed']) % 0x100) / 4.0,
                     noteskin = int(request.form['NoteSkinSpeed']) / 0x10000,
                     modifiers = int(request.form['Modifiers']),
+                    rushspeed = float(request.form['RushSpeed']),
                     #gamemix = request.form['Gamemix'],
                     gameversion = request.form['GameVersion'],
                     gameflag = int(request.form['Flag']),
@@ -78,6 +80,10 @@ def submit():
                     user_id = u.id
                 )
                 prime_to_xx_diff(post)
+                if post.rushspeed == 0.0:
+                    post.rushspeed = 1.0
+                post.sp = calc_performance(post.song, post.difficulty, post.difficultynum, post.perfect, post.great, post.good, post.bad, post.miss, int_to_judge(post.modifiers), post.rushspeed, post.stagepass == "True")
+                update_user_sp(current_user)
                 add_exp(u, request.form['EXP'])
                 add_pp(u, request.form['PP'])
                 if high_score(post):

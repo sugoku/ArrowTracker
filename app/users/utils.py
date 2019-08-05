@@ -1,10 +1,11 @@
 import os
 import secrets
+import math
 from PIL import Image
 from flask import url_for, current_app
 from flask_mail import Message
 from app import mail
-from app.models import User
+from app.models import User, Post
 import json
 from app.config import Config
 from app.scores.utils import *
@@ -78,3 +79,19 @@ def update_user_with_primeprofile(user, post):
         user.noteskin = int(post['NoteSkinSpeed']) / 0x10000 # might want to make this an option
         user.scrollspeed = (int(post['NoteSkinSpeed']) % 0x100) / 4.0 # might want to make this an option
         #user.rushspeed = float(post['RushSpeed'])
+
+def update_user_sp(u):
+    sp = 0
+    scores = Post.query.filter_by(author=u).order_by(Post.sp.desc()).limit(150).all()
+    place = 0
+    for score in scores:
+        sp += math.pow(0.95, place) * score.sp
+        place += 1
+    u.sp = sp
+
+def get_user_rank(u):
+    users = User.query.order_by(User.sp.desc()).all()
+    try:
+        return users.index(u)+1
+    except ValueError:
+        return None

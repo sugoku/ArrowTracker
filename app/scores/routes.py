@@ -2,11 +2,13 @@ from flask import (render_template, url_for, flash, redirect, request, abort, Bl
 from flask_login import current_user, login_required
 from app import db, logging, raw_songdata
 from app.models import Post, WeeklyPost, User
+from app.users.utils import update_user_sp
 from app.scores.forms import ScoreForm, WeeklyForm
 from app.scores.utils import *
 import os
 import json
 from weekly import get_current_weekly, randomize_weekly
+from calc_performance import calc_performance
 
 scores = Blueprint('scores', __name__)
 
@@ -53,12 +55,15 @@ def new_score():
             maxcombo = form.maxcombo.data,
             modifiers = mods_to_int(request.form.getlist('modifiers'), form.judgement.data),
             noteskin = form.noteskin.data,
+            rushspeed = form.rushspeed.data if form.rushspeed.data != None else 1.0,
             ranked = form.ranked.data, 
             length = raw_songdata[form.song.data]['length'], 
             acsubmit = 'False',
             author = current_user, 
             image_file = picture_file
         )
+        post.sp = calc_performance(post.song, post.difficulty, post.difficultynum, post.perfect, post.great, post.good, post.bad, post.miss, int_to_judge(post.modifiers), post.rushspeed, post.stagepass == "True")
+        update_user_sp(current_user)
         current_app.logger.info("Converted.")
         db.session.add(post)
         current_app.logger.info("Committing to database...")

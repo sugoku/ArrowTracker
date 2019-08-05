@@ -297,6 +297,19 @@
               {{ form.noteskin(class="form-control form-control-lg") }}
             {% endif %}
           </div>
+          <div class="col">
+            {{ form.rushspeed.label(class="form-control-label") }}
+            {% if form.rushspeed.errors %}
+              {{ form.rushspeed(class="form-control form-control-lg is-invalid") }}
+              <div class="invalid-feedback">
+                {% for error in form.rushspeed.errors %}
+                  <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+            {% else %}
+              {{ form.rushspeed(class="form-control form-control-lg") }}
+            {% endif %}
+          </div>
         </div>
       <div>
         <hr>

@@ -24,6 +24,7 @@ class ScoreForm(FlaskForm):
     #scrollspeed = DecimalField('Scroll Speed', places=1, validators=[NumberRange(min=0)])
     #autovelocity = IntegerField('Auto Velocity Speed', validators=[NumberRange(min=0)])
     noteskin = SelectField('Noteskin', coerce=int, choices=list(other_noteskin.items()) + list(prime_noteskin.items()), validators=[InputRequired(), NumberRange(min=0)])
+    rushspeed = DecimalField('Rush Speed', places=1, validators=[NumberRange(min=0.7, max=1.5)])
     #gamemix = SelectField('Game Mix', coerce=str, choices=gamemix_pairs)
     #gameversion = SelectField('Version', coerce=str, choices=[tuple(map(lambda x: x.decode('utf-8'), tup)) for tup in gameversion_pairs])
     ranked = SelectField('Ranked?', coerce=str, choices=(('False', 'Unranked'), ('True', 'Ranked')), validators=[DataRequired()])
