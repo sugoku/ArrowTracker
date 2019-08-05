@@ -255,6 +255,19 @@
           </div>
           <hr>
           <div class="form-group">
+            {{ form.ign.label(class="form-control-label") }}
+            {% if form.ign.errors %}
+              {{ form.ign(class="form-control form-control-lg is-invalid") }}
+              <div class="invalid-feedback">
+                {% for error in form.ign.errors %}
+                  <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+            {% else %}
+              {{ form.ign(class="form-control form-control-lg") }}
+            {% endif %}
+          </div>
+          <div class="form-group">
             {{ form.noteskin.label(class="form-control-label") }}
             {% if form.noteskin.errors %}
               {{ form.noteskin(class="form-control form-control-lg is-invalid") }}
@@ -293,33 +306,55 @@
               {{ form.judgement(class="form-control form-control-lg") }}
             {% endif %}
           </div>
+          <div class="form-group form-check">
+            {% if form.psupdate.errors %}
+              {{ form.psupdate(class="form-check-input is-invalid") }}
+              <div class="invalid-feedback">
+                {% for error in form.psupdate.errors %}
+                  <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+            {% else %}
+              {{ form.psupdate(class="form-check-input") }}
+            {% endif %}
+            {{ form.psupdate.label(class="form-check-label") }}
+          </div>
         </fieldset>
         <div class="form-field">
           {{ form.submit(class="btn btn-outline-success") }}
         </div>
         <hr>
-        <legend class="border-bottom mb-4">PrimeServer Stats</legend>
-        <div class="form-group">
-          <label class="form-control-label" for="gamelevel">Level</label>
-          <input class="form-control form-control-lg" id="gamelevel" value={{ current_user.gamelevel }} readonly>
-        </div>
-        <div class="form-group">
-          <label class="form-control-label" for="gameexp">EXP</label>
-          <input class="form-control form-control-lg" id="gameexp" value={{ current_user.gameexp }} readonly>
-        </div>
-        <div class="form-group">
-          <label class="form-control-label" for="gamepp">PP</label>
-          <input class="form-control form-control-lg" id="gamepp" value={{ current_user.gamepp }} readonly>
-        </div>
-        <div class="form-group">
-          <label class="form-control-label" for="accesscode">Access Code</label>
-          <input class="form-control form-control-lg" id="accesscode" value={{ current_user.accesscode }} readonly>
-        </div>
-        <div class="form-field">
-          <button role="button" class="btn btn-outline-success" onclick="window.open('/getprimebin')" aria-pressed="true">Get prime.bin</button>
-        </div>
-        <hr>
       </form>
+      <legend class="border-bottom mb-4">PrimeServer Stats</legend>
+      <div class="form-group">
+        <label class="form-control-label" for="gamelevel">Level</label>
+        <input class="form-control form-control-lg" id="gamelevel" value={{ current_user.gamelevel }} readonly>
+      </div>
+      <div class="form-group">
+        <label class="form-control-label" for="gameexp">EXP</label>
+        <input class="form-control form-control-lg" id="gameexp" value={{ current_user.gameexp }} readonly>
+      </div>
+      <div class="form-group">
+        <label class="form-control-label" for="gamepp">PP</label>
+        <input class="form-control form-control-lg" id="gamepp" value={{ current_user.gamepp }} readonly>
+      </div>
+      <div class="form-group">
+        <label class="form-control-label" for="runningstep">Running Steps</label>
+        <input class="form-control form-control-lg" id="runningstep" value={{ current_user.runningstep }} readonly>
+      </div>
+      <div class="form-group">
+        <label class="form-control-label" for="kcal">Kcal</label>
+        <input class="form-control form-control-lg" id="kcal" value={{ current_user.kcal }} readonly>
+      </div>
+      <div class="form-group">
+        <label class="form-control-label" for="accesscode">Access Code</label>
+        <input class="form-control form-control-lg" id="accesscode" value={{ current_user.accesscode }} readonly>
+      </div>
+      <div class="form-field">
+        <button role="button" class="btn btn-outline-success" onclick="window.open('/getprimebin')" aria-pressed="true">Get prime.bin</button>
+      </div>
+      <hr>
+      
     </div>
   </div>
 {% endblock body %}

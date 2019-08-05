@@ -120,6 +120,8 @@ def saveprofile():
     try:
         if valid_api_key(request.form['api_key']): # and if request.remote_addr in approved_ips
             u = accesscode_to_user(request.form['access_code'])
+            if u == None:
+                raise
             update_user_with_primeprofile(u, request.form)
             db.session.commit()
         else:

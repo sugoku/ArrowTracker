@@ -36,9 +36,11 @@ class UpdateAccountForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     bio = TextAreaField('Bio (Max 500 chars)', validators=[Length(max=500)])
     favsong = SelectField('Favourite Song', coerce=str, choices=[tuple(map(lambda x: x.decode('utf-8'), tup)) for tup in songlist_pairs])
+    ign = StringField('PrimeServer Username', validators=[DataRequired(), Length(min=1, max=12)])
     noteskin = SelectField('Preferred Noteskin', coerce=int, choices=list(prime_noteskin.items()), validators=[InputRequired(), NumberRange(min=0)])
     scrollspeed = DecimalField('Preferred Speed Mod', places=1, validators=[NumberRange(min=0, max=5)])
     judgement = SelectField('Preferred Judgement', coerce=str, choices=judgement_pairs, validators=[DataRequired()])
+    psupdate = BooleanField('Update Settings on Most Recent PrimeServer Play')
     submit = SubmitField('Update')
 
     def validate_username(self, username):

@@ -64,7 +64,7 @@ def user_to_primeprofile(user):
 def update_user_with_primeprofile(user, post):
     user.ign = post['Nickname'] # consider not changing this
     user.countryid = post['CountryID'] # or this
-    user.gameavatar = post['Avatar'] # or this
+    #user.gameavatar = post['Avatar'] # or this
     user.gamelevel = int(post['Level'])
     user.gameexp = int(post['EXP'])
     user.gamepp = int(post['PP'])
@@ -73,7 +73,8 @@ def update_user_with_primeprofile(user, post):
     user.runningstep = int(post['RunningStep'])
     user.playcount = int(post['PlayCount'])
     user.kcal = float(post['Kcal'])
-    user.modifiers = int(post['Modifiers']) # might want to make this an option
-    user.noteskin = int(post['NoteSkinSpeed']) / 0x10000 # might want to make this an option
-    user.scrollspeed = (int(post['NoteSkinSpeed']) % 0x100) / 4.0 # might want to make this an option
-    user.rushspeed = float(post['RushSpeed'])
+    if user.psupdate == "True":
+        user.modifiers = int(post['Modifiers']) # might want to make this an option
+        user.noteskin = int(post['NoteSkinSpeed']) / 0x10000 # might want to make this an option
+        user.scrollspeed = (int(post['NoteSkinSpeed']) % 0x100) / 4.0 # might want to make this an option
+        #user.rushspeed = float(post['RushSpeed'])

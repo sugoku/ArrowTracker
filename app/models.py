@@ -36,6 +36,7 @@ class User(db.Model, UserMixin):
     scrollspeed = db.Column(db.Float, nullable=True)
     autovelocity = db.Column(db.Integer, nullable=True)
     rushspeed = db.Column(db.Integer, nullable=False, default=0)
+    psupdate = db.Column(db.String(5), nullable=False, default='True')
 
     def get_reset_token(self, expires_sec=1800):
         s = Serializer(current_app.config["SECRET_KEY"], expires_sec)
