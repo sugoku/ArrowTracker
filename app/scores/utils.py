@@ -9,6 +9,7 @@ from flask import current_app
 from flask_login import current_user
 from app import db, logging, raw_songdata, scheduler
 from app.models import Post, User
+from app.users.utils import id_to_user
 
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 
@@ -162,9 +163,9 @@ def create_ranking(ranking='worldbest', scoretype='default'):
                         if score != None:
                             worldbest['WorldScores'].append(
                                 {
-                                    'SongID': i,
+                                    'SongID': int(raw_songdata[song]['song_id'], 16),
                                     'ChartLevel': score.difficulty,
-                                    'ChartMode': cmode[score.type],
+                                    'ChartMode': get_fulldiff(score.type),
                                     'Score': score.score,
                                     'Nickname': id_to_user(score.user_id).ign
                                 }
@@ -174,9 +175,9 @@ def create_ranking(ranking='worldbest', scoretype='default'):
                         if score != None:
                             worldbest['WorldScores'].append(
                                 {
-                                    'SongID': i,
+                                    'SongID': int(raw_songdata[song]['song_id'], 16),
                                     'ChartLevel': score.difficulty,
-                                    'ChartMode': cmode[score.type],
+                                    'ChartMode': get_fulldiff(score.type),
                                     'Score': score.exscore,
                                     'Nickname': id_to_user(score.user_id).ign
                                 }
@@ -340,6 +341,9 @@ def get_difftype(diffstr):
 
 def get_diffstr(difftype, diffnum):
     return {val: key for key, val in {x:abbrev_charttype[x] for x in abbrev_charttype if x != 'HD'}.items()}[difftype] + str(diffnum)
+
+def get_fulldiff(difftype):
+    return {val: key for key, val in {x:abbrev_charttype[x] for x in abbrev_charttype if x != 'HD'}.items()}[difftype]
 
 def int_to_noteskin(num):
     return {**prime_noteskin, **other_noteskin}.get(int(num))

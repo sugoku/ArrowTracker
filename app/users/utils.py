@@ -31,6 +31,10 @@ No changes will be made without using the above link.
 '''
     mail.send(msg)
 
+def id_to_user(uid):
+    u = User.query.filter_by(id=uid).first()
+    return u if u != None else None
+
 def accesscode_to_user(acode):
     u = User.query.filter_by(accesscode=acode).first()
     return u if u != None else None
