@@ -159,20 +159,31 @@ def create_ranking(ranking='worldbest', scoretype='default'):
                 for chart in raw_songdata[song]['difficulties']:
                     if scoretype == 'default':
                         score = Post.query.filter_by(song_id=int(raw_songdata[song]['song_id'], 16), difficulty=chart).order_by(Post.score.desc()).first()
+                        if score != None:
+                            worldbest['WorldScores'].append(
+                                {
+                                    'SongID': i,
+                                    'ChartLevel': score.difficulty,
+                                    'ChartMode': cmode[score.type],
+                                    'Score': score.score,
+                                    'Nickname': id_to_user(score.user_id).ign
+                                }
+                            )
                     elif scoretype == 'exscore':
                         score = Post.query.filter_by(song_id=int(raw_songdata[song]['song_id'], 16), difficulty=chart).order_by(Post.exscore.desc()).first()
+                        if score != None:
+                            worldbest['WorldScores'].append(
+                                {
+                                    'SongID': i,
+                                    'ChartLevel': score.difficulty,
+                                    'ChartMode': cmode[score.type],
+                                    'Score': score.exscore,
+                                    'Nickname': id_to_user(score.user_id).ign
+                                }
+                            )
                     else:
                         break
-                    if score != None:
-                        worldbest['WorldScores'].append(
-                            {
-                                'SongID': i,
-                                'ChartLevel': score.difficulty,
-                                'ChartMode': cmode[score.type],
-                                'Score': score.score,
-                                'Nickname': id_to_user(score.user_id).ign
-                            }
-                        )
+                    
         worldbest['WorldScores'] = worldbest['WorldScores'][:4095] # 0-4094
         return worldbest
     elif ranking == 'rankmode':
