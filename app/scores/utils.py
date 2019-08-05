@@ -164,8 +164,8 @@ def create_ranking(ranking='worldbest', scoretype='default'):
                             worldbest['WorldScores'].append(
                                 {
                                     'SongID': int(raw_songdata[song]['song_id'], 16),
-                                    'ChartLevel': score.difficulty,
-                                    'ChartMode': get_fulldiff(score.type),
+                                    'ChartLevel': score.difficultynum,
+                                    'ChartMode': get_primediff(score.type),
                                     'Score': score.score,
                                     'Nickname': id_to_user(score.user_id).ign
                                 }
@@ -176,8 +176,8 @@ def create_ranking(ranking='worldbest', scoretype='default'):
                             worldbest['WorldScores'].append(
                                 {
                                     'SongID': int(raw_songdata[song]['song_id'], 16),
-                                    'ChartLevel': score.difficulty,
-                                    'ChartMode': get_fulldiff(score.type),
+                                    'ChartLevel': score.difficultynum,
+                                    'ChartMode': get_primediff(score.type),
                                     'Score': score.exscore,
                                     'Nickname': id_to_user(score.user_id).ign
                                 }
@@ -342,8 +342,8 @@ def get_difftype(diffstr):
 def get_diffstr(difftype, diffnum):
     return {val: key for key, val in {x:abbrev_charttype[x] for x in abbrev_charttype if x != 'HD'}.items()}[difftype] + str(diffnum)
 
-def get_fulldiff(difftype):
-    return {val: key for key, val in {x:abbrev_charttype[x] for x in abbrev_charttype if x != 'HD'}.items()}[difftype]
+def get_primediff(difftype):
+    return {val: key for key, val in {x:prime_charttype[x] for x in prime_charttype if x != 'HD'}.items()}[difftype]
 
 def int_to_noteskin(num):
     return {**prime_noteskin, **other_noteskin}.get(int(num))
