@@ -36,7 +36,7 @@ def new_score():
         current_app.logger.info("Converting to post type...")
         post = Post(
             song = form.song.data, 
-            song_id = songname_to_id(form.song.data), 
+            song_id = int(songname_to_id(form.song.data), 16), 
             score = form.score.data,
             exscore = calc_exscore(form.perfect.data, form.great.data, form.good.data, form.bad.data, form.miss.data),
             lettergrade = form.lettergrade.data, 
