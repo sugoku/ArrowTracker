@@ -38,7 +38,7 @@ def new_score():
         current_app.logger.info("Converting to post type...")
         post = Post(
             song = form.song.data, 
-            song_id = int(songname_to_id(form.song.data), 16), 
+            song_id = int(songname_to_id(form.song.data), 16) if songname_to_id(form.song.data) != '' else None, 
             score = form.score.data,
             exscore = calc_exscore(form.perfect.data, form.great.data, form.good.data, form.bad.data, form.miss.data),
             lettergrade = form.lettergrade.data, 
@@ -91,6 +91,7 @@ def delete_score(score_id):
                 flash('Score screenshot couldn\'t be found.', 'info')
         db.session.delete(score)
         db.session.commit()
+        update_user_sp(current_user)
         flash('Your score has been deleted!', 'success')
         return redirect(url_for('main.home'))
     elif score.author != current_user:

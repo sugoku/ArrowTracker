@@ -109,7 +109,14 @@ def user_page(username):
     user = User.query.filter_by(username=username).first_or_404()
     topscores = Post.query.filter_by(author=user).order_by(Post.sp.desc()).limit(50).all()
     recentscores = Post.query.filter_by(author=user).order_by(Post.date_posted.desc()).limit(3).all()
-    return render_template("user_profile.html", topscores=topscores, recentscores=recentscores, user=user, int_to_mods=int_to_mods, modlist_to_modstr=modlist_to_modstr, int_to_noteskin=int_to_noteskin, get_user_rank=get_user_rank)
+
+    firstscores = []
+    allscores = Post.query.filter_by(author=user).all()
+    for score in allscores:
+        if score == Post.query.filter_by(song_id=score.song_id, difficulty=score.difficulty).first():
+            firstscores.append(score)
+    
+    return render_template("user_profile.html", topscores=topscores, recentscores=recentscores, user=user, int_to_mods=int_to_mods, modlist_to_modstr=modlist_to_modstr, int_to_noteskin=int_to_noteskin, get_user_rank=get_user_rank, firstscores=firstscores)
 
 @users.route("/reset_password", methods=["GET", "POST"])
 def reset_request():

@@ -59,7 +59,7 @@ class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     date_posted = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     song = db.Column(db.String(50), nullable=False)
-    song_id = db.Column(db.Integer, nullable=False)
+    song_id = db.Column(db.Integer, nullable=True)
     score = db.Column(db.Integer, nullable=False)
     exscore = db.Column(db.Integer, nullable=False)
     lettergrade = db.Column(db.String(3), nullable=False)
