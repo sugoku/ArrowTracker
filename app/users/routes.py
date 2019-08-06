@@ -20,7 +20,7 @@ def register():
     form = RegisterForm()
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-        user = User(username=form.username.data, email=form.email.data, password=hashed_password, accesscode=generate_unique_accesscode(), ign=re.sub(r'[^a-zA-Z0-9]', '', form.username.data).upper()[:12]) # ign needs to be fixed ASAP it's a major flaw
+        user = User(username=form.username.data, email=form.email.data.lower(), password=hashed_password, accesscode=generate_unique_accesscode(), ign=re.sub(r'[^a-zA-Z0-9]', '', form.username.data).upper()[:12]) # ign needs to be fixed ASAP it's a major flaw
         db.session.add(user)
         db.session.commit()
         flash(f'Hello, {form.username.data}! You may now log in!', 'success')
@@ -68,7 +68,7 @@ def dashboard():
             picture_file = save_picture(form.picture.data)
             current_user.image_file = picture_file
         current_user.username = form.username.data
-        current_user.email = form.email.data
+        current_user.email = form.email.data.lower()
         current_user.bio = form.bio.data
         current_user.favsong = form.favsong.data
         current_user.ign = form.ign.data
