@@ -33,7 +33,7 @@ class User(db.Model, UserMixin):
     kcal = db.Column(db.Integer, nullable=False, default=0)
     modifiers = db.Column(db.Integer, nullable=False, default=0)
     noteskin = db.Column(db.Integer, nullable=False, default=0)
-    scrollspeed = db.Column(db.Float, nullable=True)
+    scrollspeed = db.Column(db.Float, nullable=False, default=0)
     autovelocity = db.Column(db.Integer, nullable=True)
     rushspeed = db.Column(db.Integer, nullable=False, default=0)
     psupdate = db.Column(db.String(5), nullable=False, default='True')

@@ -64,7 +64,7 @@ def user_to_primeprofile(user):
         'PlayCount': user.playcount,
         'Kcal': user.kcal,
         'Modifiers': user.modifiers,
-        'NoteSkinSpeed': int(user.noteskin * 0x10000 + user.scrollspeed * 4.0),
+        'NoteSkinSpeed': int(user.noteskin * 0x10000 + user.scrollspeed * 4.0) if user.noteskin != None and user.scrollspeed != None else 0,
         'RushSpeed': float(user.rushspeed),
         'Scores': posts_to_uscore(user.posts)
     }

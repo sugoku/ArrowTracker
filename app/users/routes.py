@@ -35,7 +35,9 @@ def login():
     if form.validate_on_submit():
         email = form.email.data.lower()
         user = User.query.filter_by(email=email).first()
-        user.email = user.email.lower()
+        if user == None:
+            flash('User not found!', 'danger')
+        #user.email = user.email.lower()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
             next_page = request.args.get('next')
