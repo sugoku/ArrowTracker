@@ -55,7 +55,7 @@ def submit():
                     difficultynum = int(request.form['ChartLevel']),
                     difficulty = get_diffstr(prime_charttype[int(request.form['Type'])], int(request.form['ChartLevel'])),
                     platform = 'pad',
-                    stagepass = 'True' if request.form['Flag'] == '128' else 'False',
+                    stagepass = 'True' if request.form['SongCategory'] != '0' else 'False',
                     perfect = int(request.form['Perfect']),
                     great = int(request.form['Great']),
                     good = int(request.form['Good']),
