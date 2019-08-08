@@ -361,7 +361,7 @@ def high_score(post):
 def prime_to_xx_diff(post):
     with open('rerates.json', 'r') as rerates:
         reratedict = json.load(rerates)
-    newvalues = reratedict[','.join((post.song.strip(), post.difficulty, post.type, post.difficultynum))] # song name, difficulty string, chart type, difficulty number
+    newvalues = reratedict[','.join((post.song.strip(), post.difficulty, post.type, str(post.difficultynum)))] # song name, difficulty string, chart type, difficulty number
 
     #post.song = newvalues[0]
     post.difficulty = newvalues[1]
