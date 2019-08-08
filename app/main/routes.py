@@ -83,12 +83,12 @@ def submit():
                 if post.rushspeed == 0.0:
                     post.rushspeed = 1.0
                 post.sp = calc_performance(post.song, post.difficulty, post.difficultynum, post.perfect, post.great, post.good, post.bad, post.miss, int_to_judge(post.modifiers), post.rushspeed, post.stagepass == "True")
-                update_user_sp(current_user)
                 add_exp(u, request.form['EXP'])
                 add_pp(u, request.form['PP'])
                 if high_score(post):
                     db.session.add(post)
                     db.session.commit()
+                    update_user_sp(u)
             
             return jsonify(response)
         else:
