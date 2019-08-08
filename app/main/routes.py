@@ -53,7 +53,7 @@ def submit():
                     lettergrade = prime_grade[int(request.form['Grade']) % 0x100],
                     type = prime_charttype[int(request.form['Type'])],
                     difficultynum = int(request.form['ChartLevel']),
-                    difficulty = get_difficulty(s, prime_charttype[int(request.form['Type'])], int(request.form['ChartLevel'])),
+                    difficulty = get_diffstr(prime_charttype[int(request.form['Type'])], int(request.form['ChartLevel'])),
                     platform = 'pad',
                     stagepass = 'True' if request.form['Flag'] == '128' else 'False',
                     perfect = int(request.form['Perfect']),
