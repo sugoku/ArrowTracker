@@ -110,7 +110,8 @@ prime_noteskin = {
 }
 other_noteskin = {
     0x20: "Prime 2",
-    0x21: "XX"
+    0x21: "XX",
+    -1: "Unknown"
 }
 mods = {
     'v': 0x1,

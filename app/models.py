@@ -79,7 +79,7 @@ class Post(db.Model):
     kcal = db.Column(db.Float, nullable=False, default=0.0)
     scrollspeed = db.Column(db.Float, nullable=True, default=None)
     autovelocity = db.Column(db.Integer, nullable=True, default=None)
-    noteskin = db.Column(db.String(20), nullable=False, default="Default")
+    noteskin = db.Column(db.Integer, nullable=False, default=-1)
     modifiers = db.Column(db.Integer, nullable=False, default=0)
     rushspeed = db.Column(db.Float, nullable=False, default=1.0)
     gamemix = db.Column(db.String(30), nullable=False, default="Unknown")

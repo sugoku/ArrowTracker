@@ -66,7 +66,7 @@ def submit():
                     runningstep = int(request.form['RunningStep']),
                     kcal = float(request.form['Kcal']),
                     scrollspeed = (int(request.form['NoteSkinSpeed']) % 0x100) / 4.0,
-                    noteskin = prime_noteskin.get(int(request.form['NoteSkinSpeed']) // 0x10000) if prime_noteskin.get(int(request.form['NoteSkinSpeed']) // 0x10000) != None else "Unknown",
+                    noteskin = int(request.form['NoteSkinSpeed']) // 0x10000,
                     modifiers = int(request.form['Modifiers']),
                     rushspeed = float(request.form['RushSpeed']),
                     #gamemix = request.form['Gamemix'],
