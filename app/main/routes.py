@@ -39,7 +39,7 @@ def submit():
     try:
         if valid_api_key(request.form['api_key']): # and if request.remote_addr in approved_ips
             if int(request.form['Score']) > 0:
-                u = accesscode_to_user(request.form.accesscode.data)
+                u = accesscode_to_user(request.form['AccessCode'].lower())
                 if u == None:
                     raise
                 s = id_to_songname(hex(int(request.form['SongID'])))
@@ -50,7 +50,7 @@ def submit():
                     song_id = int(request.form['SongID']),
                     score = int(request.form['Score']),
                     exscore = calc_exscore(int(request.form['Perfect']), int(request.form['Great']), int(request.form['Good']), int(request.form['Bad']), int(request.form['Miss'])),
-                    lettergrade = prime_grade[int(request.form['Grade'])],
+                    lettergrade = prime_grade[int(request.form['Grade']) % 0x100],
                     type = prime_charttype[int(request.form['Type'])],
                     difficultynum = int(request.form['ChartLevel']),
                     difficulty = get_difficulty(s, prime_charttype[int(request.form['Type'])], int(request.form['ChartLevel'])),
