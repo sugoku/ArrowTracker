@@ -247,7 +247,7 @@ def posts_to_uscore(posts, scoretype='default'):
         if scoretype == 'default':
             uscore.append(
                 {
-                    'SongID': post.song_id,
+                    'SongID': int(raw_songdata[song]['song_id'], 16),
                     'ChartLevel': post.difficultynum,
                     'GameDataFlag': get_primediff(post.type),
                     'Score': post.score,
@@ -257,7 +257,7 @@ def posts_to_uscore(posts, scoretype='default'):
         elif scoretype == 'exscore':
             uscore.append(
                 {
-                    'SongID': post.song_id,
+                    'SongID': int(raw_songdata[song]['song_id'], 16),
                     'ChartLevel': post.difficultynum,
                     'GameDataFlag': get_primediff(post.type),
                     'Score': post.exscore,
