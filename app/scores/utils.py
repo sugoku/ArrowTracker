@@ -248,8 +248,8 @@ def posts_to_uscore(posts, scoretype='default'):
             uscore.append(
                 {
                     'SongID': post.song_id,
-                    'ChartLevel': post.difficulty,
-                    'GameDataFlag': post.gameflag,
+                    'ChartLevel': post.difficultynum,
+                    'GameDataFlag': get_primediff(post.type),
                     'Score': post.score,
                     'RealScore': post.score
                 }
@@ -258,8 +258,8 @@ def posts_to_uscore(posts, scoretype='default'):
             uscore.append(
                 {
                     'SongID': post.song_id,
-                    'ChartLevel': post.difficulty,
-                    'GameDataFlag': post.gameflag,
+                    'ChartLevel': post.difficultynum,
+                    'GameDataFlag': get_primediff(post.type),
                     'Score': post.exscore,
                     'RealScore': post.exscore
                 }
