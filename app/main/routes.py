@@ -42,7 +42,7 @@ def submit():
                 u = accesscode_to_user(request.form['AccessCode'].lower())
                 if u == None:
                     raise
-                s = id_to_songname(hex(int(request.form['SongID'])))
+                s = id_to_songname(hex(int(request.form['SongID'])).replace('0x', '').upper())
                 if s == None:
                     raise
                 post = Post(
