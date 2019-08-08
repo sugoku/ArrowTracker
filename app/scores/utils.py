@@ -9,7 +9,10 @@ from flask import current_app
 from flask_login import current_user
 from app import db, logging, raw_songdata, scheduler
 from app.models import Post, User
-from app.users.utils import id_to_user
+
+def id_to_user(uid):
+    u = User.query.filter_by(id=uid).first()
+    return u if u != None else None
 
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 
@@ -247,7 +250,7 @@ def posts_to_uscore(posts, scoretype='default'):
         if scoretype == 'default':
             uscore.append(
                 {
-                    'SongID': int(raw_songdata[song]['song_id'], 16),
+                    'SongID': post.song_id,
                     'ChartLevel': post.difficultynum,
                     'GameDataFlag': get_primediff(post.type),
                     'Score': post.score,
@@ -257,7 +260,7 @@ def posts_to_uscore(posts, scoretype='default'):
         elif scoretype == 'exscore':
             uscore.append(
                 {
-                    'SongID': int(raw_songdata[song]['song_id'], 16),
+                    'SongID': post.song_id,
                     'ChartLevel': post.difficultynum,
                     'GameDataFlag': get_primediff(post.type),
                     'Score': post.exscore,
