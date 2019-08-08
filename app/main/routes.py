@@ -11,7 +11,7 @@ from app import songlist_pairs, difficulties, db, raw_songdata
 from sqlalchemy import desc, or_
 from app.config import GetChangelog
 from app.main.utils import save_picture, allowed_file, valid_api_key, generate_unique_key
-from app.users.utils import accesscode_to_user, user_to_primeprofile, update_user_with_primeprofile, update_user_sp
+from app.users.utils import accesscode_to_user, user_to_primeprofile, update_user_with_primeprofile, update_user_sp, add_exp, add_pp
 from app.scores.utils import *
 from calc_performance import calc_performance
 
@@ -83,8 +83,8 @@ def submit():
                 if post.rushspeed == 0.0:
                     post.rushspeed = 1.0
                 post.sp = calc_performance(post.song, post.difficulty, post.difficultynum, post.perfect, post.great, post.good, post.bad, post.miss, int_to_judge(post.modifiers), post.rushspeed, post.stagepass == "True")
-                add_exp(u, request.form['EXP'])
-                add_pp(u, request.form['PP'])
+                add_exp(u, int(request.form['EXP']))
+                add_pp(u, int(request.form['PP']))
                 if high_score(post):
                     db.session.add(post)
                     db.session.commit()

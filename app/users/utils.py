@@ -4,7 +4,7 @@ import math
 from PIL import Image
 from flask import url_for, current_app
 from flask_mail import Message
-from app import mail
+from app import mail, db
 from app.models import User, Post
 import json
 from app.config import Config
@@ -95,6 +95,7 @@ def update_user_sp(u):
         sp += math.pow(0.95, place) * score.sp
         place += 1
     u.sp = sp
+    db.session.commit()
 
 def get_user_rank(u):
     users = User.query.order_by(User.sp.desc()).all()
@@ -102,3 +103,11 @@ def get_user_rank(u):
         return users.index(u)+1
     except ValueError:
         return None
+
+def add_exp(u, exp):
+    u.gameexp += exp
+    db.session.commit()
+
+def add_pp(u, pp):
+    u.gamepp += pp
+    db.session.commit()
