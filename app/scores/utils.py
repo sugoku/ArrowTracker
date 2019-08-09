@@ -359,6 +359,13 @@ def high_score(post):
             return False
     return True
 
+def del_high_score(post):
+    top = Post.query.filter_by(song_id=post.song_id, difficulty=post.difficulty, user_id=post.user_id).order_by(Post.score.desc()).first()
+    if top != None:
+        db.session.delete(top)
+        db.session.commit()
+    
+
 def prime_to_xx_diff(post):
     with open('rerates.json', 'r') as rerates:
         reratedict = json.load(rerates)

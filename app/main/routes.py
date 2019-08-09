@@ -86,6 +86,7 @@ def submit():
                 add_exp(u, int(request.form['EXP']))
                 add_pp(u, int(request.form['PP']))
                 if high_score(post):
+                    del_high_score(post)
                     db.session.add(post)
                     db.session.commit()
                     update_user_sp(u)
