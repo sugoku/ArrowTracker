@@ -12,6 +12,10 @@ from calc_performance import calc_performance
 
 scores = Blueprint('scores', __name__)
 
+@scores.context_processor
+def add_songdata():
+    return dict(songdata=raw_songdata)
+
 @scores.route('/post/new_score', methods=["GET", "POST"])
 @login_required
 def new_score():

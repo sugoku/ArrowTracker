@@ -75,36 +75,38 @@
             diffDrop.insertBefore(option,diffDrop.lastChild);
           }
         }
-        $('#psupdate').bootstrapToggle()
-        if (!$('#psupdate').prop('checked')) {
-            $("#noteskin").prop("disabled", true);
-            $("#scrollspeed").prop("readonly", true);
-            $("#judgement").prop("disabled", true);
-        } else {
-          $("#noteskin").prop("disabled", false);
-          $("#scrollspeed").prop("readonly", false);
-          $("#judgement").prop("disabled", false);
-        }
-        $(function() {
-          $('#psupdate').change(function() {
-            if (!$(this).prop('checked')) {
+        if ($('#psupdate').length) {
+          $('#psupdate').bootstrapToggle()
+          if (!$('#psupdate').prop('checked')) {
               $("#noteskin").prop("disabled", true);
               $("#scrollspeed").prop("readonly", true);
               $("#judgement").prop("disabled", true);
-            } else {
-              $("#noteskin").prop("disabled", false);
-              $("#scrollspeed").prop("readonly", false);
-              $("#judgement").prop("disabled", false);
-            }
+          } else {
+            $("#noteskin").prop("disabled", false);
+            $("#scrollspeed").prop("readonly", false);
+            $("#judgement").prop("disabled", false);
+          }
+          $(function() {
+            $('#psupdate').change(function() {
+              if (!$(this).prop('checked')) {
+                $("#noteskin").prop("disabled", true);
+                $("#scrollspeed").prop("readonly", true);
+                $("#judgement").prop("disabled", true);
+              } else {
+                $("#noteskin").prop("disabled", false);
+                $("#scrollspeed").prop("readonly", false);
+                $("#judgement").prop("disabled", false);
+              }
+            })
           })
-        })
-        $(function() {
-          $('form').submit(function() {
-              $(':disabled').each(function() {
-                  $(this).removeAttr('disabled');
-              })
+          $(function() {
+            $('form').submit(function() {
+                $(':disabled').each(function() {
+                    $(this).removeAttr('disabled');
+                })
+            })
           })
-        })
+        }
       }
 
       $(document).ready( function () {

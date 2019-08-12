@@ -138,6 +138,7 @@
             <th>Stage Pass</th>
             <th>Modifiers</th>
             <th>Rush Speed</th>
+            <th>Verified</th>
             <th>SP</th>
             {% set count = namespace(a=0) %}
             {% for score in recentscores %}
@@ -154,6 +155,13 @@
                 {% endif %}
                 <td>{{ modlist_to_modstr(int_to_mods(score.modifiers)) }}</td>
                 <td>{{ score.rushspeed }}</td>
+                {% if score.acsubmit == "True" %}
+                  <td>Yes (Prime)</td>
+                {% elif score.image_file != "None" %}
+                  <td>Yes</td>
+                {% else %}
+                  <td>No</td>
+                {% endif %}
                 <td>{{ score.sp|int }}</td>
               </tr>
             {% endfor %}

@@ -9,12 +9,13 @@ from app.models import User, Post
 import json
 from app.config import Config
 from app.scores.utils import *
+from sqlalchemy import desc, or_
 
 def save_picture(form_picture):
     random_hex = secrets.token_hex(8)
     _, f_ext = os.path.splitext(form_picture.filename)
-    if f_ext != 'gif':
-        f_ext = 'jpg'
+    if f_ext != '.gif':
+        f_ext = '.jpg'
     picture_fn = random_hex + f_ext
     picture_path = os.path.join(current_app.root_path, 'static/profile_pics', picture_fn)
     output_size = (125, 125)
@@ -22,7 +23,7 @@ def save_picture(form_picture):
     if i.size[0] > 1200 or i.size[1] > 1200:
         pass
     i.thumbnail(output_size)
-    if f_ext != 'gif':
+    if f_ext != '.gif':
         i.save(picture_path, format='jpeg')
     else:
         i.save(picture_path)

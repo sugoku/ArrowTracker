@@ -19,6 +19,10 @@ from calc_performance import calc_performance
 # allows us to easily call or redirect the user to any of them from anywhere.
 main = Blueprint('main', __name__)
 
+@main.context_processor
+def add_songdata():
+    return dict(songdata=raw_songdata)
+
 # The route for the main homepage.
 @main.route("/")
 def home():
@@ -218,6 +222,7 @@ def search():                                   # we can both request and send d
     form = ChartSearchForm(request.form)
     if request.method == "POST" and form.validate():
         session['search_song'] = form.song.data
+        session['search_difficulty'] = request.form.get('diffDrop')
         session['search_filters'] = form.filters.data
         return redirect(url_for('main.search_results'))
     return render_template("chartsearch.html", form=form, songdata=raw_songdata, int_to_mods=int_to_mods, modlist_to_modstr=modlist_to_modstr, int_to_noteskin=int_to_noteskin)
@@ -257,6 +262,9 @@ def search_results():
 
     if session.get('search_song') != None and session['search_song'] != '':
         results = results.filter(Post.song == session['search_song'])
+
+    if session.get('search_difficulty') != None and session['search_difficulty'] != '':
+        results = results.filter(Post.difficulty == session['search_difficulty'])
 
     if session.get('search_filters') != None and session['search_filters'] == 'verified': # fix for array
         results = results.filter(Post.platform == 'pad')

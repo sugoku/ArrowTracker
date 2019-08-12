@@ -7,11 +7,16 @@ from app.users.forms import (RegisterForm, LoginForm, UpdateAccountForm,
 from app.users.utils import save_picture, send_reset_email, get_user_rank
 from app.scores.utils import *
 from app.main.utils import *
+from sqlalchemy import or_
 import json
 import binascii
 import io
 
 users = Blueprint('users', __name__)
+
+@users.context_processor
+def add_songdata():
+    return dict(songdata=raw_songdata)
 
 @users.route("/register", methods=["GET", "POST"])
 def register():
@@ -109,13 +114,13 @@ def user_posts(username):
 @users.route("/userpage/<string:username>")
 def user_page(username):
     user = User.query.filter_by(username=username).first_or_404()
-    topscores = Post.query.filter_by(author=user).order_by(Post.sp.desc()).limit(50).all()
+    topscores = Post.query.filter_by(author=user).filter(or_(Post.image_file != "None", Post.acsubmit == "True")).order_by(Post.sp.desc()).limit(50).all()
     recentscores = Post.query.filter_by(author=user).order_by(Post.date_posted.desc()).limit(3).all()
 
     firstscores = []
     allscores = Post.query.filter_by(author=user).all()
     for score in allscores:
-        if score == Post.query.filter_by(song_id=score.song_id, difficulty=score.difficulty).first():
+        if score == Post.query.filter_by(song_id=score.song_id, difficulty=score.difficulty).filter(or_(Post.image_file != "None", Post.acsubmit == "True")).first():
             firstscores.append(score)
     
     return render_template("user_profile.html", topscores=topscores, recentscores=recentscores, user=user, int_to_mods=int_to_mods, modlist_to_modstr=modlist_to_modstr, int_to_noteskin=int_to_noteskin, get_user_rank=get_user_rank, firstscores=firstscores)

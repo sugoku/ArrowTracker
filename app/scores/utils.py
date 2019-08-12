@@ -22,10 +22,18 @@ def allowed_file(filename):
 def save_picture(form_picture):
     random_hex = secrets.token_hex(8)
     _, f_ext = os.path.splitext(form_picture.filename)
+    if f_ext != '.gif':
+        f_ext = '.jpg'
     picture_fn = random_hex + f_ext
     picture_path = os.path.join(current_app.root_path, 'static/score_screenshots', picture_fn)
+    output_size = (1200, 1200)
     i = Image.open(form_picture)
-    i.save(picture_path)
+    if i.size[0] > 1200 or i.size[1] > 1200:
+        i.thumbnail(output_size)
+    if f_ext != '.gif':
+        i.save(picture_path, format='jpeg')
+    else:
+        i.save(picture_path)
     return picture_fn
 
 def return_completion(user, difficulty):
