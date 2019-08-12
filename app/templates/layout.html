@@ -21,12 +21,14 @@
       crossorigin="anonymous"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.5.0/js/bootstrap4-toggle.min.js"></script>
     <link rel="stylesheet" href="https://bootswatch.com/4/darkly/bootstrap.min.css" />
     <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.5.0/css/bootstrap4-toggle.min.css">
     {% block head %}
       {% block title %}
         <title>Arrow Tracker</title>
@@ -73,6 +75,36 @@
             diffDrop.insertBefore(option,diffDrop.lastChild);
           }
         }
+        $('#psupdate').bootstrapToggle()
+        if (!$('#psupdate').prop('checked')) {
+            $("#noteskin").prop("disabled", true);
+            $("#scrollspeed").prop("readonly", true);
+            $("#judgement").prop("disabled", true);
+        } else {
+          $("#noteskin").prop("disabled", false);
+          $("#scrollspeed").prop("readonly", false);
+          $("#judgement").prop("disabled", false);
+        }
+        $(function() {
+          $('#psupdate').change(function() {
+            if (!$(this).prop('checked')) {
+              $("#noteskin").prop("disabled", true);
+              $("#scrollspeed").prop("readonly", true);
+              $("#judgement").prop("disabled", true);
+            } else {
+              $("#noteskin").prop("disabled", false);
+              $("#scrollspeed").prop("readonly", false);
+              $("#judgement").prop("disabled", false);
+            }
+          })
+        })
+        $(function() {
+          $('form').submit(function() {
+              $(':disabled').each(function() {
+                  $(this).removeAttr('disabled');
+              })
+          })
+        })
       }
 
       $(document).ready( function () {
@@ -80,7 +112,7 @@
             $('#search-results').DataTable();
           } 
         } 
-      );
+      )
 
     </script>
   </body>

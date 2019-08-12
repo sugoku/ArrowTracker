@@ -306,16 +306,16 @@
               {{ form.judgement(class="form-control form-control-lg") }}
             {% endif %}
           </div>
-          <div class="form-group form-check">
+          <div class="form-group">
             {% if form.psupdate.errors %}
-              {{ form.psupdate(class="form-check-input is-invalid") }}
+              {{ form.psupdate(class="form-check-input is-invalid", data_toggle="toggle", data_style="round", data_onstyle="success") }}
               <div class="invalid-feedback">
                 {% for error in form.psupdate.errors %}
                   <span>{{ error }}</span>
                 {% endfor %}
               </div>
             {% else %}
-              {{ form.psupdate(class="form-check-input") }}
+              {{ form.psupdate(class="form-check-input", data_toggle="toggle", data_style="round", data_onstyle="success") }}
             {% endif %}
             {{ form.psupdate.label(class="form-check-label") }}
           </div>

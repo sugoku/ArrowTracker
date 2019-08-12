@@ -77,7 +77,7 @@ def dashboard():
         current_user.noteskin = form.noteskin.data
         current_user.scrollspeed = round(0.5 * round(float(form.scrollspeed.data) / 0.5), 1)
         current_user.modifiers = current_user.modifiers | mods_to_int([], form.judgement.data)
-        current_user.psupdate = "True" if form.psupdate.data else "False"
+        current_user.psupdate = "True" if not form.psupdate.data else "False"
         db.session.commit()
         flash('Account details updated!', 'success')
         return redirect(url_for('users.dashboard'))
@@ -90,7 +90,7 @@ def dashboard():
         form.noteskin.data = current_user.noteskin
         form.scrollspeed.data = current_user.scrollspeed
         form.judgement.data = int_to_judge(current_user.modifiers)
-        form.psupdate.data = current_user.psupdate == "True"
+        form.psupdate.data = current_user.psupdate == "False"
     image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
     return render_template("dashboard.html", title="Dashboard", image_file=image_file, form=form, current_user=current_user)
 

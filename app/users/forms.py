@@ -40,7 +40,7 @@ class UpdateAccountForm(FlaskForm):
     noteskin = SelectField('Preferred Noteskin', coerce=int, choices=list(prime_noteskin.items()), validators=[InputRequired(), NumberRange(min=0)])
     scrollspeed = DecimalField('Preferred Speed Mod', places=1, validators=[NumberRange(min=0, max=5)])
     judgement = SelectField('Preferred Judgement', coerce=str, choices=judgement_pairs, validators=[DataRequired()])
-    psupdate = BooleanField('Update Settings on Most Recent PrimeServer Play')
+    psupdate = BooleanField('Force these settings every round in PrimeServer')
     submit = SubmitField('Update')
 
     def validate_username(self, username):

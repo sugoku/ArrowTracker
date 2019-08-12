@@ -163,3 +163,10 @@ html {
 .form-check-inline {
   margin:5px 3px;
 }
+
+.toggle.round, .toggle-on.round, .toggle-off.round { 
+  border-radius: 20rem; 
+}
+.toggle.round .toggle-handle { 
+  border-radius: 20rem; 
+}
