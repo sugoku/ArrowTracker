@@ -62,6 +62,11 @@ for i in coop:
     difficulties.append(i)
 difficulties = list(zip(difficulties, difficulties))
 
+apikey_required = False # also ip address requirement
+
+with open('approved_ips.txt', 'r') as f:
+    approved_ips = [x.replace('\n','').strip() for x in f.readlines()]
+
 db = SQLAlchemy()
 bcrypt = Bcrypt()
 login_manager = LoginManager()

@@ -22,7 +22,6 @@ def save_picture(form_picture):
     return picture_fn
 
 def valid_api_key(apikey):
-    return True
     u = APIKey.query.filter_by(key=apikey).first()
     return u != None
 
@@ -30,9 +29,9 @@ def get_api_key(apikey):
     return APIKey.query.filter_by(key=apikey).first()
 
 def generate_unique_key():
-    key = uuid.uuid4()
+    key = secrets.token_urlsafe(32)
     while valid_api_key(key.hex):
-        key = uuid.uuid4()
+        key = secrets.token_urlsafe(32)
     return key.hex
 
 def valid_accesscode(accesscode):

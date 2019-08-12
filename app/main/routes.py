@@ -7,7 +7,7 @@ from app.main.forms import SearchForm, TournamentForm, TournamentEditForm, Chart
 from app.scores.forms import ScoreForm
 from app.users.forms import APIKeyForm
 from app.models import Post, Tournament, APIKey
-from app import songlist_pairs, difficulties, db, raw_songdata
+from app import songlist_pairs, difficulties, db, raw_songdata, approved_ips, apikey_required
 from sqlalchemy import desc, or_
 from app.config import GetChangelog
 from app.main.utils import save_picture, allowed_file, valid_api_key, generate_unique_key
@@ -41,7 +41,7 @@ def submit():
         'status': 'success'
     }
     try:
-        if valid_api_key(request.form['api_key']): # and if request.remote_addr in approved_ips
+        if apikey_required or (valid_api_key(request.form['api_key']) and (request.environ.get('REMOTE_ADDR') in approved_ips or request.environ.get('HTTP_X_FORWARDED_FOR') in approved_ips)):
             if int(request.form['Score']) > 0:
                 u = accesscode_to_user(request.form['AccessCode'].lower())
                 if u == None:
@@ -110,7 +110,7 @@ def submit():
 def getprofile():
     response = {}
     try:
-        if valid_api_key(request.args.get('api_key')): # and if request.remote_addr in approved_ips
+        if apikey_required or (valid_api_key(request.form['api_key']) and (request.environ.get('REMOTE_ADDR') in approved_ips or request.environ.get('HTTP_X_FORWARDED_FOR') in approved_ips)):
             u = accesscode_to_user(request.args.get('access_code'))
             return jsonify(user_to_primeprofile(u))
         else:
@@ -129,7 +129,7 @@ def saveprofile():
         'status': 'success'
     }
     try:
-        if valid_api_key(request.form['api_key']): # and if request.remote_addr in approved_ips
+        if apikey_required or (valid_api_key(request.form['api_key']) and (request.environ.get('REMOTE_ADDR') in approved_ips or request.environ.get('HTTP_X_FORWARDED_FOR') in approved_ips)):
             u = accesscode_to_user(request.form['access_code'])
             if u == None:
                 raise
@@ -148,7 +148,7 @@ def saveprofile():
 def getworldbest():
     response = {}
     try:
-        if valid_api_key(request.args.get('api_key')): # and if request.remote_addr in approved_ips
+        if apikey_required or (valid_api_key(request.form['api_key']) and (request.environ.get('REMOTE_ADDR') in approved_ips or request.environ.get('HTTP_X_FORWARDED_FOR') in approved_ips)):
             return jsonify(get_worldbest(scoretype=request.args.get('scoretype')))
         else:
             response['status'] = 'failure'
@@ -163,7 +163,7 @@ def getworldbest():
 def getrankmode():
     response = {}
     try:
-        if valid_api_key(request.args.get('api_key')): # and if request.remote_addr in approved_ips
+        if apikey_required or (valid_api_key(request.form['api_key']) and (request.environ.get('REMOTE_ADDR') in approved_ips or request.environ.get('HTTP_X_FORWARDED_FOR') in approved_ips)):
             return jsonify(get_rankmode(scoretype=request.args.get('scoretype')))
         else:
             response['status'] = 'failure'
@@ -175,13 +175,12 @@ def getrankmode():
     return jsonify(response)
 
 @main.route('/getapikey', methods=['POST'])
-@login_required
 def getapikey():
     response = {
         'status': 'success'
     }
     try:
-        if current_user.is_authenticated: # and if request.remote_addr in approved_ips
+        if apikey_required or (request.remote_addr in approved_ips):
             form = APIKeyForm(request.form)
             if form.validate():
                 apikey = APIKey(
@@ -191,6 +190,9 @@ def getapikey():
                 )
                 db.session.add(apikey)
                 db.session.commit()
+                response['key'] = apikey.key
+                response['name'] = apikey.name
+                response['country'] = apikey.country
         else:
             response['status'] = 'failure'
             response['reason'] = 'invalid request'
