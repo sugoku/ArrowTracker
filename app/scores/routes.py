@@ -146,6 +146,12 @@ def weeklyscore(score_id):
     score = WeeklyPost.query.get_or_404(score_id)
     return render_template('weeklyscore.html', score=score, bluegrades=bluegrades, goldgrades=goldgrades, redgrades=redgrades)
 
+@scores.route('/leaderboard/main')
+def main_ldb():
+    users = User.query.filter(User.sp != 0).order_by(User.sp.desc()).all()
+    ldbtype = "Main"
+    return render_template('ldbsp.html', users=users, ldbtype=ldbtype)
+
 @scores.route('/leaderboard/total')
 def total_ldb():
     users = User.query.all()
