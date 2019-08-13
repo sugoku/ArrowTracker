@@ -107,7 +107,7 @@ def get_user_rank(u):
 
 def add_exp(u, exp):
     u.gameexp += exp
-    u.gamelevel = min((int((5.5816187294199637E-01*(u.gameexp**5.0936826990568707E-01))-5.4169035580629679), 0))+1
+    u.gamelevel = max((int((5.5816187294199637E-01*(u.gameexp**5.0936826990568707E-01))-5.4169035580629679), 0))+1
     db.session.commit()
 
 def add_pp(u, pp):

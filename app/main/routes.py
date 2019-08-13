@@ -41,7 +41,7 @@ def submit():
         'status': 'success'
     }
     try:
-        if apikey_required or (valid_api_key(request.form['api_key']) and (request.environ.get('REMOTE_ADDR') in approved_ips or request.environ.get('HTTP_X_FORWARDED_FOR') in approved_ips)):
+        if not apikey_required or (valid_api_key(request.form['api_key']) and (request.environ.get('REMOTE_ADDR') in approved_ips or request.environ.get('HTTP_X_FORWARDED_FOR') in approved_ips)):
             if int(request.form['Score']) > 0:
                 u = accesscode_to_user(request.form['AccessCode'].lower())
                 if u == None:
@@ -94,34 +94,42 @@ def submit():
                     db.session.add(post)
                     db.session.commit()
                     update_user_sp(u)
-            
-            return jsonify(response)
         else:
             response['status'] = 'failure'
-            response['reason'] = 'invalid request'
-            return jsonify(response)
+            if current_app.debug:
+                response['reason'] = 'forbidden IP ' + (request.environ.get('REMOTE_ADDR') if request.environ.get('REMOTE_ADDR') != None else "") + ' and ' + (request.environ.get('HTTP_X_FORWARDED_FOR') if request.environ.get('HTTP_X_FORWARDED_FOR') != None else "")
+            else:
+                response['reason'] = 'forbidden'
     except Exception as e:
         response['status'] = 'failure'
         #response['reason'] = type(e).__name__
-        response['reason'] = traceback.format_exc()
-        return jsonify(response)
+        if current_app.debug:
+            response['reason'] = traceback.format_exc()
+        else:
+            response['reason'] = 'internal error'
+    return jsonify(response)
 
 @main.route('/getprofile', methods=['GET'])
 def getprofile():
     response = {}
     try:
-        if apikey_required or (valid_api_key(request.form['api_key']) and (request.environ.get('REMOTE_ADDR') in approved_ips or request.environ.get('HTTP_X_FORWARDED_FOR') in approved_ips)):
+        if not apikey_required or (valid_api_key(request.form['api_key']) and (request.environ.get('REMOTE_ADDR') in approved_ips or request.environ.get('HTTP_X_FORWARDED_FOR') in approved_ips)):
             u = accesscode_to_user(request.args.get('access_code'))
             return jsonify(user_to_primeprofile(u))
         else:
             response['status'] = 'failure'
-            response['reason'] = 'invalid request'
-            return jsonify(response)
+            if current_app.debug:
+                response['reason'] = 'forbidden IP ' + (request.environ.get('REMOTE_ADDR') if request.environ.get('REMOTE_ADDR') != None else "") + ' and ' + (request.environ.get('HTTP_X_FORWARDED_FOR') if request.environ.get('HTTP_X_FORWARDED_FOR') != None else "")
+            else:
+                response['reason'] = 'forbidden'
     except Exception as e:
         response['status'] = 'failure'
         #response['reason'] = type(e).__name__
-        response['reason'] = traceback.format_exc()
-        return jsonify(response)
+        if current_app.debug:
+            response['reason'] = traceback.format_exc()
+        else:
+            response['reason'] = 'internal error'
+    return jsonify(response)
 
 @main.route('/saveprofile', methods=['POST'])
 def saveprofile():
@@ -129,7 +137,7 @@ def saveprofile():
         'status': 'success'
     }
     try:
-        if apikey_required or (valid_api_key(request.form['api_key']) and (request.environ.get('REMOTE_ADDR') in approved_ips or request.environ.get('HTTP_X_FORWARDED_FOR') in approved_ips)):
+        if not apikey_required or (valid_api_key(request.form['api_key']) and (request.environ.get('REMOTE_ADDR') in approved_ips or request.environ.get('HTTP_X_FORWARDED_FOR') in approved_ips)):
             u = accesscode_to_user(request.form['access_code'])
             if u == None:
                 raise
@@ -137,41 +145,59 @@ def saveprofile():
             db.session.commit()
         else:
             response['status'] = 'failure'
-            response['reason'] = 'invalid request'
+            if current_app.debug:
+                response['reason'] = 'forbidden IP ' + (request.environ.get('REMOTE_ADDR') if request.environ.get('REMOTE_ADDR') != None else "") + ' and ' + (request.environ.get('HTTP_X_FORWARDED_FOR') if request.environ.get('HTTP_X_FORWARDED_FOR') != None else "")
+            else:
+                response['reason'] = 'forbidden'
     except Exception as e:
         response['status'] = 'failure'
         #response['reason'] = type(e).__name__
-        response['reason'] = traceback.format_exc()
+        if current_app.debug:
+            response['reason'] = traceback.format_exc()
+        else:
+            response['reason'] = 'internal error'
     return jsonify(response)
 
 @main.route('/getworldbest', methods=['GET'])
 def getworldbest():
     response = {}
     try:
-        if apikey_required or (valid_api_key(request.form['api_key']) and (request.environ.get('REMOTE_ADDR') in approved_ips or request.environ.get('HTTP_X_FORWARDED_FOR') in approved_ips)):
+        if not apikey_required or (valid_api_key(request.form['api_key']) and (request.environ.get('REMOTE_ADDR') in approved_ips or request.environ.get('HTTP_X_FORWARDED_FOR') in approved_ips)):
             return jsonify(get_worldbest(scoretype=request.args.get('scoretype')))
         else:
             response['status'] = 'failure'
-            response['reason'] = 'invalid request'
+            if current_app.debug:
+                response['reason'] = 'forbidden IP ' + (request.environ.get('REMOTE_ADDR') if request.environ.get('REMOTE_ADDR') != None else "") + ' and ' + (request.environ.get('HTTP_X_FORWARDED_FOR') if request.environ.get('HTTP_X_FORWARDED_FOR') != None else "")
+            else:
+                response['reason'] = 'forbidden'
     except Exception as e:
         response['status'] = 'failure'
         #response['reason'] = type(e).__name__
-        response['reason'] = traceback.format_exc()
+        if current_app.debug:
+            response['reason'] = traceback.format_exc()
+        else:
+            response['reason'] = 'internal error'
     return jsonify(response)
 
 @main.route('/getrankmode', methods=['GET'])
 def getrankmode():
     response = {}
     try:
-        if apikey_required or (valid_api_key(request.form['api_key']) and (request.environ.get('REMOTE_ADDR') in approved_ips or request.environ.get('HTTP_X_FORWARDED_FOR') in approved_ips)):
+        if not apikey_required or (valid_api_key(request.form['api_key']) and (request.environ.get('REMOTE_ADDR') in approved_ips or request.environ.get('HTTP_X_FORWARDED_FOR') in approved_ips)):
             return jsonify(get_rankmode(scoretype=request.args.get('scoretype')))
         else:
             response['status'] = 'failure'
-            response['reason'] = 'invalid request'
+            if current_app.debug:
+                response['reason'] = 'forbidden IP ' + (request.environ.get('REMOTE_ADDR') if request.environ.get('REMOTE_ADDR') != None else "") + ' and ' + (request.environ.get('HTTP_X_FORWARDED_FOR') if request.environ.get('HTTP_X_FORWARDED_FOR') != None else "")
+            else:
+                response['reason'] = 'forbidden'
     except Exception as e:
         response['status'] = 'failure'
         #response['reason'] = type(e).__name__
-        response['reason'] = traceback.format_exc()
+        if current_app.debug:
+            response['reason'] = traceback.format_exc()
+        else:
+            response['reason'] = 'internal error'
     return jsonify(response)
 
 @main.route('/getapikey', methods=['POST'])
@@ -180,7 +206,7 @@ def getapikey():
         'status': 'success'
     }
     try:
-        if apikey_required or (request.remote_addr in approved_ips):
+        if not apikey_required or (valid_api_key(request.form['api_key']) and (request.environ.get('REMOTE_ADDR') in approved_ips or request.environ.get('HTTP_X_FORWARDED_FOR') in approved_ips)):
             form = APIKeyForm(request.form)
             if form.validate():
                 apikey = APIKey(
@@ -193,13 +219,25 @@ def getapikey():
                 response['key'] = apikey.key
                 response['name'] = apikey.name
                 response['country'] = apikey.country
+            else:
+                response['status'] = 'failure'
+                if current_app.debug:
+                    response['reason'] = form.errors
+                else:
+                    response['reason'] = 'invalid request'
         else:
             response['status'] = 'failure'
-            response['reason'] = 'invalid request'
+            if current_app.debug:
+                response['reason'] = 'forbidden IP ' + (request.environ.get('REMOTE_ADDR') if request.environ.get('REMOTE_ADDR') != None else "") + ' and ' + (request.environ.get('HTTP_X_FORWARDED_FOR') if request.environ.get('HTTP_X_FORWARDED_FOR') != None else "")
+            else:
+                response['reason'] = 'forbidden'
     except Exception as e:
         response['status'] = 'failure'
         #response['reason'] = type(e).__name__
-        response['reason'] = traceback.format_exc()
+        if current_app.debug:
+            response['reason'] = traceback.format_exc()
+        else:
+            response['reason'] = 'internal error'
     return jsonify(response)
 
 '''@main.route('/validatetid', methods=['POST'])

@@ -30,9 +30,9 @@ def get_api_key(apikey):
 
 def generate_unique_key():
     key = secrets.token_urlsafe(32)
-    while valid_api_key(key.hex):
+    while valid_api_key(key):
         key = secrets.token_urlsafe(32)
-    return key.hex
+    return key
 
 def valid_accesscode(accesscode):
     u = User.query.filter_by(accesscode=accesscode).first()

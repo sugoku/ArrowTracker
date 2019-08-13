@@ -70,5 +70,7 @@ class ResetPasswordForm(FlaskForm):
     submit = SubmitField('Request Reset')
 
 class APIKeyForm(FlaskForm):
-    name = StringField('Machine Name', validators=[DataRequired(), Length(min=1, max=100)])
+    class Meta:
+        csrf = False
+    name = StringField('Machine Name', validators=[DataRequired(), Length(min=1, max=50)])
     country = StringField('Country ID', validators=[DataRequired(), Length(min=1, max=2)])

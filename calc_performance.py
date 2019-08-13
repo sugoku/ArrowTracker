@@ -33,7 +33,7 @@ def calc_performance(songname, dname, difficulty, perfect, great, good, bad, mis
     max_combo = perfect + great + good + bad + miss
     ex = calc_exscore(perfect, great, good, bad, miss)
     max_ex = calc_exscore(max_combo, 0, 0, 0, 0)
-    return math.pow(difficulty, math.pow(difficulty_weight, math.pow(rush, rush_weight))) * math.pow(ex / max_ex, exscore_weight) * (1.0 - (miss / max_combo * miss_weight)) * global_multiplier * judgement_multiplier * fail_multiplier
+    return max(((math.pow(difficulty, math.pow(difficulty_weight, math.pow(rush, rush_weight))) * math.pow(ex / max_ex, exscore_weight) * (1.0 - (miss / max_combo * miss_weight)) * global_multiplier * judgement_multiplier * fail_multiplier), 0))
 
 def get_diffstr(difftype, diffnum):
     return {val: key for key, val in abbrev_charttype.items()}[difftype] + str(diffnum)
