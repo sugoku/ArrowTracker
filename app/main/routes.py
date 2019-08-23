@@ -1,6 +1,7 @@
 import os
 import logging
 import traceback
+import json
 from flask import render_template, request, Blueprint, current_app, session, redirect, url_for, flash, Markup, jsonify
 from flask_login import current_user, login_required
 from app.main.forms import SearchForm, TournamentForm, TournamentEditForm, ChartSearchForm
@@ -14,6 +15,7 @@ from app.main.utils import save_picture, allowed_file, valid_api_key, generate_u
 from app.users.utils import accesscode_to_user, user_to_primeprofile, update_user_with_primeprofile, update_user_sp, add_exp, add_pp
 from app.scores.utils import *
 from calc_performance import calc_performance
+from werkzeug.exceptions import BadRequestKeyError
 
 # We can define all of the "@main" decorators below as a "blueprint" that
 # allows us to easily call or redirect the user to any of them from anywhere.
@@ -113,6 +115,8 @@ def submit():
         response['status'] = 'failure'
         #response['reason'] = type(e).__name__
         if current_app.debug:
+            if isinstance(e, BadRequestKeyError):
+                current_app.logger.error(json.dumps(request.form, indent=4))
             response['reason'] = traceback.format_exc()
         else:
             response['reason'] = 'internal error'
@@ -166,6 +170,8 @@ def saveprofile():
         response['status'] = 'failure'
         #response['reason'] = type(e).__name__
         if current_app.debug:
+            if isinstance(e, BadRequestKeyError):
+                current_app.logger.error(json.dumps(request.form, indent=4))
             response['reason'] = traceback.format_exc()
         else:
             response['reason'] = 'internal error'
@@ -189,6 +195,8 @@ def getworldbest():
         response['status'] = 'failure'
         #response['reason'] = type(e).__name__
         if current_app.debug:
+            if isinstance(e, BadRequestKeyError):
+                current_app.logger.error(json.dumps(request.form, indent=4))
             response['reason'] = traceback.format_exc()
         else:
             response['reason'] = 'internal error'
@@ -212,6 +220,8 @@ def getrankmode():
         response['status'] = 'failure'
         #response['reason'] = type(e).__name__
         if current_app.debug:
+            if isinstance(e, BadRequestKeyError):
+                current_app.logger.error(json.dumps(request.form, indent=4))
             response['reason'] = traceback.format_exc()
         else:
             response['reason'] = 'internal error'
@@ -254,6 +264,8 @@ def getapikey():
         response['status'] = 'failure'
         #response['reason'] = type(e).__name__
         if current_app.debug:
+            if isinstance(e, BadRequestKeyError):
+                current_app.logger.error(json.dumps(request.form, indent=4))
             response['reason'] = traceback.format_exc()
         else:
             response['reason'] = 'internal error'
