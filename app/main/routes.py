@@ -45,11 +45,15 @@ def submit():
     try:
         if not apikey_required or (valid_api_key(request.form['api_key']) and (request.environ.get('REMOTE_ADDR') in approved_ips or request.environ.get('HTTP_X_FORWARDED_FOR') in approved_ips)):
             if int(request.form['Score']) > 0:
+                if current_app.debug:
+                    current_app.logger.debug("Score above 0, submitting score...")
                 u = accesscode_to_user(request.form['AccessCode'].lower())
                 if u == None:
+                    current_app.logger.error("Access code does not resolve to a valid user!")
                     raise
                 s = id_to_songname(hex(int(request.form['SongID'])).replace('0x', '').upper())
                 if s == None:
+                    current_app.logger.error("Song ID does not resolve to a valid song!")
                     raise
                 post = Post(
                     song = s,
@@ -85,7 +89,11 @@ def submit():
                     acsubmit = 'True',
                     user_id = u.id
                 )
+                if current_app.debug:
+                    current_app.logger.debug("Created post object.")
                 prime_to_xx_diff(post)
+                if current_app.debug:
+                    current_app.logger.debug("Converted Prime difficulty to XX difficulty.")
                 if post.difficulty == None or post.difficulty == '':
                     raise
                 if post.rushspeed == 0.0:
@@ -99,11 +107,21 @@ def submit():
                 post.sp = calc_performance(post.song, post.difficulty, post.difficultynum, post.perfect, post.great, post.good, post.bad, post.miss, int_to_judge(post.modifiers), post.rushspeed, post.stagepass == "True")
                 add_exp(u, int(request.form['EXP']))
                 add_pp(u, int(request.form['PP']))
+                if current_app.debug:
+                    current_app.logger.debug("EXP and PP added to profile.")
                 if high_score(post):
+                    if current_app.debug:
+                        current_app.logger.debug("High score detected, saving score...")
                     del_high_score(post)
                     db.session.add(post)
                     db.session.commit()
+                    if current_app.debug:
+                        current_app.logger.debug("Committed score to database.")
                     update_user_sp(u)
+                    if current_app.debug:
+                        current_app.logger.debug("User SP updated.")
+                elif current_app.debug:
+                    current_app.logger.debug("High score not detected, not saving score.")
         else:
             response['status'] = 'failure'
             if current_app.debug:
@@ -128,7 +146,7 @@ def getprofile():
     response = {}
     try:
         if not apikey_required or (valid_api_key(request.form['api_key']) and (request.environ.get('REMOTE_ADDR') in approved_ips or request.environ.get('HTTP_X_FORWARDED_FOR') in approved_ips)):
-            u = accesscode_to_user(request.args.get('access_code'))
+            u = accesscode_to_user(request.args.get('AccessCode'))
             return jsonify(user_to_primeprofile(u))
         else:
             response['status'] = 'failure'
@@ -171,7 +189,9 @@ def saveprofile():
         #response['reason'] = type(e).__name__
         if current_app.debug:
             if isinstance(e, BadRequestKeyError):
-                current_app.logger.error(json.dumps(request.form, indent=4))
+                temp = request.form.copy()
+                temp.pop('Scores', None)
+                current_app.logger.error(json.dumps(temp, indent=4))
             response['reason'] = traceback.format_exc()
         else:
             response['reason'] = 'internal error'
