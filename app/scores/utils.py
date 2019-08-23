@@ -161,6 +161,18 @@ def update_scores_task():
                     json.dump(create_ranking(rnk, st), f)
         current_app.logger.info("Updated leaderboards.")
 
+def update_song_list():
+    current_app.logger.info("Updating song list database...")
+    with open(os.getcwd()+'/static/gamelists/complete.json', 'w') as f:
+        json.dump(raw_songdata, f)
+    current_app.logger.info("Updated song list database.")
+
+def get_max_combo(song, difficulty):
+    return raw_songdata[song]['difficulties'][difficulty][0]
+
+def update_max_combo(song, difficulty, maxcombo):
+    raw_songdata[song]['difficulties'][difficulty][0] = maxcombo
+
 def create_ranking(ranking='worldbest', scoretype='default'):
     scoretype = re.sub(r'\W+', '', scoretype)
     if ranking == 'worldbest':

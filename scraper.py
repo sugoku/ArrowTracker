@@ -68,6 +68,7 @@ while pagenum <= totalpages:
         # else data[song]['in_prime'] = False
 
         data[song]['id'] = f'{id}'
+        data[song]['difficulties'] = {}
         thumburl = 'https://pumpout.anyhowstep.com' + match.a.div.find('img', class_='thumb-large')['src']
         urllib.request.urlretrieve(thumburl, f'app/static/songthumbs/{id}.png')
         for image in match.a.div.find('div', class_="media-body").find('div', class_="shift").find_all('img', class_='thumb-small'):
@@ -82,7 +83,7 @@ while pagenum <= totalpages:
             diff = diff['src'].split('/')[-1].replace('half_double', 'half-double')
             diff = replace_diff(diff)
             difflist.append(diff)
-            data[song]['difficulties'] = difflist
+            data[song]['difficulties'] = {x:[0] for x in difflist}
         id = id + 1
     print(f'Scraped page {pagenum}')
     pagenum += 1

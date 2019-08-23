@@ -66,7 +66,7 @@
           diffDrop.options.length = 0;
 
           var strSong = song.options[song.selectedIndex].value;
-          var diffs = data[strSong]["difficulties"];
+          var diffs = Object.keys(data[strSong]["difficulties"]);
 
           for(var i=0; i < diffs.length; i++) {
             var option = document.createElement("OPTION"),

@@ -59,7 +59,7 @@ def submit():
                     difficultynum = int(request.form['ChartLevel']),
                     difficulty = get_diffstr(prime_charttype[int(request.form['Type'])], int(request.form['ChartLevel'])),
                     platform = 'pad',
-                    stagepass = 'False' if request.form['SongCategory'] == '0' or prime_grade[int(request.form['Grade']) % 0x100] == 'f' else 'True',
+                    stagepass = 'False' if prime_grade[int(request.form['Grade']) % 0x100] == 'f' else 'True',
                     perfect = int(request.form['Perfect']),
                     great = int(request.form['Great']),
                     good = int(request.form['Good']),
@@ -84,8 +84,16 @@ def submit():
                     user_id = u.id
                 )
                 prime_to_xx_diff(post)
+                if post.difficulty == None or post.difficulty == '':
+                    raise
                 if post.rushspeed == 0.0:
                     post.rushspeed = 1.0
+                song_maxcombo = post.perfect+post.great+post.good+post.bad+post.miss
+                if get_max_combo(post.song, post.difficulty) > song_maxcombo:
+                    update_max_combo(post.song, post.difficulty, song_maxcombo)
+                    update_song_list()
+                    if current_app.debug:
+                        current_app.logger.debug("Updated max combo for song %s, difficulty %s with max combo of %s" % post.song, post.difficulty, song_maxcombo)
                 post.sp = calc_performance(post.song, post.difficulty, post.difficultynum, post.perfect, post.great, post.good, post.bad, post.miss, int_to_judge(post.modifiers), post.rushspeed, post.stagepass == "True")
                 add_exp(u, int(request.form['EXP']))
                 add_pp(u, int(request.form['PP']))
@@ -97,6 +105,7 @@ def submit():
         else:
             response['status'] = 'failure'
             if current_app.debug:
+                current_app.logger.error('Forbidden IP attempted to submit through PrimeServer: ' + (request.environ.get('REMOTE_ADDR') if request.environ.get('REMOTE_ADDR') != None else "") + ' and ' + (request.environ.get('HTTP_X_FORWARDED_FOR') if request.environ.get('HTTP_X_FORWARDED_FOR') != None else ""))
                 response['reason'] = 'forbidden IP ' + (request.environ.get('REMOTE_ADDR') if request.environ.get('REMOTE_ADDR') != None else "") + ' and ' + (request.environ.get('HTTP_X_FORWARDED_FOR') if request.environ.get('HTTP_X_FORWARDED_FOR') != None else "")
             else:
                 response['reason'] = 'forbidden'
@@ -107,6 +116,7 @@ def submit():
             response['reason'] = traceback.format_exc()
         else:
             response['reason'] = 'internal error'
+        current_app.logger.error('Error submitting through PrimeServer: %s' % traceback.format_exc())
     return jsonify(response)
 
 @main.route('/getprofile', methods=['GET'])
@@ -119,6 +129,7 @@ def getprofile():
         else:
             response['status'] = 'failure'
             if current_app.debug:
+                current_app.logger.error('Forbidden IP attempted to get PrimeServer profile: ' + (request.environ.get('REMOTE_ADDR') if request.environ.get('REMOTE_ADDR') != None else "") + ' and ' + (request.environ.get('HTTP_X_FORWARDED_FOR') if request.environ.get('HTTP_X_FORWARDED_FOR') != None else ""))
                 response['reason'] = 'forbidden IP ' + (request.environ.get('REMOTE_ADDR') if request.environ.get('REMOTE_ADDR') != None else "") + ' and ' + (request.environ.get('HTTP_X_FORWARDED_FOR') if request.environ.get('HTTP_X_FORWARDED_FOR') != None else "")
             else:
                 response['reason'] = 'forbidden'
@@ -129,6 +140,7 @@ def getprofile():
             response['reason'] = traceback.format_exc()
         else:
             response['reason'] = 'internal error'
+        current_app.logger.error('Error getting PrimeServer profile: %s' % traceback.format_exc())
     return jsonify(response)
 
 @main.route('/saveprofile', methods=['POST'])
@@ -146,6 +158,7 @@ def saveprofile():
         else:
             response['status'] = 'failure'
             if current_app.debug:
+                current_app.logger.error('Forbidden IP attempted to save PrimeServer profile: ' + (request.environ.get('REMOTE_ADDR') if request.environ.get('REMOTE_ADDR') != None else "") + ' and ' + (request.environ.get('HTTP_X_FORWARDED_FOR') if request.environ.get('HTTP_X_FORWARDED_FOR') != None else ""))
                 response['reason'] = 'forbidden IP ' + (request.environ.get('REMOTE_ADDR') if request.environ.get('REMOTE_ADDR') != None else "") + ' and ' + (request.environ.get('HTTP_X_FORWARDED_FOR') if request.environ.get('HTTP_X_FORWARDED_FOR') != None else "")
             else:
                 response['reason'] = 'forbidden'
@@ -156,6 +169,7 @@ def saveprofile():
             response['reason'] = traceback.format_exc()
         else:
             response['reason'] = 'internal error'
+        current_app.logger.error('Error saving PrimeServer profile: %s' % traceback.format_exc())
     return jsonify(response)
 
 @main.route('/getworldbest', methods=['GET'])
@@ -167,6 +181,7 @@ def getworldbest():
         else:
             response['status'] = 'failure'
             if current_app.debug:
+                current_app.logger.error('Forbidden IP attempted to retrieve world best: ' + (request.environ.get('REMOTE_ADDR') if request.environ.get('REMOTE_ADDR') != None else "") + ' and ' + (request.environ.get('HTTP_X_FORWARDED_FOR') if request.environ.get('HTTP_X_FORWARDED_FOR') != None else ""))
                 response['reason'] = 'forbidden IP ' + (request.environ.get('REMOTE_ADDR') if request.environ.get('REMOTE_ADDR') != None else "") + ' and ' + (request.environ.get('HTTP_X_FORWARDED_FOR') if request.environ.get('HTTP_X_FORWARDED_FOR') != None else "")
             else:
                 response['reason'] = 'forbidden'
@@ -177,6 +192,7 @@ def getworldbest():
             response['reason'] = traceback.format_exc()
         else:
             response['reason'] = 'internal error'
+        current_app.logger.error('Error retrieving world best: %s' % traceback.format_exc())
     return jsonify(response)
 
 @main.route('/getrankmode', methods=['GET'])
@@ -188,6 +204,7 @@ def getrankmode():
         else:
             response['status'] = 'failure'
             if current_app.debug:
+                current_app.logger.error('Forbidden IP attempted to retrieve rank mode: ' + (request.environ.get('REMOTE_ADDR') if request.environ.get('REMOTE_ADDR') != None else "") + ' and ' + (request.environ.get('HTTP_X_FORWARDED_FOR') if request.environ.get('HTTP_X_FORWARDED_FOR') != None else ""))
                 response['reason'] = 'forbidden IP ' + (request.environ.get('REMOTE_ADDR') if request.environ.get('REMOTE_ADDR') != None else "") + ' and ' + (request.environ.get('HTTP_X_FORWARDED_FOR') if request.environ.get('HTTP_X_FORWARDED_FOR') != None else "")
             else:
                 response['reason'] = 'forbidden'
@@ -198,6 +215,7 @@ def getrankmode():
             response['reason'] = traceback.format_exc()
         else:
             response['reason'] = 'internal error'
+        current_app.logger.error('Error retrieving rank mode: %s' % traceback.format_exc())
     return jsonify(response)
 
 @main.route('/getapikey', methods=['POST'])
@@ -228,6 +246,7 @@ def getapikey():
         else:
             response['status'] = 'failure'
             if current_app.debug:
+                current_app.logger.error('Forbidden IP attempted to create API key: ' + (request.environ.get('REMOTE_ADDR') if request.environ.get('REMOTE_ADDR') != None else "") + ' and ' + (request.environ.get('HTTP_X_FORWARDED_FOR') if request.environ.get('HTTP_X_FORWARDED_FOR') != None else ""))
                 response['reason'] = 'forbidden IP ' + (request.environ.get('REMOTE_ADDR') if request.environ.get('REMOTE_ADDR') != None else "") + ' and ' + (request.environ.get('HTTP_X_FORWARDED_FOR') if request.environ.get('HTTP_X_FORWARDED_FOR') != None else "")
             else:
                 response['reason'] = 'forbidden'
@@ -238,6 +257,7 @@ def getapikey():
             response['reason'] = traceback.format_exc()
         else:
             response['reason'] = 'internal error'
+        current_app.logger.error('Error creating API key: %s' % traceback.format_exc())
     return jsonify(response)
 
 '''@main.route('/validatetid', methods=['POST'])
