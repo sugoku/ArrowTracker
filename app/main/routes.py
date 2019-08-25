@@ -103,7 +103,7 @@ def submit():
                     update_max_combo(post.song, post.difficulty, song_maxcombo)
                     update_song_list()
                     if current_app.debug:
-                        current_app.logger.debug("Updated max combo for song %s, difficulty %s with max combo of %s" % post.song, post.difficulty, song_maxcombo)
+                        current_app.logger.debug("Updated max combo for song %s, difficulty %s with max combo of %s" % (post.song, post.difficulty, song_maxcombo))
                 post.sp = calc_performance(post.song, post.difficulty, post.difficultynum, post.perfect, post.great, post.good, post.bad, post.miss, int_to_judge(post.modifiers), post.rushspeed, post.stagepass == "True")
                 add_exp(u, int(request.form['EXP']))
                 add_pp(u, int(request.form['PP']))
