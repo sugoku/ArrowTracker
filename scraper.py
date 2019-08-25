@@ -83,7 +83,7 @@ while pagenum <= totalpages:
             diff = diff['src'].split('/')[-1].replace('half_double', 'half-double')
             diff = replace_diff(diff)
             difflist.append(diff)
-            data[song]['difficulties'] = {x:[0] for x in difflist}
+            data[song]['difficulties'] = {x:[0,] for x in difflist}
         id = id + 1
     print(f'Scraped page {pagenum}')
     pagenum += 1
