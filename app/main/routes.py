@@ -147,6 +147,9 @@ def getprofile():
     try:
         if not apikey_required or (valid_api_key(request.form['api_key']) and (request.environ.get('REMOTE_ADDR') in approved_ips or request.environ.get('HTTP_X_FORWARDED_FOR') in approved_ips)):
             u = accesscode_to_user(request.args.get('AccessCode'))
+            if u == None:
+                current_app.logger.error("Access code does not resolve to a valid user!")
+                raise
             return jsonify(user_to_primeprofile(u))
         else:
             response['status'] = 'failure'
@@ -174,6 +177,7 @@ def saveprofile():
         if not apikey_required or (valid_api_key(request.form['api_key']) and (request.environ.get('REMOTE_ADDR') in approved_ips or request.environ.get('HTTP_X_FORWARDED_FOR') in approved_ips)):
             u = accesscode_to_user(request.form['access_code'])
             if u == None:
+                current_app.logger.error("Access code does not resolve to a valid user!")
                 raise
             update_user_with_primeprofile(u, request.form)
             db.session.commit()
