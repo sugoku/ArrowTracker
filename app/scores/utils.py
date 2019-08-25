@@ -163,7 +163,7 @@ def update_scores_task():
 
 def update_song_list():
     current_app.logger.info("Updating song list database...")
-    with open(os.getcwd()+'/static/gamelists/complete.json', 'w') as f:
+    with open(os.getcwd()+'/app/static/gamelists/complete.json', 'w') as f:
         json.dump(raw_songdata, f)
     current_app.logger.info("Updated song list database.")
 
