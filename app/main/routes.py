@@ -146,7 +146,7 @@ def getprofile():
     response = {}
     try:
         if not apikey_required or (valid_api_key(request.form['api_key']) and (request.environ.get('REMOTE_ADDR') in approved_ips or request.environ.get('HTTP_X_FORWARDED_FOR') in approved_ips)):
-            u = accesscode_to_user(request.args.get('AccessCode').lower())
+            u = accesscode_to_user(request.args.get('access_code').lower())
             if u == None:
                 current_app.logger.error("Access code does not resolve to a valid user!")
                 raise
