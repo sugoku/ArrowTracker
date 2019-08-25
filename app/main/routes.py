@@ -180,7 +180,6 @@ def saveprofile():
                 current_app.logger.error("Access code does not resolve to a valid user!")
                 raise
             update_user_with_primeprofile(u, request.form)
-            db.session.commit()
         else:
             response['status'] = 'failure'
             if current_app.debug:
