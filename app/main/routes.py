@@ -99,7 +99,7 @@ def submit():
                 if post.rushspeed == 0.0:
                     post.rushspeed = 1.0
                 song_maxcombo = post.perfect+post.great+post.good+post.bad+post.miss
-                if get_max_combo(post.song, post.difficulty) > song_maxcombo:
+                if song_maxcombo > get_max_combo(post.song, post.difficulty):
                     update_max_combo(post.song, post.difficulty, song_maxcombo)
                     update_song_list()
                     if current_app.debug:
