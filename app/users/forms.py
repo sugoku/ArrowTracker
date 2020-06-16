@@ -12,6 +12,7 @@ class RegisterForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
     confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
+    # if RECAPTCHA_ENABLED: recaptcha = RecaptchaField()
     submit = SubmitField('Submit')
 
     def validate_username(self, username):
@@ -36,11 +37,6 @@ class UpdateAccountForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     bio = TextAreaField('Bio (Max 500 chars)', validators=[Length(max=500)])
     favsong = SelectField('Favourite Song', coerce=str, choices=[tuple(map(lambda x: x.decode('utf-8'), tup)) for tup in songlist_pairs])
-    ign = StringField('PrimeServer Username', validators=[DataRequired(), Length(min=1, max=12)])
-    noteskin = SelectField('Preferred Noteskin', coerce=int, choices=list(prime_noteskin.items()), validators=[InputRequired(), NumberRange(min=0)])
-    scrollspeed = DecimalField('Preferred Speed Mod', places=1, validators=[NumberRange(min=0, max=5)])
-    judgement = SelectField('Preferred Judgement', coerce=str, choices=judgement_pairs, validators=[DataRequired()])
-    psupdate = BooleanField('Force these settings every round in PrimeServer')
     submit = SubmitField('Update')
 
     def validate_username(self, username):
@@ -54,6 +50,19 @@ class UpdateAccountForm(FlaskForm):
             user = User.query.filter_by(email=email.data).first()
             if user:
                 raise ValidationError('That email has already been taken!')
+
+class UpdateAccountPrimeServerForm(UpdateAccountForm):
+    ign = StringField('PrimeServer Username', validators=[DataRequired(), Length(min=1, max=12)])
+    noteskin = SelectField('Preferred Noteskin', coerce=int, choices=list(prime_noteskin.items()), validators=[InputRequired(), NumberRange(min=0)])
+    scrollspeed = DecimalField('Preferred Speed Mod', places=1, validators=[NumberRange(min=0, max=5)])
+    judgement = SelectField('Preferred Judgement', coerce=str, choices=judgement_pairs, validators=[DataRequired()])
+    psupdate = BooleanField('Force these settings every round in PrimeServer')
+
+    def validate_username_primeserver(self, ign):
+        if ign.data != current_user.ign:
+            user = User.query.filter_by(ign=ign.data).first()
+            if user:
+                raise ValidationError('That PrimeServer username already exists!')
 
 class RequestResetForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])

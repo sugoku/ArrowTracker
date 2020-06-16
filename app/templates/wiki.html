@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+
+{% block title %}{{mdname}}{% endblock title %}
+
+{% block body %}
+<div class="jumbotron text-left animated fadeIn">
+  <h2>{{mdname}}</h2>
+  <hr>
+  <br>
+  {% filter markdown %}
+    {{ mdpage }}
+  {% endfilter %}
+</div>
+{% endblock %}

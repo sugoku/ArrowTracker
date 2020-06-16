@@ -1,16 +1,7 @@
 {% extends "layout.html" %}
-<head>
-  {% block head %}
-  {% block title %}<title>{{ user.username }}'s Scores</title>{% endblock %}
-  {% block meta %}
-    <meta property="og:title" content="Arrow Tracker: The PIU Score Tracker"/>
-    <meta property="og:description" content="A handy score tracking utility for Pump it Up!"/>
-    <meta property="og:url" content="https://arrowtracker.duckdns.org/">
-    <meta name="theme-color" content="#99beea">
-    <meta name="robots" content="none">
-  {% endblock meta %}
-  {% endblock %}
-</head>
+
+{% block title %}{{ user.username }}'s Scores{% endblock title %}
+
 {% block body %}
 <div class="media animated fadeInDown fast" style="z-index: -1">
   <img class="rounded-circle account-img" src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}">

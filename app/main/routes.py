@@ -2,9 +2,11 @@ import os
 import logging
 import traceback
 import json
-from flask import render_template, request, Blueprint, current_app, session, redirect, url_for, flash, Markup, jsonify
-from flask_login import current_user, login_required
-from app.main.forms import SearchForm, TournamentForm, TournamentEditForm, ChartSearchForm
+import re
+from flask import render_template, request, Blueprint, current_app, session, redirect, url_for, flash, Markup, jsonify, abort
+from flask_user import current_user, login_required
+from app.main.forms import SearchForm, ChartSearchForm
+from app.tournaments.forms import TournamentForm, TournamentEditForm
 from app.scores.forms import ScoreForm
 from app.users.forms import APIKeyForm
 from app.models import Post, Tournament, APIKey
@@ -16,6 +18,7 @@ from app.users.utils import accesscode_to_user, user_to_primeprofile, update_use
 from app.scores.utils import *
 from calc_performance import calc_performance
 from werkzeug.exceptions import BadRequestKeyError
+from sqlalchemy.sql.functions import func
 
 # We can define all of the "@main" decorators below as a "blueprint" that
 # allows us to easily call or redirect the user to any of them from anywhere.
@@ -29,8 +32,9 @@ def add_songdata():
 @main.route("/")
 def home():
     page = request.args.get('page', 1, type=int)
-    scores = Post.query.order_by(Post.date_posted.desc()).paginate(per_page=15, page=page)
-    total = db.engine.execute('select count(*) from Post').scalar()
+    scores = Post.query.filter_by(approved=1).order_by(Post.date_posted.desc()).paginate(per_page=15, page=page)
+    # total = db.engine.execute('select count(*) from Post').scalar()
+    total = db.session.execute(Post.query.filter_by(approved=1).statement.with_only_columns([func.count()]).order_by(None)).scalar()
     return render_template("home.html", scores=scores, total=total, songdata=raw_songdata)
 
 @main.route('/about')
@@ -356,6 +360,8 @@ def chartsearch():                                   # we can both request and s
 def search_results():
     results = Post.query
 
+    results = results.filter(Post.approved == 1)  # Only get approved posts
+
     if session.get('search_song') != None and session['search_song'] != '':
         results = results.filter(Post.song == session['search_song'])
 
@@ -433,6 +439,17 @@ def search_results():
 
     return render_template("search_results.html", results=results, songdata=raw_songdata, int_to_mods=int_to_mods, modlist_to_modstr=modlist_to_modstr, int_to_noteskin=int_to_noteskin)
 
+@main.route('/wiki/<wikipage>')
+def wiki(wikipage):
+    current_app.logger.debug(wikipage)
+    if re.match(r'^\w+$', wikipage):
+        dest = os.path.join(current_app.root_path, 'templates/wiki/', wikipage+'.md')
+        if os.path.isfile(dest):
+            with open(dest) as f:
+                txt = f.read()
+            return render_template("wiki.html", mdname=wikipage.replace('_', ' '), mdpage=txt)
+    abort(404)
+
 @main.route('/changelog')
 def changelog():
     return render_template("changelog.html", changelog=GetChangelog())
@@ -444,95 +461,3 @@ def resources():
 @main.route('/howto')
 def howto():
     return render_template("howto.html", changelog=GetChangelog())
-
-@main.route("/tournaments/view")
-@login_required
-def tournaments():
-    page = request.args.get('page', 1, type=int)
-    tournaments = Tournament.query.order_by(Tournament.date_posted.desc()).paginate(per_page=16, page=page)
-    return render_template("tournaments.html", tournaments=tournaments)
-
-@main.route("/tournaments/create", methods=["GET", "POST"])
-@login_required
-def create_tournament():
-    form = TournamentForm(request.form)
-    picture_file = "None"
-    if form.validate_on_submit():
-        try:
-            file = request.files['file']
-        except:
-            file = None
-            flash('No file uploaded', 'info')
-        if file != None:
-            if file.filename == '':
-                flash('No file selected!', 'error')
-                return redirect(request.url)
-            if file and allowed_file(file.filename):
-                picture_file = save_picture(file)
-                flash('File uploaded successfully!', 'success')
-            elif file and not allowed_file(file.filename):
-                flash('You can\'t upload that!', 'error')
-        tournament = Tournament(name = form.name.data, skill_lvl = form.skill_lvl.data, description = form.description.data, bracketlink = form.bracketlink.data, image_file = picture_file, contactinfo = form.contactinfo.data, user_id = current_user.id)
-        db.session.add(tournament)
-        db.session.commit()
-        flash('Tournament created!', 'success')
-        return redirect(url_for('main.tournaments'))
-    return render_template("create_tournament.html", form=form)
-
-@main.route("/tournaments/<int:tournament_id>/edit", methods=["GET", "POST"])
-@login_required
-def edit_tournament(tournament_id):
-    tournament = Tournament.query.get_or_404(tournament_id)
-    form = TournamentEditForm()
-    if form.validate_on_submit():
-        try:
-            file = request.files['file']
-        except:
-            picture_file = "None"
-            file = None
-            flash('No file uploaded', 'info')
-        if file != None:
-            if file.filename == '':
-                flash('No file selected!', 'error')
-                picture_file = "None"
-                return redirect(request.url)
-            if file and allowed_file(file.filename):
-                picture_file = save_picture(file)
-                flash('File uploaded successfully!', 'success')
-            elif file and not allowed_file(file.filename):
-                picture_file = "None"
-                flash('You can\'t upload that!', 'error')
-        tournament.image_file = picture_file
-        tournament.name = form.name.data
-        tournament.description = form.description.data
-        tournament.skill_lvl = form.skill_lvl.data
-        tournament.bracketlink = form.bracketlink.data
-        tournament.contactingo = form.contactinfo.data
-        db.session.commit()
-        flash('Tournament info updated!', 'success')
-        return redirect(url_for('main.tournaments'))
-    form.name.data = tournament.name
-    form.description.data = tournament.description
-    form.skill_lvl.data = tournament.skill_lvl
-    form.bracketlink.data = tournament.bracketlink
-    form.contactinfo.data = tournament.contactinfo
-    if tournament.user_id != current_user.id:
-        abort(403)
-    return render_template('edit_tournament.html', tournament=tournament, form=form)
-
-@main.route('/tournament/<int:tournament_id>')
-def tournament(tournament_id):
-    tournament = Tournament.query.get_or_404(tournament_id)
-    return render_template('tournament.html', tournament=tournament)
-
-@main.route('/tournament/<int:tournament_id>/delete', methods=["POST"])
-def delete_tournament(tournament_id):
-    tournament = Tournament.query.get_or_404(tournament_id)
-    if tournament.user_id != current_user.id:
-        abort(403)
-    if tournament.image_file != "None":
-        os.remove(os.path.join(current_app.root_path, 'static/tournament_pics', tournament.image_file))
-    db.session.delete(tournament)
-    db.session.commit()
-    flash('Your tournament has been deleted!', 'success')
-    return redirect(url_for('main.tournaments'))

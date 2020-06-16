@@ -31,12 +31,16 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.5.0/css/bootstrap4-toggle.min.css">
     {% block head %}
-      {% block title %}
-        <title>Arrow Tracker</title>
-      {% endblock title %}
+      <title>{% block title %}{% endblock title %} - Arrow Tracker</title>
       {% block meta %}
+        <meta property="og:title" content="Arrow Tracker: The PIU Score Tracker"/>
+        <meta property="og:description" content="A handy score tracking utility for Pump it Up!"/>
+        <meta property="og:url" content="https://arrowtracker.duckdns.org/">
+        <meta name="theme-color" content="#99beea">
+        <meta name="robots" content="index, nofollow">
       {% endblock meta %}
     {% endblock head %}
+    {% block headscript %}{% endblock headscript %}
   </head>
   <body>
     {% include 'includes/_navbar.html' %}

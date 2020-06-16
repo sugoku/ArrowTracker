@@ -2,7 +2,7 @@ from flask import render_template, url_for, flash, redirect, request, Blueprint,
 from flask_login import login_user, current_user, logout_user, login_required
 from app import db, bcrypt, raw_songdata
 from app.models import User, Post
-from app.users.forms import (RegisterForm, LoginForm, UpdateAccountForm,
+from app.users.forms import (RegisterForm, LoginForm, UpdateAccountForm, UpdateAccountPrimeServerForm,
                              RequestResetForm, ResetPasswordForm)
 from app.users.utils import save_picture, send_reset_email, get_user_rank
 from app.scores.utils import *
@@ -69,7 +69,10 @@ def update_pfp():
 @users.route('/dashboard', methods=["GET", "POST"])
 @login_required
 def dashboard():
-    form = UpdateAccountForm()
+    if current_user.has_form('primeserver'):
+        form = UpdateAccountPrimeServerForm()
+    else:
+        form = UpdateAccountForm()
     if form.validate_on_submit():
         if form.picture.data:
             picture_file = save_picture(form.picture.data)
@@ -78,11 +81,12 @@ def dashboard():
         current_user.email = form.email.data.lower()
         current_user.bio = form.bio.data
         current_user.favsong = form.favsong.data
-        current_user.ign = form.ign.data
-        current_user.noteskin = form.noteskin.data
-        current_user.scrollspeed = round(0.5 * round(float(form.scrollspeed.data) / 0.5), 1)
-        current_user.modifiers = current_user.modifiers | mods_to_int([], form.judgement.data)
-        current_user.psupdate = "True" if not form.psupdate.data else "False"
+        if current_user.has_form('primeserver'):
+            current_user.ign = form.ign.data
+            current_user.noteskin = form.noteskin.data
+            current_user.scrollspeed = round(0.5 * round(float(form.scrollspeed.data) / 0.5), 1)
+            current_user.modifiers = current_user.modifiers | mods_to_int([], form.judgement.data)
+            current_user.psupdate = "True" if not form.psupdate.data else "False"
         db.session.commit()
         flash('Account details updated!', 'success')
         return redirect(url_for('users.dashboard'))

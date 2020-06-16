@@ -1,16 +1,7 @@
 {% extends 'layout.html' %}
-<head>
-  {% block head %}
-    <title>All Members</title>
-    {% block meta %}
-      <meta property="og:title" content="Arrow Tracker: Users"/>
-      <meta property="og:description" content="A handy score tracking utility for Pump it Up!"/>
-      <meta property="og:url" content="https://arrowtracker.duckdns.org/">
-      <meta name="theme-color" content="#99beea">
-      <meta name="robots" content="none">
-    {% endblock meta %}
-  {% endblock %}
-</head>
+
+{% block title %}All Members{% endblock title %}
+
 {% block body %}
   <h2>Members</h2>
   <h4>{{ total }} Total Members</h4>

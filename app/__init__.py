@@ -2,10 +2,13 @@ from flask import Flask, current_app, logging
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
+from flask_migrate import Migrate
 from loadsongs import load_song_lists, raw_songdata
 from flask_mail import Mail
 from app.config import Config
 from flask_apscheduler import APScheduler
+from flask_user import UserManager
+from flaskext.markdown import Markdown
 import atexit
 
 songlist_pairs, lengthtype_pairs = load_song_lists()
@@ -84,16 +87,26 @@ def create_app(config_class=Config):
     db.init_app(app)
     bcrypt.init_app(app)
     login_manager.init_app(app)
-    mail.init_app(app)
+    # mail.init_app(app)
+    
+    from app.models import User
+    migrate = Migrate(app, db)
+    md = Markdown(app)
+
+    user_manager = UserManager(app, db, User)
 
     from app.users.routes import users
     from app.scores.routes import scores
     from app.main.routes import main
+    from app.tournaments.routes import tournaments
+    from app.admin.routes import admin
     from app.errors.handlers import errors
 
     app.register_blueprint(users)
     app.register_blueprint(scores)
     app.register_blueprint(main)
+    app.register_blueprint(tournaments)
+    app.register_blueprint(admin)
     app.register_blueprint(errors)
 
     scheduler.init_app(app)

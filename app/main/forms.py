@@ -60,27 +60,3 @@ class ChartSearchForm(FlaskForm):
     song = SelectField('Song', coerce=str, choices=[tuple(map(lambda x: x.decode('utf-8'), tup)) for tup in songlist_pairs], validators=[DataRequired()])
     filters = SelectField('Filter', coerce=str, choices=filters, validators=[DataRequired()])
     submit = SubmitField('Search')
-
-class TournamentForm(FlaskForm):
-    name = StringField('Tournament Name', validators=[DataRequired()])
-    description = StringField('Description')
-    bracketlink = StringField('Bracket Link (Challonge or other)')
-    picture = FileField('Update Profile Picture', validators=[FileAllowed(['jpg', 'png', 'gif'])])
-    submit = SubmitField('Submit')
-    contactinfo = StringField('Contact Information')
-    skill_lvl = SelectField('Skill Level', coerce=str, choices=(('Beginner', 'Beginner'),
-                                                                ('Intermediate', 'Intermediate'),
-                                                                ('Advanced', 'Advanced')),
-                                                                validators=[DataRequired()])
-
-class TournamentEditForm(FlaskForm):
-    name = StringField('Tournament Name', validators=[DataRequired()])
-    description = StringField('Description')
-    bracketlink = StringField('Bracket Link (Challonge or other)')
-    picture = FileField('Update Profile Picture', validators=[FileAllowed(['jpg', 'png', 'gif'])])
-    submit = SubmitField('Submit')
-    contactinfo = StringField('Contact Information')
-    skill_lvl = SelectField('Skill Level', coerce=str, choices=(('Beginner', 'Beginner'),
-                                                                ('Intermediate', 'Intermediate'),
-                                                                ('Advanced', 'Advanced')),
-                                                                validators=[DataRequired()])

@@ -1,16 +1,7 @@
 {% extends "layout.html" %}
-<head>
-  {% block head %}
-    {% block title %}<title>{{tournament.name}}</title>{% endblock %}
-    {% block meta %}
-      <meta property="og:title" content="{{tournament.name}}"/>
-      <meta property="og:description" content="{{tournament.description}}"/>
-      <meta property="og:url" content="{{ request.url }}">
-      <meta name="theme-color" content="#99beea">
-      <meta name="robots" content="none">
-    {% endblock meta %}
-  {% endblock %}
-</head>
+
+{% block title %}{{tournament.name}}{% endblock title %}
+
 {% block body %}
   <article class="media content-section" style="overflow: auto; max-width: 100%">
     {% if tournament.image_file != "None" %}

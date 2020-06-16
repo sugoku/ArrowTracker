@@ -1,5 +1,5 @@
 from flask import (render_template, url_for, flash, redirect, request, abort, Blueprint, current_app)
-from flask_login import current_user, login_required
+from flask_user import current_user, login_required
 from app import db, logging, raw_songdata
 from app.models import Post, WeeklyPost, User
 from app.users.utils import update_user_sp
