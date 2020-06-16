@@ -69,7 +69,7 @@ def update_pfp():
 @users.route('/dashboard', methods=["GET", "POST"])
 @login_required
 def dashboard():
-    if current_user.has_form('primeserver'):
+    if current_user.has_role('primeserver'):
         form = UpdateAccountPrimeServerForm()
     else:
         form = UpdateAccountForm()
@@ -81,7 +81,7 @@ def dashboard():
         current_user.email = form.email.data.lower()
         current_user.bio = form.bio.data
         current_user.favsong = form.favsong.data
-        if current_user.has_form('primeserver'):
+        if current_user.has_role('primeserver'):
             current_user.ign = form.ign.data
             current_user.noteskin = form.noteskin.data
             current_user.scrollspeed = round(0.5 * round(float(form.scrollspeed.data) / 0.5), 1)
@@ -95,11 +95,12 @@ def dashboard():
         form.email.data = current_user.email
         form.bio.data = current_user.bio
         form.favsong.data = current_user.favsong
-        form.ign.data = current_user.ign
-        form.noteskin.data = current_user.noteskin
-        form.scrollspeed.data = current_user.scrollspeed
-        form.judgement.data = int_to_judge(current_user.modifiers)
-        form.psupdate.data = current_user.psupdate == "False"
+        if current_user.has_role('primeserver'):
+            form.ign.data = current_user.ign
+            form.noteskin.data = current_user.noteskin
+            form.scrollspeed.data = current_user.scrollspeed
+            form.judgement.data = int_to_judge(current_user.modifiers)
+            form.psupdate.data = current_user.psupdate == "False"
     image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
     return render_template("dashboard.html", title="Dashboard", image_file=image_file, form=form, current_user=current_user)
 

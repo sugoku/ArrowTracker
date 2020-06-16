@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask_user import UserMixin
+# from flask_user import UserMixin
 from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
 from datetime import datetime

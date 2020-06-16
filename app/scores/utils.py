@@ -6,7 +6,7 @@ import json
 import sys
 import re
 from flask import current_app
-from flask_user import current_user
+from flask_login import current_user
 from app import db, logging, raw_songdata, scheduler
 from app.models import Post, User
 

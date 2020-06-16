@@ -1,9 +1,9 @@
 from datetime import datetime
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from flask import current_app
-from app import db, login_manager
+from app import db, login_manager, roles_required
 import app
-from flask_user import current_user, login_required, roles_required, UserManager, UserMixin
+from flask_login import current_user, login_required, UserMixin
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -23,7 +23,7 @@ class User(db.Model, UserMixin):
     posts = db.relationship('Post', backref='author', lazy=True)
     weeklyposts = db.relationship('WeeklyPost', backref='author', lazy=True)
     accesscode = db.Column(db.String(32), unique=True, nullable=False)
-    ign = db.Column(db.String(20), unique=True, nullable=False, default='PUMPITUP')
+    ign = db.Column(db.String(20), nullable=False, default='PUMPITUP')
     countryid = db.Column(db.Integer, nullable=False, default=196)
     gameavatar = db.Column(db.Integer, nullable=False, default=41)
     gamelevel = db.Column(db.Integer, nullable=False, default=0)
@@ -58,8 +58,8 @@ class User(db.Model, UserMixin):
             return None
         return User.query.get(user_id)
 
-    def has_role(self, role):
-        return role in self.roles
+    def has_role(self, *role):
+        return all(r in self.roles for r in role)
 
     def __repr__(self):
         return f"User('{self.username}', '{self.email}', '{self.image_file}'. '{self.bio}', '{self.favsong}')"
@@ -69,12 +69,18 @@ class Role(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
     name = db.Column(db.String(50), unique=True)
 
+    def __repr__(self):
+        return f"Role('{self.name}')"
+
 # Define the UserRoles association table
 class UserRoles(db.Model):
     __tablename__ = 'user_roles'
     id = db.Column(db.Integer(), primary_key=True)
     user_id = db.Column(db.Integer(), db.ForeignKey('user.id', ondelete='CASCADE'))
     role_id = db.Column(db.Integer(), db.ForeignKey('roles.id', ondelete='CASCADE'))
+
+    def __repr__(self):
+        return f"UserRoles('{self.user_id}', '{self.role_id}')"
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)

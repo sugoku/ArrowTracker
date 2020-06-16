@@ -1,15 +1,16 @@
-from flask import Flask, current_app, logging
+from flask import Flask, current_app, logging, abort
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
-from flask_login import LoginManager
+from flask_login import LoginManager, current_user
 from flask_migrate import Migrate
 from loadsongs import load_song_lists, raw_songdata
 from flask_mail import Mail
 from app.config import Config
 from flask_apscheduler import APScheduler
-from flask_user import UserManager
+# from flask_user import UserManager
 from flaskext.markdown import Markdown
 import atexit
+from functools import wraps
 
 songlist_pairs, lengthtype_pairs = load_song_lists()
 
@@ -76,6 +77,31 @@ login_manager = LoginManager()
 login_manager.login_view = 'users.login'
 login_manager.login_message_category = 'success'
 
+# Inspired by Flask-User's decoration
+def roles_required(*role_names):
+    def wrapper(view_function):
+
+        @wraps(view_function)    # Tells debuggers that is is a function wrapper
+        def decorator(*args, **kwargs):
+            login_manager = current_app.login_manager
+
+            # Must be logged in
+            if not current_user.is_authenticated:
+                # Redirect to unauthenticated page (401)
+                return login_manager.unauthorized()
+
+            # User must have the required roles
+            if not current_user.has_roles(*role_names):
+                # Redirect to the unauthorized page (403)
+                return abort(403)
+
+            # It's OK to call the view
+            return view_function(*args, **kwargs)
+
+        return decorator
+
+    return wrapper
+
 mail = Mail()
 
 scheduler = APScheduler()
@@ -89,11 +115,11 @@ def create_app(config_class=Config):
     login_manager.init_app(app)
     # mail.init_app(app)
     
-    from app.models import User
+    # from app.models import User
     migrate = Migrate(app, db)
     md = Markdown(app)
 
-    user_manager = UserManager(app, db, User)
+    # user_manager = UserManager(app, db, User)
 
     from app.users.routes import users
     from app.scores.routes import scores

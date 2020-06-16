@@ -245,6 +245,7 @@
             {% endif %}
           </div>
           <hr>
+          {% if current_user.has_role("primeserver") %}
           <div class="form-group">
             {{ form.ign.label(class="form-control-label") }}
             {% if form.ign.errors %}
@@ -310,12 +311,14 @@
             {% endif %}
             {{ form.psupdate.label(class="form-check-label") }}
           </div>
+          {% endif %}
         </fieldset>
         <div class="form-field">
           {{ form.submit(class="btn btn-outline-success") }}
         </div>
         <hr>
       </form>
+      {% if current_user.has_role("primeserver") %}
       <legend class="border-bottom mb-4">PrimeServer Stats</legend>
       <div class="form-group">
         <label class="form-control-label" for="gamelevel">Level</label>
@@ -345,6 +348,7 @@
         <button role="button" class="btn btn-outline-success" onclick="window.open('/getprimebin')" aria-pressed="true">Get prime.bin</button>
       </div>
       <hr>
+      {% endif %}
       
     </div>
   </div>
