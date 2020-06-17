@@ -41,6 +41,10 @@ def home():
 def about():
     return render_template("about.html")
 
+STATUS_PENDING = 0   # For suspicious or initial scores
+STATUS_APPROVED = 1
+STATUS_PASS_PENDING = 2  # For PrimeServer scores
+
 @main.route('/submit', methods=['POST'])
 def submit():
     response = {
@@ -60,6 +64,7 @@ def submit():
                     current_app.logger.error("Song ID does not resolve to a valid song!")
                     raise
                 post = Post(
+                    approved = STATUS_PASS_PENDING,
                     song = s,
                     song_id = int(request.form['SongID']),
                     score = int(request.form['Score']),
@@ -69,7 +74,6 @@ def submit():
                     difficultynum = int(request.form['ChartLevel']),
                     difficulty = get_diffstr(prime_charttype[int(request.form['Type'])], int(request.form['ChartLevel'])),
                     platform = 'pad',
-                    stagepass = 'False' if prime_grade[int(request.form['Grade']) % 0x100] == 'f' else 'True',
                     perfect = int(request.form['Perfect']),
                     great = int(request.form['Great']),
                     good = int(request.form['Good']),
