@@ -28,8 +28,7 @@ def save_picture(form_picture):
     i = Image.open(form_picture)
     if i.size[0] > 1200 or i.size[1] > 1200:
         i.thumbnail(output_size)
-    else:
-        i.save(picture_path)
+    i.save(picture_path)
     return picture_fn
 
 def return_completion(user, difficulty):
