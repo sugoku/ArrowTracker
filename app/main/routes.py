@@ -9,7 +9,7 @@ from app.main.forms import SearchForm, ChartSearchForm
 from app.tournaments.forms import TournamentForm, TournamentEditForm
 from app.scores.forms import ScoreForm
 from app.users.forms import APIKeyForm
-from app.models import Post, Tournament, APIKey
+from app.models import *
 from app import songlist_pairs, difficulties, db, raw_songdata, approved_ips, apikey_required
 from sqlalchemy import desc, or_
 from app.config import GetChangelog
@@ -32,18 +32,14 @@ def add_songdata():
 @main.route("/")
 def home():
     page = request.args.get('page', 1, type=int)
-    scores = Post.query.filter_by(approved=1).order_by(Post.date_posted.desc()).paginate(per_page=15, page=page)
+    scores = Post.query.filter_by(status=POST_APPROVED).order_by(Post.date_posted.desc()).paginate(per_page=15, page=page)
     # total = db.engine.execute('select count(*) from Post').scalar()
-    total = db.session.execute(Post.query.filter_by(approved=1).statement.with_only_columns([func.count()]).order_by(None)).scalar()
+    total = db.session.execute(Post.query.filter_by(status=POST_APPROVED).statement.with_only_columns([func.count()]).order_by(None)).scalar()
     return render_template("home.html", scores=scores, total=total, songdata=raw_songdata)
 
 @main.route('/about')
 def about():
     return render_template("about.html")
-
-STATUS_PENDING = 0   # For suspicious or initial scores
-STATUS_APPROVED = 1
-STATUS_PASS_PENDING = 2  # For PrimeServer scores
 
 @main.route('/submit', methods=['POST'])
 def submit():
@@ -64,7 +60,7 @@ def submit():
                     current_app.logger.error("Song ID does not resolve to a valid song!")
                     raise
                 post = Post(
-                    approved = STATUS_PASS_PENDING,
+                    status = POST_PENDING,
                     song = s,
                     song_id = int(request.form['SongID']),
                     score = int(request.form['Score']),
@@ -106,6 +102,7 @@ def submit():
                     raise
                 if post.rushspeed == 0.0:
                     post.rushspeed = 1.0
+                # TODO: MOVE ALL OF THIS INTO A SEPARATE FUNCTION (score_approved() or something which checks if score is acsubmit)
                 song_maxcombo = post.perfect+post.great+post.good+post.bad+post.miss
                 if song_maxcombo > get_max_combo(post.song, post.difficulty):
                     update_max_combo(post.song, post.difficulty, song_maxcombo)
@@ -363,7 +360,7 @@ def chartsearch():                                   # we can both request and s
 def search_results():
     results = Post.query
 
-    results = results.filter(Post.approved == 1)  # Only get approved posts
+    results = results.filter(Post.status == POST_APPROVED)  # Only get approved posts
 
     if session.get('search_song') != None and session['search_song'] != '':
         results = results.filter(Post.song == session['search_song'])

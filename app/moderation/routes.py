@@ -17,19 +17,9 @@ from app.scores.utils import *
 from calc_performance import calc_performance
 from werkzeug.exceptions import BadRequestKeyError
 
-admin = Blueprint('admin', __name__)
+moderation = Blueprint('moderation', __name__)
 
-@roles_required('admin')
-@admin.route('/admin')
-def admin_page(tournament_id):
-    return render_template('admin.html')
-
-@roles_required(['moderator', 'admin'])
-@admin.route('/mod')
-def mod_page(tournament_id):
+@roles_required(['Moderator', 'Admin'])
+@moderation.route('/mod')
+def mod_page():
     return render_template('moderator.html')
-
-@roles_required(['moderator', 'admin'])
-@admin.route('/modqueue')
-def modqueue(tournament_id):
-    return render_template('modqueue.html')

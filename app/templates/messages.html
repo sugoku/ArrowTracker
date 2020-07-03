@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+
+{% block title %}Messages{% endblock title %}
+
+{% block body %}
+<div class="jumbotron animated fadeInLeft fast">
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <h5 class="card-header">
+          Messages
+        </h5>
+        <div class="card-body">
+          {% for msg in messages %}
+            {% include 'includes/_msg.html' %}
+          {% endfor %}
+          <nav aria-label="...">
+            <ul class="pager">
+              <li class="previous{% if not prev_url %} disabled{% endif %}">
+                <a href="{{ prev_url or '#' }}">
+                  <span aria-hidden="true">&larr;</span> Newer messages
+                </a>
+              </li>
+              <li class="next{% if not next_url %} disabled{% endif %}">
+                <a href="{{ next_url or '#' }}">
+                  Older messages <span aria-hidden="true">&rarr;</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

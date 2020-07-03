@@ -34,6 +34,8 @@ Arrow Tracker is a functional online leaderboard and score tracker built for the
 * Pump Out (Song database and thumbnail image source)
 * Andamiro (Prime 2 profile images)
 * [daneden's Animeate.css](https://github.com/daneden/animate.css)
+* Miguel Grinberg's `microblog` web application
+    * The code for private messages, notifications, and asynchronous tasks are adapted from Miguel Grinberg's `microblog` web application which is under the MIT license, but this code is licensed under the AGPLv3 along with the rest of ArrowTracker. See the original license here: https://github.com/miguelgrinberg/microblog/blob/v0.21/LICENSE
 
 ## Find Arrow Tracker useful?
 

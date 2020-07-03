@@ -1,9 +1,9 @@
 from flask import render_template, url_for, flash, redirect, request, Blueprint, send_file, current_app
 from flask_login import login_user, current_user, logout_user, login_required
 from app import db, bcrypt, raw_songdata
-from app.models import User, Post
+from app.models import *
 from app.users.forms import (RegisterForm, LoginForm, UpdateAccountForm, UpdateAccountPrimeServerForm,
-                             RequestResetForm, ResetPasswordForm)
+                             RequestResetForm, ResetPasswordForm, MessageForm)
 from app.users.utils import save_picture, send_reset_email, get_user_rank
 from app.scores.utils import *
 from app.main.utils import *
@@ -11,6 +11,7 @@ from sqlalchemy import or_
 import json
 import binascii
 import io
+from datetime import datetime
 
 users = Blueprint('users', __name__)
 
@@ -161,7 +162,7 @@ def reset_token(token):
 
 @users.route("/members")
 def members():
-    users = User.query.all()
+    users = User.query.filter_by(status=USER_CONFIRMED).all()
     total = db.engine.execute('select count(*) from User').scalar()
     return render_template('users.html', users=users, total=total)
 
@@ -182,5 +183,62 @@ def getprimebin():
             attachment_filename='prime.bin',
             mimetype='application/octet-stream'
         )
+    else:
+        return redirect_for(url_for('main.home'))
+
+@users.route('/send_message/<recipient>', methods=['GET', 'POST'])
+@login_required
+def send_message(recipient):
+    user = User.query.filter_by(username=recipient).first_or_404()
+    form = MessageForm()
+    if form.validate_on_submit():
+        msg = Message(author=current_user, recipient=user,
+                      body=form.message.data)
+        db.session.add(msg)
+        user.add_notification('unread_message_count', user.new_messages())
+        db.session.commit()
+        flash('Your message has been sent.')
+        return redirect(url_for('users.user_page', username=recipient))
+    return render_template('new_message.html', form=form, recipient=recipient)
+
+@users.route('/messages')
+@login_required
+def messages():
+    current_user.last_message_read_time = datetime.utcnow()
+    current_user.add_notification('unread_message_count', 0)
+    db.session.commit()
+    page = request.args.get('page', 1, type=int)
+    messages = current_user.messages_received.order_by(
+        Message.timestamp.desc()).paginate(
+            page, current_app.config['POSTS_PER_PAGE'], False)
+    next_url = url_for('users.messages', page=messages.next_num) \
+        if messages.has_next else None
+    prev_url = url_for('users.messages', page=messages.prev_num) \
+        if messages.has_prev else None
+    return render_template('messages.html', messages=messages.items,
+                           next_url=next_url, prev_url=prev_url)
+
+# @users.route('/export_posts')
+# @login_required
+# def export_posts():
+#     if current_user.get_task_in_progress('export_posts'):
+#         flash('An export task is currently in progress')
+#     else:
+#         current_user.launch_task('export_posts', 'Exporting posts...')
+#         db.session.commit()
+#     return redirect(url_for('main.user', username=current_user.username))
+
+
+@users.route('/notifications')
+def notifications():
+    if current_user.is_authenticated:
+        since = request.args.get('since', 0.0, type=float)
+        notifications = current_user.notifications.filter(
+            Notification.timestamp > since).order_by(Notification.timestamp.asc())
+        return jsonify([{
+            'name': n.name,
+            'data': n.get_data(),
+            'timestamp': n.timestamp
+        } for n in notifications])
     else:
         return redirect_for(url_for('main.home'))

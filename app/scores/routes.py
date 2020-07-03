@@ -1,6 +1,6 @@
 from flask import (render_template, url_for, flash, redirect, request, abort, Blueprint, current_app)
 from flask_login import current_user, login_required
-from app import db, logging, raw_songdata
+from app import db, logging, raw_songdata, roles_required
 from app.models import Post, WeeklyPost, User
 from app.users.utils import update_user_sp
 from app.scores.forms import ScoreForm, WeeklyForm
@@ -9,6 +9,7 @@ import os
 import json
 from weekly import get_current_weekly, randomize_weekly
 from calc_performance import calc_performance
+from sqlalchemy import and_
 
 scores = Blueprint('scores', __name__)
 
@@ -211,3 +212,15 @@ def doubles_ldb():
 def completion(user):
     completion = return_completion(user, "singles")
     return render_template('completion.html', completion=completion)
+
+@roles_required(['Moderator', 'Admin'])
+@scores.route('/modqueue')
+def mod_queue():
+    scores = Post.query.filter_by(status=POST_PENDING).order_by(Post.date_posted.desc()).all()
+    return render_template('modqueue.html', scores=scores)
+
+@login_required
+@scores.route('/postqueue')
+def post_queue():
+    scores = Post.query.filter_by(and_(author=current_user, status=POST_PENDING)).order_by(Post.date_posted.desc()).all()
+    return render_template('postqueue.html', scores=scores)

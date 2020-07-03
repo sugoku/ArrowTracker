@@ -3,6 +3,9 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager, current_user
 from flask_migrate import Migrate
+from flask_admin import Admin, AdminIndexView
+from flask_admin.contrib.sqla import ModelView
+from flask_moment import Moment
 from loadsongs import load_song_lists, raw_songdata
 from flask_mail import Mail
 from app.config import Config
@@ -11,6 +14,7 @@ from flask_apscheduler import APScheduler
 from flaskext.markdown import Markdown
 import atexit
 from functools import wraps
+import signal
 
 songlist_pairs, lengthtype_pairs = load_song_lists()
 
@@ -66,10 +70,13 @@ for i in coop:
     difficulties.append(i)
 difficulties = list(zip(difficulties, difficulties))
 
-apikey_required = False # also ip address requirement
+apikey_required = False  # also ip address requirement
 
-with open('approved_ips.txt', 'r') as f:
-    approved_ips = [x.replace('\n','').strip() for x in f.readlines()]
+if apikey_required:
+    with open('approved_ips.txt', 'r') as f:
+        approved_ips = [x.replace('\n','').strip() for x in f.readlines()]
+else:
+    approved_ips = []
 
 db = SQLAlchemy()
 bcrypt = Bcrypt()
@@ -103,8 +110,23 @@ def roles_required(*role_names):
     return wrapper
 
 mail = Mail()
-
 scheduler = APScheduler()
+moment = Moment()
+
+def safe_shutdown(signum, frame):  # To make APScheduler actually shut off
+    print('Forcing shutdown...')
+    scheduler.shutdown()
+
+signal.signal(signal.SIGINT, safe_shutdown)
+signal.signal(signal.SIGTERM, safe_shutdown)
+
+class AdminModelView(ModelView):
+    form_excluded_columns = ('password')
+    def is_accessible(self):
+        return current_user.is_authenticated and (current_user.has_role('Admin') or current_user.username == 'admin')
+class AdminView(AdminIndexView):
+    def is_accessible(self):
+        return current_user.is_authenticated and (current_user.has_role('Admin') or current_user.username == 'admin')
 
 def create_app(config_class=Config):
     app = Flask(__name__)
@@ -119,20 +141,32 @@ def create_app(config_class=Config):
     migrate = Migrate(app, db)
     md = Markdown(app)
 
+    moment.init_app(app)
+
     # user_manager = UserManager(app, db, User)
+    
+    from app.models import User, Post, Tournament, Round, Message, APIKey, Role
+    admin = Admin(app, index_view=AdminIndexView(), name='ArrowTracker', template_mode='bootstrap3')
+    admin.add_view(AdminModelView(User, db.session))
+    admin.add_view(AdminModelView(Post, db.session))
+    admin.add_view(AdminModelView(Tournament, db.session))
+    admin.add_view(AdminModelView(Round, db.session))
+    admin.add_view(AdminModelView(Message, db.session))
+    admin.add_view(AdminModelView(APIKey, db.session))
+    admin.add_view(AdminModelView(Role, db.session))
 
     from app.users.routes import users
     from app.scores.routes import scores
     from app.main.routes import main
     from app.tournaments.routes import tournaments
-    from app.admin.routes import admin
+    from app.moderation.routes import moderation
     from app.errors.handlers import errors
 
     app.register_blueprint(users)
     app.register_blueprint(scores)
     app.register_blueprint(main)
     app.register_blueprint(tournaments)
-    app.register_blueprint(admin)
+    app.register_blueprint(moderation)
     app.register_blueprint(errors)
 
     scheduler.init_app(app)

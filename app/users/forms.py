@@ -83,3 +83,9 @@ class APIKeyForm(FlaskForm):
         csrf = False
     name = StringField('Machine Name', validators=[DataRequired(), Length(min=1, max=50)])
     country = StringField('Country ID', validators=[DataRequired(), Length(min=1, max=2)])
+
+class MessageForm(FlaskForm):
+    subject = StringField('Subject', validators=[DataRequired(), Length(min=1, max=100)])
+    message = TextAreaField('Message', validators=[
+        DataRequired(), Length(min=1, max=10000)])
+    submit = SubmitField('Submit')

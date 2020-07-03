@@ -12,6 +12,10 @@ class Config():
     MAIL_USERNAME = parser.get('email', 'email')
     MAIL_PASSWORD = parser.get('email', 'password')
 
+    FLASK_ADMIN_SWATCH = 'cerulean'
+
+    POSTS_PER_PAGE = 20
+
     RECAPTCHA_ENABLED = parser.get('recaptcha', 'enable')
     RECAPTCHA_PUBLIC_KEY = parser.get('recaptcha', 'PUBLIC_KEY')
     RECAPTCHA_PRIVATE_KEY = parser.get('recaptcha', 'PRIVATE_KEY')
