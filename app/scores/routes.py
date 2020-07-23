@@ -42,6 +42,7 @@ def new_score():
             picture_file = "None"
         current_app.logger.info("Converting to post type...")
         post = Post(
+            status = POST_PENDING,
             song = form.song.data, 
             song_id = int(songname_to_id(form.song.data), 16) if songname_to_id(form.song.data) != '' else None, 
             score = form.score.data,
@@ -61,19 +62,29 @@ def new_score():
             modifiers = mods_to_int(request.form.getlist('modifiers'), form.judgement.data),
             noteskin = form.noteskin.data,
             rushspeed = form.rushspeed.data if form.rushspeed.data != None else 1.0,
+            gamemix = form.gamemix.data,
+            #gameversion = form.gameversion.data,
             ranked = form.ranked.data, 
             length = raw_songdata[form.song.data]['length'], 
             acsubmit = 'False',
-            author = current_user, 
+            author = current_user,
+            user_id = current_user.id,
             image_file = picture_file
         )
-        post.sp = calc_performance(post.song, post.difficulty, post.difficultynum, post.perfect, post.great, post.good, post.bad, post.miss, int_to_judge(post.modifiers), post.rushspeed, post.stagepass == "True")
-        update_user_sp(current_user)
-        current_app.logger.info("Converted.")
-        db.session.add(post)
-        current_app.logger.info("Committing to database...")
-        db.session.commit()
-        flash('Score has been submitted!', 'success')
+        if current_app.debug:
+            current_app.logger.debug("Created Post object.")
+        analysis = check_post(post)
+        if analysis == POST_APPROVED:
+            approve_post(post)
+            flash('Score has been submitted!', 'success')
+        elif analysis == POST_PENDING:
+            queue_post(post)
+            flash('Score has been submitted for moderator review.', 'success')
+        elif analysis == None:
+            flash('Error: your score contains something that is impossible and was rejected. Please try again, making sure your info is correct.', 'error')
+        # handle any other cases
+        else:
+            flash('Error: something odd happened. Please try again.', 'error')
         return redirect(url_for('main.home'))
     return render_template("new_score.html", title="New Score", form=form, songdata=raw_songdata)
 
@@ -84,6 +95,81 @@ def score(score_id):
     redgrades = ['f']
     score = Post.query.get_or_404(score_id)
     return render_template('score.html', score=score, songdata=raw_songdata, bluegrades=bluegrades, goldgrades=goldgrades, redgrades=redgrades, int_to_mods=int_to_mods, modlist_to_modstr=modlist_to_modstr, int_to_noteskin=int_to_noteskin)
+
+@scores.route('/post/<int:score_id>/edit')
+def edit_score(score_id):
+    form = ScoreForm()
+    current_app.logger.info(request.form)
+
+    post = Post.query.get(score_id)
+
+    form.score.data = post.score
+    form.lettergrade.data = post.lettergrade
+    form.platform.data = post.platform
+    form.stagepass.data = post.stagepass
+    form.perfect.data = post.perfect
+    form.great.data = post.great
+    form.good.data = post.good
+    form.bad.data = post.bad
+    form.miss.data = post.miss
+    form.maxcombo.data = post.maxcombo
+    modifiers, form.judgement.data = int_to_mods(post.modifiers, separate_judge=True)
+    form.noteskin.data = post.noteskin
+    form.rushspeed.data = post.rushspeed
+    form.ranked.data = post.ranked
+
+    if form.validate_on_submit():
+        current_app.logger.info("Form validated.")
+        difficulty = request.form.get('diffDrop')
+        try:
+            file = request.files['file']
+        except:
+            picture_file = "None"
+            file = None
+            flash('No file uploaded', 'info')
+        if file.filename != '':
+            if file and allowed_file(file.filename):
+                picture_file = save_picture(file)
+                flash('File uploaded successfully!', 'success')
+            elif file and not allowed_file(file.filename):
+                picture_file = "None"
+                flash('You can\'t upload that!', 'error')
+        else:
+            picture_file = "None"
+        current_app.logger.info("Updating post info...")
+        # instead of converting form to a post, edit an existing post ID and update some info
+        post = Post.query.get(score_id)
+
+        post.score = form.score.data
+        post.exscore = calc_exscore(form.perfect.data, form.great.data, form.good.data, form.bad.data, form.miss.data)
+        post.lettergrade = form.lettergrade.data
+        post.platform = form.platform.data
+        post.stagepass = form.stagepass.data
+        post.perfect = form.perfect.data
+        post.great = form.great.data
+        post.good = form.good.data
+        post.bad = form.bad.data
+        post.miss = form.miss.data
+        post.maxcombo = form.maxcombo.data
+        post.modifiers = mods_to_int(request.form.getlist('modifiers'), form.judgement.data)
+        post.noteskin = form.noteskin.data
+        post.rushspeed = form.rushspeed.data if form.rushspeed.data != None else 1.0
+        post.ranked = form.ranked.data
+        if picture_file != None:
+            post.image_file = picture_file 
+        
+        # probably update this after approval
+        post.sp = calc_performance(post.song, post.difficulty, post.difficultynum, post.perfect, post.great, post.good, post.bad, post.miss, int_to_judge(post.modifiers), post.rushspeed, post.stagepass == "True")
+        
+        update_user_sp(current_user)
+        current_app.logger.info("Converted.")
+        db.session.add(post)
+        current_app.logger.info("Committing to database...")
+        db.session.commit()
+        flash('Score has been edited!', 'success')
+        return redirect(url_for('scores.score', score_id=score_id))
+    # generate form from post here
+    return render_template("new_score.html", title="Edit Score", form=form, currpost=post, songdata=raw_songdata)
 
 @scores.route('/post/<int:score_id>/delete', methods=["POST"])
 def delete_score(score_id):

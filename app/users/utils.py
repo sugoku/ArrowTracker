@@ -14,6 +14,7 @@ from sqlalchemy import desc, or_
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
 def save_picture(form_picture):
+    '''Given a profile picture, resize and save the image.'''
     random_hex = secrets.token_hex(8)
     _, f_ext = os.path.splitext(form_picture.filename)
     if f_ext != '.gif':
@@ -43,14 +44,17 @@ No changes will be made without using the above link.
     mail.send(msg)
 
 def id_to_user(uid):
+    '''Given an user ID, return the user it is associated with.'''
     u = User.query.filter_by(id=uid).first()
     return u if u != None else None
 
 def accesscode_to_user(acode):
+    '''Given an PrimeServer access code, return the user it is associated with.'''
     u = User.query.filter_by(accesscode=acode).first()
     return u if u != None else None
 
 def user_to_primeprofile(user):
+    '''Given a user, returns a compatible PrimeServer profile packet.'''
     return {
         'PlayerID': user.id,     # figure out which is which (player and profile ID)
         'AccessCode': user.accesscode,
@@ -73,6 +77,7 @@ def user_to_primeprofile(user):
     }
 
 def update_user_with_primeprofile(user, post):
+    '''Given a user and a PrimeServer profile packet, update the user's info with the packet.'''
     #user.ign = post['Nickname'] # consider not changing this
     #user.countryid = post['CountryID'] # or this
     #user.gameavatar = post['Avatar'] # or this
@@ -92,8 +97,9 @@ def update_user_with_primeprofile(user, post):
     db.session.commit()
 
 def update_user_sp(u):
+    '''Evaluates a user's eligible scores and updates their SP (skill points) in the database.'''
     sp = 0
-    scores = Post.query.filter_by(author=u, platform='pad').filter(or_(Post.image_file != "None", Post.acsubmit == "True")).order_by(Post.sp.desc()).limit(150).all()
+    scores = Post.query.filter_by(author=u, platform='pad', is_personal_best='True').filter(or_(Post.image_file != "None", Post.acsubmit == "True")).order_by(Post.sp.desc()).limit(150).all()
     place = 0
     for score in scores:
         sp += math.pow(0.95, place) * score.sp
@@ -102,6 +108,7 @@ def update_user_sp(u):
     db.session.commit()
 
 def get_user_rank(u):
+    '''Gets a user's rank on the main SP leaderboard.'''
     users = User.query.order_by(User.sp.desc()).all()
     try:
         return users.index(u)+1
@@ -109,10 +116,12 @@ def get_user_rank(u):
         return None
 
 def add_exp(u, exp):
+    '''Given a user and the amount of experience points, adds the XP to the user's account and recalculates their level.'''
     u.gameexp += exp
     u.gamelevel = max((int((5.5816187294199637E-01*(u.gameexp**5.0936826990568707E-01))-5.4169035580629679), 0))+1
     db.session.commit()
 
 def add_pp(u, pp):
+    '''Given a user and the amount of PP, adds the PP to the user's account.'''
     u.gamepp += pp
     db.session.commit()

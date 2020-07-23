@@ -7,8 +7,9 @@ import sys
 import re
 from flask import current_app
 from flask_login import current_user
-from app import db, logging, raw_songdata, scheduler
-from app.models import Post, User
+from app import db, logging, raw_songdata, scheduler, judgement_pairs
+from app.models import *
+from app.users.utils import update_user_sp, update_user_titles
 
 def id_to_user(uid):
     u = User.query.filter_by(id=uid).first()
@@ -246,21 +247,66 @@ def get_rankmode(scoretype='default'):
         return json.load(f)
     # plan to use APScheduler to update database
 
-def id_to_songdiff(sid, diff):
-    pass
+def check_post(post):
+    """Evaluates a post and returns the status which it should be assigned.
+    
+    If there is something impossible which would prevent the post from being submitted, return None"""
+    # return status a given post should be by looking at the post itself, returns None is something is impossible
+
+    # if SS or SSS, check if full combo or 0 miss
+    if post.grade in ('ss', 'sss') and post.miss > 0:
+        return None
+    
+    # make a score unranked if...
+    # - song doesn't have a max combo
+    # - platform != 'pad'
+
+    # # check picture using fastai
+    # # use this to initialize the learner: score_learner = load_learner(path)
+    # current_app.logger.debug("Predicting image.")
+    # im = Image.open(post.image_file)
+    # if im != None:
+    #     result = score_learner.predict(im)
+    # mix = int_to_gamelabel(result[1])
+    # if mix not in pump_mixes:  # or mix not the specified gamemix
+    #     return POST_PENDING
+    # # also consider checking if a song or chart is not playable in the recognized mix (but also check this above if possible)
+
+    return POST_APPROVED
+
+
+def approve_post(post):
+    '''Given a post, set it to an approved state and update the user's SP and titles.'''
+    post.status = POST_APPROVED
+    db.session.commit()
+    u = User.query.get(post.user_id)
+    update_user_sp(u)
+    update_user_titles(u)
+
+def queue_post(post):
+    '''Given a post, add it to the moderator queue.'''
+    post.status = POST_PENDING
+    db.session.commit()
+
+# def id_to_songdiff(sid, diff):
+#     '''Given an official song ID and a difficulty, return the difficulty of the song (???)'''
+#     pass
 
 def id_to_songname(sid):
+    '''Given an official song ID, return the song it is associated with.'''
     for song in raw_songdata:
         if raw_songdata[song]['song_id'] == sid:
             return song
     return None
 
 def songname_to_id(songname):
+    '''Given the name of a song, return its official song ID.'''
     if raw_songdata.get(songname) != None:
         return raw_songdata[songname]['song_id']
     return None
 
 def posts_to_uscore(posts, scoretype='default'):
+    '''Given a list of posts, return a PrimeServer UScore packet.'''
     uscore = []
     for post in posts:
         if scoretype == 'default':
@@ -286,6 +332,7 @@ def posts_to_uscore(posts, scoretype='default'):
     return uscore[:4384]
 
 def calc_exscore(perfect, great, good, bad, miss):
+    '''Calculate the EX Score of a chart given the amounts of perfects, greats, goods, bads, and misses.'''
     PERFECT_WEIGHT = 3
     GREAT_WEIGHT = 2
     GOOD_WEIGHT = 1
@@ -294,6 +341,7 @@ def calc_exscore(perfect, great, good, bad, miss):
     return PERFECT_WEIGHT * perfect + GREAT_WEIGHT * great + GOOD_WEIGHT * good + BAD_WEIGHT * bad + MISS_WEIGHT * miss
 
 def mods_to_int(modlist, judgement):
+    '''Given a list of modifiers, return a representative integer.'''
     modsum = 0
 
     if ('V' in modlist and 'AP' in modlist) or ('V' in modlist and 'NS' in modlist) or ('NS' in modlist and 'AP' in modlist):
@@ -312,7 +360,8 @@ def mods_to_int(modlist, judgement):
 
     return modsum
 
-def int_to_mods(num):
+def int_to_mods(num, separate_judge=False):
+    '''Given an integer, return the list of modifiers that it represents.'''
     mods_rev = {val: key for key, val in mods.items()}
     mods_vals = sorted(mods.values(), reverse=True)
     
@@ -324,10 +373,19 @@ def int_to_mods(num):
             num -= mod
             if num == 0:
                 break
+    
+    if separate_judge:
+        judgement = 'nj'
+        for judge in judgement_pairs:
+            if judge[0] in modlist:
+                modlist.remove(judge[0])  # error catching might be a good idea here
+                judgement = judge[0]
+        return modlist, judgement
 
     return modlist
 
 def int_to_judge(num):
+    '''Given an integer representing a list of modifiers, return its judgement modifier.'''
     judge_rev = {val: key for key, val in judgements.items()}
     judge_vals = sorted(judgements.values(), reverse=True)
     
@@ -343,6 +401,7 @@ def int_to_judge(num):
     return modlist[0]
 
 def modlist_to_modstr(modlist):
+    '''Given a list of modifiers, format it as a readable comma-separated string.'''
     s = ""
     i = 0
     while i < len(modlist)-1:
@@ -353,21 +412,29 @@ def modlist_to_modstr(modlist):
     return s if s != "" else "None"
 
 def get_diffnum(diffstr):
+    '''Given a difficulty string, return its difficulty value.'''
     return int(''.join(x for x in diffstr if x.isdigit()))
 
 def get_difftype(diffstr):
+    '''Given a difficulty string, return the full name of the chart type it is associate with.'''
     return abbrev_charttype.get(''.join(x for x in diffstr if not x.isdigit()))
 
 def get_diffstr(difftype, diffnum):
+    '''Given two integers representing the chart type and the difficulty value, return the representative difficulty string.'''
     return {val: key for key, val in {x:abbrev_charttype[x] for x in abbrev_charttype if x != 'HD'}.items()}[difftype] + str(diffnum)
 
 def get_primediff(difftype):
+    '''Given an integer, return the associated chart type's full name.'''
     return {val: key for key, val in {x:prime_charttype[x] for x in prime_charttype if x != 'HD'}.items()}[difftype]
 
 def int_to_noteskin(num):
+    '''Given an integer key, return the associated noteskin's name.'''
     return {**prime_noteskin, **other_noteskin}.get(int(num))
 
 def high_score(post):
+    """Check if a score is a user's highest score (in points, not in SP).
+
+    For highest SP score, use `post.is_personal_best`."""
     top = Post.query.filter_by(song_id=post.song_id, difficulty=post.difficulty, user_id=post.user_id).order_by(Post.score.desc()).first()
     if top != None:
         if top.score > post.score:
@@ -375,13 +442,18 @@ def high_score(post):
     return True
 
 def del_high_score(post):
+    """Delete a user's highest score given a Post with the song ID, difficulty, and user ID.
+
+    This function is deprecated since all scores are saved now and thus it should not be used."""
     top = Post.query.filter_by(song_id=post.song_id, difficulty=post.difficulty, user_id=post.user_id).order_by(Post.score.desc()).first()
     if top != None:
         db.session.delete(top)
         db.session.commit()
     
 
-def prime_to_xx_diff(post):
+def rerate_diff(post):
+    '''Given a post, update the difficulty to match the latest difficulty name.'''
+    # todo: do this using the new database
     with open('rerates.json', 'r') as rerates:
         reratedict = json.load(rerates)
     newvalues = reratedict.get(','.join((post.song.strip(), post.difficulty, post.type, str(post.difficultynum)))) # song name, difficulty string, chart type, difficulty number

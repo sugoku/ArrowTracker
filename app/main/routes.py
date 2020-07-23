@@ -91,6 +91,7 @@ def submit():
                     length = raw_songdata[s]['length'], 
                     accesscode = request.form['AccessCode'],
                     acsubmit = 'True',
+                    author = u,
                     user_id = u.id
                 )
                 if current_app.debug:
@@ -103,30 +104,18 @@ def submit():
                 if post.rushspeed == 0.0:
                     post.rushspeed = 1.0
                 # TODO: MOVE ALL OF THIS INTO A SEPARATE FUNCTION (score_approved() or something which checks if score is acsubmit)
-                song_maxcombo = post.perfect+post.great+post.good+post.bad+post.miss
-                if song_maxcombo > get_max_combo(post.song, post.difficulty):
-                    update_max_combo(post.song, post.difficulty, song_maxcombo)
-                    update_song_list()
-                    if current_app.debug:
-                        current_app.logger.debug("Updated max combo for song %s, difficulty %s with max combo of %s" % (post.song, post.difficulty, song_maxcombo))
+                # song_maxcombo = post.perfect+post.great+post.good+post.bad+post.miss
+                # if song_maxcombo > get_max_combo(post.song, post.difficulty):
+                #     update_max_combo(post.song, post.difficulty, song_maxcombo)
+                #     update_song_list()
+                #     if current_app.debug:
+                #         current_app.logger.debug("Updated max combo for song %s, difficulty %s with max combo of %s" % (post.song, post.difficulty, song_maxcombo))
                 post.sp = calc_performance(post.song, post.difficulty, post.difficultynum, post.perfect, post.great, post.good, post.bad, post.miss, int_to_judge(post.modifiers), post.rushspeed, post.stagepass == "True")
                 add_exp(u, int(request.form['EXP']))
                 add_pp(u, int(request.form['PP']))
+                queue_post(post)
                 if current_app.debug:
-                    current_app.logger.debug("EXP and PP added to profile.")
-                if high_score(post):
-                    if current_app.debug:
-                        current_app.logger.debug("High score detected, saving score...")
-                    del_high_score(post)
-                    db.session.add(post)
-                    db.session.commit()
-                    if current_app.debug:
-                        current_app.logger.debug("Committed score to database.")
-                    update_user_sp(u)
-                    if current_app.debug:
-                        current_app.logger.debug("User SP updated.")
-                elif current_app.debug:
-                    current_app.logger.debug("High score not detected, not saving score.")
+                    current_app.logger.debug("Post submitted to queue.")
         else:
             response['status'] = 'failure'
             if current_app.debug:

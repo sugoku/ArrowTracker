@@ -13,12 +13,15 @@ TOURNAMENT_HIDDEN = 2
 
 POST_APPROVED = 0
 POST_PENDING = 1
-POST_HIDDEN = 2
+POST_UNRANKED = 2
+POST_HIDDEN = 3
+POST_PRIVATE = 4
 
 USER_CONFIRMED = 0
 USER_UNCONFIRMED = 1
 USER_HIDDEN = 2
-USER_BANNED = 3
+USER_PRIVATE = 3
+USER_BANNED = 4
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -128,6 +131,7 @@ class Post(db.Model):
     date_posted = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     status = db.Column(db.Integer, nullable=False, default=POST_APPROVED)
     approved_time = db.Column(db.DateTime(), nullable=True)
+    is_personal_best = db.Column(db.String(5), nullable=False, default="False")
     song = db.Column(db.String(50), nullable=False)
     song_id = db.Column(db.Integer, nullable=True)
     score = db.Column(db.Integer, nullable=False)
@@ -264,12 +268,14 @@ class Tournament(db.Model):
     def __repr__(self):
         return f"Tournament('{self.name}', '{self.skill_lvl}, '{self.description}', '{self.bracketlink}', '{self.image_file}')"
 
-class Round(db.Model): # tournament round
+class Match(db.Model): # tournament match
     id = db.Column(db.Integer, primary_key=True)
     tournament_id = db.Column(db.Integer(), db.ForeignKey('tournament.id', ondelete='CASCADE'))
+    parent_match_id = db.Column(db.Integer(), db.ForeignKey('match.id', ondelete='CASCADE'))
     start_time = db.Column(db.DateTime, nullable=True)
     end_time = db.Column(db.DateTime, nullable=True)
     _participants = db.Column(db.String(10000), nullable=False, default="")
+    _winners = db.Column(db.String(10000), nullable=False, default="")
 
     @property
     def participants(self):
@@ -278,6 +284,45 @@ class Round(db.Model): # tournament round
     def participants(self, val):
         if type(val) == int:
             self._participants += ',' + str(val)
+        elif type(val) == list:
+            self._participants = ','.join(val)
+    @property
+    def winners(self):
+        return [int(x) for x in self._winners.split(',')]
+    @participants.setter
+    def winners(self, val):
+        if type(val) == int:
+            self._winners += ',' + str(val)
+        elif type(val) == list:
+            self._winners = ','.join(val)
+
+class Round(db.Model): # tournament round
+    id = db.Column(db.Integer, primary_key=True)
+    tournament_id = db.Column(db.Integer(), db.ForeignKey('tournament.id', ondelete='CASCADE'))
+    match_id = db.Column(db.Integer(), db.ForeignKey('match.id', ondelete='CASCADE'))
+    start_time = db.Column(db.DateTime, nullable=True)
+    end_time = db.Column(db.DateTime, nullable=True)
+    _participants = db.Column(db.String(10000), nullable=False, default="")
+    _winners = db.Column(db.String(10000), nullable=False, default="")
+
+    @property
+    def participants(self):
+        return [int(x) for x in self._participants.split(',')]
+    @participants.setter
+    def participants(self, val):
+        if type(val) == int:
+            self._participants += ',' + str(val)
+        elif type(val) == list:
+            self._participants = ','.join(val)
+    @property
+    def winners(self):
+        return [int(x) for x in self._winners.split(',')]
+    @participants.setter
+    def winners(self, val):
+        if type(val) == int:
+            self._winners += ',' + str(val)
+        elif type(val) == list:
+            self._winners = ','.join(val)
     
 class APIKey(db.Model):
     id = db.Column(db.Integer, primary_key=True)

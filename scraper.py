@@ -89,4 +89,4 @@ while pagenum <= totalpages:
     pagenum += 1
 
 with open('app/static/gamelists/Pump it Up/complete.json', 'w') as f:
-       json.dump(data, f, indent=2)
+    json.dump(data, f, indent=2)

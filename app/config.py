@@ -12,6 +12,9 @@ class Config():
     MAIL_USERNAME = parser.get('email', 'email')
     MAIL_PASSWORD = parser.get('email', 'password')
 
+    ENABLE_API_KEY = parser.get('arrowtracker', 'enable_api_key')
+    AUTO_APPROVE_SCORES = parser.get('arrowtracker', 'auto_approve_scores')
+
     FLASK_ADMIN_SWATCH = 'cerulean'
 
     POSTS_PER_PAGE = 20

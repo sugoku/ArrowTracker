@@ -1,14 +1,14 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, SelectField, TextAreaField, DecimalField
-from wtforms.validators import DataRequired, InputRequired, Length, Email, EqualTo, ValidationError, Optional, NumberRange
+from wtforms.validators import DataRequired, InputRequired, Length, Email, EqualTo, ValidationError, Optional, NumberRange, Regexp
 from flask_login import current_user
 from app.models import User
 from app import songlist_pairs, raw_songdata, judgement_pairs
 from app.scores.utils import *
 
 class RegisterForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired(), Length(min=1, max=20)])
+    username = StringField('Username', validators=[DataRequired(), Length(min=1, max=20), Regexp('^(\w| )+$')])
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
     confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
