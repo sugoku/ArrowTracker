@@ -62,6 +62,14 @@ judgement_pairs = (
     ('vj', 'Very Hard Judgement')
 )
 
+genre_pairs = (
+    ('ORIGINAL', 'Original'),
+    ('K-POP', 'K-Pop'),
+    ('WORLD MUSIC', 'World Music'),
+    ('J-MUSIC', 'J-Music'),
+    ('XROSS', 'Xross (Crossover)')
+)
+
 difficulties = []
 coop = ["2P", "3P", "4P", "5P"]
 for i in range(1, 29):
@@ -98,7 +106,7 @@ def roles_required(*role_names):
                 return login_manager.unauthorized()
 
             # User must have the required roles
-            if not current_user.has_roles(*role_names):
+            if not current_user.has_role(*role_names):
                 # Redirect to the unauthorized page (403)
                 return abort(403)
 

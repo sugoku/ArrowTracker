@@ -321,6 +321,9 @@ def chartsearch():                                   # we can both request and s
     form = SearchForm(request.form)
     if request.method == "POST" and form.validate():
         session['search_song'] = form.song.data
+        session['search_genre'] = form.genre.data
+        session['search_minbpm'] = form.minbpm.data
+        session['search_maxbpm'] = form.maxbpm.data
         session['search_filters'] = form.filters.data
         session['search_scoremodifier'] = form.scoremodifier.data
         session['search_score'] = form.score.data
@@ -353,6 +356,14 @@ def search_results():
 
     if session.get('search_song') != None and session['search_song'] != '':
         results = results.filter(Post.song == session['search_song'])
+
+    # to be implemented: add genre + BPM (maybe min and max) to Post
+    # if session.get('search_genre') != None and session['search_genre'] != '':
+    #     results = results.filter(Post.genre == session['search_genre'])
+    # if session.get('search_minbpm') != None and session['search_minbpm'] != '' and session['search_minbpm'] != 'Any':
+    #     results = results.filter(Post.song == int(session['search_minbpm']))
+    # if session.get('search_maxbpm') != None and session['search_maxbpm'] != '' and session['search_maxbpm'] != 'Any':
+    #     results = results.filter(Post.perfect == int(session['search_maxbpm']))
 
     if session.get('search_difficulty') != None and session['search_difficulty'] != '':
         results = results.filter(Post.difficulty == session['search_difficulty'])
@@ -432,7 +443,7 @@ def search_results():
 def wiki(wikipage):
     current_app.logger.debug(wikipage)
     if re.match(r'^\w+$', wikipage):
-        dest = os.path.join(current_app.root_path, 'templates/wiki/', wikipage+'.md')
+        dest = os.path.join(current_app.root_path, 'templates/wiki/', f'{wikipage}.md')
         if os.path.isfile(dest):
             with open(dest) as f:
                 txt = f.read()

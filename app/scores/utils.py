@@ -9,6 +9,7 @@ from flask import current_app
 from flask_login import current_user
 from app import db, logging, raw_songdata, scheduler, judgement_pairs
 from app.models import *
+from weekly import randomize_weekly
 from app.users.utils import update_user_sp, update_user_titles
 
 def id_to_user(uid):
@@ -19,18 +20,6 @@ ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
-def save_picture(form_picture):
-    random_hex = secrets.token_hex(8)
-    _, f_ext = os.path.splitext(form_picture.filename)
-    picture_fn = random_hex + f_ext
-    picture_path = os.path.join(current_app.root_path, 'static/score_screenshots', picture_fn)
-    output_size = (1200, 1200)
-    i = Image.open(form_picture)
-    if i.size[0] > 1200 or i.size[1] > 1200:
-        i.thumbnail(output_size)
-    i.save(picture_path)
-    return picture_fn
 
 def return_completion(user, difficulty):
     user = user = User.query.filter_by(username=user).first_or_404()
@@ -156,6 +145,13 @@ def update_scores_task():
                 with open(os.getcwd()+'/leaderboards/'+rnk+'_'+st+'.json', 'w') as f:
                     json.dump(create_ranking(rnk, st), f)
         current_app.logger.info("Updated leaderboards.")
+
+@scheduler.cron_schedule(day_of_week='mon')
+def update_weekly_task():
+    with scheduler.app.app_context():
+        current_app.logger.info("Updating weekly challenge...")
+        randomize_weekly(app)
+        current_app.logger.info("Updated weekly challenge.")
 
 def update_song_list():
     current_app.logger.info("Updating song list database...")

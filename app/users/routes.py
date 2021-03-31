@@ -4,7 +4,7 @@ from app import db, bcrypt, raw_songdata
 from app.models import *
 from app.users.forms import (RegisterForm, LoginForm, UpdateAccountForm, UpdateAccountPrimeServerForm,
                              RequestResetForm, ResetPasswordForm, MessageForm)
-from app.users.utils import save_picture, send_reset_email, get_user_rank
+from app.users.utils import send_reset_email, get_user_rank
 from app.scores.utils import *
 from app.main.utils import *
 from sqlalchemy import or_
@@ -70,19 +70,19 @@ def update_pfp():
 @users.route('/dashboard', methods=["GET", "POST"])
 @login_required
 def dashboard():
-    if current_user.has_role('primeserver'):
+    if current_user.has_role('PrimeServer'):
         form = UpdateAccountPrimeServerForm()
     else:
         form = UpdateAccountForm()
     if form.validate_on_submit():
         if form.picture.data:
-            picture_file = save_picture(form.picture.data)
+            picture_file = save_picture(form.picture.data, 'profile')
             current_user.image_file = picture_file
         current_user.username = form.username.data
         current_user.email = form.email.data.lower()
         current_user.bio = form.bio.data
         current_user.favsong = form.favsong.data
-        if current_user.has_role('primeserver'):
+        if current_user.has_role('PrimeServer'):
             current_user.ign = form.ign.data
             current_user.noteskin = form.noteskin.data
             current_user.scrollspeed = round(0.5 * round(float(form.scrollspeed.data) / 0.5), 1)
@@ -96,7 +96,7 @@ def dashboard():
         form.email.data = current_user.email
         form.bio.data = current_user.bio
         form.favsong.data = current_user.favsong
-        if current_user.has_role('primeserver'):
+        if current_user.has_role('PrimeServer'):
             form.ign.data = current_user.ign
             form.noteskin.data = current_user.noteskin
             form.scrollspeed.data = current_user.scrollspeed
@@ -109,7 +109,7 @@ def dashboard():
 def user_posts(username):
     page = request.args.get('page', 1, type=int)
     user = User.query.filter_by(username=username).first_or_404()
-    scores = Post.query.filter_by(author=user)\
+    scores = Post.query.filter_by(author=user, status=POST_APPROVED)\
         .order_by(Post.date_posted.desc())\
         .paginate(per_page=5, page=page)
     difficulty = None
@@ -120,11 +120,11 @@ def user_posts(username):
 @users.route("/userpage/<string:username>")
 def user_page(username):
     user = User.query.filter_by(username=username).first_or_404()
-    topscores = Post.query.filter_by(author=user).filter(or_(Post.image_file != "None", Post.acsubmit == "True")).order_by(Post.sp.desc()).limit(50).all()
-    recentscores = Post.query.filter_by(author=user).order_by(Post.date_posted.desc()).limit(3).all()
+    topscores = Post.query.filter_by(author=user, status=POST_APPROVED).filter(or_(Post.image_file != "None", Post.acsubmit == "True")).order_by(Post.sp.desc()).limit(50).all()
+    recentscores = Post.query.filter_by(author=user, status=POST_APPROVED).order_by(Post.date_posted.desc()).limit(3).all()
 
     firstscores = []
-    allscores = Post.query.filter_by(author=user).all()
+    allscores = Post.query.filter_by(author=user, status=POST_APPROVED).all()
     for score in allscores:
         if score == Post.query.filter_by(song_id=score.song_id, difficulty=score.difficulty).filter(or_(Post.image_file != "None", Post.acsubmit == "True")).first():
             firstscores.append(score)

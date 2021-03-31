@@ -13,25 +13,6 @@ from sqlalchemy import desc, or_
 
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
-def save_picture(form_picture):
-    '''Given a profile picture, resize and save the image.'''
-    random_hex = secrets.token_hex(8)
-    _, f_ext = os.path.splitext(form_picture.filename)
-    if f_ext != '.gif':
-        f_ext = '.jpg'
-    picture_fn = random_hex + f_ext
-    picture_path = os.path.join(current_app.root_path, 'static/profile_pics', picture_fn)
-    output_size = (125, 125)
-    i = Image.open(form_picture)
-    # if i.size[0] > 1200 or i.size[1] > 1200:
-    #     pass
-    i.thumbnail(output_size)
-    if f_ext != '.gif':
-        i.save(picture_path, format='jpeg')
-    else:
-        i.save(picture_path)
-    return picture_fn
-
 def send_reset_email(user):
     token = user.get_reset_token()
     msg = Message('Arrow Tracker: Password Reset Request', sender=Config.MAIL_USERNAME, recipients=[user.email])

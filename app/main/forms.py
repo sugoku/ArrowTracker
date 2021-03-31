@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 from wtforms import StringField, SubmitField, TextAreaField, SelectField, IntegerField, SelectMultipleField, DecimalField
 from wtforms.validators import DataRequired, NumberRange, Optional
-from app import songlist_pairs, raw_songdata, judgement_pairs
+from app import songlist_pairs, raw_songdata, judgement_pairs, genre_pairs
 from app.scores.utils import *
 
 # Form classes defined here are what show up on the website as text inputs, dropdowns, etc.
@@ -24,6 +24,9 @@ class SearchForm(FlaskForm):
         ('<=', "<=")
     )
     song = SelectField('Song', coerce=str, choices=[tuple(map(lambda x: x.decode('utf-8'), tup)) for tup in songlist_pairs])
+    genre = SelectField('Genre', coerce=str, choices=genre_pairs)
+    minbpm = IntegerField('Minimum BPM', validators=[Optional(), NumberRange(min=0)])
+    maxbpm = IntegerField('Maximum BPM', validators=[Optional(), NumberRange(min=0)])
     lettergrade = SelectMultipleField('Letter Grade', coerce=str, choices=(('Any', 'Any'), ('f', 'F'), ('d', 'D'), ('c', 'C'), ('b', 'B'), ('a', 'A'), ('s', 'S'), ('ss', 'SS'), ('sss', 'SSS')), validators=[DataRequired()])
     scoremodifier = SelectField('Score Search Type', coerce=str, choices=comparators, validators=[DataRequired()])
     score = IntegerField('Score', validators=[Optional(), NumberRange(min=0)])

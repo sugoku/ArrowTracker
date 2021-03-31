@@ -1,10 +1,11 @@
 from flask import (render_template, url_for, flash, redirect, request, abort, Blueprint, current_app)
 from flask_login import current_user, login_required
 from app import db, logging, raw_songdata, roles_required
-from app.models import Post, WeeklyPost, User
+from app.models import *
 from app.users.utils import update_user_sp
 from app.scores.forms import ScoreForm, WeeklyForm
 from app.scores.utils import *
+from app.main.utils import *
 import os
 import json
 from weekly import get_current_weekly, randomize_weekly
@@ -21,6 +22,35 @@ def add_songdata():
 @login_required
 def new_score():
     form = ScoreForm()
+    if flask.request.method == "GET":
+        form.song.data = request.form.get('song')
+        form.lettergrade.data = request.form.get('lettergrade')
+        form.stagepass.data = request.form.get('stagepass')
+        form.platform.data = request.form.get('platform')
+        try:
+            if request.form.get('score') is not None:
+                form.score.data = int(request.form.get('score'))
+            if request.form.get('perfect') is not None:
+                form.perfect.data = int(request.form.get('perfect'))
+            if request.form.get('great') is not None:
+                form.great.data = int(request.form.get('great'))
+            if request.form.get('good') is not None:
+                form.good.data = int(request.form.get('good'))
+            if request.form.get('bad') is not None:
+                form.bad.data = int(request.form.get('bad'))
+            if request.form.get('miss') is not None:
+                form.miss.data = int(request.form.get('miss'))
+            if request.form.get('maxcombo') is not None:
+                form.maxcombo.data = int(request.form.get('maxcombo'))
+            if request.form.get('noteskin') is not None:
+                form.noteskin.data = int(request.form.get('noteskin'))
+            if request.form.get('rushspeed') is not None:
+                form.rushspeed.data = float(request.form.get('rushspeed'))
+        except:
+            pass
+        form.gamemix.data = request.form.get('gamemix')
+        form.ranked.data = request.form.get('ranked')
+        form.judgement.data = request.form.get('judgement')
     current_app.logger.info(request.form)
     if form.validate_on_submit():
         current_app.logger.info("Form validated.")
@@ -33,7 +63,7 @@ def new_score():
             flash('No file uploaded', 'info')
         if file.filename != '':
             if file and allowed_file(file.filename):
-                picture_file = save_picture(file)
+                picture_file = save_picture(file, 'score')
                 flash('File uploaded successfully!', 'success')
             elif file and not allowed_file(file.filename):
                 picture_file = "None"
@@ -94,29 +124,72 @@ def score(score_id):
     goldgrades = ['s', 'ss', 'sss']
     redgrades = ['f']
     score = Post.query.get_or_404(score_id)
+
+    if score.status != POST_APPROVED and not (score.author == current_user or current_user.has_any_role("Moderator", "Admin")):
+        current_app.logger.info(f"Access denied for user {current_user} to access score {score_id}, returning 404")
+        abort(404)
+
     return render_template('score.html', score=score, songdata=raw_songdata, bluegrades=bluegrades, goldgrades=goldgrades, redgrades=redgrades, int_to_mods=int_to_mods, modlist_to_modstr=modlist_to_modstr, int_to_noteskin=int_to_noteskin)
 
-@scores.route('/post/<int:score_id>/edit')
+@scores.route('/post/<int:score_id>/edit', methods=["GET", "POST"])
 def edit_score(score_id):
     form = ScoreForm()
     current_app.logger.info(request.form)
 
     post = Post.query.get(score_id)
+    if not post or not (post.author == current_user or current_user.has_any_role("Moderator", "Admin")):
+        current_app.logger.info(f"Access denied for user {current_user} to edit score {score_id}, returning 403")
+        abort(403)
 
-    form.score.data = post.score
-    form.lettergrade.data = post.lettergrade
-    form.platform.data = post.platform
-    form.stagepass.data = post.stagepass
-    form.perfect.data = post.perfect
-    form.great.data = post.great
-    form.good.data = post.good
-    form.bad.data = post.bad
-    form.miss.data = post.miss
-    form.maxcombo.data = post.maxcombo
-    modifiers, form.judgement.data = int_to_mods(post.modifiers, separate_judge=True)
-    form.noteskin.data = post.noteskin
-    form.rushspeed.data = post.rushspeed
-    form.ranked.data = post.ranked
+    if flask.request.method == "GET":
+        form.score.data = post.score
+        form.lettergrade.data = post.lettergrade
+        form.platform.data = post.platform
+        form.stagepass.data = post.stagepass
+        form.perfect.data = post.perfect
+        form.great.data = post.great
+        form.good.data = post.good
+        form.bad.data = post.bad
+        form.miss.data = post.miss
+        form.maxcombo.data = post.maxcombo
+        modifiers, form.judgement.data = int_to_mods(post.modifiers, separate_judge=True)
+        form.noteskin.data = post.noteskin
+        form.rushspeed.data = post.rushspeed
+        form.ranked.data = post.ranked
+
+        if request.form.get('lettergrade') is not None:
+            form.lettergrade.data = request.form.get('lettergrade')
+        if request.form.get('stagepass') is not None:
+            form.stagepass.data = request.form.get('stagepass')
+        if request.form.get('platform') is not None:
+            form.platform.data = request.form.get('platform')
+        try:
+            if request.form.get('score') is not None:
+                form.score.data = int(request.form.get('score'))
+            if request.form.get('perfect') is not None:
+                form.perfect.data = int(request.form.get('perfect'))
+            if request.form.get('great') is not None:
+                form.great.data = int(request.form.get('great'))
+            if request.form.get('good') is not None:
+                form.good.data = int(request.form.get('good'))
+            if request.form.get('bad') is not None:
+                form.bad.data = int(request.form.get('bad'))
+            if request.form.get('miss') is not None:
+                form.miss.data = int(request.form.get('miss'))
+            if request.form.get('maxcombo') is not None:
+                form.maxcombo.data = int(request.form.get('maxcombo'))
+            if request.form.get('noteskin') is not None:
+                form.noteskin.data = int(request.form.get('noteskin'))
+            if request.form.get('rushspeed') is not None:
+                form.rushspeed.data = float(request.form.get('rushspeed'))
+        except:
+            pass
+        if request.form.get('gamemix') is not None:
+            form.gamemix.data = request.form.get('gamemix')
+        if request.form.get('ranked') is not None:
+            form.ranked.data = request.form.get('ranked')
+        if request.form.get('judgement') is not None:
+            form.judgement.data = request.form.get('judgement')
 
     if form.validate_on_submit():
         current_app.logger.info("Form validated.")
@@ -129,7 +202,7 @@ def edit_score(score_id):
             flash('No file uploaded', 'info')
         if file.filename != '':
             if file and allowed_file(file.filename):
-                picture_file = save_picture(file)
+                picture_file = save_picture(file, 'score')
                 flash('File uploaded successfully!', 'success')
             elif file and not allowed_file(file.filename):
                 picture_file = "None"
@@ -171,71 +244,54 @@ def edit_score(score_id):
     # generate form from post here
     return render_template("new_score.html", title="Edit Score", form=form, currpost=post, songdata=raw_songdata)
 
-@scores.route('/post/<int:score_id>/delete', methods=["POST"])
-def delete_score(score_id):
-    score = Post.query.get_or_404(score_id)
-    if score.author == current_user or current_user.id == 1:
-        if score.image_file != "None":
-            try:
-                os.remove(os.path.join(current_app.root_path, 'static/score_screenshots', score.image_file))
-            except:
-                flash('Score screenshot couldn\'t be found.', 'info')
-        db.session.delete(score)
-        db.session.commit()
-        update_user_sp(current_user)
-        flash('Your score has been deleted!', 'success')
-        return redirect(url_for('main.home'))
-    elif score.author != current_user:
+@scores.route('/post/<int:score_id>/accept', methods=["POST"])
+def accept_score(score_id):
+    if not current_user.has_any_role("Moderator", "Admin"):
+        current_app.logger.info(f"Access denied for user {current_user} to accept score {score_id}, returning 403")
         abort(403)
 
-@scores.route('/challenge/weekly/<int:score_id>/delete', methods=["POST"])
-def delete_weekly(score_id):
-    score = WeeklyPost.query.get_or_404(score_id)
-    if score.author != current_user:
+    score = Post.query.get_or_404(score_id)
+
+    score.status = POST_APPROVED
+    current_app.logger.info("Score accepted.")
+    db.session.add(score)
+    current_app.logger.info("Committing to database...")
+    db.session.commit()
+    update_user_sp(score.author)
+    flash('The score has been accepted!', 'success')
+
+    return redirect(url_for('main.home'))
+
+@scores.route('/post/<int:score_id>/delete', methods=["POST"])
+def delete_score(score_id):
+    score = Post.query.get(score_id)
+
+    if not score or not (score.author == current_user or current_user.has_any_role("Moderator", "Admin")):
+        current_app.logger.info(f"Access denied for user {current_user} to delete score {score_id}, returning 403")
         abort(403)
+    
     if score.image_file != "None":
-        os.remove(os.path.join(current_app.root_path, 'static/score_screenshots', score.image_file))
+        try:
+            os.remove(os.path.join(current_app.root_path, pic_directories['score'], score.image_file))
+        except:
+            flash('Score screenshot couldn\'t be found.', 'info')
     db.session.delete(score)
     db.session.commit()
-    flash('Your score has been deleted!', 'success')
+    update_user_sp(score.author)
+    flash('The score has been deleted!', 'success')
+
     return redirect(url_for('main.home'))
 
 @scores.route('/challenge/weekly', methods=["GET", "POST"])
 @login_required
 def weekly():
-    current_weekly = get_current_weekly()
-    form = WeeklyForm()
-    if form.validate_on_submit():
-        try:
-            file = request.files['file']
-        except:
-            flash('Score not submitted. Verification screenshot required.')
-            return redirect(url_for('main.home'))
-        if file != None:
-            if file.filename == '':
-                flash('Score not submitted. Verification screenshot required.')
-                return redirect(url_for('main.home'))
-            if file and allowed_file(file.filename):
-                picture_file = save_picture(file)
-                flash('File uploaded successfully!', 'success')
-                post = WeeklyPost(song = current_weekly[0], score = form.score.data, lettergrade = form.lettergrade.data, type=current_weekly[1], difficulty = form.difficulty.data, platform = form.platform.data, stagepass = form.stagepass.data, ranked = form.ranked.data, author = current_user, image_file = picture_file)
-                db.session.add(post)
-                db.session.commit()
-            elif file and not allowed_file(file.filename):
-                    flash('Score not submitted. Verification screenshot required.')
-                    return redirect(url_for('main.home'))
-        flash('Score has been submitted!', 'success')
-        return redirect(url_for('scores.weekly'))
-    ldb = WeeklyPost.query.order_by(WeeklyPost.score.desc()).all()
-    return render_template('weekly.html', current_weekly=current_weekly, form=form, ldb=ldb)
-
-@scores.route('/challenge/weekly/<int:score_id>')
-def weeklyscore(score_id):
-    bluegrades = ['a', 'b', 'c', 'd']
-    goldgrades = ['s', 'ss', 'sss']
-    redgrades = ['f']
-    score = WeeklyPost.query.get_or_404(score_id)
-    return render_template('weeklyscore.html', score=score, bluegrades=bluegrades, goldgrades=goldgrades, redgrades=redgrades)
+    w_song, w_length = get_current_weekly()
+    # https://stackoverflow.com/questions/6558535/find-the-date-for-the-first-monday-after-a-given-date
+    last_monday = datetime.date.today() - datetime.timedelta(days=date.weekday())
+    next_monday = datetime.date.today() + datetime.timedelta(days=(-date.weekday()+7)%7)
+    ldb = Post.query.filter_by(song=w_song, length=w_length).filter(Post.date_posted >= last_monday,
+                                                                    Post.date_posted <= next_monday).order_by(Post.score.desc()).all()
+    return render_template('weekly.html', current_weekly=(w_song, w_length), form=form, ldb=ldb)
 
 @scores.route('/leaderboard/main')
 def main_ldb():
@@ -250,7 +306,7 @@ def total_ldb():
     ldbtype = "Total Score"
     for user in users:
         usertotal = []
-        allscores = Post.query.filter_by(author=user).order_by(Post.date_posted.desc()).all()
+        allscores = Post.query.filter_by(author=user, status=POST_APPROVED).all()
         for score in allscores:
             usertotal.append(score.score)
         total = sum(usertotal)
@@ -266,7 +322,7 @@ def singles_ldb():
     ldbtype = "Singles Total"
     for user in users:
         usertotal = []
-        allscores = Post.query.filter_by(author=user).order_by(Post.date_posted.desc()).all()
+        allscores = Post.query.filter_by(author=user, status=POST_APPROVED).all()
         for score in allscores:
             if score.type.startswith('s'):
                 usertotal.append(score.score)
@@ -283,7 +339,7 @@ def doubles_ldb():
     ldbtype = "Doubles Total"
     for user in users:
         usertotal = []
-        allscores = Post.query.filter_by(author=user).order_by(Post.date_posted.desc()).all()
+        allscores = Post.query.filter_by(author=user, status=POST_APPROVED).all()
         for score in allscores:
             if score.type.startswith('d'):
                 usertotal.append(score.score)

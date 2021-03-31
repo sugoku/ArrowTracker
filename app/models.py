@@ -11,17 +11,36 @@ TOURNAMENT_APPROVED = 0
 TOURNAMENT_PENDING = 1
 TOURNAMENT_HIDDEN = 2
 
+TOURNAMENT_STANDARD = 0
+TOURNAMENT_TEAMS = 1
+
 POST_APPROVED = 0
 POST_PENDING = 1
 POST_UNRANKED = 2
 POST_HIDDEN = 3
 POST_PRIVATE = 4
 
+post_status = {
+    POST_APPROVED: "Approved",
+    POST_PENDING: "Pending",
+    POST_UNRANKED: "Unranked",
+    POST_HIDDEN: "Hidden",
+    POST_PRIVATE: "Private"
+}
+
 USER_CONFIRMED = 0
 USER_UNCONFIRMED = 1
 USER_HIDDEN = 2
 USER_PRIVATE = 3
 USER_BANNED = 4
+
+user_status = {
+    USER_CONFIRMED: "Confirmed",
+    USER_UNCONFIRMED: "Unconfirmed",
+    USER_HIDDEN: "Hidden",
+    USER_PRIVATE: "Private",
+    USER_BANNED: "Banned"
+}
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -93,6 +112,9 @@ class User(db.Model, UserMixin):
     def has_role(self, *role):
         return all(r in self.roles for r in role)
 
+    def has_any_role(self, *role):
+        return any(r in self.roles for r in role)
+
     def new_messages(self):
         last_read_time = self.last_message_read_time or datetime(1900, 1, 1)
         return Message.query.filter_by(recipient=self).filter(
@@ -111,6 +133,14 @@ class Role(db.Model):
     __tablename__ = 'roles'
     id = db.Column(db.Integer(), primary_key=True)
     name = db.Column(db.String(50), unique=True)
+
+    def __eq__(self, other):
+        if isinstance(other, self.__class__):
+            return self.__dict__ == other.__dict__
+        elif isinstance(other, str):
+            return self.name == other
+        else:
+            return False
 
     def __repr__(self):
         return f"Role('{self.name}')"
@@ -243,6 +273,7 @@ class Tournament(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     date_posted = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     status = db.Column(db.Integer, nullable=False, default=TOURNAMENT_APPROVED)
+    tournament_type = db.Column(db.Integer, nullable=False, default=TOURNAMENT_STANDARD)
     name = db.Column(db.String(50), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     signup_time_start = db.Column(db.DateTime, nullable=False)
@@ -254,8 +285,9 @@ class Tournament(db.Model):
     contactinfo = db.Column(db.String(150), nullable=False, default="No contact info provided")
     scoretype = db.Column(db.String(10), nullable=False, default="Default")
     _participants = db.Column(db.String(10000), nullable=False, default="")
-    # _teams = db.Column(db.String(10000), nullable=False, default="") # i have no clue
-    rounds = db.relationship('Round', backref='tournament', lazy=True)
+    # if team tournament, _participants becomes a list of teams
+    depth = db.Column(db.Integer, nullable=False, default=0)  # the depth of the binary tree of matches that this tournament is currently on
+    matches = db.relationship('Match', backref='tournament', lazy=True)
 
     @property
     def participants(self):
@@ -274,6 +306,7 @@ class Match(db.Model): # tournament match
     parent_match_id = db.Column(db.Integer(), db.ForeignKey('match.id', ondelete='CASCADE'))
     start_time = db.Column(db.DateTime, nullable=True)
     end_time = db.Column(db.DateTime, nullable=True)
+    depth = db.Column(db.Integer, nullable=False, default=0)  # the depth of this match in the binary tree of matches (0 is the final match)
     _participants = db.Column(db.String(10000), nullable=False, default="")
     _winners = db.Column(db.String(10000), nullable=False, default="")
 
@@ -296,24 +329,15 @@ class Match(db.Model): # tournament match
         elif type(val) == list:
             self._winners = ','.join(val)
 
-class Round(db.Model): # tournament round
+class Round(db.Model): # tournament round (matches have rounds)
     id = db.Column(db.Integer, primary_key=True)
     tournament_id = db.Column(db.Integer(), db.ForeignKey('tournament.id', ondelete='CASCADE'))
     match_id = db.Column(db.Integer(), db.ForeignKey('match.id', ondelete='CASCADE'))
     start_time = db.Column(db.DateTime, nullable=True)
     end_time = db.Column(db.DateTime, nullable=True)
-    _participants = db.Column(db.String(10000), nullable=False, default="")
+    # participants based on match
     _winners = db.Column(db.String(10000), nullable=False, default="")
 
-    @property
-    def participants(self):
-        return [int(x) for x in self._participants.split(',')]
-    @participants.setter
-    def participants(self, val):
-        if type(val) == int:
-            self._participants += ',' + str(val)
-        elif type(val) == list:
-            self._participants = ','.join(val)
     @property
     def winners(self):
         return [int(x) for x in self._winners.split(',')]

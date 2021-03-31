@@ -117,10 +117,13 @@ dmypy.json
 *.ini
 *.db
 app/static/score_screenshots/*.jpg
-app/static/score_screenshots/*.png
 app/static/score_screenshots/*.jpeg
+app/static/score_screenshots/*.png
+app/static/score_screenshots/*.gif
 app/static/tournament_pics/*.jpg
+app/static/tournament_pics/*.jpeg
 app/static/tournament_pics/*.png
+app/static/tournament_pics/*.gif
 app/static/archived_weekly*
 migrations/
 app/static/rivals/*.json
@@ -134,6 +137,7 @@ _site_verification.html
 google*.html
 app/static/profile_pics/*.png
 app/static/profile_pics/*.jpg
+app/static/profile_pics/*.jpeg
 app/static/profile_pics/*.gif
 *.backup
 leaderboards/*.json

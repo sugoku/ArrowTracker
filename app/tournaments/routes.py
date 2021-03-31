@@ -7,6 +7,7 @@ from flask_login import current_user, login_required
 from app.tournaments.forms import TournamentForm
 from app.scores.forms import ScoreForm
 from app.users.forms import APIKeyForm
+from app.main.utils import *
 from app.models import Post, Tournament, APIKey
 from app import songlist_pairs, difficulties, db, raw_songdata, approved_ips, apikey_required
 
@@ -35,7 +36,7 @@ def create_tournament():
                 flash('No file selected!', 'error')
                 return redirect(request.url)
             if file and allowed_file(file.filename):
-                picture_file = save_picture(file)
+                picture_file = save_picture(file, 'tournament')
                 flash('File uploaded successfully!', 'success')
             elif file and not allowed_file(file.filename):
                 flash('You can\'t upload that!', 'error')
@@ -64,7 +65,7 @@ def edit_tournament(tournament_id):
                 picture_file = "None"
                 return redirect(request.url)
             if file and allowed_file(file.filename):
-                picture_file = save_picture(file)
+                picture_file = save_picture(file, 'tournament')
                 flash('File uploaded successfully!', 'success')
             elif file and not allowed_file(file.filename):
                 picture_file = "None"
@@ -98,7 +99,7 @@ def delete_tournament(tournament_id):
     if tournament.user_id != current_user.id:
         abort(403)
     if tournament.image_file != "None":
-        os.remove(os.path.join(current_app.root_path, 'static/tournament_pics', tournament.image_file))
+        os.remove(os.path.join(current_app.root_path, pic_directories['tournament'], tournament.image_file))
     db.session.delete(tournament)
     db.session.commit()
     flash('Your tournament has been deleted!', 'success')
