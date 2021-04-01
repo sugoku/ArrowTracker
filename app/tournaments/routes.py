@@ -8,7 +8,7 @@ from app.tournaments.forms import TournamentForm
 from app.scores.forms import ScoreForm
 from app.users.forms import APIKeyForm
 from app.main.utils import *
-from app.models import Post, Tournament, APIKey
+from app.models import Post, Tournament, Match, Game, APIKey
 from app import songlist_pairs, difficulties, db, raw_songdata, approved_ips, apikey_required
 
 tournaments = Blueprint('tournaments', __name__)
@@ -88,12 +88,62 @@ def edit_tournament(tournament_id):
         abort(403)
     return render_template('edit_tournament.html', tournament=tournament, form=form)
 
-@tournaments.route('/tournament/<int:tournament_id>')
+@tournaments.route('/tournaments/<int:tournament_id>')
 def tournament(tournament_id):
     tournament = Tournament.query.get_or_404(tournament_id)
     return render_template('tournament.html', tournament=tournament)
 
-@tournaments.route('/tournament/<int:tournament_id>/delete', methods=["POST"])
+@tournaments.route('/tournaments/<int:tournament_id>/match/<int:match_id>')
+def tournament_match(tournament_id, match_id):
+    tournament = Tournament.query.get_or_404(tournament_id)
+    match = Match.query.get_or_404(match_id)
+    return render_template('tournament_match.html', tournament=tournament, match=match)
+
+@tournaments.route('/tournaments/<int:tournament_id>/queue')
+@login_required
+def tournament_queue(tournament_id):
+    tournament = Tournament.query.get_or_404(tournament_id)
+    if current_user.id not in tournament.organizers():
+        abort(403)
+    return render_template('tournamentqueue.html', tournament=tournament)
+
+@tournaments.route('/tournaments/<int:tournament_id>/matches')
+@login_required
+def tournament_queue(tournament_id):
+    tournament = Tournament.query.get_or_404(tournament_id)
+    if current_user.id not in tournament.organizers():
+        abort(403)
+    return render_template('tournament_matches.html', tournament=tournament)
+
+@tournaments.route("/tournaments/<int:tournament_id>/creatematch", methods=["GET", "POST"])
+@login_required
+def create_tournament():
+    form = TournamentForm(request.form)
+    picture_file = "None"
+    if form.validate_on_submit():
+        try:
+            file = request.files['file']
+        except:
+            file = None
+            flash('No file uploaded', 'info')
+        if file != None:
+            if file.filename == '':
+                flash('No file selected!', 'error')
+                return redirect(request.url)
+            if file and allowed_file(file.filename):
+                picture_file = save_picture(file, 'tournament')
+                flash('File uploaded successfully!', 'success')
+            elif file and not allowed_file(file.filename):
+                flash('You can\'t upload that!', 'error')
+        tournament = Tournament(name = form.name.data, skill_lvl = form.skill_lvl.data, description = form.description.data, bracketlink = form.bracketlink.data, image_file = picture_file, contactinfo = form.contactinfo.data, user_id = current_user.id)
+        db.session.add(tournament)
+        db.session.commit()
+        flash('Match created!', 'success')
+        return redirect(url_for('main.tournaments'))
+    return render_template("create_tournament.html", form=form)
+
+
+@tournaments.route('/tournaments/<int:tournament_id>/delete', methods=["POST"])
 def delete_tournament(tournament_id):
     tournament = Tournament.query.get_or_404(tournament_id)
     if tournament.user_id != current_user.id:

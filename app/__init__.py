@@ -153,12 +153,13 @@ def create_app(config_class=Config):
 
     # user_manager = UserManager(app, db, User)
     
-    from app.models import User, Post, Tournament, Round, Message, APIKey, Role
+    from app.models import User, Post, Tournament, Match, Game, Message, APIKey, Role
     admin = Admin(app, index_view=AdminIndexView(), name='ArrowTracker', template_mode='bootstrap3')
     admin.add_view(AdminModelView(User, db.session))
     admin.add_view(AdminModelView(Post, db.session))
     admin.add_view(AdminModelView(Tournament, db.session))
-    admin.add_view(AdminModelView(Round, db.session))
+    admin.add_view(AdminModelView(Match, db.session))
+    admin.add_view(AdminModelView(Game, db.session))
     admin.add_view(AdminModelView(Message, db.session))
     admin.add_view(AdminModelView(APIKey, db.session))
     admin.add_view(AdminModelView(Role, db.session))

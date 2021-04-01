@@ -11,6 +11,7 @@ from app import db, logging, raw_songdata, scheduler, judgement_pairs
 from app.models import *
 from weekly import randomize_weekly
 from app.users.utils import update_user_sp, update_user_titles
+# from fastai import load_learner, Learner
 
 def id_to_user(uid):
     u = User.query.filter_by(id=uid).first()

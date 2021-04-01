@@ -234,12 +234,14 @@ def edit_score(score_id):
         # probably update this after approval
         post.sp = calc_performance(post.song, post.difficulty, post.difficultynum, post.perfect, post.great, post.good, post.bad, post.miss, int_to_judge(post.modifiers), post.rushspeed, post.stagepass == "True")
         
+        post.status = POST_PENDING
+
         update_user_sp(current_user)
         current_app.logger.info("Converted.")
         db.session.add(post)
         current_app.logger.info("Committing to database...")
         db.session.commit()
-        flash('Score has been edited!', 'success')
+        flash('Score has been edited! If your score was approved before it has re-entered the moderator queue.', 'success')
         return redirect(url_for('scores.score', score_id=score_id))
     # generate form from post here
     return render_template("new_score.html", title="Edit Score", form=form, currpost=post, songdata=raw_songdata)
@@ -252,12 +254,7 @@ def accept_score(score_id):
 
     score = Post.query.get_or_404(score_id)
 
-    score.status = POST_APPROVED
-    current_app.logger.info("Score accepted.")
-    db.session.add(score)
-    current_app.logger.info("Committing to database...")
-    db.session.commit()
-    update_user_sp(score.author)
+    approve_post(score)
     flash('The score has been accepted!', 'success')
 
     return redirect(url_for('main.home'))

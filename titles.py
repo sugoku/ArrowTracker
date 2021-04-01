@@ -101,10 +101,7 @@ def post_count(u, stagepass=False):
     return len(q.all())
 
 def has_titles(u, titles):
-    for title in titles:
-        if not u.has_role(title):
-            return False
-    return True
+    return u.has_role(titles)
 
 xx = '[XX]'
 
@@ -197,7 +194,7 @@ titles = {
     f"{xx} {half} {level} 8": lambda u: song_passed_grade(u=u, song="Bad Apple [Full Song]", difficulty='D22', lettergrades=xx_title_grades),
     f"{xx} {half} {level} 9": lambda u: song_passed_grade(u=u, song="Danger Zone Try to B.P.M.", difficulty='D23', lettergrades=xx_title_grades),
     f"{xx} {half} {level} 10": lambda u: song_passed_grade(u=u, song="Imprinting", difficulty='D24', lettergrades=xx_title_grades),
-    f"{xx} {half} {expert}": lambda u: has_titles(u=u, titles=[f"{xx} {half} {level} {i}" for i in range(10)]),
+    f"{xx} {half} {expert}": lambda u: u.has_titles(u=u, titles=[f"{xx} {half} {level} {i}" for i in range(10)]),
 
     f"{xx} {gimmick} {level} 1": lambda u: song_passed_grade(u=u, song="Yeo Rae A", difficulty='S13', lettergrades=xx_title_grades),
     f"{xx} {gimmick} {level} 2": lambda u: song_passed_grade(u=u, song="Bad Apple", difficulty='S15', lettergrades=xx_title_grades),

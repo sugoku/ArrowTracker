@@ -12,7 +12,7 @@ This is the current formula:
 
 Current values:
 - Difficulty weight = 2.0
-- Exscore weight = 2.0
+- EX score weight = 2.0
 - Miss weight = 5.0
 - Rush weight = 0.4
 - Stage fail penalty = 0.75
@@ -22,5 +22,6 @@ Some notes:
 - This forumla does NOT rely on combo-based scoring.
 However, in order to keep encouraging high combos and low miss plays, misses are counted exponentially.
 The more misses you have, the more SP you lose.
+    - Misses also scale based on max combo, so getting a miss on a higher combo song doesn't hurt as much as a miss on a song with less combo.
 - A lot of things exponentially increase; difficulty is rewarded exponentially because it arguably gets harder exponentially.
-- Rush speed mods and harder judgements are encouraged!
+- Rush speed mods and harder judgements are encouraged! Though, rush speed might become unranked since it's only accessible to people with older mixes.

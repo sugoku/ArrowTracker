@@ -10,9 +10,32 @@ from time import time
 TOURNAMENT_APPROVED = 0
 TOURNAMENT_PENDING = 1
 TOURNAMENT_HIDDEN = 2
+TOURNAMENT_PRIVATE = 3
+
+tournament_status = {
+    TOURNAMENT_APPROVED: "Approved",
+    TOURNAMENT_PENDING: "Pending",
+    TOURNAMENT_HIDDEN: "Hidden",
+    TOURNAMENT_PRIVATE: "Private"
+}
 
 TOURNAMENT_STANDARD = 0
-TOURNAMENT_TEAMS = 1
+TOURNAMENT_TEAM = 1
+TOURNAMENT_TEAM_AVG = 2  # The average of the score of a single team is used
+
+tournament_types = {
+    TOURNAMENT_STANDARD: "Standard",
+    TOURNAMENT_TEAM: "Team",
+    TOURNAMENT_TEAM_AVG: "Team Average"
+}
+
+SCORE_DEFAULT = 0
+SCORE_EXSCORE = 1
+
+score_types = {
+    SCORE_DEFAULT: "Default",
+    SCORE_EXSCORE: "EX Score"
+}
 
 POST_APPROVED = 0
 POST_PENDING = 1
@@ -60,7 +83,6 @@ class User(db.Model, UserMixin):
     bio = db.Column(db.String(500), nullable=True, default="This user has no bio.")
     favsong = db.Column(db.String(50), nullable=True, default="No favorite song chosen.")
     posts = db.relationship('Post', backref='author', lazy=True)
-    weeklyposts = db.relationship('WeeklyPost', backref='author', lazy=True)
 
     accesscode = db.Column(db.String(32), unique=True, nullable=False)
     ign = db.Column(db.String(20), nullable=False, default='PUMPITUP')
@@ -201,74 +223,6 @@ class Post(db.Model):
     def __repr__(self):
         return f"Post('{self.song}', '{self.score}', '{self.lettergrade}', '{self.type}', '{self.difficulty}', '{self.platform}', '{self.stagepass}', '{self.ranked}', '{self.length}')"
 
-class WeeklyPost(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    date_posted = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
-    approved = db.Column(db.Integer, nullable=False, default=1)
-    song = db.Column(db.String(50), nullable=False)
-    score = db.Column(db.Integer, nullable=False)   
-    lettergrade = db.Column(db.String(3), nullable=False)
-    type = db.Column(db.String(7), nullable=True, default="None")
-    difficulty = db.Column(db.Integer, nullable=False)
-    platform = db.Column(db.String(8), nullable=False)
-    stagepass = db.Column(db.String(5), nullable=False)
-    perfect = db.Column(db.Integer, nullable=False)
-    great = db.Column(db.Integer, nullable=False)
-    good = db.Column(db.Integer, nullable=False)
-    bad = db.Column(db.Integer, nullable=False)
-    miss = db.Column(db.Integer, nullable=False)
-    maxcombo = db.Column(db.Integer, nullable=False)
-    pp = db.Column(db.Float, nullable=False, default=0)
-    runningstep = db.Column(db.Float, nullable=False, default=0)
-    kcal = db.Column(db.Float, nullable=False, default=0)
-    scrollspeed = db.Column(db.Float, nullable=False)
-    noteskin = db.Column(db.Integer, nullable=False, default=0)
-    modifiers = db.Column(db.Integer, nullable=False, default=0)
-    gamemix = db.Column(db.String(20), nullable=False, default="Unknown")
-    gameversion = db.Column(db.String(12), nullable=False, default="Unknown")
-    ranked = db.Column(db.String(5), nullable=False)
-    length = db.Column(db.String(8), nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    image_file = db.Column(db.String(20), nullable=False, default="None")
-
-    def __repr__(self):
-        return f"WeeklyPost('{self.song}', '{self.score}', '{self.lettergrade}', '{self.type}', '{self.difficulty}', '{self.platform}', '{self.stagepass}', '{self.ranked}', '{self.length}')"
-
-
-class TournamentPost(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    date_posted = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
-    approved = db.Column(db.Integer, nullable=False, default=1)
-    song = db.Column(db.String(50), nullable=False)
-    score = db.Column(db.Integer, nullable=False)   
-    lettergrade = db.Column(db.String(3), nullable=False)
-    type = db.Column(db.String(7), nullable=True, default="None")
-    difficulty = db.Column(db.Integer, nullable=False)
-    platform = db.Column(db.String(8), nullable=False)
-    stagepass = db.Column(db.String(5), nullable=False)
-    perfect = db.Column(db.Integer, nullable=False)
-    great = db.Column(db.Integer, nullable=False)
-    good = db.Column(db.Integer, nullable=False)
-    bad = db.Column(db.Integer, nullable=False)
-    miss = db.Column(db.Integer, nullable=False)
-    maxcombo = db.Column(db.Integer, nullable=False)
-    pp = db.Column(db.Float, nullable=False, default=0)
-    runningstep = db.Column(db.Float, nullable=False, default=0)
-    kcal = db.Column(db.Float, nullable=False, default=0)
-    scrollspeed = db.Column(db.Float, nullable=False)
-    noteskin = db.Column(db.Integer, nullable=False, default=0)
-    modifiers = db.Column(db.Integer, nullable=False, default=0)
-    gamemix = db.Column(db.String(20), nullable=False, default="Unknown")
-    gameversion = db.Column(db.String(12), nullable=False, default="Unknown")
-    ranked = db.Column(db.String(5), nullable=False)
-    length = db.Column(db.String(8), nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    image_file = db.Column(db.String(20), nullable=False, default="None")
-    tournamentid = db.Column(db.Integer, nullable=True)
-
-    def __repr__(self):
-        return f"WeeklyPost('{self.song}', '{self.score}', '{self.lettergrade}', '{self.type}', '{self.difficulty}', '{self.platform}', '{self.stagepass}', '{self.ranked}', '{self.length}')"
-
 class Tournament(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     date_posted = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
@@ -276,26 +230,35 @@ class Tournament(db.Model):
     tournament_type = db.Column(db.Integer, nullable=False, default=TOURNAMENT_STANDARD)
     name = db.Column(db.String(50), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    signup_time_start = db.Column(db.DateTime, nullable=False)
-    signup_time_end = db.Column(db.DateTime, nullable=False)
+    _organizers = db.Column(db.String(10000), nullable=False, default="")
+    signup_start_time = db.Column(db.DateTime, nullable=False)
+    signup_end_time = db.Column(db.DateTime, nullable=False)
     skill_lvl = db.Column(db.String(12), nullable=False)
+    titles_required = db.Column(db.String(1000), nullable=False, default="")
     description = db.Column(db.String(200), nullable=False)
     # bracketlink = db.Column(db.String(150), nullable=False)
     image_file = db.Column(db.String(20), nullable=False, default="None")
-    contactinfo = db.Column(db.String(150), nullable=False, default="No contact info provided")
-    scoretype = db.Column(db.String(10), nullable=False, default="Default")
+    contact_info = db.Column(db.String(150), nullable=False, default="No contact info provided")
+    score_type = db.Column(db.Integer, nullable=False, default=SCORE_DEFAULT)
     _participants = db.Column(db.String(10000), nullable=False, default="")
     # if team tournament, _participants becomes a list of teams
-    depth = db.Column(db.Integer, nullable=False, default=0)  # the depth of the binary tree of matches that this tournament is currently on
+    max_depth = db.Column(db.Integer, nullable=False, default=0)  # the max depth of the binary tree of matches
     matches = db.relationship('Match', backref='tournament', lazy=True)
 
     @property
-    def participants(self):
+    def participants(self):  # list of user IDs or team IDs if it's a team tournament
         return [int(x) for x in self._participants.split(',')]
     @participants.setter
     def participants(self, val):
         if type(val) == int:
             self._participants += ',' + str(val)
+    @property
+    def organizers(self):  # list of user IDs
+        return [int(x) for x in self._organizers.split(',')]
+    @organizers.setter
+    def organizers(self, val):
+        if type(val) == int:
+            self._organizers += ',' + str(val)
 
     def __repr__(self):
         return f"Tournament('{self.name}', '{self.skill_lvl}, '{self.description}', '{self.bracketlink}', '{self.image_file}')"
@@ -329,24 +292,27 @@ class Match(db.Model): # tournament match
         elif type(val) == list:
             self._winners = ','.join(val)
 
-class Round(db.Model): # tournament round (matches have rounds)
+class Game(db.Model): # tournament games (matches have games)
     id = db.Column(db.Integer, primary_key=True)
     tournament_id = db.Column(db.Integer(), db.ForeignKey('tournament.id', ondelete='CASCADE'))
     match_id = db.Column(db.Integer(), db.ForeignKey('match.id', ondelete='CASCADE'))
-    start_time = db.Column(db.DateTime, nullable=True)
-    end_time = db.Column(db.DateTime, nullable=True)
     # participants based on match
-    _winners = db.Column(db.String(10000), nullable=False, default="")
+    song = db.Column(db.String(50), nullable=False)
+    song_id = db.Column(db.Integer, nullable=True)
+    difficulty = db.Column(db.String(5), nullable=False)
+    difficultynum = db.Column(db.Integer, nullable=False)
+    # Winners are not necessary to store for games because they can be calculated at match end instead of game end
+    # _winners = db.Column(db.String(10000), nullable=False, default="")
 
-    @property
-    def winners(self):
-        return [int(x) for x in self._winners.split(',')]
-    @participants.setter
-    def winners(self, val):
-        if type(val) == int:
-            self._winners += ',' + str(val)
-        elif type(val) == list:
-            self._winners = ','.join(val)
+    # @property
+    # def winners(self):
+    #     return [int(x) for x in self._winners.split(',')]
+    # @participants.setter
+    # def winners(self, val):
+    #     if type(val) == int:
+    #         self._winners += ',' + str(val)
+    #     elif type(val) == list:
+    #         self._winners = ','.join(val)
     
 class APIKey(db.Model):
     id = db.Column(db.Integer, primary_key=True)
