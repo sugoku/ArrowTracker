@@ -275,6 +275,8 @@ def check_post(post):
 def approve_post(post):
     '''Given a post, set it to an approved state and update the user's SP and titles.'''
     post.status = POST_APPROVED
+    if Post.query.get(post.id) is None:
+        db.session.add(post)
     db.session.commit()
     u = User.query.get(post.user_id)
     update_user_sp(u)
@@ -283,6 +285,8 @@ def approve_post(post):
 def queue_post(post):
     '''Given a post, add it to the moderator queue.'''
     post.status = POST_PENDING
+    if Post.query.get(post.id) is None:
+        db.session.add(post)
     db.session.commit()
 
 # def id_to_songdiff(sid, diff):

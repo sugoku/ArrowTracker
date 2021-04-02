@@ -10,6 +10,8 @@ from loadsongs import load_song_lists, raw_songdata
 from flask_mail import Mail
 from app.config import Config
 from flask_apscheduler import APScheduler
+from apscheduler.schedulers.background import BackgroundScheduler
+from apscheduler.jobstores.sqlalchemy import SQLAlchemyJobStore
 # from flask_user import UserManager
 from flaskext.markdown import Markdown
 import atexit
@@ -118,12 +120,17 @@ def roles_required(*role_names):
     return wrapper
 
 mail = Mail()
-scheduler = APScheduler()
+
+jobstores = {
+    'default': SQLAlchemyJobStore(url=current_app.config['SQLALCHEMY_JOBS_DATABASE_URI'])
+}
+scheduler = APScheduler(scheduler=BackgroundScheduler(jobstores=jobstores))
+
 moment = Moment()
 
 def safe_shutdown(signum, frame):  # To make APScheduler actually shut off
     print('Forcing shutdown...')
-    scheduler.shutdown()
+    scheduler.shutdown(wait=False)
 
 signal.signal(signal.SIGINT, safe_shutdown)
 signal.signal(signal.SIGTERM, safe_shutdown)

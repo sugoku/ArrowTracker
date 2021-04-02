@@ -109,7 +109,7 @@ def tournament_queue(tournament_id):
 
 @tournaments.route('/tournaments/<int:tournament_id>/matches')
 @login_required
-def tournament_queue(tournament_id):
+def tournament_matches(tournament_id):
     tournament = Tournament.query.get_or_404(tournament_id)
     if current_user.id not in tournament.organizers():
         abort(403)

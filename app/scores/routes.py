@@ -235,12 +235,13 @@ def edit_score(score_id):
         post.sp = calc_performance(post.song, post.difficulty, post.difficultynum, post.perfect, post.great, post.good, post.bad, post.miss, int_to_judge(post.modifiers), post.rushspeed, post.stagepass == "True")
         
         post.status = POST_PENDING
-
-        update_user_sp(current_user)
-        current_app.logger.info("Converted.")
-        db.session.add(post)
+        
         current_app.logger.info("Committing to database...")
         db.session.commit()
+
+        update_user_sp(current_user)
+        current_app.logger.info("Updated user SP.")
+        
         flash('Score has been edited! If your score was approved before it has re-entered the moderator queue.', 'success')
         return redirect(url_for('scores.score', score_id=score_id))
     # generate form from post here

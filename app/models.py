@@ -241,8 +241,10 @@ class Tournament(db.Model):
     contact_info = db.Column(db.String(150), nullable=False, default="No contact info provided")
     score_type = db.Column(db.Integer, nullable=False, default=SCORE_DEFAULT)
     _participants = db.Column(db.String(10000), nullable=False, default="")
+    _remaining_participants = db.Column(db.String(10000), nullable=False, default="")
     # if team tournament, _participants becomes a list of teams
-    max_depth = db.Column(db.Integer, nullable=False, default=0)  # the max depth of the binary tree of matches
+    depth = db.Column(db.Integer, nullable=False, default=0)  # the current depth of the binary tree of matches (the round we are on)
+    max_depth = db.Column(db.Integer, nullable=False, default=0)  # the max depth of the binary tree of matches (the number representing the first round)
     matches = db.relationship('Match', backref='tournament', lazy=True)
 
     @property
@@ -252,6 +254,13 @@ class Tournament(db.Model):
     def participants(self, val):
         if type(val) == int:
             self._participants += ',' + str(val)
+    @property
+    def remaining_participants(self):  # list of user IDs or team IDs if it's a team tournament
+        return [int(x) for x in self._remaining_participants.split(',')]
+    @participants.setter
+    def remaining_participants(self, val):
+        if type(val) == int:
+            self._remaining_participants += ',' + str(val)
     @property
     def organizers(self):  # list of user IDs
         return [int(x) for x in self._organizers.split(',')]
@@ -266,7 +275,6 @@ class Tournament(db.Model):
 class Match(db.Model): # tournament match
     id = db.Column(db.Integer, primary_key=True)
     tournament_id = db.Column(db.Integer(), db.ForeignKey('tournament.id', ondelete='CASCADE'))
-    parent_match_id = db.Column(db.Integer(), db.ForeignKey('match.id', ondelete='CASCADE'))
     start_time = db.Column(db.DateTime, nullable=True)
     end_time = db.Column(db.DateTime, nullable=True)
     depth = db.Column(db.Integer, nullable=False, default=0)  # the depth of this match in the binary tree of matches (0 is the final match)
@@ -313,6 +321,20 @@ class Game(db.Model): # tournament games (matches have games)
     #         self._winners += ',' + str(val)
     #     elif type(val) == list:
     #         self._winners = ','.join(val)
+
+class Team(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(32), unique=True, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    _members = db.Column(db.String(10000), nullable=False, default="")
+
+    @property
+    def members(self):  # list of user IDs
+        return [int(x) for x in self._members.split(',')]
+    @members.setter
+    def members(self, val):
+        if type(val) == int:
+            self._members += ',' + str(val)
     
 class APIKey(db.Model):
     id = db.Column(db.Integer, primary_key=True)
