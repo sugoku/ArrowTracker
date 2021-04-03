@@ -6,6 +6,7 @@ from app.tournaments.utils import *
 from app.models import *
 from app import songlist_pairs
 from titles import titles
+from datetime import timedelta
 
 class TournamentForm(FlaskForm):
     name = StringField('Tournament Name', validators=[DataRequired()])
@@ -27,6 +28,8 @@ class TournamentForm(FlaskForm):
     def validate_signup_end_time(form, field):
         if field.data < form.signup_start_time.data:
             raise ValidationError("Signup end time must be after the start time!")
+        elif field.data-form.signup_start_time.data < timedelta(month = 6):
+            raise ValidationError("Signup time can only last for 6 months at most.")
 
 class MatchForm(FlaskForm):
     participants = SelectField('Participants', coerce=str, validators=[DataRequired()])
@@ -37,6 +40,8 @@ class MatchForm(FlaskForm):
     def validate_end_time(form, field):
         if field.data < form.start_time.data:
             raise ValidationError("End time must be after the start time!")
+        elif field.data-form.start_time.data < timedelta(month = 1):
+            raise ValidationError("Matches can only last for 1 month at most.")
 
 class GameForm(FlaskForm):
     song = SelectField('Song', coerce=str, choices=[tuple(map(lambda x: x.decode('utf-8'), tup)) for tup in songlist_pairs], validators=[DataRequired()])

@@ -37,6 +37,16 @@ score_types = {
     SCORE_EXSCORE: "EX Score"
 }
 
+PROGRESS_NOT_STARTED = 0
+PROGRESS_IN_PROGRESS = 1
+PROGRESS_FINISHED = 2
+
+progress_types = {
+    PROGRESS_NOT_STARTED: "Not Started",
+    PROGRESS_IN_PROGRESS: "In Progress",
+    PROGRESS_FINISHED: "Finished"
+}
+
 POST_APPROVED = 0
 POST_PENDING = 1
 POST_UNRANKED = 2
@@ -227,6 +237,7 @@ class Tournament(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     date_posted = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     status = db.Column(db.Integer, nullable=False, default=TOURNAMENT_APPROVED)
+    progress = db.Column(db.Integer, nullable=False, default=PROGRESS_NOT_STARTED)
     tournament_type = db.Column(db.Integer, nullable=False, default=TOURNAMENT_STANDARD)
     name = db.Column(db.String(50), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
@@ -275,9 +286,11 @@ class Tournament(db.Model):
 class Match(db.Model): # tournament match
     id = db.Column(db.Integer, primary_key=True)
     tournament_id = db.Column(db.Integer(), db.ForeignKey('tournament.id', ondelete='CASCADE'))
+    progress = db.Column(db.Integer, nullable=False, default=PROGRESS_NOT_STARTED)
     start_time = db.Column(db.DateTime, nullable=True)
     end_time = db.Column(db.DateTime, nullable=True)
     depth = db.Column(db.Integer, nullable=False, default=0)  # the depth of this match in the binary tree of matches (0 is the final match)
+    games = db.relationship('Game', backref='match', lazy=True)
     _participants = db.Column(db.String(10000), nullable=False, default="")
     _winners = db.Column(db.String(10000), nullable=False, default="")
 
@@ -304,6 +317,7 @@ class Game(db.Model): # tournament games (matches have games)
     id = db.Column(db.Integer, primary_key=True)
     tournament_id = db.Column(db.Integer(), db.ForeignKey('tournament.id', ondelete='CASCADE'))
     match_id = db.Column(db.Integer(), db.ForeignKey('match.id', ondelete='CASCADE'))
+    progress = db.Column(db.Integer, nullable=False, default=PROGRESS_NOT_STARTED)
     # participants based on match
     song = db.Column(db.String(50), nullable=False)
     song_id = db.Column(db.Integer, nullable=True)

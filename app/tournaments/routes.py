@@ -75,7 +75,7 @@ def edit_tournament(tournament_id):
         tournament.description = form.description.data
         tournament.skill_lvl = form.skill_lvl.data
         tournament.bracketlink = form.bracketlink.data
-        tournament.contactingo = form.contactinfo.data
+        tournament.contactinfo = form.contactinfo.data
         db.session.commit()
         flash('Tournament info updated!', 'success')
         return redirect(url_for('main.tournaments'))
