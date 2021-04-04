@@ -129,6 +129,28 @@ mods = {
     'hj': 0x400000,
     'vj': 0x800000
 }
+mods_display = {
+    'v': 'V (Vanish)',
+    'ap': 'AP',
+    'ns': 'NS',
+    'fl': 'FL',
+    'fd': 'FD',
+    'm': 'M (Mirror)',
+    'rs': 'RS',
+    'rn': 'Random Noteskin', # random noteskin
+    'ua': 'UA',
+    'jr': 'JR (Judge Reverse)',
+    'dc': 'DC',
+    'bgaoff': 'BGA OFF',
+    'x': 'X',
+    'nx': 'NX',
+    'dr': 'DR',
+    'si': 'SI',
+    'ri': 'RI',
+    'sn': 'SN',
+    'hj': 'HJ (Hard Judgement)',
+    'vj': 'VJ (Very Hard Judgement)'
+}
 judgements = {
     'nj': 0x0,
     'hj': 0x400000,

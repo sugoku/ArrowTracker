@@ -1,9 +1,9 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, TextAreaField, SelectField, IntegerField, DecimalField, HiddenField
+from wtforms import StringField, SubmitField, TextAreaField, SelectField, IntegerField, DecimalField, HiddenField, SelectMultipleField
 from wtforms.validators import DataRequired, NumberRange, Length, InputRequired
 from flask_wtf.file import FileField, FileAllowed
 from app import songlist_pairs, difficulties, lengthtype_pairs, gamemix_pairs, judgement_pairs
-from app.scores.utils import prime_noteskin, other_noteskin
+from app.scores.utils import prime_noteskin, other_noteskin, mods_display, judgements
 import json
 
 weeklydiffs = json.load(open('weekly.json', 'r'))['diffs']
@@ -47,6 +47,8 @@ class ScoreForm(FlaskForm):
     #autovelocity = IntegerField('Auto Velocity Speed', validators=[NumberRange(min=0)])
     noteskin = SelectField('Noteskin', coerce=int, choices=list(other_noteskin.items()) + list(prime_noteskin.items()), validators=[InputRequired(), NumberRange(min=0)])
     rushspeed = DecimalField('Rush Speed', places=1, validators=[NumberRange(min=0.7, max=1.5)])
+
+    modifiers = SelectMultipleField('Modifiers', coerce=str, choices=[(k, v) for k, v in mods_display.items() if k not in judgements], validators=[DataRequired()])
     
     # add this back in template + submit routes and uncomment
     gamemix = SelectField('Game Mix', coerce=str, choices=gamemix_pairs, validators=[RequiredIf(platform='pad')])
