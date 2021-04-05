@@ -169,7 +169,7 @@ def update_scores_task():
                     json.dump(create_ranking(rnk, st), f)
         current_app.logger.info("Updated leaderboards.")
 
-@scheduler.cron_schedule(day_of_week='mon')
+@scheduler.task('cron', id='update_weekly', week='*', day_of_week='mon')
 def update_weekly_task():
     with scheduler.app.app_context():
         current_app.logger.info("Updating weekly challenge...")

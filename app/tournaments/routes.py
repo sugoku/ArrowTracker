@@ -51,7 +51,7 @@ def create_tournament():
 @login_required
 def edit_tournament(tournament_id):
     tournament = Tournament.query.get_or_404(tournament_id)
-    form = TournamentEditForm()
+    form = TournamentForm()
     if form.validate_on_submit():
         try:
             file = request.files['file']
@@ -117,7 +117,7 @@ def tournament_matches(tournament_id):
 
 @tournaments.route("/tournaments/<int:tournament_id>/creatematch", methods=["GET", "POST"])
 @login_required
-def create_tournament():
+def create_match():
     form = TournamentForm(request.form)
     picture_file = "None"
     if form.validate_on_submit():

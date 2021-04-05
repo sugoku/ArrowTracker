@@ -3,7 +3,7 @@ from flask_login import current_user, login_required
 from app import db, logging, raw_songdata, roles_required
 from app.models import *
 from app.users.utils import update_user_sp
-from app.scores.forms import ScoreForm, WeeklyForm
+from app.scores.forms import ScoreForm
 from app.scores.utils import *
 from app.main.utils import *
 import os

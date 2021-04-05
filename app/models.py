@@ -165,6 +165,7 @@ class Role(db.Model):
     __tablename__ = 'roles'
     id = db.Column(db.Integer(), primary_key=True)
     name = db.Column(db.String(50), unique=True)
+    perms = db.Column(db.Integer(), nullable=False, default=0)
 
     def __eq__(self, other):
         if isinstance(other, self.__class__):

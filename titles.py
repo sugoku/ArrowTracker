@@ -194,7 +194,7 @@ titles = {
     f"{xx} {half} {level} 8": lambda u: song_passed_grade(u=u, song="Bad Apple [Full Song]", difficulty='D22', lettergrades=xx_title_grades),
     f"{xx} {half} {level} 9": lambda u: song_passed_grade(u=u, song="Danger Zone Try to B.P.M.", difficulty='D23', lettergrades=xx_title_grades),
     f"{xx} {half} {level} 10": lambda u: song_passed_grade(u=u, song="Imprinting", difficulty='D24', lettergrades=xx_title_grades),
-    f"{xx} {half} {expert}": lambda u: u.has_titles(u=u, titles=[f"{xx} {half} {level} {i}" for i in range(10)]),
+    f"{xx} {half} {expert}": lambda u: has_titles(u=u, titles=[f"{xx} {half} {level} {i}" for i in range(10)]),
 
     f"{xx} {gimmick} {level} 1": lambda u: song_passed_grade(u=u, song="Yeo Rae A", difficulty='S13', lettergrades=xx_title_grades),
     f"{xx} {gimmick} {level} 2": lambda u: song_passed_grade(u=u, song="Bad Apple", difficulty='S15', lettergrades=xx_title_grades),
@@ -299,7 +299,7 @@ titles = {
     f"{xx} {vip} Member": lambda u: post_count(u) > 6000,  # 2000 play count = ~6000 score count
 
     f"{xx} {scrooge}": lambda u: u.pp > 200000,
-    f"{xx} {cheater}": score_exists(u=u, difficulty='D26', lettergrades=xx_title_grades),  
+    f"{xx} {cheater}": lambda u: score_exists(u=u, difficulty='D26', lettergrades=xx_title_grades),  
     # f"{xx} {macnom}": lambda u: judge_count(u=u, judge='bad') > 10000,
     f"{xx} {pump_is_a_sense}": lambda u: song_passed_grade(u=u, song="Love is a Danger Zone", difficulty='D21', lettergrades=xx_title_grades),
     f"{xx} {no_skill_no_pump}": lambda u: song_passed_grade(u=u, song="Moonlight", difficulty='D21', lettergrades=xx_title_grades),  

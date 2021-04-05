@@ -120,12 +120,7 @@ def roles_required(*role_names):
     return wrapper
 
 mail = Mail()
-
-jobstores = {
-    'default': SQLAlchemyJobStore(url=current_app.config['SQLALCHEMY_JOBS_DATABASE_URI'])
-}
-scheduler = APScheduler(scheduler=BackgroundScheduler(jobstores=jobstores))
-
+scheduler = APScheduler(scheduler=BackgroundScheduler())
 moment = Moment()
 
 def safe_shutdown(signum, frame):  # To make APScheduler actually shut off
@@ -185,6 +180,8 @@ def create_app(config_class=Config):
     app.register_blueprint(moderation)
     app.register_blueprint(errors)
 
+    scheduler.scheduler.add_jobstore(SQLAlchemyJobStore(url=app.config['SQLALCHEMY_JOBS_DATABASE_URI']), 'default')
+    
     scheduler.init_app(app)
     scheduler.start()
     atexit.register(lambda: scheduler.shutdown())

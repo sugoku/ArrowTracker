@@ -8,13 +8,21 @@ import os
 from pathlib import Path
 from app import db, create_app
 from app.pump_models import *
+from tqdm import tqdm
 
 db_uri = 'sqlite:///resources/pumpout.db'
 engine = create_engine(db_uri)
 conn = engine.connect()
 
+CLEAR_DB = True
+
 app = create_app()
 app.app_context().push()
+
+if CLEAR_DB:
+    print("CLEAR_DB enabled, dropping existing tables...")
+    db.drop_all(bind='pump')
+print("Generating pump.db if it doesn't exist...")
 db.create_all(bind='pump')
 
 meta = MetaData(engine)
@@ -36,7 +44,7 @@ typeabbrev = {
 
 smtype_to_stdtype = {
     'StepsType_Pump_Single': 'S',
-    'StepsType_Pump_Halfdouble': 'HD',
+    'StepsType_Pump_Halfdouble': 'HDB',
     'StepsType_Pump_Double': 'D'
 }  # this should be a fallback only because SP, DP, Co-Op charts aren't accounted for
 
@@ -82,7 +90,7 @@ class Difficulty:
         self.internalTitle = internalTitle
         self.danger = danger
 
-difficulties = {Difficulty(difficultyId, value, sortOrder, internalTitle, danger) for difficultyId, value, sortOrder, internalTitle, danger in get_all_items(difficulty)}
+difficulties = {difficultyId: Difficulty(difficultyId, value, sortOrder, internalTitle, danger) for difficultyId, value, sortOrder, internalTitle, danger in get_all_items(difficulty)}
 
 song = meta.tables['song']                                              # songId, cutId, internalTitle
 songArtist = meta.tables['songArtist']                                  # songId, artistId, sortOrder, prefix
@@ -127,11 +135,11 @@ for songId, cutId, internalTitle in get_all_items(song):
     # }
     complete[songId] = Song(
         id=songId,
-        length=cutId,
+        length=cuts[cutId],
         internal_title=internalTitle
     )
 
-for complete[songId] in complete:
+for songId in complete:
     if complete[songId].length.name in ('Full Song', 'Short Cut'):
         complete[songId].internal_title += f" [{complete[songId].length.name}]"
 
@@ -144,12 +152,12 @@ for songId, artistId, sortOrder, prefix in get_all_items(songArtist):
 for songId in complete:
     artist_titles[songId].sort(key=lambda x: x[1])
     s = ""
-    for artistId, sortOrder, prefix in complete[songId].artists:
-        if len(s) >= 0:
+    for artistId, sortOrder, prefix in artist_titles[songId]:
+        if len(s) > 0:
             s += f" {prefix}" if prefix != '' else ' &'
         s += f" {artists[artistId].name}"
     # print(s)
-    complete[songId].author = s
+    complete[songId].artist = s
 
 for songBpmId, songId, bpmMin, bpmMax in get_all_items(songBpm):
     complete[songId].bpm_min = bpmMin
@@ -160,7 +168,7 @@ for songCardId, songId, path, sortOrder in get_all_items(songCard):
         complete[songId].card = path
 
 for songCategoryId, songId, categoryId in get_all_items(songCategory):
-    complete[songId].category = category[categoryId]
+    complete[songId].category = categories[categoryId]
 
 for songGameIdentifierId, songId, gameIdentifier in get_all_items(songGameIdentifier):
     complete[songId].song_id = gameIdentifier
@@ -192,17 +200,19 @@ for chartId, stepmakerId, sortOrder, prefix in get_all_items(chartStepmaker):
 
 print('Getting chart difficulties from database...')
 for chartRatingId, chartId, modeId, difficultyId in get_all_items(chartRating):
-    version = conn.execute(
+    version = versions[conn.execute(
         select([chartRatingVersion]) \
             .where(chartRatingVersion.c.chartRatingId == chartRatingId)) \
-            .fetchone()[2]
+            .fetchone()[2]]
     charts[chartId].difficulties.append(
         ChartDifficulty(
             id=chartRatingId,
             chart=charts[chartId],
-            mode=modes[mode],
-            name=f"{modes[mode].abbrev}{difficulties[difficultyId].internalTitle}",
-            version=versions[versionId]
+            mode=modes[modeId],
+            mode_id=modeId,
+            name=f"{modes[modeId].abbrev}{difficulties[difficultyId].internalTitle}",
+            rating=difficulties[difficultyId].value,
+            version=version
         )
     )
 
@@ -211,12 +221,21 @@ for chartId in charts:
     try:
         # print(charts[chartId])
         diffs = sorted(charts[chartId].difficulties, key=lambda x: x.version.sort_order)
-        charts[chartId].rerate_name = ' -> '.join([f'{x.name} ({x.version.gamemix.name})' for x in diffs])
+
+        diffstrs = [f'{x.name} ({x.version.gamemix.name})' for x in diffs]
+        # remove duplicates with python magic
+        tmp = set()
+        tmp_add = tmp.add
+        diffstrs = [x for x in diffstrs if not (x in tmp or tmp_add(x))]
+        
+        charts[chartId].rerate_name = ' -> '.join(diffstrs)
+        charts[chartId].name = diffs[-1].name
         charts[chartId].mode_id = diffs[-1].mode_id
         charts[chartId].rating = diffs[-1].rating
     except:
         print(f"WARNING: Skipping chart with no difficulty: {chartId}")
 
+print("Adding objects to database session...")
 for artistId in artists:
     db.session.add(artists[artistId])
 for categoryId in categories:
@@ -240,13 +259,18 @@ for songId in complete:
     db.session.add(complete[songId])
 for chartId in charts:
     db.session.add(charts[chartId])
+
+print("Committing to database...")
 db.session.commit()
+print("Committed.")
 
 '''
     Notice:
-    The below code requires files which may not be publicly available or easily reproducible
+    The below code requires files which may not be publicly available or easily reproducible.
+    Running the above code should work fine by itself, though.
 '''
 
+print("Loading max combos...")
 # afterwards, load max combos AND displayed artist names because they are not actually in the database for some reason
 maxcombo_fn = Path("resources/maxcombo20200717.csv")
 # the place where your stepmania songs folder is located (with all the same simfiles as in the maxcombo.csv)
@@ -272,42 +296,54 @@ with open(maxcombo_fn, 'r') as f:
             
     #         print(tmp[i])
 
-    maxcombos = {title: {
+    maxcombos = [{
+        'title': title,
         'chartname': chartname,
         'description': desc,
         'meter': int(meter),
         'style': style,
-        'stepstype': smtype_to_stdtype[stepstype],  # make this
+        'stepstype': smtype_to_stdtype[stepstype],
         'filename': fn,
         # AutoPlayCPU results here, can be redone by hand or by retrying these specific charts
         'grade': grade,
         'score': score,
         # I messed up accuracy so I'm not going to bother putting it in
         'isfull': isfull,
-        'maxcombo': maxcombo,
+        'maxcombo': int(maxcombo),
         'fantastic': fantastic,
         'perfect': perfect,
         'great': great,
         'good': good,
         'bad': bad,
         'miss': miss
-    } for title, chartname, desc, meter, style, stepstype, fn, grade, score, acc, isfull, maxcombo, fantastic, perfect, great, good, bad, miss, _ in tmp}
+    } for title, chartname, desc, meter, style, stepstype, fn, grade, score, acc, isfull, maxcombo, fantastic, perfect, great, good, bad, miss, _ in tmp]
 
+song_ids = {complete[songId].song_id for songId in complete}
 # for each maxcombo option get the filename and read the artist (mostly artist) so we can have an 'author' key instead of 'authors'
-for title in maxcombos:
-    maxcombos[title]['song_id'] = os.path.basename(maxcombos[title]['filename']).split(' - ')[0] # extract song ID from filename
-    chart = Chart.query.filter_by(song_id=maxcombos[title]['song_id']).first()
+combos_found = 0
+for i in tqdm(range(len(maxcombos))):
+    ch = maxcombos[i]
+    ch['song_id'] = os.path.basename(ch['filename']).split(' - ')[0].split(' ')[0] # extract song ID from filename
+    if ch['song_id'] not in song_ids:
+        continue
+    # print(f"{ch['song_id']}")
+    diffstr = f"{ch['stepstype']}{ch['meter']:02}".replace('99', '??')
+    # print(diffstr)
+    chart = Chart.query.join(Song).filter(Song.song_id == ch['song_id'], Chart.name == diffstr).first()
     if chart is not None:
-        chart.max_combo = maxcombos[title]['maxcombo']
-        db.session.add(chart)
+        chart.max_combo = ch['maxcombo']
+        combos_found += 1
+        # print(f'Combos found: {combos_found}')
     # with open(sm_dir/maxcombos[title]['filename']) as f:
     #     for line in f.readlines():
     #         tmp = line.strip()
     #         if '#ARTIST:' in tmp:
     #             maxcombos[title]['author'] = tmp.split('#ARTIST:')[1][:-1]  # Remove the ARTIST tag and semicolon/newline etc. at the end
     #             break
+print(f"Committing {combos_found} combos to database...")
 db.session.commit()
-print(maxcombos)
+print("Committed.")
+# print(maxcombos)
 
 # check for manually blacklisted songs or charts in a text file
 # format will be title,difficulty,mixes,remove
@@ -316,8 +352,8 @@ print(maxcombos)
 blacklist_fn = Path("blacklisted.csv")
 
 # with open('app/static/gamelists/Pump it Up/complete.json', 'w') as f:
-print('Exporting to JSON...')
-fn = 'completev2.json'
+print('Exporting max combos to JSON...')
+fn = 'maxcombos.json'
 with open(fn, 'w') as f:
-    json.dump(complete, f, indent=2)
+    json.dump(maxcombos, f, indent=2)
 print(f"Dumped to {fn}.")

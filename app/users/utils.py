@@ -88,6 +88,19 @@ def update_user_sp(u):
     u.sp = sp
     db.session.commit()
 
+def update_user_titles(u):
+    '''Evaluates a user's eligible scores and updates their titles in the database.'''
+    u_titles = [title for title in titles if titles[title](u)]
+    role_names = set(u.roles).union(*u_titles)  # make sure there are no duplicate roles
+    roles = [Role.query.filter(name=name).first() for name in role_names]
+
+    for role in roles:
+        if role is None:
+            current_app.logger.info(f"WARNING: Tried to give user {u} a role that doesn't exist.")
+    
+    u.roles = [role for role in roles if role is not None]
+    db.session.commit()
+
 def get_user_rank(u):
     '''Gets a user's rank on the main SP leaderboard.'''
     users = User.query.order_by(User.sp.desc()).all()

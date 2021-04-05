@@ -19,21 +19,16 @@ songcharts = db.Table('songcharts',
 songversions = db.Table('songversions',
     db.Column('song_id', db.Integer, db.ForeignKey('song.id'), primary_key=True),
     db.Column('version_id', db.Integer, db.ForeignKey('version.id'), primary_key=True),
-    info={'bind_key': 'pump'}
-)
-
-songversions = db.Table('songversions',
-    db.Column('song_id', db.Integer, db.ForeignKey('song.id'), primary_key=True),
-    db.Column('version_id', db.Integer, db.ForeignKey('version.id'), primary_key=True),
     db.Column('operation', db.String(10), nullable=True),
     info={'bind_key': 'pump'}
 )
 class Song(db.Model):
     __bind_key__ = 'pump'
+    __tablename__ = 'song'
 
     id = db.Column(db.Integer, primary_key=True)
     song_id = db.Column(db.String(5), nullable=False, default='')
-    length = db.Column(db.Integer, db.ForeignKey('length.id'), nullable=False)
+    length_id = db.Column(db.Integer, db.ForeignKey('length.id'), nullable=False)
     artist = db.Column(db.String(127), nullable=True)
     artists = db.relationship('Artist', secondary=songartists, lazy='subquery', backref=db.backref('songs', lazy=True))
     bpm_min = db.Column(db.Float, nullable=False, default=0.0)
@@ -59,45 +54,51 @@ chartstepmakers = db.Table('chartstepmakers',
 
 class Chart(db.Model):
     __bind_key__ = 'pump'
+    __tablename__ = 'chart'
 
     id = db.Column(db.Integer, primary_key=True)
     labels = db.relationship('Label', secondary=chartlabels, lazy='subquery', backref=db.backref('charts', lazy=True))
     song_id = db.Column(db.Integer, db.ForeignKey('song.id'), nullable=False)
     difficulties = db.relationship('ChartDifficulty', backref='chart', lazy=True)
-    mode_id = db.Column(db.Integer, db.ForeignKey('mode.id'), nullable=False)  # no relationship for this one, actual relationship is in difficulties
+    mode_id = db.Column(db.Integer, nullable=False)  # no relationship for this one, actual relationship is in difficulties
     name = db.Column(db.String(10), nullable=False)
     rating = db.Column(db.Integer, nullable=False, default=0)
     new_rating = db.Column(db.Float, nullable=False, default=0.0)
     rerate_name = db.Column(db.String(127), nullable=False)
     stepmakers = db.relationship('Stepmaker', secondary=chartstepmakers, lazy='subquery', backref=db.backref('charts', lazy=True))
     weight = db.Column(db.Float, nullable=False, default=1.0)
-    max_combo = db.Integer(db.Integer, nullable=True)
+    max_combo = db.Column(db.Integer, nullable=True)
 
 class ChartDifficulty(db.Model):
     __bind_key__ = 'pump'
+    __tablename__ = 'chartdifficulty'
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(10), nullable=False)
     chart_id = db.Column(db.Integer, db.ForeignKey('chart.id'), nullable=False)
     mode_id = db.Column(db.Integer, db.ForeignKey('mode.id'), nullable=False)
-    rating = db.Column(db.Integer, nullable=False, default=0)
+    rating = db.Column(db.Integer, nullable=False, default=99)
     version_id = db.Column(db.Integer, db.ForeignKey('version.id'), nullable=False)
 
 class Artist(db.Model):
     __bind_key__ = 'pump'
+    __tablename__ = 'artist'
     
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(127), nullable=False, default="")
 
 class Length(db.Model):
     __bind_key__ = 'pump'
+    __tablename__ = 'length'
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False, default="")
     sort_order = db.Column(db.Integer, nullable=False, default=0)
+    songs = db.relationship('Song', backref='length', lazy=True)
 
 class SongTitle(db.Model):
     __bind_key__ = 'pump'
+    __tablename__ = 'songtitle'
     
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(127), nullable=False)
@@ -106,6 +107,7 @@ class SongTitle(db.Model):
 
 class Label(db.Model):
     __bind_key__ = 'pump'
+    __tablename__ = 'label'
     
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(127), nullable=False, default="")
@@ -113,6 +115,7 @@ class Label(db.Model):
     
 class Mode(db.Model):
     __bind_key__ = 'pump'
+    __tablename__ = 'mode'
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(127), nullable=False, default="")
@@ -125,12 +128,14 @@ class Mode(db.Model):
 
 class Stepmaker(db.Model):
     __bind_key__ = 'pump'
+    __tablename__ = 'stepmaker'
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(127), nullable=False, default="")
 
 class Category(db.Model):
     __bind_key__ = 'pump'
+    __tablename__ = 'category'
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(127), nullable=False, default="")
@@ -139,6 +144,7 @@ class Category(db.Model):
 
 class GameMix(db.Model):
     __bind_key__ = 'pump'
+    __tablename__ = 'gamemix'
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(127), nullable=False, default="")
@@ -148,6 +154,7 @@ class GameMix(db.Model):
 
 class Version(db.Model):
     __bind_key__ = 'pump'
+    __tablename__ = 'version'
 
     id = db.Column(db.Integer, primary_key=True)
     gamemix_id = db.Column(db.Integer, db.ForeignKey('gamemix.id'), nullable=False)
@@ -158,6 +165,7 @@ class Version(db.Model):
 
 class Language(db.Model):
     __bind_key__ = 'pump'
+    __tablename__ = 'language'
 
     id = db.Column(db.Integer, primary_key=True)
     code = db.Column(db.String(2), nullable=False)
