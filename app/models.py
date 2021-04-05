@@ -265,6 +265,8 @@ class Tournament(db.Model):
     def participants(self, val):
         if type(val) == int:
             self._participants += ',' + str(val)
+        elif type(val) == list:
+            self._participants = ','.join(val)
     @property
     def remaining_participants(self):  # list of user IDs or team IDs if it's a team tournament
         return [int(x) for x in self._remaining_participants.split(',')]
@@ -272,6 +274,8 @@ class Tournament(db.Model):
     def remaining_participants(self, val):
         if type(val) == int:
             self._remaining_participants += ',' + str(val)
+        elif type(val) == list:
+            self._remaining_participants = ','.join(val)
     @property
     def organizers(self):  # list of user IDs
         return [int(x) for x in self._organizers.split(',')]
@@ -279,6 +283,8 @@ class Tournament(db.Model):
     def organizers(self, val):
         if type(val) == int:
             self._organizers += ',' + str(val)
+        elif type(val) == list:
+            self._organizers = ','.join(val)
 
     def __repr__(self):
         return f"Tournament('{self.name}', '{self.skill_lvl}, '{self.description}', '{self.bracketlink}', '{self.image_file}')"
@@ -349,6 +355,8 @@ class Team(db.Model):
     def members(self, val):
         if type(val) == int:
             self._members += ',' + str(val)
+        elif type(val) == list:
+            self._members = ','.join(val)
     
 class APIKey(db.Model):
     id = db.Column(db.Integer, primary_key=True)
