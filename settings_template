@@ -1,9 +1,17 @@
 [settings]
-SECRET_KEY = 0123456789abcdef  # secret key, you should probably generate one with secrets.token_urlsafe(32) or secrets.token_hex(32)
-MAX_CONTENT_LENGTH = 8388608  # 8 megabytes
+SECRET_KEY = 0123456789abcdef
+MAX_CONTENT_LENGTH = 16777216  # 16 megabytes
+
+[arrowtracker]
+enable_api_key = false
+auto_approve_scores = false
+
+[fastai]
+enable_score_detection = true
 
 [sql]
 SQLALCHEMY_DATABASE_URI = sqlite:///site.db
+SQLALCHEMY_PUMP_DATABASE_URI = sqlite:///pump.db
 SQLALCHEMY_JOBS_DATABASE_URI = sqlite:///jobs.db
 
 [email]

@@ -46,13 +46,17 @@ prime_grade = {
     6: "d",
     7: "f"
 }
-prime_charttype = {
-    0x0: Mode.query.filter_by(name="Single").first(), # 0
-    0x5: Mode.query.filter_by(name="Double Performance").first(), # 5
-    0x40: Mode.query.filter_by(name="Single Performance").first(), # 64
-    0x80: Mode.query.filter_by(name="Double").first(), # 128
-    0xc0: Mode.query.filter_by(name="Co-Op").first() # 192
-}
+try:
+    prime_charttype = {
+        0x0: Mode.query.filter_by(name="Single").first(), # 0
+        0x5: Mode.query.filter_by(name="Double Performance").first(), # 5
+        0x40: Mode.query.filter_by(name="Single Performance").first(), # 64
+        0x80: Mode.query.filter_by(name="Double").first(), # 128
+        0xc0: Mode.query.filter_by(name="Co-Op").first() # 192
+    }
+except:
+    print('Cannot get Prime chart types from Mode database. This will break things.')
+    prime_charttype = {}
 abbrev_charttype = {
     'S': "Single",
     'SP': "Double Performance",
@@ -156,14 +160,18 @@ judgements = {
 
 fastai_classes = ['a20blue','a20gold','ace','chunithm','ddrassorted','fiesta','fiesta2','groovecoaster','infinity','jubeat','none','pium','prime','prime2','pumpassorted','sdvx','simplylove','stepmaniax','xx']
 
-fastai_games = {
-    'fiesta': GameMix.query.filter_by(name='Fiesta').first(),
-    'fiesta2': GameMix.query.filter_by(name='Fiesta 2').first(),
-    'infinity': GameMix.query.filter_by(name='Infinity').first(),
-    'prime': GameMix.query.filter_by(name='Prime').first(),
-    'prime2': GameMix.query.filter_by(name='Prime 2').first(),
-    'pumpassorted': GameMix.query.filter_by(name='The 1st Dance Floor').first()
-}
+try:
+    fastai_games = {
+        'fiesta': GameMix.query.filter_by(name='Fiesta').first(),
+        'fiesta2': GameMix.query.filter_by(name='Fiesta 2').first(),
+        'infinity': GameMix.query.filter_by(name='Infinity').first(),
+        'prime': GameMix.query.filter_by(name='Prime').first(),
+        'prime2': GameMix.query.filter_by(name='Prime 2').first(),
+        'pumpassorted': GameMix.query.filter_by(name='The 1st Dance Floor').first()
+    }
+except:
+    print('Cannot get game mixes for fastai classification. This functionality will not work.')
+    fastai_games = {}
 
 def fastai_int_to_game(i):
     return fastai_games.get(fastai_classes[i])
@@ -275,7 +283,10 @@ def get_rankmode(scoretype='default'):
         return json.load(f)
     # plan to use APScheduler to update database
 
-fiesta_sort_order = GameMix.query.filter_by(name='Fiesta').first().sort_order
+try:
+    fiesta_sort_order = GameMix.query.filter_by(name='Fiesta').first().sort_order
+except:
+    print('Cannot get Fiesta sort order. This will break check_post.')
 
 def check_post(post):
     """Evaluates a post and returns the status which it should be assigned.

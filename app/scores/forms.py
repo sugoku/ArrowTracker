@@ -1,8 +1,8 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, TextAreaField, SelectField, IntegerField, DecimalField, HiddenField, SelectMultipleField
-from wtforms.validators import DataRequired, NumberRange, Length, InputRequired
+from wtforms.validators import DataRequired, NumberRange, InputRequired
 from flask_wtf.file import FileField, FileAllowed
-from app import songlist_pairs, difficulties, lengthtype_pairs, gamemix_pairs, judgement_pairs, chart_pairs
+from app import songlist_pairs, lengthtype_pairs, gamemix_pairs, judgement_pairs, chart_pairs
 from app.scores.utils import prime_noteskin, other_noteskin, mods_display, judgements
 import json
 

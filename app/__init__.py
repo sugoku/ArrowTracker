@@ -8,14 +8,41 @@ from flask_admin.contrib.sqla import ModelView
 from flask_moment import Moment
 from flask_mail import Mail
 from app.config import Config
+from app.pump_models import *
 from flask_apscheduler import APScheduler
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.jobstores.sqlalchemy import SQLAlchemyJobStore
 # from flask_user import UserManager
 from flaskext.markdown import Markdown
+from pathlib import Path
 import atexit
 from functools import wraps
 import signal
+
+# empty values for startup
+songlist_pairs = []
+chart_pairs = []
+lengthtype_pairs = []
+
+gamemix_pairs = []
+
+judgement_pairs = (
+    ('nj', 'Normal Judgement'),
+    ('hj', 'Hard Judgement'),
+    ('vj', 'Very Hard Judgement')
+)
+
+category_pairs = []
+
+charts = dict()
+gamemixes = dict()
+lengths = dict()
+languages = dict()
+songid_to_songtitle = dict()
+modes = dict()
+
+approved_ips = []
+apikey_required = None
 
 db = SQLAlchemy()
 bcrypt = Bcrypt()
@@ -88,26 +115,24 @@ def create_app(config_class=Config):
 
     moment.init_app(app)
 
-    songlist_pairs = [(song.id, song.name) for song in Song.query.all()]
-    chart_pairs = [(chart.id, f"{chart.song.name} - {chart.rerate_name}") for chart in Chart.query.all()]
-    lengthtype_pairs = [(length.id, length.name) for length in Length.query.all()]
+    with app.app_context():
+        try:
+            songlist_pairs = [(song.id, song.internal_title) for song in Song.query.all()]
+            chart_pairs = [(chart.id, f"{chart.song.name} - {chart.rerate_name}") for chart in Chart.query.all()]
+            lengthtype_pairs = [(length.id, length.name) for length in Length.query.all()]
 
-    gamemix_pairs = [(mix.id, mix.name) for mix in GameMix.query.order_by(GameMix.sort_order.desc()).all()]
+            gamemix_pairs = [(mix.id, mix.name) for mix in GameMix.query.order_by(GameMix.sort_order.desc()).all()]
 
-    judgement_pairs = (
-        ('nj', 'Normal Judgement'),
-        ('hj', 'Hard Judgement'),
-        ('vj', 'Very Hard Judgement')
-    )
+            category_pairs = [(category.id, category.name) for category in Category.query.all()]
 
-    category_pairs = [(category.id, category.name) for category in Category.query.all()]
-
-    charts = {chart.id: chart for chart in Chart.query.all()}
-    gamemixes = {gamemix.id: gamemix for gamemix in GameMix.query.all()}
-    lengths = {length.id: length for length in Length.query.all()}
-    languages = {language.id: language for language in Language.query.all()}
-    songid_to_songtitle = {languages[lid].code: {songtitle.song.id: songtitle for songtitle in SongTitle.query.filter_by(language_id=lid).all()} for lid in languages}
-    modes = {mode.id: mode for mode in Mode.query.all()}
+            charts = {chart.id: chart for chart in Chart.query.all()}
+            gamemixes = {gamemix.id: gamemix for gamemix in GameMix.query.all()}
+            lengths = {length.id: length for length in Length.query.all()}
+            languages = {language.id: language for language in Language.query.all()}
+            songid_to_songtitle = {languages[lid].code: {songtitle.song.id: songtitle for songtitle in SongTitle.query.filter_by(language_id=lid).all()} for lid in languages}
+            modes = {mode.id: mode for mode in Mode.query.all()}
+        except:
+            app.logger.error("Could not initialize data structures from database. Nothing will work unless you are creating a new database now.")
 
     @app.context_processor
     def inject_charts():
@@ -130,7 +155,6 @@ def create_app(config_class=Config):
 
     apikey_required = app.config['ENABLE_API_KEY']  # also ip address requirement
 
-    approved_ips = []
     if apikey_required:
         try:
             with open('approved_ips.txt', 'r') as f:
@@ -139,8 +163,8 @@ def create_app(config_class=Config):
             app.logger.info("WARNING: API key requirement enabled but no whitelisted IP addresses could be read. No one will be able to use API functionality even with an API key.")
 
     if app.config['ENABLE_FASTAI_SCORE_DETECTION']:
-        from fastai import load_learner
-        score_learner = load_learner(Path('../fastai_ml/model-s2.pkl'))
+        from fastai.vision import load_learner
+        score_learner = load_learner('.', Path('fastai_ml/model-s2.pkl'))
 
     # user_manager = UserManager(app, db, User)
     

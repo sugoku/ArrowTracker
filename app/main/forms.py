@@ -1,7 +1,8 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
+import wtforms
 from wtforms import StringField, SubmitField, TextAreaField, SelectField, IntegerField, SelectMultipleField, DecimalField
-from wtforms.validators import DataRequired, NumberRange, Optional, Length
+from wtforms.validators import DataRequired, NumberRange, Optional
 from app import songlist_pairs, chart_pairs, judgement_pairs, category_pairs, gamemix_pairs
 from app.models import post_status
 from app.scores.utils import *
@@ -45,7 +46,7 @@ class SearchForm(FlaskForm):
     ranked = SelectField('Rank Mode', coerce=str, choices=(('Any', 'Any'), ('False', 'Unranked'), ('True', 'Ranked')), validators=[DataRequired()])
     judgement = SelectMultipleField('Judgement', coerce=str, choices=judgement_pairs)
     #tournamentid = IntegerField('Tournament ID', validators=[NumberRange(min=0)])
-    author = StringField('Author', validators=[Length(min=3, max=20)])
+    author = StringField('Author', validators=[wtforms.validators.Length(min=3, max=20)])
     submit = SubmitField('Search')
 
 class ChartSearchForm(FlaskForm):

@@ -10,7 +10,7 @@ from app.scores.forms import ScoreForm
 from app.users.forms import APIKeyForm
 from app.models import *
 from app.pump_models import *
-from app import songlist_pairs, difficulties, db, approved_ips, apikey_required
+from app import songlist_pairs, db, approved_ips, apikey_required
 from sqlalchemy import desc, or_
 from app.config import GetChangelog
 from app.main.utils import save_picture, allowed_file, valid_api_key, generate_unique_key
