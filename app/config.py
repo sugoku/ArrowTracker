@@ -17,6 +17,8 @@ class Config():
     ENABLE_API_KEY = parser.get('arrowtracker', 'enable_api_key')
     AUTO_APPROVE_SCORES = parser.get('arrowtracker', 'auto_approve_scores')
 
+    ENABLE_FASTAI_SCORE_DETECTION = parser.get('fastai', 'enable_score_detection')
+
     FLASK_ADMIN_SWATCH = 'cerulean'
 
     POSTS_PER_PAGE = 20

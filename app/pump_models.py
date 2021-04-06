@@ -63,9 +63,13 @@ class Chart(db.Model):
     mode_id = db.Column(db.Integer, nullable=False)  # no relationship for this one, actual relationship is in difficulties
     name = db.Column(db.String(10), nullable=False)
     rating = db.Column(db.Integer, nullable=False, default=0)
+    prime_rating = db.Column(db.Integer, nullable=True)
     new_rating = db.Column(db.Float, nullable=False, default=0.0)
     rerate_name = db.Column(db.String(127), nullable=False)
     stepmakers = db.relationship('Stepmaker', secondary=chartstepmakers, lazy='subquery', backref=db.backref('charts', lazy=True))
+    earliest_version_id = db.Column(db.Integer, nullable=False, default=0)
+    latest_version_id = db.Column(db.Integer, nullable=False, default=0)  # latest CHANGE, not necessarily last version
+    in_latest_kpump = db.Column(db.Boolean, nullable=False)
     weight = db.Column(db.Float, nullable=False, default=1.0)
     max_combo = db.Column(db.Integer, nullable=True)
 
@@ -148,6 +152,7 @@ class GameMix(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(127), nullable=False, default="")
+    short_name = db.Column(db.String(20), nullable=False, default="")
     parent_mix_id = db.Column(db.Integer, nullable=True)
     sort_order = db.Column(db.Integer, nullable=False, default=0)
     versions = db.relationship('Version', backref='gamemix', lazy=True)

@@ -6,14 +6,14 @@ def song_passed(u, song, difficulty):
         Post.status == POST_APPROVED, \
         Post.song == song, \
         Post.difficulty == difficulty, \
-        Post.stagepass == 'True')).first() != None
+        Post.stagepass == True)).first() != None
 
 def song_passed_grade(u, song, difficulty, lettergrades):
     return Post.query.filter(and_(Post.user_id == u.id, \
         Post.status == POST_APPROVED, \
         Post.song == song, \
         Post.difficulty == difficulty, \
-        Post.stagepass == 'True', \
+        Post.stagepass == True, \
         Post.lettergrade.in_(lettergrades))).first() != None
 
 def score_exists(u, song=None, difficulty=None, stagepass=None, lettergrades=None, perfect=None, great=None, good=None, bad=None, miss=None, score=None):
@@ -45,7 +45,7 @@ def has_unique_clears(u, count, diffbounds, co_op=False, lettergrades=None):
     if count <= 0: return True
     q = Post.query.filter(and_(Post.user_id == u.id, \
         Post.status == POST_APPROVED, \
-        Post.stagepass == 'True'))
+        Post.stagepass == True))
     if not co_op:
         q = q.filter(diffbounds[0] <= Post.difficultynum <= diffbounds[1])
     if co_op:
@@ -70,7 +70,7 @@ def last_n_scores_match(u, n, lettergrades=None):
     if len(q) != n:
         return False
     for post in q:
-        if post.stagepass == 'False' or post.lettergrade not in lettergrades:
+        if not post.stagepass or post.lettergrade not in lettergrades:
             return False
     return True
 
@@ -78,7 +78,7 @@ def judge_count(u, judge, stagepass=True):
     q = Post.query.filter(and_(Post.user_id == u.id, \
         Post.status == POST_APPROVED))
     if stagepass:
-        q.filter(Post.stagepass == 'True')
+        q.filter(Post.stagepass == True)
     i = 0
     for post in q.all():
         if judge == 'perfect':
@@ -97,7 +97,7 @@ def post_count(u, stagepass=False):
     q = Post.query.filter(and_(Post.user_id == u.id, \
         Post.status == POST_APPROVED))
     if stagepass:
-        q.filter(Post.stagepass == 'True')
+        q.filter(Post.stagepass == True)
     return len(q.all())
 
 def has_titles(u, titles):

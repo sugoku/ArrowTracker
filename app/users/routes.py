@@ -1,6 +1,6 @@
 from flask import render_template, url_for, flash, redirect, request, Blueprint, send_file, current_app
 from flask_login import login_user, current_user, logout_user, login_required
-from app import db, bcrypt, raw_songdata
+from app import db, bcrypt
 from app.models import *
 from app.users.forms import (RegisterForm, LoginForm, UpdateAccountForm, UpdateAccountPrimeServerForm,
                              RequestResetForm, ResetPasswordForm, MessageForm)
@@ -14,10 +14,6 @@ import io
 from datetime import datetime
 
 users = Blueprint('users', __name__)
-
-@users.context_processor
-def add_songdata():
-    return dict(songdata=raw_songdata)
 
 @users.route("/register", methods=["GET", "POST"])
 def register():
@@ -87,7 +83,7 @@ def dashboard():
             current_user.noteskin = form.noteskin.data
             current_user.scrollspeed = round(0.5 * round(float(form.scrollspeed.data) / 0.5), 1)
             current_user.modifiers = current_user.modifiers | mods_to_int([], form.judgement.data)
-            current_user.psupdate = "True" if not form.psupdate.data else "False"
+            current_user.psupdate = form.psupdate.data
         db.session.commit()
         flash('Account details updated!', 'success')
         return redirect(url_for('users.dashboard'))
@@ -101,7 +97,7 @@ def dashboard():
             form.noteskin.data = current_user.noteskin
             form.scrollspeed.data = current_user.scrollspeed
             form.judgement.data = int_to_judge(current_user.modifiers)
-            form.psupdate.data = current_user.psupdate == "False"
+            form.psupdate.data = current_user.psupdate == False
     image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
     return render_template("dashboard.html", title="Dashboard", image_file=image_file, form=form, current_user=current_user)
 
@@ -109,25 +105,23 @@ def dashboard():
 def user_posts(username):
     page = request.args.get('page', 1, type=int)
     user = User.query.filter_by(username=username).first_or_404()
-    scores = Post.query.filter_by(author=user, status=POST_APPROVED)\
-        .order_by(Post.date_posted.desc())\
-        .paginate(per_page=5, page=page)
-    difficulty = None
-    for score in scores.items:
-        difficulty = str(score.difficulty)
-    return render_template("user_posts.html", scores=scores, difficulty=difficulty, user=user, songdata=raw_songdata)
+
+    scores = Post.query.filter_by(author=user)
+    if current_user != user and not current_user.has_any_role("Moderator", "Admin"):
+        scores = scores.filter(or_(Post.status == POST_APPROVED, Post.status == POST_UNRANKED))
+
+    scores = scores.order_by(Post.date_posted.desc()).paginate(per_page=5, page=page)
+
+    return render_template("user_posts.html", scores=scores, difficulty=difficulty, user=user)
 
 @users.route("/userpage/<string:username>")
 def user_page(username):
     user = User.query.filter_by(username=username).first_or_404()
-    topscores = Post.query.filter_by(author=user, status=POST_APPROVED).filter(or_(Post.image_file != "None", Post.acsubmit == "True")).order_by(Post.sp.desc()).limit(50).all()
-    recentscores = Post.query.filter_by(author=user, status=POST_APPROVED).order_by(Post.date_posted.desc()).limit(3).all()
+    topscores = Post.query.filter_by(author=user, status=POST_APPROVED).order_by(Post.sp.desc()).limit(50).all()
+    recentscores = Post.query.filter_by(author=user).filter(or_(Post.status == POST_APPROVED, Post.status == POST_UNRANKED)).order_by(Post.date_posted.desc()).limit(3).all()
 
-    firstscores = []
-    allscores = Post.query.filter_by(author=user, status=POST_APPROVED).all()
-    for score in allscores:
-        if score == Post.query.filter_by(song_id=score.song_id, difficulty=score.difficulty).filter(or_(Post.image_file != "None", Post.acsubmit == "True")).first():
-            firstscores.append(score)
+    allscores = Post.query.filter_by(author=user).filter(or_(Post.status == POST_APPROVED, Post.status == POST_UNRANKED)).all()
+    firstscores = [score for score in allscores if score == Post.query.filter_by(chart_id=score.chart_id, status=POST_APPROVED).first()]
     
     return render_template("user_profile.html", topscores=topscores, recentscores=recentscores, user=user, int_to_mods=int_to_mods, modlist_to_modstr=modlist_to_modstr, int_to_noteskin=int_to_noteskin, get_user_rank=get_user_rank, firstscores=firstscores)
 

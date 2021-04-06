@@ -63,7 +63,7 @@
                   <td>{{ score.difficulty }}</td>
                   <td>{{ score.score }}</td>
                   <td>{{ score.lettergrade.upper() }}</td>
-                  {% if score.stagepass == "True" %}
+                  {% if score.stagepass %}
                     <td>{{score.stagepass|replace("True", "Yes")}}</td>
                   {% elif score.stagepass == "False" %}
                     <td>{{score.stagepass|replace("False", "No")}}</td>
@@ -108,7 +108,7 @@
                   <td>{{ score.difficulty }}</td>
                   <td>{{ score.score }}</td>
                   <td>{{ score.lettergrade.upper() }}</td>
-                  {% if score.stagepass == "True" %}
+                  {% if score.stagepass %}
                     <td>{{score.stagepass|replace("True", "Yes")}}</td>
                   {% elif score.stagepass == "False" %}
                     <td>{{score.stagepass|replace("False", "No")}}</td>
@@ -155,14 +155,14 @@
                   <td>{{ score.difficulty }}</td>
                   <td>{{ score.score }}</td>
                   <td>{{ score.lettergrade.upper() }}</td>
-                  {% if score.stagepass == "True" %}
+                  {% if score.stagepass %}
                     <td>{{score.stagepass|replace("True", "Yes")}}</td>
                   {% elif score.stagepass == "False" %}
                     <td>{{score.stagepass|replace("False", "No")}}</td>
                   {% endif %}
                   <td>{{ modlist_to_modstr(int_to_mods(score.modifiers)) }}</td>
                   <td>{{ score.rushspeed }}</td>
-                  {% if score.acsubmit == "True" %}
+                  {% if score.acsubmit %}
                     <td>Yes (Prime)</td>
                   {% elif score.image_file != "None" %}
                     <td>Yes</td>

@@ -4,7 +4,7 @@ from wtforms import StringField, PasswordField, SubmitField, BooleanField, Selec
 from wtforms.validators import DataRequired, InputRequired, Length, Email, EqualTo, ValidationError, Optional, NumberRange, Regexp
 from flask_login import current_user
 from app.models import User
-from app import songlist_pairs, raw_songdata, judgement_pairs
+from app import songlist_pairs, judgement_pairs
 from app.scores.utils import *
 
 class RegisterForm(FlaskForm):

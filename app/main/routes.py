@@ -9,7 +9,8 @@ from app.main.forms import SearchForm, ChartSearchForm
 from app.scores.forms import ScoreForm
 from app.users.forms import APIKeyForm
 from app.models import *
-from app import songlist_pairs, difficulties, db, raw_songdata, approved_ips, apikey_required
+from app.pump_models import *
+from app import songlist_pairs, difficulties, db, approved_ips, apikey_required
 from sqlalchemy import desc, or_
 from app.config import GetChangelog
 from app.main.utils import save_picture, allowed_file, valid_api_key, generate_unique_key
@@ -23,10 +24,6 @@ from sqlalchemy.sql.functions import func
 # allows us to easily call or redirect the user to any of them from anywhere.
 main = Blueprint('main', __name__)
 
-@main.context_processor
-def add_songdata():
-    return dict(songdata=raw_songdata)
-
 # The route for the main homepage.
 @main.route("/")
 def home():
@@ -34,7 +31,7 @@ def home():
     scores = Post.query.filter_by(status=POST_APPROVED).order_by(Post.date_posted.desc()).paginate(per_page=15, page=page)
     # total = db.engine.execute('select count(*) from Post').scalar()
     total = db.session.execute(Post.query.filter_by(status=POST_APPROVED).statement.with_only_columns([func.count()]).order_by(None)).scalar()
-    return render_template("home.html", scores=scores, total=total, songdata=raw_songdata)
+    return render_template("home.html", scores=scores, total=total)
 
 @main.route('/about')
 def about():
@@ -51,23 +48,29 @@ def submit():
                 if current_app.debug:
                     current_app.logger.debug("Score above 0, submitting score...")
                 u = accesscode_to_user(request.form['AccessCode'].lower())
-                if u == None:
+                if u is None:
                     current_app.logger.error("Access code does not resolve to a valid user!")
                     raise
-                s = id_to_songname(hex(int(request.form['SongID'])).replace('0x', '').upper())
-                if s == None:
+                sid = hex(int(request.form['SongID'])).replace('0x', '').upper()
+                if current_app.debug:
+                    current_app.logger.debug(f"SongID: {sid}")
+                song = Song.query.filter_by(song_id=sid).first()
+                if song is None:
                     current_app.logger.error("Song ID does not resolve to a valid song!")
                     raise
+                prime2_sort_order = 540
+                chartdiff = ChartDifficulty.query.join(Mode).join(Version).filter(ChartDifficulty.rating == int(request.form['ChartLevel']),
+                                                                                  Mode == prime_charttype.get(int(request.form['Type'])),
+                                                                                  Version.sort_order < prime2_sort_order).order_by(Version.sort_order.desc()).first()
+                if chartdiff is None:
+                    current_app.logger.error("Chart parameters do not resolve to a valid chart difficulty!")
+                    raise
                 post = Post(
-                    status = POST_PENDING,
-                    song = s,
-                    song_id = int(request.form['SongID']),
+                    song_id = song.song_id,
                     score = int(request.form['Score']),
                     exscore = calc_exscore(int(request.form['Perfect']), int(request.form['Great']), int(request.form['Good']), int(request.form['Bad']), int(request.form['Miss'])),
                     lettergrade = prime_grade[int(request.form['Grade']) % 0x100],
-                    type = prime_charttype[int(request.form['Type'])],
-                    difficultynum = int(request.form['ChartLevel']),
-                    difficulty = get_diffstr(prime_charttype[int(request.form['Type'])], int(request.form['ChartLevel'])),
+                    chart_id = chartdiff.chart,
                     platform = 'pad',
                     perfect = int(request.form['Perfect']),
                     great = int(request.form['Great']),
@@ -85,34 +88,25 @@ def submit():
                     #gamemix = request.form['Gamemix'],
                     gameversion = request.form['GameVersion'],
                     gameflag = int(request.form['Flag']),
-                    ranked = 'True' if request.form['Flag'] == '128' else 'False',
+                    ranked = True if request.form['Flag'] == '128' else False,
                     #length = prime_songcategory[int(request.form['SongCategory'])],
-                    length = raw_songdata[s]['length'], 
+                    length_id = song.length_id, 
                     accesscode = request.form['AccessCode'],
-                    acsubmit = 'True',
-                    author = u,
-                    user_id = u.id
+                    acsubmit = True,
+                    author = u
                 )
                 if current_app.debug:
                     current_app.logger.debug("Created post object.")
-                prime_to_xx_diff(post)
-                if current_app.debug:
-                    current_app.logger.debug("Converted Prime difficulty to XX difficulty.")
-                if post.difficulty == None or post.difficulty == '':
-                    raise
                 if post.rushspeed == 0.0:
                     post.rushspeed = 1.0
-                # TODO: MOVE ALL OF THIS INTO A SEPARATE FUNCTION (score_approved() or something which checks if score is acsubmit)
-                # song_maxcombo = post.perfect+post.great+post.good+post.bad+post.miss
-                # if song_maxcombo > get_max_combo(post.song, post.difficulty):
-                #     update_max_combo(post.song, post.difficulty, song_maxcombo)
-                #     update_song_list()
-                #     if current_app.debug:
-                #         current_app.logger.debug("Updated max combo for song %s, difficulty %s with max combo of %s" % (post.song, post.difficulty, song_maxcombo))
+                
                 post.sp = calc_performance(post.song, post.difficulty, post.difficultynum, post.perfect, post.great, post.good, post.bad, post.miss, int_to_judge(post.modifiers), post.rushspeed, post.stagepass == "True")
+                
                 add_exp(u, int(request.form['EXP']))
                 add_pp(u, int(request.form['PP']))
-                queue_post(post)
+
+                draft_post(post)
+                
                 if current_app.debug:
                     current_app.logger.debug("Post submitted to queue.")
         else:
@@ -288,23 +282,6 @@ def getapikey():
         current_app.logger.error('Error creating API key: %s' % traceback.format_exc())
     return jsonify(response)
 
-'''@main.route('/validatetid', methods=['POST'])
-def validatetid():
-    response = {}
-    try:
-        if request.form.validate() and valid_api_key(request.form['api_key']): # and if request.remote_addr in approved_ips
-            if get_tournament(request.form['tid']) == None: 
-                response['status'] = 'false'
-            else:
-                response['status'] = 'true' if get_tournament(request.form['tid']).active else 'false'
-        else:
-            response['status'] = 'failure'
-            response['reason'] = 'invalid request'
-    except Exception as e:
-        response['status'] = 'failure'
-        response['reason'] = type(e).__name__
-    return jsonify(response)'''
-
 @main.route('/chart_search', methods=['GET', 'POST']) # The methods 'GET' and 'POST' tell this route that
 def search():                                   # we can both request and send data to/from the page.
     form = ChartSearchForm(request.form)
@@ -313,14 +290,15 @@ def search():                                   # we can both request and send d
         session['search_difficulty'] = request.form.get('diffDrop')
         session['search_filters'] = form.filters.data
         return redirect(url_for('main.search_results'))
-    return render_template("chartsearch.html", form=form, songdata=raw_songdata, int_to_mods=int_to_mods, modlist_to_modstr=modlist_to_modstr, int_to_noteskin=int_to_noteskin)
+    return render_template("chartsearch.html", form=form, int_to_mods=int_to_mods, modlist_to_modstr=modlist_to_modstr, int_to_noteskin=int_to_noteskin)
 
 @main.route('/search', methods=['GET', 'POST']) # The methods 'GET' and 'POST' tell this route that
 def chartsearch():                                   # we can both request and send data to/from the page.
     form = SearchForm(request.form)
     if request.method == "POST" and form.validate():
-        session['search_song'] = form.song.data
-        session['search_genre'] = form.genre.data
+        session['search_author'] = form.author.data
+        session['search_chart_id'] = form.song_id.data
+        session['search_category_id'] = form.category_id.data
         session['search_minbpm'] = form.minbpm.data
         session['search_maxbpm'] = form.maxbpm.data
         session['search_filters'] = form.filters.data
@@ -338,14 +316,14 @@ def chartsearch():                                   # we can both request and s
         session['search_maxcombo'] = form.maxcombo.data
         #scrollspeed
         #autovelocity
-        session['noteskin'] = form.noteskin.data
-        #gamemix
+        session['search_noteskin'] = form.noteskin.data
+        session['search_gamemix_id'] = form.gamemix.data
         #gameversion
-        session['ranked'] = form.ranked.data
-        session['judgement'] = form.judgement.data
+        session['search_ranked'] = form.ranked.data
+        session['search_judgement'] = form.judgement.data
         #tournamentid
         return redirect(url_for('main.search_results'))
-    return render_template("search.html", form=form, songdata=raw_songdata, int_to_mods=int_to_mods, modlist_to_modstr=modlist_to_modstr, int_to_noteskin=int_to_noteskin)
+    return render_template("search.html", form=form, int_to_mods=int_to_mods, modlist_to_modstr=modlist_to_modstr, int_to_noteskin=int_to_noteskin)
 
 @main.route('/search_results/')
 def search_results():
@@ -353,26 +331,21 @@ def search_results():
 
     results = results.filter(Post.status == POST_APPROVED)  # Only get approved posts
 
-    if session.get('search_song') != None and session['search_song'] != '':
-        results = results.filter(Post.song == session['search_song'])
+    if session.get('search_author') != None and session['search_author'] != '':
+        u = User.query.filter_by(user=session['search_author']).first()
+        if u is not None:
+            results = results.filter(Post.author == u)
 
-    # to be implemented: add genre + BPM (maybe min and max) to Post
-    # if session.get('search_genre') != None and session['search_genre'] != '':
-    #     results = results.filter(Post.genre == session['search_genre'])
-    # if session.get('search_minbpm') != None and session['search_minbpm'] != '' and session['search_minbpm'] != 'Any':
-    #     results = results.filter(Post.song == int(session['search_minbpm']))
-    # if session.get('search_maxbpm') != None and session['search_maxbpm'] != '' and session['search_maxbpm'] != 'Any':
-    #     results = results.filter(Post.perfect == int(session['search_maxbpm']))
+    if session.get('search_chart_id') != None and session['search_chart_id'] != '':
+        results = results.filter(Post.chart_id == int(session['search_chart_id']))
 
-    if session.get('search_difficulty') != None and session['search_difficulty'] != '':
-        results = results.filter(Post.difficulty == session['search_difficulty'])
+    if session.get('search_genre') != None and session['search_genre'] != '':
+        results = results.filter(Post.genre == session['search_genre'])
 
-    if session.get('search_filters') != None and session['search_filters'] == 'verified': # fix for array
-        results = results.filter(Post.platform == 'pad')
-    elif session.get('search_filters') != None and session['search_filters'] == 'prime-verified':
-        results = results.filter(Post.platform == 'pad', Post.acsubmit == "True")
-    elif session.get('search_filters') != None and session['search_filters'] == 'unverified':
-        results = results.filter(or_(Post.platform == 'keyboard', Post.platform == 'sf2-pad'))
+    if session.get('search_minbpm') != None and session['search_minbpm'] != '' and session['search_minbpm'] != 'Any':
+        results = results.filter(or_(Post.song.bpm_min >= int(session['search_minbpm'], Post.song.bpm_max >= int(session['search_minbpm']))))
+    if session.get('search_maxbpm') != None and session['search_maxbpm'] != '' and session['search_maxbpm'] != 'Any':
+        results = results.filter(or_(Post.song.bpm_min >= int(session['search_maxbpm'], Post.song.bpm_max >= int(session['search_maxbpm']))))
 
     if session.get('search_score') != None and session['search_score'] != '':
         if session.get('search_scoremodifier') != None and session['search_scoremodifier'] != '':
@@ -405,9 +378,14 @@ def search_results():
                 results = results.filter(Post.exscore >= int(session['search_exscore']))
 
     if session.get('search_stagepass') != None and session['search_stagepass'] != '' and session['search_stagepass'] != 'Any':
-        results = results.filter(Post.stagepass == session['search_stagepass'])
+        cond = True if session['search_stagepass'] == 'True' else False
+        results = results.filter(Post.stagepass == cond)
 
-    if session.get('search_platform') != None and session['search_platform'] != '' and session['search_platform'] != 'Any':
+    if session.get('search_lettergrade') != None and session['search_lettergrade'] != '':
+        q = [Post.lettergrade == x for x in session['search_lettergrade']]
+        results = results.filter(or_(*q))
+
+    if session.get('search_platform') != None and session['search_platform'] != '':
         q = [Post.platform == x for x in session['search_platform']]
         results = results.filter(or_(*q))
 
@@ -429,14 +407,19 @@ def search_results():
         q = [Post.noteskin == x for x in session['search_noteskin']]
         results = results.filter(or_(*q))
 
-    if session.get('search_ranked') != None and session['search_ranked'] != '' and session['search_ranked'] != 'Any':
-        results = results.filter(Post.ranked == session['search_ranked'])
+    if session.get('search_gamemix_id') != None and session['search_gamemix_id'] != '':
+        q = [Post.gamemix_id == x for x in session['search_gamemix_id']]
+        results = results.filter(or_(*q))
 
-    if session.get('search_judgement') != None and session['search_judgement'] != '' and session['search_judgement'] != 'Any':
+    if session.get('search_ranked') != None and session['search_ranked'] != '' and session['search_ranked'] != 'Any':
+        cond = True if session['search_stagepass'] == 'True' else False
+        results = results.filter(Post.ranked == cond)
+
+    if session.get('search_judgement') != None and session['search_judgement'] != '':
         q = [Post.noteskin == x for x in session['search_judgement']]
         results = results.filter(or_(*q))
 
-    return render_template("search_results.html", results=results, songdata=raw_songdata, int_to_mods=int_to_mods, modlist_to_modstr=modlist_to_modstr, int_to_noteskin=int_to_noteskin)
+    return render_template("search_results.html", results=results, int_to_mods=int_to_mods, modlist_to_modstr=modlist_to_modstr, int_to_noteskin=int_to_noteskin)
 
 @main.route('/wiki/<wikipage>')
 def wiki(wikipage):

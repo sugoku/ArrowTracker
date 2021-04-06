@@ -15,168 +15,17 @@
   <hr />
   <div class="jumbotron text-center">
     <div class="animated fadeIn">
-      <h1 class="display-4">「{{ current_weekly[0] }}」</h1>
-      <h2>{{ current_weekly[1] }}</h2>
+      <h1 class="display-4">「{{ songid_to_title['en'][current_weekly.song.id] }}」</h1>
+      <h2>{{ lengths[current_weekly.song.length_id].name }}</h2>
+      <h2>{{ current_weekly.mode.name }} {{ current_weekly.rating }}</h2>
     </div>
     <hr />
     <p class="lead">
-      Submit scores for the weekly challenge below! Users with top scores at the end of the week will earn points on their profiles once this feature is completely finished. For now, it's all for fun!
+      Submit scores for the weekly challenge below! Users with top scores at the end of the week will earn points on their profiles and may have the chance to obtain special titles!
     </p>
-    <div style="padding-bottom: 10pt">
-      <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#collapseSubmit" aria-expanded="false" aria-controls="collapseExample">
-        Submit Your Score
-      </button>
-    </div>
-    <div class="content-section collapse" id="collapseSubmit">
-      <form action="" method="POST" enctype = "multipart/form-data">
-        {{ form.hidden_tag() }}
-        <fieldset class="form-group animated fadeInDown faster">
-          <legend class="border-bottom mb-4">Submit Score</legend>
-          <div class="form-row" style="padding: 5pt">
-            <div class="col">
-              {{ form.score.label(class="form-control-label") }}
-              {% if form.score.errors %}
-                {{ form.score(class="form-control form-control-lg is-invalid") }}
-                <div class="invalid-feedback">
-                  {% for error in form.score.errors %}
-                    <span>{{ error }}</span>
-                  {% endfor %}
-                </div>
-              {% else %}
-                {{ form.score(class="form-control form-control-lg") }}
-              {% endif %}
-            </div>
-          </div>
-          <div class="form-row" style="padding: 5pt">
-            <div class="col">
-              {{ form.lettergrade.label(class="form-control-label") }}
-              {% if form.lettergrade.errors %}
-                {{ form.lettergrade(class="form-control form-control-lg is-invalid") }}
-                <div class="invalid-feedback">
-                  {% for error in form.lettergrade.errors %}
-                    <span>{{ error }}</span>
-                  {% endfor %}
-                </div>
-              {% else %}
-                {{ form.lettergrade(class="form-control form-control-lg") }}
-              {% endif %}
-            </div>
-            <div class="col">
-              <div>
-                {{ form.difficulty.label(class="form-control-label") }}
-                <a style="color: #4fbcf7" data-toggle="tooltip" data-placement="top" title="Scroll to the bottom of the dropdown for Co-Op difficulties">[i]</a>
-              </div>
-              {% if form.difficulty.errors %}
-                {{ form.difficulty(class="form-control form-control-lg is-invalid") }}
-                <div class="invalid-feedback">
-                  {% for error in form.difficulty.errors %}
-                    <span>{{ error }}</span>
-                  {% endfor %}
-                </div>
-              {% else %}
-                {{ form.difficulty(class="form-control form-control-lg") }}
-              {% endif %}
-            </div>
-          </div>
-          <div class="form-row" style="padding: 5pt">
-            <div class="col">
-              {{ form.platform.label(class="form-control-label") }}
-              {% if form.platform.errors %}
-                {{ form.platform(class="form-control form-control-lg is-invalid") }}
-                <div class="invalid-feedback">
-                  {% for error in form.platform.errors %}
-                    <span>{{ error }}</span>
-                  {% endfor %}
-                </div>
-              {% else %}
-                {{ form.platform(class="form-control form-control-lg") }}
-              {% endif %}
-            </div>
-            <div class="col">
-              {{ form.stagepass.label(class="form-control-label") }}
-              {% if form.stagepass.errors %}
-                {{ form.stagepass(class="form-control form-control-lg is-invalid") }}
-                <div class="invalid-feedback">
-                  {% for error in form.stagepass.errors %}
-                    <span>{{ error }}</span>
-                  {% endfor %}
-                </div>
-              {% else %}
-                {{ form.stagepass(class="form-control form-control-lg") }}
-              {% endif %}
-            </div>
-            <div class="col">
-              {{ form.ranked.label(class="form-control-label") }}
-              {% if form.ranked.errors %}
-                {{ form.ranked(class="form-control form-control-lg is-invalid") }}
-                <div class="invalid-feedback">
-                  {% for error in form.ranked.errors %}
-                    <span>{{ error }}</span>
-                  {% endfor %}
-                </div>
-              {% else %}
-                {{ form.ranked(class="form-control form-control-lg") }}
-              {% endif %}
-            </div>
-          </div>
-        <div>
-          <hr>
-        </div>
-        <div style="padding: 5pt">
-          <div style="display: inline-block">
-            <p align="center">Score Screenshot [MANDATORY]</p>
-          </div>
-          <div class="form-row">
-            <div class="custom-file">
-              <input type="file" name="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
-              <label class="custom-file-label" for="inputGroupFile01"><span class="span-choose-file">Add Verification Image<span></label>
-            </div>
-          </div>
-        </div>
-        </fieldset>
-        <div class="form-field">
-          {{ form.submit(class="btn btn-outline-success") }}
-        </div>
-      </form>
-    </div>
-    {% if ldb != None %}
+    {% if ldb is not None %}
       <div style="overflow: auto; max-width: 100%">
-        <table class="table table-striped animated fadeIn">
-          <th>Song</th>
-          <th>Type & Difficulty</th>
-          <th>Letter Grade</th>
-          <th>Score</th>
-          <th>Stage Pass</th>
-          <th>Platform</th>
-          <th>Ranked?</th>
-          <th>Author</th>
-          {% set count = namespace(a=0) %}
-          {% for score in ldb %}
-          {% set count.a = count.a + 0.03 %}
-          <tr class="animated fadeInLeft fast" style="animation-delay: {{ count.a|float }}s;">
-            <td><a href="/challenge/weekly/{{score.id}}">{{score.song}}</a>
-              {% if score.image_file != "None" %}
-                <span style="padding-left: 5pt"><span class="badge badge-pill badge-success">Verified!</span></span>
-              {% endif %}
-            </td>
-            <td>{{score.type.capitalize()}} {{score.difficulty}}</td>
-            <td>{{score.lettergrade.upper()}}</td>
-            <td>{{score.score}}</td>
-            {% if score.stagepass == "True" %}
-              <td>{{score.stagepass|replace("True", "Yes")}}</td>
-            {% elif score.stagepass == "False" %}
-              <td>{{score.stagepass|replace("False", "No")}}</td>
-            {% endif %}
-            <td>{{score.platform.capitalize()|replace('Sf2-pad', 'StepF2 Pad')}}</td>
-            {% if score.ranked == "True" %}
-              <td>{{score.ranked|replace("True", "Yes")}}</td>
-            {% elif score.ranked == "False" %}
-              <td>{{score.ranked|replace("False", "No")}}</td>
-            {% endif %}
-            <td>{{score.author.username}}</td>
-          </tr>
-          {% endfor %}
-        </table>
+        score_table(ldb, song=False, chart=False)
       </div>
     {% else %}
       <h4>No scores submitted. Scores will display here when any are uploaded.</h4>

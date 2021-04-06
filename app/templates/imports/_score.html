@@ -1,0 +1,234 @@
+{% macro score_title(score) -%}
+  {{ songid_to_title['en'][score.song_id].name }} - {{ charts[score.chart_id].name }}
+{%- endmacro %}
+
+{% macro score_page(score, delay=None) -%}
+  {% set songtitle = songid_to_title['en'][score.song_id].name %}
+  {% set length = lengths[score.length_id] %}
+  {% if delay is None %}
+  <article class="media content-section" style="overflow: auto; max-width: 100%">
+  {% else %}
+  <article class="media content-section animated fadeInLeft fast fastBoxShadow" style="height: 100%; animation-delay: {{ delay|float }}s;">
+  {% endif %}
+    <img src="{{ url_for('static', filename='profile_pics/' + score.author.image_file) }}" class="rounded-circle article-img">
+    <div class="media-body">
+      <div class="article-metadata">
+        <a class="mr-2" href="{{ url_for('users.user_page', username=score.author.username) }}">{{ score.author.username }}</a>
+        <small class="text-muted">{{ score.date_posted.strftime('%Y-%m-%d') }}</small>
+      </div>
+      <div>
+        <h2 class="article-title">
+          {{ songtitle.name }}
+          <img class="rounded float-right animated fadeInRight fast" style="padding-right: 5pt; padding-top: 5pt; padding-bottom: 5pt;" src="{{ url_for('static', filename='songthumbs/{}.png'.format(score.song.id)) }}">
+        </h2>
+        <h3>{{ length.name }}</h3>
+        <h3>{{ moment(score.date_posted).fromNow() }}</h3>
+      </div>
+      <div style="padding: 5pt">
+        <table class="table animated fadeInUp fast">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Song</th>
+              <th scope="col">Chart</th>
+              <th scope="col">Letter Grade</th>
+              <th scope="col">Score</th>
+              <th scope="col">EX Score</th>
+              <th scope="col">SP</th>
+              <th scope="col">Perfect</th>
+              <th scope="col">Great</th>
+              <th scope="col">Good</th>
+              <th scope="col">Bad</th>
+              <th scope="col">Miss</th>
+              <th scope="col">Max Combo</th>
+              <th scope="col">Stage Pass</th>
+              <th scope="col">Noteskin</th>
+              <th scope="col">Modifiers</th>
+              <th scope="col">Rush Speed</th>
+              <th scope="col">Platform</th>
+              <th scope="col">Game Mix</th>
+              <th scope="col">Rank Mode</th>
+              <th scope="col">Author</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><a href="#">{{ songtitle.name }}</a>
+                {% if score.status == constants['POST_APPROVED'] and score.acsubmit %}
+                  <span class="badge badge-pill badge-info">Verified!</span>
+                {% if score.status == constants['POST_APPROVED'] %}
+                  <span class="badge badge-pill badge-success">Verified!</span>
+                {% endif %}
+              </td>
+              <td>{{chart.name}}</td>
+              <td>{{score.lettergrade.upper()}}</td>
+              <td>{{score.score}}</td>
+              <td>{{score.exscore}}</td>
+              {% if score.status == constants['POST_APPROVED'] %}
+                <td>{{ score.sp|int }}</td>
+              {% else %}
+                <td>N/A</td>
+              {% endif %}
+              <td>{{score.perfect}}</td>
+              <td>{{score.great}}</td>
+              <td>{{score.good}}</td>
+              <td>{{score.bad}}</td>
+              <td>{{score.miss}}</td>
+              <td>{{score.maxcombo}}</td>
+              {% if score.stagepass %}
+                <td>Yes</td>
+              {% else core.stagepass %}
+                <td>No</td>
+              {% endif %}
+              <td>{{int_to_noteskin(score.noteskin)}}</td>
+              <td>{{modlist_to_modstr(int_to_mods(score.modifiers))}}</td>
+              <td>{{score.rushspeed}}</td>
+              <td>{{score.platform.capitalize()|replace('Sf2-pad', 'StepF2 Pad')}}</td>
+              {% if score.gamemix_id is not None %}
+                <td>{{gamemixes[score.gamemix_id].short_name}}</td>
+              {% else %}
+                <td>N/A</td>
+              {% endif %}
+              {% if score.ranked %}
+                <td>Yes</td>
+              {% else %}
+                <td>No</td>
+              {% endif %}
+              <td>{{score.author.username}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      {% if score.image_file != "None" %}
+      <div style="padding-bottom: 10pt; padding-left: 5pt; padding-right: 5pt">
+        <img src="{{ url_for('static', filename='score_screenshots/' + score.image_file) }}" class="rounded mx-auto d-block img-fluid animated fadeInUp fast">
+      </div>
+      {% endif %}
+      {% if score.author == current_user or current_user.has_any_role('Moderator', 'Admin') %}
+      <div>
+        <form action="{{ url_for('scores.delete_score', score_id=score.id) }}" method="POST">
+          <input type="submit" class="btn btn-danger m-1" value="Delete">
+        </form>
+      </div>
+      {% endif %}
+    </div>
+  </article>
+{%- endmacro %}
+
+{% macro score_table(scores, song=True, chart=True, gamemix=False, verified=False, delay=True) -%}
+{% set _chart = charts[score.chart_id] %}
+{% set songtitle = songid_to_title['en'][score.song_id].name %}
+<table class="table table-striped table-dark">
+  {% if song %}
+  <th>Song</th>
+  {% endif %}
+  {% if chart %}
+  <th>Chart</th>
+  {% endif %}
+  <th>Score</th>
+  <th>Letter Grade</th>
+  <th>Stage Pass</th>
+  <th>Modifiers</th>
+  <th>Rush Speed</th>
+  {% if verified %}
+  <th>Verified</th>
+  {% endif %}
+  <th>SP</th>
+  {% set count = namespace(a=0) %}
+  {% for score in scores %}
+    {% set count.a = count.a + 0.03 %}
+    <tr class="animated fadeInLeft fast" style="animation-delay: {{ count.a|float }}s;">
+      {% if song %}
+      <td><a href="{{ url_for('scores.score', score_id=score.id) }}">{{ songtitle }}</a></td>
+      {% endif %}
+      {% if chart %}
+      <td>{{ _chart.name }}</td>
+      {% endif %}
+      {% if not song %}
+      <td><a href="{{ url_for('scores.score', score_id=score.id) }}">{{ score.score }}</a></td>
+      {% else %}
+      <td>{{ score.score }}</td>
+      {% endif %}
+      <td>{{ score.lettergrade.upper() }}</td>
+      {% if score.stagepass %}
+        <td>Yes</td>
+      {% else %}
+        <td>No</td>
+      {% endif %}
+      <td>{{ modlist_to_modstr(int_to_mods(score.modifiers)) }}</td>
+      <td>{{ score.rushspeed }}</td>
+      {% if verified %}
+        {% if score.status == constants['POST_APPROVED'] %}
+          <td>Yes</td>
+        {% else %}
+          <td>No</td>
+        {% endif %}
+      {% endif %}
+      {% if score.status == constants['POST_APPROVED'] %}
+        <td>{{ score.sp|int }}</td>
+      {% else %}
+        <td>N/A</td>
+      {% endif %}
+    </tr>
+  {% endfor %}
+</table>
+{%- endmacro %}
+
+{% macro score_page_home(score) -%}
+{% set chart = charts[score.chart_id] %}
+<div class="table-responsive">
+  <table class="table" id="content-desktop">
+    <thead>
+      <tr>
+        <th scope="col">Difficulty</th>
+        <th scope="col">Letter Grade</th>
+        <th scope="col">Score</th>
+        <th scope="col">EX Score</th>
+        <th scope="col">SP</th>
+        <th scope="col">Max Combo</th>
+        <th scope="col">Stage Pass</th>
+        <th scope="col">Platform</th>
+        <th scope="col">Rank Mode</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <img width="50pt" src="{{ url_for('static', filename='diffballs/{}.png'.format(chart.name|replace('??', '99'))) }}" />
+        </td>
+        <td>{{score.lettergrade.upper()}}</td>
+        <td>{{score.score}}</td>
+        <td>{{score.exscore}}</td>
+        <td>{{score.sp|int}}</td>
+        <td>{{score.maxcombo}}</td>
+        {% if score.stagepass %}
+          <td>Yes</td>
+        {% else %}
+          <td>No</td>
+        {% endif %}
+        <td>{{score.platform.capitalize()|replace('Sf2-pad', 'StepF2 Pad')}}</td>
+        {% if score.ranked %}
+          <td>Yes</td>
+        {% else %}
+          <td>No</td>
+        {% endif %}
+      </tr>
+    </tbody>
+  </table>
+  <table class="table" id="content-mobile">
+    <thead>
+      <tr>
+        <th>Difficulty</th>
+        <th>Letter Grade</th>
+        <th>Score</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{chart.mode.name}} {{chart.rating}}</td>
+        <td>{{score.lettergrade.upper()}}</td>
+        <td>{{score.score}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+{%- endmacro %}

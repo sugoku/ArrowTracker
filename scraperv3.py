@@ -15,13 +15,19 @@ engine = create_engine(db_uri)
 conn = engine.connect()
 
 CLEAR_DB = True
+CLEAR_PUMP_DB = True
 
 app = create_app()
 app.app_context().push()
 
 if CLEAR_DB:
-    print("CLEAR_DB enabled, dropping existing tables...")
+    print("CLEAR_DB enabled, dropping existing app.db tables...")
+    db.drop_all(bind=None)
+if CLEAR_PUMP_DB:
+    print("CLEAR_PUMP_DB enabled, dropping existing pump.db tables...")
     db.drop_all(bind='pump')
+print("Generating app.db if it doesn't exist...")
+db.create_all(bind=None)
 print("Generating pump.db if it doesn't exist...")
 db.create_all(bind='pump')
 
@@ -77,11 +83,34 @@ categories ={categoryId: Category(id=categoryId, name=internalTitle, sort_order=
 cuts = {cutId: Length(id=cutId, name=internalTitle, sort_order=sortOrder) for cutId, internalTitle, sortOrder in get_all_items(cut)}
 labels = {labelId: Label(id=labelId, name=internalTitle, sort_order=sortOrder) for labelId, internalTitle, sortOrder, description in get_all_items(label)}
 languages = {languageId: Language(id=languageId, code=code, name=internalTitle) for languageId, code, internalTitle in get_all_items(language)}
-mixes = {mixId: GameMix(id=mixId, name=internalTitle, parent_mix_id=parentMixId, sort_order=sortOrder) for mixId, gameId, internalTitle, parentMixId, sortOrder in get_all_items(mix)}
+mixes = {mixId: GameMix(id=mixId, name=internalTitle, short_name=internalTitle, parent_mix_id=parentMixId, sort_order=sortOrder) for mixId, gameId, internalTitle, parentMixId, sortOrder in get_all_items(mix)}
 modes = {modeId: Mode(id=modeId, name=internalTitle, abbrev=internalAbbreviation, pads_used=padsUsed, panels_used=(5*padsUsed if internalAbbreviation != 'HDB' else 6), coop=bool(coOp), performance=bool(performance)) for modeId, internalTitle, internalAbbreviation, internalHexColor, sortOrder, padsUsed, routine, coOp, performance in get_all_items(mode)}
 stepmakers = {stepmakerId: Stepmaker(id=stepmakerId, name=internalTitle) for stepmakerId, internalTitle in get_all_items(stepmaker)}
 versions = {versionId: Version(id=versionId, gamemix=mixes[mixId], name=internalTitle, parent_version_id=parentVersionId, sort_order=sortOrder) for versionId, mixId, internalTitle, parentVersionId, sortOrder in get_all_items(version)}
-    
+
+mix_short_name = {
+    "NX Absolute": "NXA",
+    "NX2 / Next Xenesis": "NX2",
+    "NX / New Xenesis": "NX",
+    "The Prex 3": "Prex 3",
+    "The Premiere 3": "Premiere 3",
+    "The Prex 2": "Prex 2",
+    "The Premiere 2": "Premiere 2",
+    "The Rebirth": "Rebirth",
+    "The Prex": "Prex",
+    "The Premiere": "Premiere",
+    "The Perfect Collection": "Perfect",
+    "The Collection": "Collection",
+    "The O.B.G / Season Evolution": "O.B.G SE",
+    "2nd Ultimate Remix": "2nd",
+    "The 1st Dance Floor": "1st"
+}
+
+for mixId in mixes:
+    sn = mix_short_name.get(mixes[mixId].name)
+    if sn is not None:
+        mixes[mixId].short_name = sn
+
 class Difficulty:
     def __init__(self, difficultyId, value, sortOrder, internalTitle, danger):
         self.difficultyId = difficultyId
@@ -231,6 +260,11 @@ for chartId in charts:
         charts[chartId].rerate_name = ' -> '.join(diffstrs)
         charts[chartId].name = diffs[-1].name
         charts[chartId].mode_id = diffs[-1].mode_id
+        for diff in diffs:
+            if diff.version.sort_order < 540:  # Prime 2 v1.00.0
+                charts[chartId].prime_rating = diff.rating
+        charts[chartId].earliest_version_id = diffs[0].id
+        charts[chartId].latest_version_id = diffs[-1].id
         charts[chartId].rating = diffs[-1].rating
     except:
         print(f"WARNING: Skipping chart with no difficulty: {chartId}")

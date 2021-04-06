@@ -3,7 +3,7 @@ import traceback
 import random
 from flask import current_app
 from flask_login import current_user
-from app import db, logging, raw_songdata, scheduler, judgement_pairs
+from app import db, logging, scheduler, judgement_pairs
 from app.models import *
 
 #scheduler.add_job(f, args=[2,3])
@@ -131,8 +131,8 @@ def game_winner(game, tournament_type, score_type):
 
     if tournament_type == TOURNAMENT_STANDARD:
         for uid in participants:
-            scores = Post.query.filter_by(user_id=uid).filter(Post.date_posted >= match.start_time,
-                                                              Post.date_posted <= match.end_time)
+            scores = Post.query.filter_by(user_id=uid, chart_id=game.chart_id).filter(Post.date_posted >= match.start_time,
+                                                                                      Post.date_posted <= match.end_time)
             if score_type == SCORE_DEFAULT:
                 best_score = scores.order_by(Post.score.desc()).first()
             elif score_type == SCORE_EXSCORE:
@@ -144,8 +144,8 @@ def game_winner(game, tournament_type, score_type):
             member_scores = []
             team = Team.query.get(tid)
             for uid in team.members:
-                scores = Post.query.filter_by(user_id=uid).filter(Post.date_posted >= match.start_time,
-                                                              Post.date_posted <= match.end_time)
+                scores = Post.query.filter_by(user_id=uid, chart_id=game.chart_id).filter(Post.date_posted >= match.start_time,
+                                                                                          Post.date_posted <= match.end_time)
                 if score_type == SCORE_DEFAULT:
                     best_score = scores.order_by(Post.score.desc()).first()
                 elif score_type == SCORE_EXSCORE:

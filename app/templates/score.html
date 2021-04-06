@@ -1,22 +1,19 @@
 {% extends "layout.html" %}
+{% from 'imports/_score.html' import score_page %}
 
 {% block head %}
   {% block title %}
-    {% if score.type == "None" %}
-      {{ score.song }} | {{ score.length }} {{score.difficulty}}
-    {% else %}
-      {{ score.song }} | {{score.type}} {{score.difficulty}}
-    {% endif %}
+    score_title(songtitle, chart)
   {% endblock %}
   {% block meta %}
     <meta property="og:title" content="{{ score.song }} {{score.difficulty}}"/>
     <meta property="og:description" content="Score: {{score.score}} | Grade: {{score.lettergrade.upper()}} | Author: {{score.author.username}}"/>
     <meta property="og:url" content="{{ request.url }}">
-    {% if score.lettergrade in bluegrades and score.stagepass == "True" %}
+    {% if score.lettergrade in bluegrades and score.stagepass %}
       <meta name="theme-color" content="#176ac8">
-    {% elif score.lettergrade in goldgrades and score.stagepass == "True" %}
+    {% elif score.lettergrade in goldgrades and score.stagepass %}
       <meta name="theme-color" content="#ecc019">
-    {% elif score.lettergrade in redgrades and score.stagepass == "True" %}
+    {% elif score.lettergrade in redgrades and score.stagepass %}
       <meta name="theme-color" content="#d21b0b">
     {% else %}
       <meta name="theme-color" content="#bab8ba">
@@ -26,101 +23,5 @@
 {% endblock %}
 
 {% block body %}
-  <article class="media content-section" style="overflow: auto; max-width: 100%">
-    <img src="{{ url_for('static', filename='profile_pics/' + score.author.image_file) }}" class="rounded-circle article-img">
-    <div class="media-body">
-      <div class="article-metadata">
-        <a class="mr-2" href="{{ url_for('users.user_page', username=score.author.username) }}">{{ score.author.username }}</a>
-        <small class="text-muted">{{ score.date_posted.strftime('%Y-%m-%d') }}</small>
-      </div>
-      <div>
-        <h2 class="article-title">
-          {{ score.song }}
-          {% if score.song in songdata %}
-            <img class="rounded float-right animated fadeInRight fast" style="padding-right: 5pt; padding-top: 5pt; padding-bottom: 5pt;" src="{{ url_for('static', filename='songthumbs/{}.png'.format(songdata[score.song]['id'])) }}">
-          {% endif %}
-        </h2>
-        <h3>{{ score.length }}</h3>
-        <h3>{{ moment(score.date_posted).fromNow() }}</h3>
-      </div>
-      <div style="padding: 5pt">
-        <table class="table animated fadeInUp fast">
-          <thead class="thead-dark">
-            <tr>
-              <th scope="col">Song</th>
-              <th scope="col">Difficulty</th>
-              <th scope="col">Letter Grade</th>
-              <th scope="col">Score</th>
-              <th scope="col">EX Score</th>
-              <th scope="col">SP</th>
-              <th scope="col">Perfect</th>
-              <th scope="col">Great</th>
-              <th scope="col">Good</th>
-              <th scope="col">Bad</th>
-              <th scope="col">Miss</th>
-              <th scope="col">Max Combo</th>
-              <th scope="col">Stage Pass</th>
-              <th scope="col">Noteskin</th>
-              <th scope="col">Modifiers</th>
-              <th scope="col">Rush Speed</th>
-              <th scope="col">Platform</th>
-              <th scope="col">Ranked?</th>
-              <th scope="col">Author</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><a href="#">{{score.song}}</a>
-                {% if score.id in images %}
-                  <span class="badge badge-pill badge-success">Verified!</span>
-                {% elif score.acsubmit == "True" %}
-                  <span class="badge badge-pill badge-info">Verified!</span>
-                {% endif %}
-              </td>
-              <td>
-                {{score.difficulty}}
-              </td>
-              <td>{{score.lettergrade.upper()}}</td>
-              <td>{{score.score}}</td>
-              <td>{{score.exscore}}</td>
-              <td>{{score.sp|int}}</td>
-              <td>{{score.perfect}}</td>
-              <td>{{score.great}}</td>
-              <td>{{score.good}}</td>
-              <td>{{score.bad}}</td>
-              <td>{{score.miss}}</td>
-              <td>{{score.maxcombo}}</td>
-              {% if score.stagepass == "True" %}
-                <td>{{score.stagepass|replace("True", "Yes")}}</td>
-              {% elif score.stagepass == "False" %}
-                <td>{{score.stagepass|replace("False", "No")}}</td>
-              {% endif %}
-              <td>{{int_to_noteskin(score.noteskin)}}</td>
-              <td>{{modlist_to_modstr(int_to_mods(score.modifiers))}}</td>
-              <td>{{score.rushspeed}}</td>
-              <td>{{score.platform.capitalize()|replace('Sf2-pad', 'StepF2 Pad')}}</td>
-              {% if score.ranked == "True" %}
-                <td>{{score.ranked|replace("True", "Yes")}}</td>
-              {% elif score.ranked == "False" %}
-                <td>{{score.ranked|replace("False", "No")}}</td>
-              {% endif %}
-              <td>{{score.author.username}}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      {% if score.image_file != "None" %}
-      <div style="padding-bottom: 10pt; padding-left: 5pt; padding-right: 5pt">
-        <img src="{{ url_for('static', filename='score_screenshots/' + score.image_file) }}" class="rounded mx-auto d-block img-fluid animated fadeInUp fast">
-      </div>
-      {% endif %}
-      {% if score.author == current_user or current_user.id == 1 %}
-      <div>
-        <form action="{{ url_for('scores.delete_score', score_id=score.id) }}" method="POST">
-          <input type="submit" class="btn btn-danger m-1" value="Delete">
-        </form>
-      </div>
-      {% endif %}
-    </div>
-  </article>
+score_page(score)
 {% endblock body %}

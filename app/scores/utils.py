@@ -7,15 +7,11 @@ import sys
 import re
 from flask import current_app
 from flask_login import current_user
-from app import db, logging, raw_songdata, scheduler, judgement_pairs
+from app import db, logging, scheduler, judgement_pairs
 from app.models import *
-from weekly import randomize_weekly
+from app.pump_models import *
+from weekly import randomize_weekly, get_current_weekly, create_json
 from app.users.utils import update_user_sp, update_user_titles
-# from fastai import load_learner, Learner
-
-def id_to_user(uid):
-    u = User.query.filter_by(id=uid).first()
-    return u if u != None else None
 
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 
@@ -23,7 +19,7 @@ def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 def return_completion(user, difficulty):
-    user = user = User.query.filter_by(username=user).first_or_404()
+    user = User.query.filter_by(username=user).first_or_404()
     allscores = Post.query.filter_by(author=user).all()
     data = {}
     passinggrades = ['a','s','ss','sss']
@@ -51,11 +47,11 @@ prime_grade = {
     7: "f"
 }
 prime_charttype = {
-    0x0: "Single", # 0
-    0x5: "Double Performance", # 5
-    0x40: "Single Performance", # 64
-    0x80: "Double", # 128
-    0xc0: "Co-Op" # 192
+    0x0: Mode.query.filter_by(name="Single").first(), # 0
+    0x5: Mode.query.filter_by(name="Double Performance").first(), # 5
+    0x40: Mode.query.filter_by(name="Single Performance").first(), # 64
+    0x80: Mode.query.filter_by(name="Double").first(), # 128
+    0xc0: Mode.query.filter_by(name="Co-Op").first() # 192
 }
 abbrev_charttype = {
     'S': "Single",
@@ -157,6 +153,22 @@ judgements = {
     'vj': 0x800000
 }
 
+
+fastai_classes = ['a20blue','a20gold','ace','chunithm','ddrassorted','fiesta','fiesta2','groovecoaster','infinity','jubeat','none','pium','prime','prime2','pumpassorted','sdvx','simplylove','stepmaniax','xx']
+
+fastai_games = {
+    'fiesta': GameMix.query.filter_by(name='Fiesta').first(),
+    'fiesta2': GameMix.query.filter_by(name='Fiesta 2').first(),
+    'infinity': GameMix.query.filter_by(name='Infinity').first(),
+    'prime': GameMix.query.filter_by(name='Prime').first(),
+    'prime2': GameMix.query.filter_by(name='Prime 2').first(),
+    'pumpassorted': GameMix.query.filter_by(name='The 1st Dance Floor').first()
+}
+
+def fastai_int_to_game(i):
+    return fastai_games.get(fastai_classes[i])
+    
+
 @scheduler.task('interval', id='update_scores', minutes=1)
 def update_scores_task():
     with scheduler.app.app_context():
@@ -172,21 +184,16 @@ def update_scores_task():
 @scheduler.task('cron', id='update_weekly', week='*', day_of_week='mon')
 def update_weekly_task():
     with scheduler.app.app_context():
+        weekly_id = get_current_weekly()
+        high_score = Post.query.filter_by(chart_id=weekly_id).filter(Post.date_posted >= match.start_time,
+                                                                     Post.date_posted <= match.end_time).order_by(Post.score.desc()).first()
+        if high_score is not None:
+            create_json(high_score)
+            high_score.author.weeklywins += 1
+            db.session.commit()
         current_app.logger.info("Updating weekly challenge...")
         randomize_weekly(app)
         current_app.logger.info("Updated weekly challenge.")
-
-def update_song_list():
-    current_app.logger.info("Updating song list database...")
-    with open(os.getcwd()+'/app/static/gamelists/complete.json', 'w') as f:
-        json.dump(raw_songdata, f)
-    current_app.logger.info("Updated song list database.")
-
-def get_max_combo(song, difficulty):
-    return raw_songdata[song]['difficulties'][difficulty][0]
-
-def update_max_combo(song, difficulty, maxcombo):
-    raw_songdata[song]['difficulties'][difficulty][0] = maxcombo
 
 def create_ranking(ranking='worldbest', scoretype='default'):
     scoretype = re.sub(r'\W+', '', scoretype)
@@ -194,31 +201,33 @@ def create_ranking(ranking='worldbest', scoretype='default'):
         worldbest = {
             'WorldScores': []
         }
-        for song in raw_songdata:
-            if raw_songdata[song]['song_id'] != "":
-                for chart in raw_songdata[song]['difficulties']:
+        for song in Song.query.all():
+            if song.song_id != "" and song.song_id is not None:
+                for chart in song.charts:
+                    if chart.prime_rating is None:
+                        continue
                     if scoretype == 'default':
-                        score = Post.query.filter_by(song_id=int(raw_songdata[song]['song_id'], 16), difficulty=chart).order_by(Post.score.desc()).first()
-                        if score != None:
+                        score = Post.query.filter_by(chart_id=chart.id, status=POST_APPROVED).order_by(Post.score.desc()).first()
+                        if score is not None:
                             worldbest['WorldScores'].append(
                                 {
-                                    'SongID': int(raw_songdata[song]['song_id'], 16),
-                                    'ChartLevel': score.difficultynum,
-                                    'ChartMode': get_primediff(score.type),
+                                    'SongID': int(song.song_id, 16),
+                                    'ChartLevel': chart.prime_rating,
+                                    'ChartMode': get_primediff(chart.mode),
                                     'Score': score.score,
-                                    'Nickname': id_to_user(score.user_id).ign
+                                    'Nickname': score.author.ign
                                 }
                             )
                     elif scoretype == 'exscore':
-                        score = Post.query.filter_by(song_id=int(raw_songdata[song]['song_id'], 16), difficulty=chart).order_by(Post.exscore.desc()).first()
-                        if score != None:
+                        score = Post.query.filter_by(chart_id=chart.id, status=POST_APPROVED).order_by(Post.exscore.desc()).first()
+                        if score is not None:
                             worldbest['WorldScores'].append(
                                 {
-                                    'SongID': int(raw_songdata[song]['song_id'], 16),
-                                    'ChartLevel': score.difficultynum,
-                                    'ChartMode': get_primediff(score.type),
+                                    'SongID': int(song.song_id, 16),
+                                    'ChartLevel': chart.prime_rating,
+                                    'ChartMode': get_primediff(chart.mode),
                                     'Score': score.exscore,
-                                    'Nickname': id_to_user(score.user_id).ign
+                                    'Nickname': score.author.ign
                                 }
                             )
                     else:
@@ -230,10 +239,10 @@ def create_ranking(ranking='worldbest', scoretype='default'):
         rankmode = {
             'Ranks': []
         }
-        song_ids = []
-        for song in raw_songdata:
-            if raw_songdata[song]['song_id'] != "":
-                song_ids.append(int(raw_songdata[song]['song_id'], 16))
+        # song_ids = []
+        # for song in raw_songdata:
+        #     if raw_songdata[song]['song_id'] != "":
+        #         song_ids.append(int(raw_songdata[song]['song_id'], 16))
         # then calculate cumulative score per user on song id and get top 3
         # ideally that is what we would do but nah let's put a watermark cause that will be hard when people submit more scores
         for i in song_ids:
@@ -266,30 +275,54 @@ def get_rankmode(scoretype='default'):
         return json.load(f)
     # plan to use APScheduler to update database
 
+fiesta_sort_order = GameMix.query.filter_by(name='Fiesta').first().sort_order
+
 def check_post(post):
     """Evaluates a post and returns the status which it should be assigned.
     
     If there is something impossible which would prevent the post from being submitted, return None"""
     # return status a given post should be by looking at the post itself, returns None is something is impossible
 
+    # --- SANITY CHECKS
     # if SS or SSS, check if full combo or 0 miss
     if post.grade in ('ss', 'sss') and post.miss > 0:
         return None
-    
-    # make a score unranked if...
-    # - song doesn't have a max combo
-    # - platform != 'pad'
 
-    # # check picture using fastai
-    # # use this to initialize the learner: score_learner = load_learner(path)
-    # current_app.logger.debug("Predicting image.")
-    # im = Image.open(post.image_file)
-    # if im != None:
-    #     result = score_learner.predict(im)
-    # mix = int_to_gamelabel(result[1])
-    # if mix not in pump_mixes:  # or mix not the specified gamemix
-    #     return POST_PENDING
-    # # also consider checking if a song or chart is not playable in the recognized mix (but also check this above if possible)
+    # check if chart exists
+    chart = Chart.query.get(post.chart_id)
+    if chart is None:
+        return None
+    if platform == 'pad':
+        gamemix = GameMix.query.get(post.gamemix_id)
+        if gamemix is None:
+            return None
+    else:  # non-arcade posts should not have a game mix
+        if post.gamemix_id is not None:
+            return None
+
+    # --- UNRANKED
+    if post.platform != 'pad' or chart.max_combo is None or chart.weight == 0.0 or chart.mode.name in ('Co-Op', 'Routine') or gamemix.sort_order < 140:
+        return POST_UNRANKED
+
+    # --- QUEUE
+    # check picture using fastai
+    if score_learner is not None:
+        current_app.logger.debug(f"Predicting image for post submitted by {post.author}...")
+        if post.image_file is not None:
+            im = Image.open(post.image_file)
+            result = current_app.score_learner.predict(im)
+            
+        ai_gamemix = fastai_int_to_game(result[1])
+        if ai_gamemix is None or ai_gamemix.sort_order < fiesta_sort_order:
+            return POST_PENDING
+
+        earliest = GameMix.query.get(chart.earliest_version_id)
+        if ai_gamemix.sort_order < earliest.sort_order:  # check if chart didn't even exist until after the mix
+            return POST_PENDING
+
+        if ai_gamemix != gamemix:
+            if (ai_gamemix.name == 'Prime' and gamemix.name != 'Prime JE') or (ai_gamemix.name == 'Fiesta' and gamemix.name != 'Fiesta EX'):  # these games look the same so don't worry about it
+                return POST_PENDING
 
     return POST_APPROVED
 
@@ -300,7 +333,7 @@ def approve_post(post):
     if Post.query.get(post.id) is None:
         db.session.add(post)
     db.session.commit()
-    u = User.query.get(post.user_id)
+    u = post.author
     update_user_sp(u)
     update_user_titles(u)
 
@@ -311,22 +344,22 @@ def queue_post(post):
         db.session.add(post)
     db.session.commit()
 
-# def id_to_songdiff(sid, diff):
-#     '''Given an official song ID and a difficulty, return the difficulty of the song (???)'''
-#     pass
+def unrank_post(post):
+    '''Given a post, set it to unranked.'''
+    post.status = POST_UNRANKED
+    if Post.query.get(post.id) is None:
+        db.session.add(post)
+    db.session.commit()
+    u = post.author
+    update_user_sp(u)
+    update_user_titles(u)
 
-def id_to_songname(sid):
-    '''Given an official song ID, return the song it is associated with.'''
-    for song in raw_songdata:
-        if raw_songdata[song]['song_id'] == sid:
-            return song
-    return None
-
-def songname_to_id(songname):
-    '''Given the name of a song, return its official song ID.'''
-    if raw_songdata.get(songname) != None:
-        return raw_songdata[songname]['song_id']
-    return None
+def draft_post(post):
+    '''Given a post, save it as a draft.'''
+    post.status = POST_DRAFT
+    if Post.query.get(post.id) is None:
+        db.session.add(post)
+    db.session.commit()
 
 def posts_to_uscore(posts, scoretype='default'):
     '''Given a list of posts, return a PrimeServer UScore packet.'''

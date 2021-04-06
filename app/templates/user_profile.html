@@ -53,34 +53,7 @@
           Top 50 Scores
         </h5>
         <div class="card-body">
-          <table class="table table-striped table-dark">
-            <th>Song</th>
-            <th>Difficulty</th>
-            <th>Score</th>
-            <th>Letter Grade</th>
-            <th>Stage Pass</th>
-            <th>Modifiers</th>
-            <th>Rush Speed</th>
-            <th>SP</th>
-            {% set count = namespace(a=0) %}
-            {% for score in topscores %}
-              {% set count.a = count.a + 0.03 %}
-              <tr class="animated fadeInLeft fast" style="animation-delay: {{ count.a|float }}s;">
-                <td><a href="{{ url_for('scores.score', score_id=score.id) }}">{{ score.song }}</a></td>
-                <td>{{ score.difficulty }}</td>
-                <td>{{ score.score }}</td>
-                <td>{{ score.lettergrade.upper() }}</td>
-                {% if score.stagepass == "True" %}
-                  <td>{{score.stagepass|replace("True", "Yes")}}</td>
-                {% elif score.stagepass == "False" %}
-                  <td>{{score.stagepass|replace("False", "No")}}</td>
-                {% endif %}
-                <td>{{ modlist_to_modstr(int_to_mods(score.modifiers)) }}</td>
-                <td>{{ score.rushspeed }}</td>
-                <td>{{ score.sp|int }}</td>
-              </tr>
-            {% endfor %}
-          </table>
+          score_table(topscores, verified=False)
         </div>
       </div>
     </div>
@@ -93,34 +66,7 @@
           First Place Scores
         </h5>
         <div class="card-body">
-          <table class="table table-striped table-dark">
-            <th>Song</th>
-            <th>Difficulty</th>
-            <th>Score</th>
-            <th>Letter Grade</th>
-            <th>Stage Pass</th>
-            <th>Modifiers</th>
-            <th>Rush Speed</th>
-            <th>SP</th>
-            {% set count = namespace(a=0) %}
-            {% for score in firstscores %}
-              {% set count.a = count.a + 0.03 %}
-              <tr class="animated fadeInLeft fast" style="animation-delay: {{ count.a|float }}s;">
-                <td><a href="{{ url_for('scores.score', score_id=score.id) }}">{{ score.song }}</a></td>
-                <td>{{ score.difficulty }}</td>
-                <td>{{ score.score }}</td>
-                <td>{{ score.lettergrade.upper() }}</td>
-                {% if score.stagepass == "True" %}
-                  <td>{{score.stagepass|replace("True", "Yes")}}</td>
-                {% elif score.stagepass == "False" %}
-                  <td>{{score.stagepass|replace("False", "No")}}</td>
-                {% endif %}
-                <td>{{ modlist_to_modstr(int_to_mods(score.modifiers)) }}</td>
-                <td>{{ score.rushspeed }}</td>
-                <td>{{ score.sp|int }}</td>
-              </tr>
-            {% endfor %}
-          </table>
+          score_table(firstscores, verified=False)
         </div>
       </div>
     </div>
@@ -133,43 +79,8 @@
           Recent Scores
         </h5>
         <div class="card-body">
-          <table class="table table-striped table-dark">
-            <th>Song</th>
-            <th>Difficulty</th>
-            <th>Score</th>
-            <th>Letter Grade</th>
-            <th>Stage Pass</th>
-            <th>Modifiers</th>
-            <th>Rush Speed</th>
-            <th>Verified</th>
-            <th>SP</th>
-            {% set count = namespace(a=0) %}
-            {% for score in recentscores %}
-              {% set count.a = count.a + 0.03 %}
-              <tr class="animated fadeInLeft fast" style="animation-delay: {{ count.a|float }}s;">
-                <td><a href="{{ url_for('scores.score', score_id=score.id) }}">{{ score.song }}</a></td>
-                <td>{{ score.difficulty }}</td>
-                <td>{{ score.score }}</td>
-                <td>{{ score.lettergrade.upper() }}</td>
-                {% if score.stagepass == "True" %}
-                  <td>{{score.stagepass|replace("True", "Yes")}}</td>
-                {% elif score.stagepass == "False" %}
-                  <td>{{score.stagepass|replace("False", "No")}}</td>
-                {% endif %}
-                <td>{{ modlist_to_modstr(int_to_mods(score.modifiers)) }}</td>
-                <td>{{ score.rushspeed }}</td>
-                {% if score.acsubmit == "True" %}
-                  <td>Yes (Prime)</td>
-                {% elif score.image_file != "None" %}
-                  <td>Yes</td>
-                {% else %}
-                  <td>No</td>
-                {% endif %}
-                <td>{{ score.sp|int }}</td>
-              </tr>
-            {% endfor %}
-          </table>
-          <a href="/user/{{ user.username }}" class="btn btn-primary" role="button" aria-pressed="True">View All</a>
+          score_table(recentscores, verified=True)
+          <a href="{{url_for('users.user_posts', username=user.username)}}" class="btn btn-primary" role="button" aria-pressed="True">View All</a>
         </div>
       </div>
     </div>

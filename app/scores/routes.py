@@ -1,7 +1,8 @@
 from flask import (render_template, url_for, flash, redirect, request, abort, Blueprint, current_app)
 from flask_login import current_user, login_required
-from app import db, logging, raw_songdata, roles_required
+from app import db, logging, roles_required
 from app.models import *
+from app.pump_models import *
 from app.users.utils import update_user_sp
 from app.scores.forms import ScoreForm
 from app.scores.utils import *
@@ -13,10 +14,6 @@ from calc_performance import calc_performance
 from sqlalchemy import and_
 
 scores = Blueprint('scores', __name__)
-
-@scores.context_processor
-def add_songdata():
-    return dict(songdata=raw_songdata)
 
 @scores.route('/post/new_score', methods=["GET", "POST"])
 @login_required
@@ -71,16 +68,15 @@ def new_score():
         else:
             picture_file = "None"
         current_app.logger.info("Converting to post type...")
+        chart = Chart.query.get(form.chart_id.data)
+        if chart is None:
+            flash('Error: chart does not exist. Weird.', 'error')
         post = Post(
-            status = POST_PENDING,
-            song = form.song.data, 
-            song_id = int(songname_to_id(form.song.data), 16) if songname_to_id(form.song.data) != '' else None, 
+            song_id = chart.song.id,
             score = form.score.data,
             exscore = calc_exscore(form.perfect.data, form.great.data, form.good.data, form.bad.data, form.miss.data),
             lettergrade = form.lettergrade.data, 
-            type = get_difftype(difficulty),
-            difficulty = difficulty, 
-            difficultynum = get_diffnum(difficulty),
+            chart_id = chart.id,
             platform = form.platform.data, 
             stagepass = form.stagepass.data, 
             perfect = form.perfect.data,
@@ -92,17 +88,16 @@ def new_score():
             modifiers = mods_to_int(request.form.getlist('modifiers'), form.judgement.data),
             noteskin = form.noteskin.data,
             rushspeed = form.rushspeed.data if form.rushspeed.data != None else 1.0,
-            gamemix = form.gamemix.data,
-            #gameversion = form.gameversion.data,
+            gamemix_id = form.gamemix_id.data,
+            # version_id = form.version_id.data,
             ranked = form.ranked.data, 
-            length = raw_songdata[form.song.data]['length'], 
-            acsubmit = 'False',
+            length_id = chart.song.length_id, 
+            acsubmit = False,
             author = current_user,
-            user_id = current_user.id,
             image_file = picture_file
         )
         if current_app.debug:
-            current_app.logger.debug("Created Post object.")
+            current_app.logger.debug("Created Post object, checking post...")
         analysis = check_post(post)
         if analysis == POST_APPROVED:
             approve_post(post)
@@ -110,13 +105,19 @@ def new_score():
         elif analysis == POST_PENDING:
             queue_post(post)
             flash('Score has been submitted for moderator review.', 'success')
+        elif analysis == POST_UNRANKED:
+            unrank_post(post)
+            flash('Score has been submitted as unranked!', 'success')
+        # elif analysis == POST_DRAFT:  # i don't think this should happen
+        #     draft_post(post)
+        #     flash('Score draft has been saved!', 'success')
         elif analysis == None:
             flash('Error: your score contains something that is impossible and was rejected. Please try again, making sure your info is correct.', 'error')
         # handle any other cases
         else:
             flash('Error: something odd happened. Please try again.', 'error')
         return redirect(url_for('main.home'))
-    return render_template("new_score.html", title="New Score", form=form, songdata=raw_songdata)
+    return render_template("new_score.html", title="New Score", form=form)
 
 @scores.route('/post/<int:score_id>')
 def score(score_id):
@@ -124,12 +125,16 @@ def score(score_id):
     goldgrades = ['s', 'ss', 'sss']
     redgrades = ['f']
     score = Post.query.get_or_404(score_id)
+    songtitle = SongTitle.query.join(Language).filter_by(song=score.song).filter(Language.code == 'en').first()
+    if songtitle is None:
+        current_app.logger.error("Error: song title not found for song ID {score.song.id}!")
+        abort(500)
 
     if score.status != POST_APPROVED and not (score.author == current_user or current_user.has_any_role("Moderator", "Admin")):
         current_app.logger.info(f"Access denied for user {current_user} to access score {score_id}, returning 404")
         abort(404)
 
-    return render_template('score.html', score=score, songdata=raw_songdata, bluegrades=bluegrades, goldgrades=goldgrades, redgrades=redgrades, int_to_mods=int_to_mods, modlist_to_modstr=modlist_to_modstr, int_to_noteskin=int_to_noteskin)
+    return render_template('score.html', score=score, songtitle=songtitle, length=score.length, bluegrades=bluegrades, goldgrades=goldgrades, redgrades=redgrades, int_to_mods=int_to_mods, modlist_to_modstr=modlist_to_modstr, int_to_noteskin=int_to_noteskin)
 
 @scores.route('/post/<int:score_id>/edit', methods=["GET", "POST"])
 def edit_score(score_id):
@@ -231,10 +236,13 @@ def edit_score(score_id):
         if picture_file != None:
             post.image_file = picture_file 
         
-        # probably update this after approval
-        post.sp = calc_performance(post.song, post.difficulty, post.difficultynum, post.perfect, post.great, post.good, post.bad, post.miss, int_to_judge(post.modifiers), post.rushspeed, post.stagepass == "True")
+        # SP should always be calculated in score submission, non-approved posts will get ignored
+        post.sp = calc_performance(Post.query.get(post.chart_id).first(), post.perfect, post.great, post.good, post.bad, post.miss, int_to_judge(post.modifiers), post.rushspeed, post.stagepass == "True")
         
-        post.status = POST_PENDING
+        # if already unranked before, do not set to pending
+        post.status = POST_PENDING if post.sp >= 0 and post.status != POST_UNRANKED else POST_UNRANKED
+        if post.acsubmit:
+            post.status = POST_APPROVED
         
         current_app.logger.info("Committing to database...")
         db.session.commit()
@@ -242,10 +250,10 @@ def edit_score(score_id):
         update_user_sp(current_user)
         current_app.logger.info("Updated user SP.")
         
-        flash('Score has been edited! If your score was approved before it has re-entered the moderator queue.', 'success')
+        flash('Score has been edited! If your score was approved before it has re-entered the moderator queue. If it was unranked it stays unranked.', 'success')
         return redirect(url_for('scores.score', score_id=score_id))
     # generate form from post here
-    return render_template("new_score.html", title="Edit Score", form=form, currpost=post, songdata=raw_songdata)
+    return render_template("new_score.html", title="Edit Score", form=form, currpost=post)
 
 @scores.route('/post/<int:score_id>/accept', methods=["POST"])
 def accept_score(score_id):
@@ -283,13 +291,17 @@ def delete_score(score_id):
 @scores.route('/challenge/weekly', methods=["GET", "POST"])
 @login_required
 def weekly():
-    w_song, w_length = get_current_weekly()
+    weekly_id = get_current_weekly()
+    weekly_chart = Chart.query.get(weekly_id)
+    if weekly_chart is None:
+        current_app.logger.error('Weekly chart could not be found!')
+        abort(500)
     # https://stackoverflow.com/questions/6558535/find-the-date-for-the-first-monday-after-a-given-date
     last_monday = datetime.date.today() - datetime.timedelta(days=date.weekday())
     next_monday = datetime.date.today() + datetime.timedelta(days=(-date.weekday()+7)%7)
-    ldb = Post.query.filter_by(song=w_song, length=w_length).filter(Post.date_posted >= last_monday,
+    ldb = Post.query.filter_by(chart_id=weekly_id, status=POST_APPROVED).filter(Post.date_posted >= last_monday,
                                                                     Post.date_posted <= next_monday).order_by(Post.score.desc()).all()
-    return render_template('weekly.html', current_weekly=(w_song, w_length), form=form, ldb=ldb)
+    return render_template('weekly.html', current_weekly=weekly_chart, ldb=ldb)
 
 @scores.route('/leaderboard/main')
 def main_ldb():

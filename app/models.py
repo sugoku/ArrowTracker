@@ -9,12 +9,14 @@ from time import time
 
 TOURNAMENT_APPROVED = 0
 TOURNAMENT_PENDING = 1
-TOURNAMENT_HIDDEN = 2
-TOURNAMENT_PRIVATE = 3
+TOURNAMENT_DRAFT = 2
+TOURNAMENT_HIDDEN = 3
+TOURNAMENT_PRIVATE = 4
 
 tournament_status = {
     TOURNAMENT_APPROVED: "Approved",
     TOURNAMENT_PENDING: "Pending",
+    TOURNAMENT_DRAFT: "Draft",
     TOURNAMENT_HIDDEN: "Hidden",
     TOURNAMENT_PRIVATE: "Private"
 }
@@ -47,16 +49,18 @@ progress_types = {
     PROGRESS_FINISHED: "Finished"
 }
 
-POST_APPROVED = 0
+POST_APPROVED = 0  # top score
 POST_PENDING = 1
 POST_UNRANKED = 2
-POST_HIDDEN = 3
-POST_PRIVATE = 4
+POST_DRAFT = 3
+POST_HIDDEN = 4
+POST_PRIVATE = 5
 
 post_status = {
     POST_APPROVED: "Approved",
     POST_PENDING: "Pending",
     POST_UNRANKED: "Unranked",
+    POST_DRAFT: "Draft",
     POST_HIDDEN: "Hidden",
     POST_PRIVATE: "Private"
 }
@@ -75,6 +79,38 @@ user_status = {
     USER_BANNED: "Banned"
 }
 
+constants = {
+    "TOURNAMENT_APPROVED": TOURNAMENT_APPROVED,
+    "TOURNAMENT_PENDING": TOURNAMENT_PENDING,
+    "TOURNAMENT_DRAFT": TOURNAMENT_DRAFT,
+    "TOURNAMENT_HIDDEN": TOURNAMENT_HIDDEN,
+    "TOURNAMENT_PRIVATE": TOURNAMENT_PRIVATE,
+
+    "TOURNAMENT_STANDARD": TOURNAMENT_STANDARD,
+    "TOURNAMENT_TEAM": TOURNAMENT_TEAM,
+    "TOURNAMENT_TEAM_AVG": TOURNAMENT_TEAM_AVG,
+
+    "SCORE_DEFAULT": SCORE_DEFAULT,
+    "SCORE_EXSCORE": SCORE_EXSCORE,
+
+    "PROGRESS_NOT_STARTED": PROGRESS_NOT_STARTED,
+    "PROGRESS_IN_PROGRESS": PROGRESS_IN_PROGRESS,
+    "PROGRESS_FINISHED": PROGRESS_FINISHED,
+
+    "POST_APPROVED": POST_APPROVED,
+    "POST_PENDING": POST_PENDING,
+    "POST_UNRANKED": POST_UNRANKED,
+    "POST_DRAFT": POST_DRAFT,
+    "POST_HIDDEN": POST_HIDDEN,
+    "POST_PRIVATE": POST_PRIVATE,
+
+    "USER_CONFIRMED": USER_CONFIRMED,
+    "USER_UNCONFIRMED": USER_UNCONFIRMED,
+    "USER_HIDDEN": USER_HIDDEN,
+    "USER_PRIVATE": USER_PRIVATE,
+    "USER_BANNED": USER_BANNED,
+}
+
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
@@ -84,12 +120,12 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
-    email_confirmed_at = db.Column(db.DateTime(), nullable=True)
+    email_confirmed_at = db.Column(db.DateTime, nullable=True)
     image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
     password = db.Column(db.String(60), nullable=False)
-    active = db.Column(db.Boolean(), nullable=True)
+    active = db.Column(db.Boolean, nullable=True)
     status = db.Column(db.Integer, nullable=False, default=USER_CONFIRMED)
-    banned_until = db.Column(db.DateTime(), nullable=True)
+    banned_until = db.Column(db.DateTime, nullable=True)
     bio = db.Column(db.String(500), nullable=True, default="This user has no bio.")
     favsong = db.Column(db.String(50), nullable=True, default="No favorite song chosen.")
     posts = db.relationship('Post', backref='author', lazy=True)
@@ -111,7 +147,7 @@ class User(db.Model, UserMixin):
     scrollspeed = db.Column(db.Float, nullable=False, default=0)
     autovelocity = db.Column(db.Integer, nullable=True)
     rushspeed = db.Column(db.Integer, nullable=False, default=0)
-    psupdate = db.Column(db.String(5), nullable=False, default='True')
+    psupdate = db.Column(db.Boolean, nullable=False, default=True)
 
     sp = db.Column(db.Float, nullable=False, default=0)
     title = db.Column(db.String(50), nullable=False, default='Newcomer')
@@ -165,7 +201,7 @@ class Role(db.Model):
     __tablename__ = 'roles'
     id = db.Column(db.Integer(), primary_key=True)
     name = db.Column(db.String(50), unique=True)
-    perms = db.Column(db.Integer(), nullable=False, default=0)
+    perms = db.Column(db.Integer, nullable=False, default=0)
 
     def __eq__(self, other):
         if isinstance(other, self.__class__):
@@ -182,8 +218,8 @@ class Role(db.Model):
 class UserRoles(db.Model):
     __tablename__ = 'user_roles'
     id = db.Column(db.Integer(), primary_key=True)
-    user_id = db.Column(db.Integer(), db.ForeignKey('user.id', ondelete='CASCADE'))
-    role_id = db.Column(db.Integer(), db.ForeignKey('roles.id', ondelete='CASCADE'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE'))
+    role_id = db.Column(db.Integer, db.ForeignKey('roles.id', ondelete='CASCADE'))
 
     def __repr__(self):
         return f"UserRoles('{self.user_id}', '{self.role_id}')"
@@ -193,18 +229,14 @@ class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     date_posted = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     status = db.Column(db.Integer, nullable=False, default=POST_APPROVED)
-    approved_time = db.Column(db.DateTime(), nullable=True)
-    is_personal_best = db.Column(db.String(5), nullable=False, default="False")
-    song = db.Column(db.String(50), nullable=False)
-    song_id = db.Column(db.Integer, nullable=True)
+    approved_time = db.Column(db.DateTime, nullable=True)
+    song_id = db.Column(db.Integer, nullable=False)  # uses key in pump database now
     score = db.Column(db.Integer, nullable=False)
     exscore = db.Column(db.Integer, nullable=False)
     lettergrade = db.Column(db.String(3), nullable=False)
-    type = db.Column(db.String(20), nullable=False)
-    difficulty = db.Column(db.String(5), nullable=False)
-    difficultynum = db.Column(db.Integer, nullable=False)
+    chart_id = db.Column(db.Integer, nullable=False)  # uses key in pump database now
     platform = db.Column(db.String(8), nullable=False)
-    stagepass = db.Column(db.String(5), nullable=True)
+    stagepass = db.Column(db.Boolean, nullable=True)
     perfect = db.Column(db.Integer, nullable=False)
     great = db.Column(db.Integer, nullable=False)
     good = db.Column(db.Integer, nullable=False)
@@ -216,17 +248,17 @@ class Post(db.Model):
     kcal = db.Column(db.Float, nullable=False, default=0.0)
     scrollspeed = db.Column(db.Float, nullable=True, default=None)
     autovelocity = db.Column(db.Integer, nullable=True, default=None)
-    noteskin = db.Column(db.Integer, nullable=False, default=-1)
+    noteskin = db.Column(db.Integer, nullable=True)
     modifiers = db.Column(db.Integer, nullable=False, default=0)
     rushspeed = db.Column(db.Float, nullable=False, default=1.0)
-    gamemix = db.Column(db.String(30), nullable=False, default="Unknown")
-    gameversion = db.Column(db.String(12), nullable=False, default="Unknown")
-    gameflag = db.Column(db.Integer, nullable=False, default=0)
-    ranked = db.Column(db.String(5), nullable=False)
-    length = db.Column(db.String(8), nullable=False)
+    gamemix_id = db.Column(db.Integer, nullable=True)  # uses key in pump database now
+    version_id = db.Column(db.Integer, nullable=True)  # uses key in pump database now
+    gameflag = db.Column(db.Integer, nullable=True)
+    ranked = db.Column(db.Boolean, nullable=False, default=False)  # string to boolean change, make sure it is accounted for
+    length_id = db.Column(db.Integer, nullable=False)  # uses key in pump database now
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     accesscode = db.Column(db.String(32), nullable=True, default=None)
-    acsubmit = db.Column(db.String(5), nullable=False)
+    acsubmit = db.Column(db.Boolean, nullable=False, default=False)  # string to boolean change, make sure it is accounted for
     sp = db.Column(db.Float, nullable=True, default=None)
     #tournamentid = db.Column(db.Integer, nullable=True)
     image_file = db.Column(db.String(20), nullable=False, default="None")
@@ -292,7 +324,7 @@ class Tournament(db.Model):
 
 class Match(db.Model): # tournament match
     id = db.Column(db.Integer, primary_key=True)
-    tournament_id = db.Column(db.Integer(), db.ForeignKey('tournament.id', ondelete='CASCADE'))
+    tournament_id = db.Column(db.Integer, db.ForeignKey('tournament.id', ondelete='CASCADE'))
     progress = db.Column(db.Integer, nullable=False, default=PROGRESS_NOT_STARTED)
     start_time = db.Column(db.DateTime, nullable=True)
     end_time = db.Column(db.DateTime, nullable=True)
@@ -322,14 +354,11 @@ class Match(db.Model): # tournament match
 
 class Game(db.Model): # tournament games (matches have games)
     id = db.Column(db.Integer, primary_key=True)
-    tournament_id = db.Column(db.Integer(), db.ForeignKey('tournament.id', ondelete='CASCADE'))
-    match_id = db.Column(db.Integer(), db.ForeignKey('match.id', ondelete='CASCADE'))
+    tournament_id = db.Column(db.Integer, db.ForeignKey('tournament.id', ondelete='CASCADE'))
+    match_id = db.Column(db.Integer, db.ForeignKey('match.id', ondelete='CASCADE'))
     progress = db.Column(db.Integer, nullable=False, default=PROGRESS_NOT_STARTED)
     # participants based on match
-    song = db.Column(db.String(50), nullable=False)
-    song_id = db.Column(db.Integer, nullable=True)
-    difficulty = db.Column(db.String(5), nullable=False)
-    difficultynum = db.Column(db.Integer, nullable=False)
+    chart_id = db.Column(db.Integer, nullable=False)
     # Winners are not necessary to store for games because they can be calculated at match end instead of game end
     # _winners = db.Column(db.String(10000), nullable=False, default="")
 

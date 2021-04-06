@@ -28,7 +28,7 @@
         <th>Modifiers</th>
         <th>Rush Speed</th>
         <th>Platform</th>
-        <th>Ranked?</th>
+        <th>Rank Mode</th>
         <th>Author</th>
       </tr>
     </thead>
@@ -41,7 +41,7 @@
             <span style="padding-left: 5pt"><span class="badge badge-pill badge-success">Verified!</span></span>
           {% elif score.image_file != "None" and score.platform != "pad" %}
             <span style="padding-left: 5pt"><span class="badge badge-pill badge-info">SF2 Verified!</span></span>
-          {% elif score.acsubmit == "True" %}
+          {% elif score.acsubmit %}
             <span style="padding-left: 5pt"><span class="badge badge-pill badge-info">Verified!</span></span>
           {% endif %}
         </td>
@@ -58,19 +58,19 @@
         <td>{{score.bad}}</td>
         <td>{{score.miss}}</td>
         <td>{{score.maxcombo}}</td>
-        {% if score.stagepass == "True" %}
-          <td>{{score.stagepass|replace("True", "Yes")}}</td>
-        {% elif score.stagepass == "False" %}
-          <td>{{score.stagepass|replace("False", "No")}}</td>
+        {% if score.stagepass %}
+          <td>Yes</td>
+        {% else %}
+          <td>No}</td>
         {% endif %}
         <td>{{int_to_noteskin(score.noteskin)}}</td>
         <td>{{modlist_to_modstr(int_to_mods(score.modifiers))}}</td>
         <td>{{score.rushspeed}}</td>
         <td>{{score.platform.capitalize()|replace('Sf2-pad', 'StepF2 Pad')}}</td>
-        {% if score.ranked == "True" %}
-          <td>{{score.ranked|replace("True", "Yes")}}</td>
-        {% elif score.ranked == "False" %}
-          <td>{{score.ranked|replace("False", "No")}}</td>
+        {% if score.ranked %}
+          <td>Yes</td>
+        {% else %}
+          <td>No</td>
         {% endif %}
         <td>{{score.author.username}}</td>
       </tr>

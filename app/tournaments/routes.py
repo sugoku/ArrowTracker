@@ -9,7 +9,7 @@ from app.scores.forms import ScoreForm
 from app.users.forms import APIKeyForm
 from app.main.utils import *
 from app.models import Post, Tournament, Match, Game, APIKey
-from app import songlist_pairs, difficulties, db, raw_songdata, approved_ips, apikey_required
+from app import songlist_pairs, difficulties, db, approved_ips, apikey_required
 
 tournaments = Blueprint('tournaments', __name__)
 
@@ -103,7 +103,7 @@ def tournament_match(tournament_id, match_id):
 @login_required
 def tournament_queue(tournament_id):
     tournament = Tournament.query.get_or_404(tournament_id)
-    if current_user.id not in tournament.organizers():
+    if current_user.id not in tournament.organizers() and not current_user.has_any_role("Moderator", "Admin")::
         abort(403)
     return render_template('tournamentqueue.html', tournament=tournament)
 
@@ -111,7 +111,7 @@ def tournament_queue(tournament_id):
 @login_required
 def tournament_matches(tournament_id):
     tournament = Tournament.query.get_or_404(tournament_id)
-    if current_user.id not in tournament.organizers():
+    if current_user.id not in tournament.organizers() and not current_user.has_any_role("Moderator", "Admin")::
         abort(403)
     return render_template('tournament_matches.html', tournament=tournament)
 
@@ -146,7 +146,7 @@ def create_match():
 @tournaments.route('/tournaments/<int:tournament_id>/delete', methods=["POST"])
 def delete_tournament(tournament_id):
     tournament = Tournament.query.get_or_404(tournament_id)
-    if tournament.user_id != current_user.id:
+    if tournament.user_id != current_user.id and not current_user.has_any_role("Moderator", "Admin"):
         abort(403)
     if tournament.image_file != "None":
         os.remove(os.path.join(current_app.root_path, pic_directories['tournament'], tournament.image_file))

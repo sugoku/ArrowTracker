@@ -6,7 +6,6 @@ from flask_migrate import Migrate
 from flask_admin import Admin, AdminIndexView
 from flask_admin.contrib.sqla import ModelView
 from flask_moment import Moment
-from loadsongs import load_song_lists, raw_songdata
 from flask_mail import Mail
 from app.config import Config
 from flask_apscheduler import APScheduler
@@ -17,76 +16,6 @@ from flaskext.markdown import Markdown
 import atexit
 from functools import wraps
 import signal
-
-songlist_pairs, lengthtype_pairs = load_song_lists()
-
-gamemix_pairs = (
-    ('1st', 'The 1st Dance Floor'),
-    ('2nd', '2nd Ultimate Remix'),
-    ('3rd', '3rd O.B.G'),
-    ('obg', 'The O.B.G / Season Evolution'),
-    ('collection', 'The Collection'),
-    ('perfect', 'The Perfect Collection'),
-    ('extra', 'Extra'),
-    ('premiere', 'The Premiere'),
-    ('prex', 'The Prex'),
-    ('rebirth', 'The Rebirth'),
-    ('premiere2', 'The Premiere 2'),
-    ('prex2', 'The Prex 2'),
-    ('premiere3', 'The Premiere 3'),
-    ('prex3', 'The Prex 3'),
-    ('exceed', 'Exceed'),
-    ('exceed2', 'Exceed 2'),
-    ('zero', 'Zero'),
-    ('nx', 'NX / New Xenesis'),
-    ('nx2', 'NX2 / Next Xenesis'),
-    ('nxa', 'NX Absolute'),
-    ('fiesta', 'Fiesta'),
-    ('fiestaex', 'Fiesta EX'),
-    ('fiesta2', 'Fiesta 2'),
-    ('infinity', 'Infinity'),
-    ('prime', 'Prime'),
-    ('primeje', 'Prime JE'),
-    ('prime2', 'Prime 2'),
-    ('xx', 'XX'),
-    ('jump', 'Jump'),
-    ('pro', 'Pro'),
-    ('pro2', 'Pro 2'),
-    ('prox', 'Pro-X'),
-    ('stepmania', 'StepMania'),
-    ('stepf2', 'StepF2'),
-    ('other', 'Other')
-)
-
-judgement_pairs = (
-    ('nj', 'Normal Judgement'),
-    ('hj', 'Hard Judgement'),
-    ('vj', 'Very Hard Judgement')
-)
-
-genre_pairs = (
-    ('ORIGINAL', 'Original'),
-    ('K-POP', 'K-Pop'),
-    ('WORLD MUSIC', 'World Music'),
-    ('J-MUSIC', 'J-Music'),
-    ('XROSS', 'Xross (Crossover)')
-)
-
-difficulties = []
-coop = ["2P", "3P", "4P", "5P"]
-for i in range(1, 29):
-    difficulties.append(str(i))
-for i in coop:
-    difficulties.append(i)
-difficulties = list(zip(difficulties, difficulties))
-
-apikey_required = False  # also ip address requirement
-
-if apikey_required:
-    with open('approved_ips.txt', 'r') as f:
-        approved_ips = [x.replace('\n','').strip() for x in f.readlines()]
-else:
-    approved_ips = []
 
 db = SQLAlchemy()
 bcrypt = Bcrypt()
@@ -119,6 +48,8 @@ def roles_required(*role_names):
 
     return wrapper
 
+score_learner = None
+
 mail = Mail()
 scheduler = APScheduler(scheduler=BackgroundScheduler())
 moment = Moment()
@@ -142,6 +73,10 @@ def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(Config)
 
+    @app.context_processor
+    def inject_model_constants():
+        return dict(constants=app.models.constants)
+
     db.init_app(app)
     bcrypt.init_app(app)
     login_manager.init_app(app)
@@ -152,6 +87,60 @@ def create_app(config_class=Config):
     md = Markdown(app)
 
     moment.init_app(app)
+
+    songlist_pairs = [(song.id, song.name) for song in Song.query.all()]
+    chart_pairs = [(chart.id, f"{chart.song.name} - {chart.rerate_name}") for chart in Chart.query.all()]
+    lengthtype_pairs = [(length.id, length.name) for length in Length.query.all()]
+
+    gamemix_pairs = [(mix.id, mix.name) for mix in GameMix.query.order_by(GameMix.sort_order.desc()).all()]
+
+    judgement_pairs = (
+        ('nj', 'Normal Judgement'),
+        ('hj', 'Hard Judgement'),
+        ('vj', 'Very Hard Judgement')
+    )
+
+    category_pairs = [(category.id, category.name) for category in Category.query.all()]
+
+    charts = {chart.id: chart for chart in Chart.query.all()}
+    gamemixes = {gamemix.id: gamemix for gamemix in GameMix.query.all()}
+    lengths = {length.id: length for length in Length.query.all()}
+    languages = {language.id: language for language in Language.query.all()}
+    songid_to_songtitle = {languages[lid].code: {songtitle.song.id: songtitle for songtitle in SongTitle.query.filter_by(language_id=lid).all()} for lid in languages}
+    modes = {mode.id: mode for mode in Mode.query.all()}
+
+    @app.context_processor
+    def inject_charts():
+        return dict(charts=charts)
+    @app.context_processor
+    def inject_gamemixes():
+        return dict(gamemixes=gamemixes)
+    @app.context_processor
+    def inject_lengths():
+        return dict(lengths=lengths)
+    @app.context_processor
+    def inject_languages():
+        return dict(languages=languages)
+    @app.context_processor
+    def inject_songid_to_songtitle():
+        return dict(songid_to_songtitle=songid_to_songtitle)
+    @app.context_processor
+    def inject_modes():
+        return dict(modes=modes)
+
+    apikey_required = app.config['ENABLE_API_KEY']  # also ip address requirement
+
+    approved_ips = []
+    if apikey_required:
+        try:
+            with open('approved_ips.txt', 'r') as f:
+                approved_ips = [x.replace('\n','').strip() for x in f.readlines()]
+        except:
+            app.logger.info("WARNING: API key requirement enabled but no whitelisted IP addresses could be read. No one will be able to use API functionality even with an API key.")
+
+    if app.config['ENABLE_FASTAI_SCORE_DETECTION']:
+        from fastai import load_learner
+        score_learner = load_learner(Path('../fastai_ml/model-s2.pkl'))
 
     # user_manager = UserManager(app, db, User)
     

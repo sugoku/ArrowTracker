@@ -1,10 +1,13 @@
-Latest Update (2019-07-24)
+Changes (2020+)
+- An unbelievable amount of stuff
+
+Changes (2019-07-24)
 - Minor changes to the About page and footer
   - Added a Buy Me a Coffee button for site support!
   - Anyone can support the site using the button or the buymeacoff.ee/dj505 link!
 - Added a sidebar!
 
-Last Update (2019-07-09)
+Changes (2019-07-09)
 - Big fixes and minor changes
   - No need to refresh the submit score page to make difficulties show up!
   - Edited popup besides Difficulties label on said page to better reflect its current state
